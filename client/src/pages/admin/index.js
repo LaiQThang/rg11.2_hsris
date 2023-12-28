@@ -1,7 +1,5 @@
-import "./Login.scss"
-function Login(){
-    return (
-        <div >Làm đi đừng lười nữa</div>
-    )
+import './Login.scss';
+function Login() {
+	return <div>Content Page</div>;
 }
-export default Login
+export default Login;
