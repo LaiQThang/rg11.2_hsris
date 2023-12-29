@@ -6,9 +6,9 @@ import { Fragment } from 'react';
 
 function App() {
 	return (
-		// <div className="App">
-		// 	<Login/>
-	  	// </div>
+		<div className="App">
+			<Login/>
+	  	</div>
 		<Router>
 			<div className="App">
 				<Routes>
