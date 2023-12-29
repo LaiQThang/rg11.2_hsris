@@ -4,4 +4,4 @@ function Login(){
         <div >Làm đi đừng lười nữa</div>
     )
 }
-export default Login
+export default Login;
