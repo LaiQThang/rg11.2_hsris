@@ -1,10 +1,10 @@
-import Login from "./pages/Login/login";
-import Client from "./pages/client";
+// import Login from "./pages/Login/login";
+// import Client from "./pages/client";
 
 function App() {
   return (
     <div className="App">
-      <Login/>
+      
     </div>
   );
 }
