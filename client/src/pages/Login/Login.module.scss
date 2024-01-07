@@ -1,12 +1,15 @@
 .wrapper{
     display:flex;
     position: relative;
-    padding-left: 12%;
-    padding-right: 8%;
+    padding-left: 10%;
+    padding-right: 10%;
+    justify-content: center;
 }
 .identify{
     display:flex;
     flex-direction: column;
+    height: 100vh;
+    justify-content: center;
 }
 .logo{
     position:relative;
@@ -23,14 +26,13 @@
 .content{
     position:absolute;
     left:0;
-    bottom:30px;
+    bottom:20%;
     color: #676767;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 0.5;
+    line-height: 1;
     letter-spacing: 3.08px;
-    margin-left:12%;
 }
 .banner{
     margin-top: 20px;
@@ -251,46 +253,35 @@
         background: rgba(27, 44, 149, 0.75)
     }
 }
-@media (min-width: 858px) and (max-width: 1024px) {
+@media (min-width: 992px) and (max-width: 1199px) {
     .img-banner{
         flex-shrink: 0;
         zoom:0.55;
     }
-    .wrapper{
-        padding-left: 7%;
-        padding-right: 7%;
-    }
     .login{
-        margin-top: 10px;
         min-width: 310px;
     }
+    .content{
+        margin-left:13%;
+    }
 }
-@media (min-width: 768px) and (max-width: 857px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .img-banner{
         flex-shrink: 0;
         zoom:0.5;
     }
-    .banner{
-        margin-top: 22%;
-    }
-    .wrapper{
-        margin-top: 4%;
-        padding-left: 6%;
-        padding-right: 6%;
-    }
     .login{
         min-width: 280px;
-        margin-left: 15%;
         justify-content: center;
     }
-    .img-logo{
-        zoom:0.15;
-    }
     .content{
-        bottom:0;
+        margin-left:14%;
     }
 }
 @media(max-width: 767px) {
+    .identify{
+        height:35vh;
+    }
     .content{
         display:none;
     }
@@ -329,5 +320,17 @@
                 padding-bottom: 15px;
             }
         }
+    }
+}
+@media (min-width:1200px) {
+    .img-banner{
+        flex-shrink: 0;
+        zoom:0.65;
+    }
+    .login{
+        min-width: 35%;
+    }
+    .content{
+        margin-left:11%;
     }
 }
