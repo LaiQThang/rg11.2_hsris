@@ -17,6 +17,8 @@ class huongnghiencuu extends Model
 
     protected $table = 'huongnghiencuus';
 
+    protected $primaryKey = 'idHNC';
+
     protected $fillable = [
         'idHNC',
         'tenHNC',
@@ -31,7 +33,8 @@ class huongnghiencuu extends Model
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
     }
@@ -39,5 +42,10 @@ class huongnghiencuu extends Model
     public function deTai() : HasMany 
     {
         return $this->hasMany(detai::class, 'idHNC', 'idHNC');
+    }
+
+    public function hNCGiangVien() : HasMany 
+    {
+        return $this->hasMany(ct_hncgv::class, 'idHNC', 'idHNC');
     }
 }

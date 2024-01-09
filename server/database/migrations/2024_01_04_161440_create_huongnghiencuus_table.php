@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('mucTieu')->nullable();
             $table->string('phamVi')->nullable();
             $table->boolean('delete');
-            $table->string('ghiChu');
+            $table->string('ghiChu')->nullable();
             $table->timestamps();
         });
     }

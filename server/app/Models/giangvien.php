@@ -17,6 +17,8 @@ class giangvien extends Model
 
     protected $table = 'giangviens';
 
+    protected $primaryKey = 'idGV';
+
     protected $fillable = [
         'idGV',
         'maGV',
@@ -36,7 +38,8 @@ class giangvien extends Model
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
     }

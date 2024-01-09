@@ -17,6 +17,8 @@ class permission extends Model
 
     protected $table = 'permissions';
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'id',
         'tenQuyen',
@@ -25,7 +27,8 @@ class permission extends Model
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
     }
