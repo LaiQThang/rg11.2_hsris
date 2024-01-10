@@ -5,7 +5,8 @@ const routes = {
 	achievement: '/achievement',
 	historyRegisterResearch: '/historyRegisterResearch',
 	historyRegisterTopic: '/historyRegisterTopic',
-	@@ -10,6 +14,12 @@ const routes = {
+	profile: '/profile',
+	progressTopic: '/progressTopic',
 	registerResearch: '/registerResearch',
 	registerTopic: '/registerTopic',
 	login: '/auth/login'
