@@ -99,7 +99,7 @@ function Login(){
                             <div className={cx('overlay')}></div>
                             <div className ={cx('modal-pw')}>
                                 <div className= {cx('icon-check')}>
-{cx('icon-inside')}icon={faCircleCheck}/></div>
+<div className={cx('round-check')}> <FontAwesomeIcon className={cx('icon-inside')}icon={faCircleCheck}/></div>
                                 
                                 </div>
                                 <div className={cx('notification')}>
