@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser,faEye,faCircleCheck, faEyeSlash} from '@fortawesome/free-regular-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
-import Client from '../client'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
+import config from '~/config'
 
 const cx = classNames.bind(styles)
 function Login(){
@@ -16,6 +17,7 @@ function Login(){
     const [password,setPassword] = useState('')
     const [username,setUsername] = useState('')
     const [message,setMessage] = useState('')
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [users,setUsers] = useState([])
 
     // Các hàm thực hiện
@@ -57,12 +59,16 @@ function Login(){
         e.preventDefault();
         const user = users.find(u=>u.username === username)
         if(user && user.password === password){
-            setMessage('Đăng nhập thành công!')
+            setIsLoggedIn(true)
         }
         else{
             setMessage('Tài khoản hoặc Mật khẩu không chính xác!')
+            setIsLoggedIn(false)
         }
     }
+    if (isLoggedIn) {
+        return <Link to={config.routes.profile} />;
+      }
     // render giao diện
     return (
         <div className = {cx('wrapper')}>
