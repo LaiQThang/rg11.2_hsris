@@ -10,4 +10,7 @@ function MenuItem({ title, to, icon }) {
 			<div className={cx('icon')}>{icon}</div>
 			<span className={cx('title')}>{title}</span>
 		</NavLink>
-	
+	);
+}
+
+export default MenuItem;	
