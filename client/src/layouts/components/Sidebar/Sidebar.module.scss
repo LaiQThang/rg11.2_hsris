@@ -2,87 +2,24 @@
 	background: #e2eded;
 	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 	width: 220px;
-	height: auto;
-	min-height: 100vh;
 }
 .inner {
 	width: 100%;
-}
-
-.img-frame {
-	width: 140px;
-	height: 62px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 38px;
-}
-
-.img-logo {
-	width: 100%;
-}
-
+	@@ -23,6 +25,8 @@
 //user infor
 .user-infor {
 	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 .user-avatar {
 	width: 36px;
-	height: 36px;
-	object-fit: cover;
-	border-radius: 50%;
-	margin-left: 20px;
-	cursor: pointer;
-}
-
-.user-decs {
-	margin-left: 10px;
-}
-
-.user-name {
-	font-size: 14px;
-	font-weight: 700;
-}
-
-.user-class {
-	font-size: 13px;
-	letter-spacing: 1.17px;
-	font-weight: 200;
-}
-
-//menu-sidebar
-.menu-list {
-	display: block;
-	margin-top: 32px;
-}
-
-.menu-item-text {
-	flex: 1;
-}
-
-.menu-item-parent {
-	display: flex;
-	align-items: center;
-	font-size: 16px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
-	letter-spacing: 0.32px;
-	text-decoration: none;
-	padding: 8px 12px;
-	color: var(--black);
+	@@ -72,6 +76,7 @@
 
 	&:hover {
 		background-color: rgba(22, 24, 35, 0.05);
-		cursor: pointer;
 	}
 }
 
-.menu-item-child {
-	margin-left: 14px;
-}
+	@@ -81,3 +86,18 @@
 .icon {
 	padding: 0 4px;
 }
