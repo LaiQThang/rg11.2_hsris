@@ -99,8 +99,8 @@ function Login(){
                             <div className={cx('overlay')}></div>
                             <div className ={cx('modal-pw')}>
                                 <div className= {cx('icon-check')}>
-                                    <div className={cx('round-check')}> <FontAwesomeIcon className={cx('icon-inside')}icon={faCircleCheck}/></div>
-                            
+{cx('icon-inside')}icon={faCircleCheck}/></div>
+                                
                                 </div>
                                 <div className={cx('notification')}>
                                     <div>Liên hệ quản trị viên để được cấp mật khẩu mới</div>
