@@ -32,6 +32,7 @@ class SinhVienController extends Controller
      */
     public function store(StoreSinhVienRequest $request)
     {
+        // dd(request());
         return new SinhVienResource(sinhvien::create($request->all())); 
     }
 

@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\V1\HNCGiangVienController;
-use App\Http\Controllers\Api\V1\HuongNghienCuuController;
-use App\Http\Controllers\Api\V1\SinhVienController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\SinhVienController;
+use App\Http\Controllers\Api\V1\HNCGiangVienController;
+use App\Http\Controllers\Api\V1\HuongNghienCuuController;
+use App\Http\Controllers\Authentication\V1\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('profile-me', [AuthController::class, 'profile']);
+
 });
 
 Route::group([
@@ -30,4 +42,6 @@ Route::group([
 
     Route::post('students/bulk', [SinhVienController::class, 'bulkStore']);
 });
+
+
 

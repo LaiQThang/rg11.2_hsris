@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,14 +54,14 @@ Route::get('/postgv', function(){
             'tenGV' => 'Nguyễn Thị Quỳnh Như',
             'anhDD' => null,
             'ngaySinh' => Carbon::createFromTimestamp($randT),
-            'email' => null,
+            'email' => 'thang@gmail.com',
             'soDT' => null,
             'diaChi' => null,
             'gioiTinh' => mt_rand(0,1),
             'trinhDo' => null,
             'chuyenNganh' => null,
             'delete' => false,
-            'matKhau' => Str::random(10),
+            'matKhau' => Hash::make('thang0308'),
             'permissionId'=> null,
         ]);
         $result = App\Models\giangvien::all()->toArray();

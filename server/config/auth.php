@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'teacher',
     ],
 
     /*
@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'apiTeacher' => [
+            'driver' => 'jwt',
+            'provider' => 'teacher',
+        ],
     ],
 
     /*
@@ -63,6 +67,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'teacher' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\giangvien::class,
+            // 'table' => 'giangviens',
+            // // 'username' => 'maGV',
+            // // 'password' => 'matKhau'
         ],
 
         // 'users' => [

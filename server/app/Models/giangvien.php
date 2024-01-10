@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class giangvien extends Model
+class giangvien extends Authenticatable implements JWTSubject
 {
     use HasFactory;
 
@@ -36,12 +37,41 @@ class giangvien extends Model
         'permissionId',
     ];
 
+    protected $casts = [
+        'matKhau' => 'hashed',
+    ];
+
     protected static function boot()
     {
         parent::boot();
         self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    // public function getAuthUsername()
+    // {
+    //     return  $this->attributes['maGV'];
+    // }
+
+    public function getAuthPassword()
+    {
+        return $this->attributes['matKhau'];
     }
 
     public function bienBanPhanCong() : HasMany 
