@@ -48,6 +48,25 @@ function Sidebar() {
 
 				{/* ----------------Menu Sidebar----------------- */}
 				<Menu className={cx('menu-list')}>
+					<ParentMenuItem icon={faMortarBoard} text="Hướng Nghiên Cứu">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Đăng Ký'} to={config.routes.registerResearch} />
+							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Đăng ký đề tài'} to={config.routes.registerTopic} />
+							<MenuItem title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
+							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faGear} text="Quản Lý Tài Khoản">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
+							<MenuItem title={'Thành Tích'} to={config.routes.achievement} />
+						</div>
+					</ParentMenuItem>
 					<ParentMenuItem icon={faBox} text="Quản Lý Chung">
 						<div className={cx('menu-frame')}>
 							<MenuItem title={'Phân nhóm	đề tài'} to={config.routes.topicGroup} />
@@ -60,12 +79,6 @@ function Sidebar() {
 							<MenuItem title={'Thêm đề tài'} to={config.routes.addTopic} />
 							<MenuItem title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
 							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
-						</div>
-					</ParentMenuItem>
-					<ParentMenuItem icon={faGear} text="Quản Lý Tài Khoản">
-						<div className={cx('menu-frame')}>
-							<MenuItem title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
-							<MenuItem title={'Thành Tích'} to={config.routes.achievement} />
 						</div>
 					</ParentMenuItem>
 				</Menu>

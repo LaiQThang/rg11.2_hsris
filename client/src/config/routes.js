@@ -13,6 +13,7 @@ const routes = {
 	progressTopic: '/progressTopic',
 	registerResearch: '/registerResearch',
 	registerTopic: '/registerTopic',
+	detailResearch: '/detailResearch/:id',
 	login: '/auth/login',
 	//Giang Vien
 	topicGroup: '/topicGroup',
