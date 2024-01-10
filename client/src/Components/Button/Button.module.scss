@@ -2,7 +2,7 @@
 	min-width: 100px;
 	padding: 10px 12px;
 	border-radius: 6px;
-	font-size: 1.6rem;
+	font-size: 16px;
 	font-weight: 700;
 	cursor: pointer;
 	border: 1px solid transparent;
@@ -25,4 +25,18 @@
 
 .text {
 	border: none;
+}
+
+@media (max-width: 1024px) and (min-width: 744px) {
+	.wrapper {
+		padding: 8px 6px;
+		font-size: 12px;
+	}
+}
+
+//mobile
+@media (max-width: 743px) {
+	.wrapper {
+		display: none;
+	}
 }
