@@ -1,5 +1,5 @@
 const routes = {
-	login: '/auth/login',
+	
 	logout: '/auth/logout',
 	home: '/',
 	notification: '/notification',
@@ -13,7 +13,7 @@ const routes = {
 	progressTopic: '/progressTopic',
 	registerResearch: '/registerResearch',
 	registerTopic: '/registerTopic',
-
+	login: '/auth/login',
 	//Giang Vien
 	topicGroup: '/topicGroup',
 	addTopic: '/addTopic',
