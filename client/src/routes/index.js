@@ -12,6 +12,12 @@ import RegisterResearch from '~/pages/sidebarPages/RegisterResearch/RegisterRese
 import DetailResearch from '~/pages/sidebarPages/DetailResearch/DetailResearch';
 import RegisterTopic from '~/pages/sidebarPages/RegisterTopic/RegisterTopic';
 import Login from '~/pages/Login/login';
+import AddTopic from '~/pages/sidebarPages/AddTopic/AddTopic';
+import TrackProgress from '~/pages/sidebarPages/TrackProgress/TrackProgress';
+import TrackProgressDetail from '~/pages/sidebarPages/TrackProgress/TrackProgressDetail';
+import SetupProgress from '~/pages/sidebarPages/SetupProgress/SetupProgress';
+import TopicGroup from '~/pages/sidebarPages/TopicGroup/TopicGroup';
+import Logout from '~/pages/Logout';
 const publicRoutes = [
 	{ path: config.routes.home, component: Home },
 	{ path: config.routes.notification, component: Notification },
@@ -25,6 +31,13 @@ const publicRoutes = [
 	{ path: config.routes.registerTopic, component: RegisterTopic },
 	{ path: config.routes.detailResearch, component: DetailResearch},
 	{ path: config.routes.login, component: Login, layout: null},
+	{ path: config.routes.login, component: Login, layout: null },
+	{ path: config.routes.logout, component: Logout },
+	{ path: config.routes.addTopic, component: AddTopic },
+	{ path: config.routes.trackProgress, component: TrackProgress },
+	{ path: config.routes.setupProgress, component: SetupProgress },
+	{ path: config.routes.topicGroup, component: TopicGroup },
+	{ path: config.routes.trackProgressDetail, component: TrackProgressDetail },
 ];
 
 const privateRoutes = [];
