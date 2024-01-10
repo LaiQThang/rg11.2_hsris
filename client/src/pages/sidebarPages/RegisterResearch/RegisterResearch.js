@@ -117,38 +117,6 @@ function RegisterResearch() {
 				</div>
 				<div className={cx('grid')}>
 				<div className={cx('name')}>Danh sách đăng ký hướng nghiên cứu</div>
-				{/* <div className={cx('grid-title')}>
-					<div className={cx('title')}>
-						STT
-					</div>
-					<div className={cx('title')}>
-						Tên HNC
-					</div>
-					<div className={cx('title')}>
-						Tóm tắt
-					</div>
-					<div className={cx('title')}>
-						Mục tiêu
-					</div>
-					<div className={cx('title')}>
-						Phạm vi
-					</div>
-					<div className={cx('title')}>
-						Ghi chú
-					</div>
-				</div>
-				{
-					displayedData.map((data)=>
-						<Link to ={`/detailResearch/${data.id}`} className={cx(data.id % 2 !== 0 ? 'grid-content' : 'grid-content-light')} key = {data.id}>
-							<div className={cx('content')}>{data.id}</div>
-							<div className={cx('content')}>{data.ResearchName}</div>
-							<div className={cx('content')}>{data.summary}</div>
-							<div className={cx('content')}>{data.target}</div>
-							<div className={cx('content')}>{data.limit}</div>
-							<div className={cx('content')}>{data.note}</div>
-						</Link>
-					)
-				} */}
 				<table {...getTableProps()}>
 					<thead>
 						{headerGroups.map(headerGroup => (

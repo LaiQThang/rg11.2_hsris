@@ -4,17 +4,21 @@ import classNames from 'classnames/bind'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import { showToast } from '~/Components/ToastMessage/Toast';
+
 const cx = classNames.bind(Styles)
 function DetailResearch(){
     const navigate = useNavigate()
     const {id} = useParams();
     const [data,setData] = useState([])
+    const [toast,setToast] = useState(false)
     const dataId = data.filter(data=>data.id===id)
 
     const handlesShowNotification =()=>{
        const show =  window.confirm("Bạn có chắc với lựa chọn này");
        if(show){
-            navigate('/historyRegisterResearch')
+        showToast('success', 'Đăng kí thành công!');
        }
     }
     useEffect(()=>{
@@ -33,6 +37,7 @@ function DetailResearch(){
 
     return (
         <div className={cx('container')}>
+            <ToastContainer/>
 {
     dataId.map(data=><div className={cx('table')} key ={data.id}>
         <div className={cx('header')}>Hướng nghiên cứu - Lịch sử đăng ký - Chi tiết HNC</div>

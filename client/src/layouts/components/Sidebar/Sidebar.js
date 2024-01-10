@@ -16,13 +16,7 @@ function Sidebar() {
 	const [isHNCVisible, setIsHNCVisible] = useState(true);
 	const [isQLDTVisible, setIsQLDTVisible] = useState(true);
 	const [isQLTKVisible, setIsQLTKVisible] = useState(true);
-	const [sideBarActive,setSideBarActive] = useState(null);
 
-	const handleActiveSideBar = (item) =>{
-		if(sideBarActive !== item){
-			setSideBarActive(item)
-		}
-	}
 	const toggleMenuHNC = () => {
 		setIsHNCVisible(!isHNCVisible);
 	};
@@ -59,8 +53,8 @@ function Sidebar() {
 						</div>
 						{
 							isHNCVisible && (<div className={cx('menu-item-child' /*hidden*/)}>
-							<MenuItem isSideBar active ={sideBarActive === 'registerResearch'} title={'Đăng Ký'} to={config.routes.registerResearch} onClick ={()=>handleActiveSideBar('registerResearch')}/>
-							<MenuItem isSideBar active ={sideBarActive === 'historyRegister'} title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} onClick ={()=>handleActiveSideBar('historyRegister')}/>
+							<MenuItem isSideBar  title={'Đăng Ký'} to={config.routes.registerResearch} />
+							<MenuItem isSideBar  title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} />
 						</div>)
 						}
 					</div>
@@ -73,9 +67,9 @@ function Sidebar() {
 						</div>
 						{
 							isQLDTVisible && (<div className={cx('menu-item-child' /*hidden*/)}>
-							<MenuItem isSideBar active ={sideBarActive === 'registerTopic'} title={'Đăng Ký Đề Tài'} to={config.routes.registerTopic} onClick ={()=>handleActiveSideBar('registerTopic')}/>
-							<MenuItem isSideBar active ={sideBarActive === 'progressTopic'} title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} onClick ={()=>handleActiveSideBar('progressTopic')}/>
-							<MenuItem isSideBar active ={sideBarActive === 'historyRegisterTopic'} title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} onClick ={()=>handleActiveSideBar('historyRegisterTopic')}/>
+							<MenuItem isSideBar title={'Đăng Ký Đề Tài'} to={config.routes.registerTopic} />
+							<MenuItem isSideBar title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
+							<MenuItem isSideBar title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
 						</div>)
 						}
 					</div>
@@ -87,8 +81,8 @@ function Sidebar() {
 							{isQLTKVisible ? <FontAwesomeIcon icon={faChevronDown} className={cx('icon')} /> : <FontAwesomeIcon icon={faChevronUp} className={cx('icon')} />}
 						</div>
 						{isQLTKVisible && (<div className={cx('menu-item-child' /*hidden*/)}>
-							<MenuItem isSideBar active ={sideBarActive === 'profile'} title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} onClick ={()=>handleActiveSideBar('profile')}/>
-							<MenuItem isSideBar active ={sideBarActive === 'achievement'} title={'Thành Tích'} to={config.routes.achievement} onClick ={()=>handleActiveSideBar('achievement')}/>
+							<MenuItem isSideBar title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
+							<MenuItem isSideBar title={'Thành Tích'} to={config.routes.achievement} />
 						</div>)}
 					</div>
 				</Menu>
