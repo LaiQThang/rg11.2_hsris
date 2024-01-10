@@ -1,0 +1,36 @@
+.mw-1200{
+    max-width: 1200px;
+}
+
+.title{
+    border-bottom: 1px solid #ccc;
+}
+
+.content-item{
+    border: 1px solid #1b2c95;
+}
+
+.content-button{
+    width: 100px;
+}
+
+button{
+    color: #fff !important;
+    font-weight: 500 !important;
+}
+
+.get{
+    background-color: #61affe;
+}
+
+.put{
+    background-color: #ffa500;
+}
+
+.post{
+    background-color: #2ec05a;
+}
+
+.delete{
+    background-color: #a82323;
+}
