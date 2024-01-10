@@ -12,7 +12,12 @@ const cx = classNames.bind(styles);
 function Header() {
 	return (
 		<div className={cx('wrapper')}>
-	@@ -21,6 +27,19 @@ function Header() {
+			<div className={cx('inner')}>
+				<div className={cx('language')}>
+					<div className={cx('text')}>ENGLISH</div>
+					<span className={cx('text')}>|</span>
+					<div className={cx('text')}>Tiếng Việt</div>
+				</div>
 				<Menu className={cx('nav-list')}>
 					<MenuItem title={'Trang Chủ'} to={config.routes.home} icon={<FontAwesomeIcon icon={faHome} />} />
 					<MenuItem
