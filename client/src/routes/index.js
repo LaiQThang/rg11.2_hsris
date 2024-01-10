@@ -29,7 +29,7 @@ const publicRoutes = [
 	{ path: config.routes.progressTopic, component: ProgressTopic },
 	{ path: config.routes.registerResearch, component: RegisterResearch },
 	{ path: config.routes.registerTopic, component: RegisterTopic },
-	{ path: config.routes.login, component: Login, layout: null },
+	{ path: config.routes.login, component: Login, layout: null},
 	{ path: config.routes.logout, component: Logout },
 
 	{ path: config.routes.addTopic, component: AddTopic },
