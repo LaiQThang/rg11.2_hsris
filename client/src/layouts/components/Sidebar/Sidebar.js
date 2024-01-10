@@ -12,23 +12,6 @@ import Menu from '~/Components/Menu';
 import { MenuItem } from '~/Components/Menu';
 const cx = classNames.bind(styles);
 
-function ParentMenuItem({ icon, text, children }) {
-	const [isChildVisible, setIsChildVisible] = useState(false);
-	const toggleMenuItems = () => {
-		setIsChildVisible(!isChildVisible);
-	};
-	return (
-		<div className={cx('menu-item')}>
-			<div className={cx('menu-item-parent')} onClick={toggleMenuItems}>
-				<FontAwesomeIcon icon={icon} className={cx('icon')} />
-				<div className={cx('menu-item-text')}>{text}</div>
-				<FontAwesomeIcon icon={isChildVisible ? faChevronUp : faChevronDown} className={cx('icon')} />
-			</div>
-			{isChildVisible && <div className={cx('menu-item-child' /*hidden*/)}>{children}</div>}
-		</div>
-	);
-}
-
 function Sidebar() {
 	return (
 		<div className={cx('wrapper')}>
@@ -73,5 +56,24 @@ function Sidebar() {
 		</div>
 	);
 }
+
+function ParentMenuItem({ icon, text, children }) {
+	const [isChildVisible, setIsChildVisible] = useState(false);
+	const toggleMenuItems = () => {
+		setIsChildVisible(!isChildVisible);
+	};
+	return (
+		<div className={cx('menu-item')}>
+			<div className={cx('menu-item-parent')} onClick={toggleMenuItems}>
+				<FontAwesomeIcon icon={icon} className={cx('icon')} />
+				<div className={cx('menu-item-text')}>{text}</div>
+				<FontAwesomeIcon icon={isChildVisible ? faChevronUp : faChevronDown} className={cx('icon')} />
+			</div>
+			{isChildVisible && <div className={cx('menu-item-child' /*hidden*/)}>{children}</div>}
+		</div>
+	);
+}
+
+
 
 export default Sidebar;
