@@ -13,4 +13,4 @@ function MenuItem({ title, to, icon }) {
 	);
 }
 
-export default MenuItem;	
+export default MenuItem;
