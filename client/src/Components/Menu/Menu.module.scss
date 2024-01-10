@@ -19,5 +19,25 @@
 	padding: 0 4px;
 }
 
-.title {
+.active {
+	background-color: blue;
+}
+
+@media (min-width: 1024px) {
+}
+
+@media (max-width: 1023px) and (min-width: 744px) {
+	.menu-item {
+		font-size: 12px;
+		padding: 4px;
+	}
+}
+
+@media (max-width: 743px) {
+	.menu-item:first-child {
+		display: none;
+	}
+	.title {
+		display: none;
+	}
 }

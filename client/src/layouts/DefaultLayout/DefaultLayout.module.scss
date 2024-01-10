@@ -1,12 +1,11 @@
 .wrapper {
 	display: flex;
-	height: 100vh; /* Chiều cao của wrapper bằng chiều cao của viewport */
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1; /* Chiếm phần còn lại của wrapper */
+	flex-grow: 1;
 }
 
 .content {
