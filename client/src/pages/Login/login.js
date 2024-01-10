@@ -74,7 +74,7 @@ function Login(){
                         <p>Nghiên cứu khoa học</p>
                     </div>
                 </div>
-
+                
                 <div className = {cx('banner')}>
                     <img className={cx('img-banner')} src={images.banner} alt="" />
                 </div>
@@ -100,7 +100,7 @@ function Login(){
                             <div className ={cx('modal-pw')}>
                                 <div className= {cx('icon-check')}>
                                     <div className={cx('round-check')}> <FontAwesomeIcon className={cx('icon-inside')}icon={faCircleCheck}/></div>
-
+                            
                                 </div>
                                 <div className={cx('notification')}>
                                     <div>Liên hệ quản trị viên để được cấp mật khẩu mới</div>
@@ -116,6 +116,6 @@ function Login(){
             </form>
         </div>
 
-
+        
     )
 export default Login;
