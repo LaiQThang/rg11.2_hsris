@@ -17,11 +17,45 @@
 }
 .language {
 	display: flex;
+	font-size: 14px;
 }
 
 .nav-list {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+}
+
+@media (min-width: 1024px) {
+	.item-open-sidebar {
+		display: none;
+	}
+}
+
+@media (max-width: 1023px) and (min-width: 744px) {
+	.inner {
+		padding: 0 12px;
+	}
+	.nav-item {
+		font-size: 13px;
+	}
+	.item-open-sidebar {
+		display: none;
+	}
+}
+
+@media (max-width: 743px) {
+	.wrapper {
+		width: 100%;
+		padding: 0 16px;
+	}
+	.inner {
+		padding: 0;
+	}
+
+	.item-open-sidebar {
+		padding: 8px 12px;
+	}
 }
 .text-active{
 	color: #3F4DA6;
