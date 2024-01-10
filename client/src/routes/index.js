@@ -1,6 +1,5 @@
 import config from '~/config';
 
-import Login from '~/pages/Login/login';
 import Logout from '~/pages/Logout';
 import Home from '~/pages/headerPages/Home';
 import Notification from '~/pages/headerPages/Notification';
@@ -12,6 +11,7 @@ import ProFile from '~/pages/sidebarPages/ProFile/ProFile';
 import ProgressTopic from '~/pages/sidebarPages/ProgressTopic/ProgressTopic';
 import RegisterResearch from '~/pages/sidebarPages/RegisterResearch/RegisterResearch';
 import RegisterTopic from '~/pages/sidebarPages/RegisterTopic/RegisterTopic';
+import Login from '~/pages/Login/login';
 
 import AddTopic from '~/pages/sidebarPages/AddTopic/AddTopic';
 import TrackProgress from '~/pages/sidebarPages/TrackProgress/TrackProgress';
