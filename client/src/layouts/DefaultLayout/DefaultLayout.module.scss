@@ -1,0 +1,18 @@
+.wrapper {
+	display: flex;
+	background-color: #F5F6F9;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1; /* Chiếm phần còn lại của wrapper */
+}
+
+.content {
+	flex-grow: 1;
+	padding-top: 56px; /* Chiếm phần còn lại của container */
+	height: 100%;
+}
+
+/* Các kiểu CSS tùy chỉnh cho các component Header và Sidebar */

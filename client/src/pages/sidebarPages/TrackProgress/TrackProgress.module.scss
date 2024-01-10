@@ -1,0 +1,151 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+	padding: 12px 0 50px 0;
+}
+
+.inner {
+	width: 80%;
+	min-width: 800px;
+	border-radius: 4px;
+	padding: 4px 8px;
+	background: #fff;
+	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.frame-common {
+	padding: 2px 8px 26px;
+}
+.name-page {
+	font-size: 12px;
+	color: rgba(0, 0, 0, 0.6);
+	font-weight: 400;
+	border-bottom: 1px solid #ccc;
+}
+
+//list-member
+.frame-desc {
+	display: flex;
+	align-items: center;
+	padding: 8px 0;
+}
+
+.frame-text {
+	flex: 1;
+	font-size: 18px;
+	font-weight: 400;
+	margin-right: 4px;
+}
+.frame-year {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.year {
+	padding: 4px;
+}
+
+//container
+.frame-container-border {
+	border: 1px solid #ccc;
+}
+
+.frame-container-inner {
+	padding: 22px;
+}
+
+.container-wrap {
+	width: 100%;
+}
+.container-groupname-progress {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.frame-item-groupname-progress {
+	padding: 12px 0;
+	width: 45%;
+}
+.frame-item {
+	padding: 12px 0;
+}
+
+.frame-item-text {
+	font-size: 12px;
+	color: #5c6873;
+}
+
+.frame-item-form {
+	display: flex;
+	width: 100%;
+}
+
+.input-item {
+	flex: 1;
+	padding: 8px;
+	border: 1px solid rgba(27, 44, 149, 0.8);
+	border-radius: 6px;
+	width: 100%;
+}
+
+.frame-item-content,
+.name-item-group {
+	border: 1px solid rgba(27, 44, 149, 0.8);
+	padding: 8px;
+	font-size: 14px;
+	border-radius: 6px;
+	width: 100%;
+	font-size: 14px;
+	letter-spacing: 1.2px;
+}
+
+.frame-container-progress {
+	padding: 12px;
+}
+
+//table
+table {
+	margin-top: 20px;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th,
+td {
+	padding: 8px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.table-inner-row {
+	border-bottom: 1px solid #ccc;
+}
+.table-inner-row:nth-child(odd) {
+	background: rgba(217, 217, 217, 0.4);
+}
+.table-inner-row:nth-child(even) {
+	background: rgba(217, 217, 217, 0.1);
+}
+.table-header-row {
+	background-color: rgba(243, 128, 32, 0.1);
+	border-bottom: 2px solid #f38020;
+}
+
+.table-header-cell {
+	color: var(--Back, #2d323e);
+	font-feature-settings: 'salt' on;
+	font-weight: 700;
+	border-bottom: 1px solid #d9d9d917;
+}
+
+.button-comment {
+	padding: 8px;
+	font-size: 12px;
+	letter-spacing: 1.2px;
+	color: #fff;
+	border-radius: 6px;
+	background: #1b2c95;
+	text-decoration: none;
+}
