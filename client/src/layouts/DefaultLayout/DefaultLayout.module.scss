@@ -1,6 +1,6 @@
 .wrapper {
 	display: flex;
-	height: 100vh; /* Chiều cao của wrapper bằng chiều cao của viewport */
+	background-color: #F5F6F9;
 }
 
 .container {
@@ -12,6 +12,7 @@
 .content {
 	flex-grow: 1;
 	padding-top: 56px; /* Chiếm phần còn lại của container */
+	height: 100%;
 }
 
 /* Các kiểu CSS tùy chỉnh cho các component Header và Sidebar */

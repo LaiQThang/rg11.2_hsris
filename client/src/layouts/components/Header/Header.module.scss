@@ -6,6 +6,7 @@
 	top: 0;
 	right: 0;
 	background-color: #fff;
+	z-index: 999;
 }
 .inner {
 	display: flex;
@@ -21,4 +22,14 @@
 .nav-list {
 	display: flex;
 	justify-content: space-between;
+}
+.text-active{
+	color: #3F4DA6;
+	cursor: pointer;
+}
+.text-line{
+	padding:0 5px
+}
+.text{
+	cursor: pointer;
 }

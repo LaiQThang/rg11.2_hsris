@@ -9,7 +9,8 @@ const routes = {
 	progressTopic: '/progressTopic',
 	registerResearch: '/registerResearch',
 	registerTopic: '/registerTopic',
-	login: '/auth/login'
+	login: '/auth/login',
+	detailResearch: '/detailResearch/:id'
 };
 
 export default routes;
