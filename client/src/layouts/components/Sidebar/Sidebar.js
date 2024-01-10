@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
 import { Link } from 'react-router-dom';
@@ -13,20 +13,6 @@ import { MenuItem } from '~/Components/Menu';
 const cx = classNames.bind(styles);
 
 function Sidebar() {
-	const [isHNCVisible, setIsHNCVisible] = useState(true);
-	const [isQLDTVisible, setIsQLDTVisible] = useState(true);
-	const [isQLTKVisible, setIsQLTKVisible] = useState(true);
-
-	const toggleMenuHNC = () => {
-		setIsHNCVisible(!isHNCVisible);
-	};
-	const toggleMenuQLDT = () => {
-		setIsQLDTVisible(!isQLDTVisible);
-	};
-	const toggleMenuQLTK = () => {
-		setIsQLTKVisible(!isQLTKVisible);
-	};
-
 	return (
 		<div className={cx('wrapper')}>
 			<div className={cx('inner')}>
@@ -38,57 +24,56 @@ function Sidebar() {
 				<div className={cx('user-infor')}>
 					<Image className={cx('user-avatar')} alt="NO-IMAGE" src={img.noImage} />
 					<div className={cx('user-decs')}>
-						<div className={cx('user-name')}>Phạm Văn Long</div>
-						<div className={cx('user-class')}>21A100100212</div>
+						<div className={cx('user-name')}>Phạm Quang Thắng</div>
+						<div className={cx('user-class')}>21A100100100</div>
 					</div>
 				</div>
 
 				{/* ----------------Menu Sidebar----------------- */}
 				<Menu className={cx('menu-list')}>
-					<div className={cx('menu-item')}>
-						<div className={cx('menu-item-parent')} onClick={toggleMenuHNC}>
-							<FontAwesomeIcon icon={faBox} className={cx('icon')} />
-							<div className={cx('menu-item-text')}>Hướng Nghiên Cứu</div>
-							{isHNCVisible ? <FontAwesomeIcon icon={faChevronDown} className={cx('icon')} />: <FontAwesomeIcon icon={faChevronUp} className={cx('icon')} />}
+					<ParentMenuItem icon={faBox} text="Quản Lý Chung">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Phân nhóm	đề tài'} to={config.routes.topicGroup} />
+							<MenuItem title={'Lập đợt tiến độ'} to={config.routes.setupProgress} />
+							<MenuItem title={'Theo dõi tiến độ'} to={config.routes.trackProgress} />
 						</div>
-						{
-							isHNCVisible && (<div className={cx('menu-item-child' /*hidden*/)}>
-							<MenuItem isSideBar  title={'Đăng Ký'} to={config.routes.registerResearch} />
-							<MenuItem isSideBar  title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} />
-						</div>)
-						}
-					</div>
-
-					<div className={cx('menu-item')}>
-						<div className={cx('menu-item-parent')} onClick={toggleMenuQLDT}>
-							<FontAwesomeIcon icon={faMortarBoard} className={cx('icon')} />
-							<div className={cx('menu-item-text')}>Quản Lý Đề Tài</div>
-							{isQLDTVisible ? <FontAwesomeIcon icon={faChevronDown} className={cx('icon')} />: <FontAwesomeIcon icon={faChevronUp} className={cx('icon')} />}
+					</ParentMenuItem>
+					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Thêm đề tài'} to={config.routes.addTopic} />
+							<MenuItem title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
+							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
 						</div>
-						{
-							isQLDTVisible && (<div className={cx('menu-item-child' /*hidden*/)}>
-							<MenuItem isSideBar title={'Đăng Ký Đề Tài'} to={config.routes.registerTopic} />
-							<MenuItem isSideBar title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
-							<MenuItem isSideBar title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
-						</div>)
-						}
-					</div>
-
-					<div className={cx('menu-item')}>
-						<div className={cx('menu-item-parent')} onClick={toggleMenuQLTK}>
-							<FontAwesomeIcon icon={faGear} className={cx('icon')} />
-							<div className={cx('menu-item-text')}>Quản Lý Tài Khoản</div>
-							{isQLTKVisible ? <FontAwesomeIcon icon={faChevronDown} className={cx('icon')} /> : <FontAwesomeIcon icon={faChevronUp} className={cx('icon')} />}
+					</ParentMenuItem>
+					<ParentMenuItem icon={faGear} text="Quản Lý Tài Khoản">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
+							<MenuItem title={'Thành Tích'} to={config.routes.achievement} />
 						</div>
-						{isQLTKVisible && (<div className={cx('menu-item-child' /*hidden*/)}>
-							<MenuItem isSideBar title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
-							<MenuItem isSideBar title={'Thành Tích'} to={config.routes.achievement} />
-						</div>)}
-					</div>
+					</ParentMenuItem>
 				</Menu>
 			</div>
 		</div>
 	);
 }
+
+function ParentMenuItem({ icon, text, children }) {
+	const [isChildVisible, setIsChildVisible] = useState(false);
+	const toggleMenuItems = () => {
+		setIsChildVisible(!isChildVisible);
+	};
+	return (
+		<div className={cx('menu-item')}>
+			<div className={cx('menu-item-parent')} onClick={toggleMenuItems}>
+				<FontAwesomeIcon icon={icon} className={cx('icon')} />
+				<div className={cx('menu-item-text')}>{text}</div>
+				<FontAwesomeIcon icon={isChildVisible ? faChevronUp : faChevronDown} className={cx('icon')} />
+			</div>
+			{isChildVisible && <div className={cx('menu-item-child' /*hidden*/)}>{children}</div>}
+		</div>
+	);
+}
+
+
 
 export default Sidebar;
