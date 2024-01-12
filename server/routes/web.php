@@ -4,6 +4,8 @@ use App\Models\ct_hncgv;
 use App\Models\giangvien;
 use App\Models\huongnghiencuu;
 use App\Models\permission;
+use App\Models\permission_detail;
+use App\Models\permission_list;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -100,4 +102,22 @@ Route::get('/postpermission', function(){
     // catch(\Exception $e){
     //     dd($e->getMessage());
     // }
+});
+
+Route::get('/postpermission2', function(){
+        // permission_list::create([
+        //     'tenQuyen' => Str::random(10),
+        //     'tokenBase' => Hash::make(\Ramsey\Uuid\Uuid::uuid4()->toString()),
+        // ]);
+        $result = App\Models\permission_list::all()->toArray();
+        dd($result);
+});
+
+Route::get('/postpermission3', function(){
+    // permission_detail::create([
+    //     'permission_id' => '7fb1b312-1841-45ef-8f82-c572a08b2410',
+    //     'permission_list_id' => 'b89282d1-0456-4ae0-85fb-a5af5e21b03f'
+    // ]);
+    $result = App\Models\permission_detail::all()->toArray();
+    dd($result);
 });

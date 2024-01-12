@@ -44,6 +44,10 @@ return [
             'driver' => 'jwt',
             'provider' => 'teacher',
         ],
+        'apiStudent' => [
+            'driver' => 'jwt',
+            'provider' => 'student',
+        ],
     ],
 
     /*
@@ -77,10 +81,10 @@ return [
             // // 'password' => 'matKhau'
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'student' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\sinhvien::class,
+        ],
     ],
 
     /*

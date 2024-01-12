@@ -3,56 +3,159 @@
 namespace App\Http\Controllers\Authentication\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\UpdateProfileRequest;
+use App\Models\giangvien;
+use App\Models\sinhvien;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->middleware('auth:apiTeacher', ['except' => ['login']]);
+        // $this->middleware('authClassify');
+
+        // dd($request);
+        $check = $this->validatePerson($request);
+        if($check == 'hou.edu.vn'){
+            $this->middleware('auth:apiTeacher', ['except' => ['login']]);
+        }else if($check == 'students.hou.edu.vn'){
+            $this->middleware('auth:apiStudent', ['except' => ['login']]);
+        }
+        else{
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
 
     public function login()
     {
         // // dd($request);
 
-        $credentials = request(['maGV', 'password']);
+        $credentials = request(['email', 'password']);
         // dd(request(['email', 'password']));
         // $tokenDetails = auth('apiTeacher');
         // dd(auth('apiTeacher'));
 
         // dd(auth('apiTeacher')->attempt($credentials));
+        // dd(auth('apiStudent')->attempt($credentials));
+        $tokenTeacher = auth('apiTeacher')->attempt($credentials);
+        $tokenStudent = auth('apiStudent')->attempt($credentials);
 
-        if (! $token = auth('apiTeacher')->attempt($credentials)) {
+        if ( $tokenTeacher == false  && $tokenStudent == false ) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        if($tokenTeacher == false){
+           
+            $permission = $this->tokenPermission(auth('apiStudent')->user()->permissionId);
+            
+            return $this->respondWithToken($tokenStudent, $permission);
+        }
+        else{
+
+            $permission = $this->tokenPermission(auth('apiTeacher')->user()->permissionId);
+
+            return $this->respondWithToken($tokenTeacher, $permission);
+        }
+
+    }
+
+    private function tokenPermission($permissionId){
+        $data = [
+            'permissionId' => Hash::make($permissionId),
+            'exp' => time() + config('jwt.ttl')
+        ];
+        $permission = JWTAuth::getJWTProvider()->encode($data);
+        return $permission;
     }
 
     public function profile()
     {
-        return response()->json(auth('apiTeacher')->user());
+        $check = $this->validatePerson(request());
+        if($check == 'hou.edu.vn'){
+            return response()->json(auth('apiTeacher')->user());
+        }else if($check == 'students.hou.edu.vn'){
+            // dd(123);
+            return response()->json(auth('apiStudent')->user());
+        }
+        else{
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+    }
+
+    public function updateProfile(UpdateProfileRequest $request, string $id){
+        $check = $this->validatePerson($request);
+        if($check == 'hou.edu.vn'){
+            try{
+                giangvien::find($id)->update($request->all());
+                return response()->json(['Message' => 'Success'], 200);
+            }
+            catch(QueryException $e){
+                return response()->json(['Message' => 'Error'], 404);
+            }
+        }else if($check == 'students.hou.edu.vn'){
+            try{
+                sinhvien::find($id)->update($request->all());
+                return response()->json(['Message' => 'Success'], 200);
+            }
+            catch(QueryException $e){
+                return response()->json(['Message' => 'Error'], 404);
+            }
+        }
+        else{
+            return response()->json(['Message' => 'Error'], 401);
+        }
     }
 
     public function logout()
     {
-        auth()->logout();
-
+        $check = $this->validatePerson(request());
+        if($check == 'hou.edu.vn'){
+            auth('apiTeacher')->logout();
+        }else if($check == 'students.hou.edu.vn'){
+            auth('apiStudent')->logout();
+        }
+        else{
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
         return response()->json(['message' => 'Successfully logged out']);
     }
 
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        // return $this->respondWithToken(auth()->refresh());
     }
 
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $permission)
     {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('apiTeacher')->factory()->getTTL() * 60
-        ]);
+        $check = $this->validatePerson(request());
+
+        if($check == 'hou.edu.vn'){
+            return response()->json([
+                'access_token' => $token,
+                'access_permission_token' => $permission,
+                'token_type' => 'bearer',
+                'expires_in' => auth('apiTeacher')->factory()->getTTL() * 60
+            ]);
+        }else if($check == 'students.hou.edu.vn'){
+            return response()->json([
+                'access_token' => $token,
+                'access_permission_token' => $permission,
+                'token_type' => 'bearer',
+                'expires_in' => auth('apiStudent')->factory()->getTTL() * 60
+            ]);
+        }
+        else{
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        
+    }
+
+    protected function validatePerson($request){
+        $email = $request->email;
+        $validate = explode("@", $email)[1];
+        return $validate;
     }
 }

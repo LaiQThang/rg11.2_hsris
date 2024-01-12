@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use App\Http\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class sinhvien extends Model
+class sinhvien extends Authenticatable implements JWTSubject
 {
     use HasFactory;
 
@@ -17,6 +22,10 @@ class sinhvien extends Model
     protected $table = 'sinhviens';
 
     protected $primaryKey = 'idSV';
+
+    protected $casts = [
+        'matKhau' => 'hashed',
+    ];
 
     protected $fillable = [
         'idSV',
@@ -43,6 +52,31 @@ class sinhvien extends Model
         self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->attributes['matKhau'];
+    }
+
+    public function historyResearchStudent() : BelongsToMany 
+    {
+        return $this->belongsToMany(huongnghiencuu::class,'ct_hncsv', 'idSV', 'idHNC');   
     }
 
 }

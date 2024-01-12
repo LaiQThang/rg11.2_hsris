@@ -3,8 +3,9 @@
 namespace App\Http\Requests\V1;
 
 use Faker\Core\Uuid;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Http\FormRequest;
 
 class BulkStoreSinhVienRequest extends FormRequest
 {
@@ -44,7 +45,7 @@ class BulkStoreSinhVienRequest extends FormRequest
 
     protected function prepareForValidation() {
         $data = [];
-        dd($this->toArray());
+        // dd($this->toArray());
 
         foreach($this->toArray() as $obj){
             $obj['idSV'] = \Ramsey\Uuid\Uuid::uuid4()->toString();
@@ -59,7 +60,7 @@ class BulkStoreSinhVienRequest extends FormRequest
             $obj['soDT'] = $obj['phone'] ?? null;
             $obj['gioiTinh'] = $obj['sex'] ?? null;
             $obj['diaChi'] = $obj['address'] ?? null;
-            $obj['matKhau'] = $obj['passWord'] ?? null;
+            $obj['matKhau'] = Hash::make($obj['passWord']) ?? null;
 
             $data[] = $obj;
         }
