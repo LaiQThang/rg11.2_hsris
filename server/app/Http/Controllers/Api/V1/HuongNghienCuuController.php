@@ -36,7 +36,7 @@ class HuongNghienCuuController extends Controller
         }
 
         
-        return new HuongNghienCuuCollection($huongnghiencuu->paginate(2)->appends($request->query()));
+        return new HuongNghienCuuCollection($huongnghiencuu->paginate(5)->appends($request->query()));
     }
 
     /**

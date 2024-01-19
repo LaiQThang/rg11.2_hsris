@@ -76,7 +76,11 @@ class sinhvien extends Authenticatable implements JWTSubject
 
     public function historyResearchStudent() : BelongsToMany 
     {
-        return $this->belongsToMany(huongnghiencuu::class,'ct_hncsv', 'idSV', 'idHNC');   
+        return $this->belongsToMany(huongnghiencuu::class,'ct_hncsv', 'idSV', 'idHNC')->withPivot('id');   
     }
 
+    public function detailsDeTai() : BelongsToMany
+    {
+        return $this->belongsToMany(detai::class, 'ct_detai', 'idSV', 'idDT');
+    }
 }

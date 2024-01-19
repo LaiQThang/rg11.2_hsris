@@ -2,36 +2,30 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\sinhvien;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\StoreHNCSinhVienRequest;
-use App\Models\V1\HNCSinhVienModel;
+use App\Models\Api\V1\HNCSinhVienModel;
 
 class HNCSinhVienController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    private $initModel;
+
+    public function __construct() {
+        $this->initModel = new HNCSinhVienModel();
+    }
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreHNCSinhVienRequest $request)
     {
-        $model = new HNCSinhVienModel();
+        $model = $this->initModel;
 
         $result = $model->addHNCSinhVien($request);
         if($result){
@@ -47,24 +41,12 @@ class HNCSinhVienController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $res = sinhvien::find($id);
-        $res1 = $res->historyResearchStudent()->whereYear('ngayTao', $request->y)->get();
-        return response()->json($res1);
-        dd($res1->toArray());
-        dd($request);
+        $model = $this->initModel;
+        $arr = $model->showHNCSinhVien($request->y, $id);
+        $res = $model->ApiResponse($arr);
+        return response()->json($res);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
@@ -75,6 +57,13 @@ class HNCSinhVienController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $check = $this->initModel->deleteHNCSinhVien($id);
+        if($check){
+            return response()->json(['Message' => 'Success'], 200);
+        }
+        else{
+            return response()->json(['Message' => 'Fail'], 404);
+        }
     }
+
 }

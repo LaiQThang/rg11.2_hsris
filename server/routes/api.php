@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\V1\BaoCaoDeTaiController;
+use App\Http\Controllers\Api\V1\CTBaoCaoSVController;
+use App\Http\Controllers\Api\V1\CTDeTaiController;
+use App\Http\Controllers\Api\V1\DeTaiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\SinhVienController;
@@ -42,6 +46,10 @@ Route::group([
     Route::apiResource('/hncgiangvien', HNCGiangVienController::class);
     Route::apiResource('/students', SinhVienController::class)->middleware(['authorizationClassify', 'validatePermission']);
     Route::apiResource('/hncsinhvien', HNCSinhVienController::class);
+    Route::apiResource('/detai', DeTaiController::class);
+    Route::apiResource('/ct-detai', CTDeTaiController::class);
+    Route::apiResource('/baocaodetai', BaoCaoDeTaiController::class);
+    Route::apiResource('/ct-baocaosinhvien', CTBaoCaoSVController::class);
 
     Route::post('students/bulk', [SinhVienController::class, 'bulkStore']);
 });
