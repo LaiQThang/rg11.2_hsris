@@ -30,4 +30,11 @@ class Controller extends BaseController
         
         return false;
     }
+
+    public function ApiResponse($array) 
+    {
+        return [
+            'data' => $array
+        ];
+    }
 }

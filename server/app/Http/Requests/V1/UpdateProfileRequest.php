@@ -62,7 +62,7 @@ class UpdateProfileRequest extends FormRequest
 
         $fieldStudent = [
             'name' => 'tenSV',
-            'avatar' => 'anhDD',
+            // 'avatar' => 'anhDD',
             'class' => 'lopHC',
             'favorite' => 'soThich',
             'birthday' => 'ngaySinh',
@@ -76,7 +76,7 @@ class UpdateProfileRequest extends FormRequest
 
         $fieldTeacher = [
             'name' => 'tenGV',
-            'avatar' => 'anhDD',
+            // 'avatar' => 'anhDD',
             'birthday' => 'ngaySinh' ,
             'email' => 'email',
             'phone' => 'soDT',

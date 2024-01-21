@@ -17,6 +17,8 @@ class giaithuong extends Model
 
     protected $table = 'giaithuongs';
 
+    protected $primaryKey = 'idGT';
+
     protected $fillable = [
         'idGT',
         'tenGiai',
@@ -28,7 +30,8 @@ class giaithuong extends Model
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Authentication\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\UpdateProfileRequest;
+use App\Http\Resources\V1\SinhVienResource;
+use App\Models\Api\V1\AccountModel;
 use App\Models\giangvien;
 use App\Models\sinhvien;
 use Illuminate\Database\QueryException;
@@ -13,11 +15,14 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+
+    private $model;
     public function __construct(Request $request)
     {
         // $this->middleware('authClassify');
 
         // dd($request);
+        $this->model = new AccountModel();
         $check = $this->validatePerson($request);
         if($check == 'hou.edu.vn'){
             $this->middleware('auth:apiTeacher', ['except' => ['login']]);
@@ -61,7 +66,7 @@ class AuthController extends Controller
         }
 
     }
-
+ 
     private function tokenPermission($permissionId){
         $data = [
             'permissionId' => Hash::make($permissionId),
@@ -77,28 +82,37 @@ class AuthController extends Controller
         if($check == 'hou.edu.vn'){
             return response()->json(auth('apiTeacher')->user());
         }else if($check == 'students.hou.edu.vn'){
+            // dd(new SinhVienResource(auth('apiStudent')->user()));
             // dd(123);
-            return response()->json(auth('apiStudent')->user());
+            return response()->json(new SinhVienResource(auth('apiStudent')->user()));
         }
         else{
             return response()->json(['error' => 'Unauthorized'], 401);
         }
     }
 
-    public function updateProfile(UpdateProfileRequest $request, string $id){
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        // dd(123);
         $check = $this->validatePerson($request);
         if($check == 'hou.edu.vn'){
             try{
-                giangvien::find($id)->update($request->all());
-                return response()->json(['Message' => 'Success'], 200);
+                if($this->model->updateInfoStudent($request))
+                {
+                    return response()->json(['Message' => 'Success'], 200);
+                }
+                return response()->json(['Message' => 'Error'], 404);
             }
             catch(QueryException $e){
                 return response()->json(['Message' => 'Error'], 404);
             }
         }else if($check == 'students.hou.edu.vn'){
             try{
-                sinhvien::find($id)->update($request->all());
-                return response()->json(['Message' => 'Success'], 200);
+                if($this->model->updateInfoStudent($request))
+                {
+                    return response()->json(['Message' => 'Success'], 200);
+                }
+                return response()->json(['Message' => 'Error'], 404);
             }
             catch(QueryException $e){
                 return response()->json(['Message' => 'Error'], 404);

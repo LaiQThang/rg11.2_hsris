@@ -2,9 +2,10 @@
 
 namespace App\Models\Api\V1;
 
-use App\Models\Api\ApiModel;
-use App\Models\ct_detai;
 use Exception;
+use App\Models\ct_detai;
+use App\Models\sinhvien;
+use App\Models\Api\ApiModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CTDeTaiModel extends ApiModel
@@ -37,5 +38,26 @@ class CTDeTaiModel extends ApiModel
         catch(Exception $e){
             return false;
         }
+    }
+
+    public function getHistory($y)
+    {
+        $idSV = $this->getidSV();
+        if( $idSV != null && $y != null){
+            $user = sinhvien::find($idSV);
+            $history = $user->detailsDeTai()->whereYear('ngayLap', $y)->get()->toArray();
+            return $history;
+        }
+        return null;
+    }
+
+    public function getFinally()
+    {
+        if($idSV = $this->getidSV()){
+            $user = sinhvien::find($idSV);
+            $history = $user->detailsDeTai()->get()->toArray();
+            return $history;
+        }
+        return null;
     }
 }

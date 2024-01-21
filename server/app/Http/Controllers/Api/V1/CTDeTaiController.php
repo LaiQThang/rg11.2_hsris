@@ -19,7 +19,22 @@ class CTDeTaiController extends Controller
 
     public function index()
     {
+        $result = $this->modelCTDeTai->getHistory(request()->y);
+        if($result != null)
+        {
+            return response($this->ApiResponse($result));
+        }
+        return response()->json(['Message' => 'Error'], 500);
+    }
 
+    public function getFinally()
+    {
+        // dd($request);
+        if($result = $this->modelCTDeTai->getFinally())
+        {
+            return response($this->ApiResponse($result));
+        }
+        return response()->json(['Message' => 'Error'], 500);
     }
 
     public function store(Request $request)
@@ -42,6 +57,7 @@ class CTDeTaiController extends Controller
     public function show(string $id)
     {
         //
+        // dd($id);
     }
 
     public function update(Request $request, string $id)

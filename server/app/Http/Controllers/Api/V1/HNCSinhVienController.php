@@ -13,9 +13,10 @@ class HNCSinhVienController extends Controller
      * Display a listing of the resource.
      */
     private $initModel;
-
+    private $idSV;
     public function __construct() {
         $this->initModel = new HNCSinhVienModel();
+        $this->idSV = $this->getidSV();
     }
 
     public function index()
@@ -42,7 +43,8 @@ class HNCSinhVienController extends Controller
     public function show(Request $request, string $id)
     {
         $model = $this->initModel;
-        $arr = $model->showHNCSinhVien($request->y, $id);
+        // dd($request->y);
+        $arr = $model->showHNCSinhVien($request->y, $this->idSV);
         $res = $model->ApiResponse($arr);
         return response()->json($res);
     }

@@ -15,4 +15,25 @@ class ApiModel extends Model
             'data' => $array
         ];
     }
+
+    public function getidSV() 
+    {
+        $user = auth('apiStudent')->user();
+        if($user != null)
+        {
+            // dd($user->idSV);
+            return $user->idSV;
+        }
+        return false;
+    }
+
+    public function getidGV()
+    {
+        $user = auth('apiTeacher')->user();
+        if($user != null)
+        {
+            return $user->idGV;
+        }
+        return false;
+    }
 }

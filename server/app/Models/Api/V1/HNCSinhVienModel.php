@@ -23,10 +23,10 @@ class HNCSinhVienModel extends ApiModel
         }
     }
 
-    public function showHNCSinhVien($year, $id) : array
+    public function showHNCSinhVien($year, $idSV) : array
     {
-        $student = sinhvien::find($id);
-
+        $student = sinhvien::find($idSV);
+        // dd($student);
         $researchStudent = $student->historyResearchStudent()->whereYear('ngayTao', $year)->get();
         // dd($researchStudent->toArray());
         return $researchStudent->toArray();
