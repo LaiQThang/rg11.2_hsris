@@ -23,9 +23,6 @@ class HNCGiangVienController extends Controller
             return new HNCGiangVienCollection(ct_hncgv::paginate());
         }
         else{
-            // dd(huongnghiencuu::where('soLuong', '>', 5) );
-            // dd(huongnghiencuu::where($queryItems) );
-            // dd($queryItems);
             $hnc = ct_hncgv::where($queryItems)->paginate();
             return new HNCGiangVienCollection($hnc->appends($request->query()));
         }

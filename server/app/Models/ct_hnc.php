@@ -5,9 +5,8 @@ namespace App\Models;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class bienbanphancong extends Model
+class ct_hnc extends Model
 {
     use HasFactory;
 
@@ -15,17 +14,15 @@ class bienbanphancong extends Model
 
     public $incrementing = false;
 
-    protected $table = 'bienbanphancongs';
+    protected $table = 'ct_hnc';
 
-    protected $primaryKey = 'idBB';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'idBB',
-        'tenBB',
-        'ngayLap',
-        'noiDung',
-        'ghiChu',
+        'id',
+        'idHNC',
         'idGV',
+        'idSV',
     ];
 
     protected static function boot()
@@ -36,8 +33,13 @@ class bienbanphancong extends Model
         });
     }
 
-    public function bienBan_SinhVien() : BelongsToMany
+    public function HuongNghienCuu()
     {
-        return $this->belongsToMany(sinhvien::class, 'ct_bienban', 'idBB', 'idSV');
+        return $this->morphToMany(huongnghiencuu::class, 'idHNC');
+    }
+
+    public function SinhVien()
+    {
+        return $this->morphToMany(sinhvien::class, 'idSV');
     }
 }

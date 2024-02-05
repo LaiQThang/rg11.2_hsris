@@ -83,4 +83,6 @@ class sinhvien extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(detai::class, 'ct_detai', 'idSV', 'idDT');
     }
+
+ 
 }

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\V1\BaoCaoDeTaiController;
+use App\Http\Controllers\Api\V1\BienBanPhanCongController;
 use App\Http\Controllers\Api\V1\CTBaoCaoSVController;
 use App\Http\Controllers\Api\V1\CTDeTaiController;
+use App\Http\Controllers\Api\V1\CTHuongNghienCuuController;
 use App\Http\Controllers\Api\V1\DeTaiController;
 use App\Http\Controllers\Api\V1\GiaiThuongController;
 use Illuminate\Http\Request;
@@ -54,6 +56,9 @@ Route::group([
 
     Route::apiResource('/baocaodetai', BaoCaoDeTaiController::class);
     Route::apiResource('/ct-baocaosinhvien', CTBaoCaoSVController::class);
+    Route::apiResource('/ct-huongnghiencuu', CTHuongNghienCuuController::class);
+    Route::apiResource('/bienbanphancong', BienBanPhanCongController::class);
+    Route::get('/bienbanphancong-get', [BienBanPhanCongController::class, 'getBienBan']);
 
     Route::apiResource('/giai-thuong', GiaiThuongController::class);
     Route::get('/giai-thuong-sv', [GiaiThuongController::class, 'getGiaiThuongSV']);
