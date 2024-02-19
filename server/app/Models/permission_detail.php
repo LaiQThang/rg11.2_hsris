@@ -15,15 +15,18 @@ class permission_detail extends Model
 
     protected $table = 'permission_details';
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'id',
-        'permisson_id',
-        'permisson_list_id',
+        'permission_id',
+        'permission_list_id',
     ];
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
     }

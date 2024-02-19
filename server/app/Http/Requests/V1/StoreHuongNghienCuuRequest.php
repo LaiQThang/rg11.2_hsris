@@ -44,7 +44,7 @@ class StoreHuongNghienCuuRequest extends FormRequest
             'phamVi' => $this->limit,
             'ghiChu' => $this->note,
         ]);
-        dd($this->name);
+        // dd($this->name);
 
     }
 }

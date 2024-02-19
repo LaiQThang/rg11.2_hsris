@@ -14,6 +14,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Database\QueryException;
 class SinhVienController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('authorizationClassify');
+    }
     /**
      * Display a listing of the resource.
      */
