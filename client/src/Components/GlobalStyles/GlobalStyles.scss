@@ -1,11 +1,24 @@
 @import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-:root{
-
+:root {
+	--black: #000;
 }
-html{
-
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
-body{
-    font-family: 'Inter', sans-serif;
+html {
+	font-size: 62.5%;
+}
+body {
+	font-family: 'Inter', sans-serif;
+	font-size: 1.6rem;
+	line-height: 1.5;
+	text-rendering: optimizeSpeed;
+	overflow-y: overlay;
+}
+
+.hidden {
+	display: none;
 }

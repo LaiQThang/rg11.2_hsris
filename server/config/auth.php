@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'teacher',
     ],
 
     /*
@@ -39,6 +39,14 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        'apiTeacher' => [
+            'driver' => 'jwt',
+            'provider' => 'teacher',
+        ],
+        'apiStudent' => [
+            'driver' => 'jwt',
+            'provider' => 'student',
         ],
     ],
 
@@ -65,10 +73,18 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'teacher' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\giangvien::class,
+            // 'table' => 'giangviens',
+            // // 'username' => 'maGV',
+            // // 'password' => 'matKhau'
+        ],
+
+        'student' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\sinhvien::class,
+        ],
     ],
 
     /*
