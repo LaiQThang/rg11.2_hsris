@@ -25,7 +25,6 @@ function Header() {
 					<div className={cx('text')}>Tiếng Việt</div>
 				</div>
 				<Menu className={cx('nav-list')}>
-					<MenuItem title={'Trang Chủ'} to={config.routes.home} icon={<FontAwesomeIcon icon={faHome} />} />
 					<MenuItem
 						className={cx('nav-item')}
 						title={'Trang Chủ'}

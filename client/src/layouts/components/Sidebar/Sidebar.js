@@ -12,6 +12,23 @@ import Menu from '~/Components/Menu';
 import { MenuItem } from '~/Components/Menu';
 const cx = classNames.bind(styles);
 
+function ParentMenuItem({ icon, text, children }) {
+	const [isChildVisible, setIsChildVisible] = useState(false);
+	const toggleMenuItems = () => {
+		setIsChildVisible(!isChildVisible);
+	};
+	return (
+		<div className={cx('menu-item')}>
+			<div className={cx('menu-item-parent')} onClick={toggleMenuItems}>
+				<FontAwesomeIcon icon={icon} className={cx('icon')} />
+				<div className={cx('menu-item-text')}>{text}</div>
+				<FontAwesomeIcon icon={isChildVisible ? faChevronUp : faChevronDown} className={cx('icon')} />
+			</div>
+			{isChildVisible && <div className={cx('menu-item-child' /*hidden*/)}>{children}</div>}
+		</div>
+	);
+}
+
 function Sidebar() {
 	return (
 		<div className={cx('wrapper')}>
@@ -31,6 +48,25 @@ function Sidebar() {
 
 				{/* ----------------Menu Sidebar----------------- */}
 				<Menu className={cx('menu-list')}>
+					<ParentMenuItem icon={faMortarBoard} text="Hướng Nghiên Cứu">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Đăng Ký'} to={config.routes.registerResearch} />
+							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Đăng ký đề tài'} to={config.routes.registerTopic} />
+							<MenuItem title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
+							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faGear} text="Quản Lý Tài Khoản">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
+							<MenuItem title={'Thành Tích'} to={config.routes.achievement} />
+						</div>
+					</ParentMenuItem>
 					<ParentMenuItem icon={faBox} text="Quản Lý Chung">
 						<div className={cx('menu-frame')}>
 							<MenuItem title={'Phân nhóm	đề tài'} to={config.routes.topicGroup} />
@@ -45,35 +81,10 @@ function Sidebar() {
 							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
 						</div>
 					</ParentMenuItem>
-					<ParentMenuItem icon={faGear} text="Quản Lý Tài Khoản">
-						<div className={cx('menu-frame')}>
-							<MenuItem title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
-							<MenuItem title={'Thành Tích'} to={config.routes.achievement} />
-						</div>
-					</ParentMenuItem>
 				</Menu>
 			</div>
 		</div>
 	);
 }
-
-function ParentMenuItem({ icon, text, children }) {
-	const [isChildVisible, setIsChildVisible] = useState(false);
-	const toggleMenuItems = () => {
-		setIsChildVisible(!isChildVisible);
-	};
-	return (
-		<div className={cx('menu-item')}>
-			<div className={cx('menu-item-parent')} onClick={toggleMenuItems}>
-				<FontAwesomeIcon icon={icon} className={cx('icon')} />
-				<div className={cx('menu-item-text')}>{text}</div>
-				<FontAwesomeIcon icon={isChildVisible ? faChevronUp : faChevronDown} className={cx('icon')} />
-			</div>
-			{isChildVisible && <div className={cx('menu-item-child' /*hidden*/)}>{children}</div>}
-		</div>
-	);
-}
-
-
 
 export default Sidebar;
