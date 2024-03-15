@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBox, faChevronDown, faChevronUp, faGear, faMortarBoard } from '@fortawesome/free-solid-svg-icons';
+import { faBox, faChevronDown, faChevronUp, faGear, faMortarBoard, faReceipt } from '@fortawesome/free-solid-svg-icons';
 
 import config from '~/config';
 import img from '~/assets/img';
@@ -50,35 +50,44 @@ function Sidebar() {
 				<Menu className={cx('menu-list')}>
 					<ParentMenuItem icon={faMortarBoard} text="Hướng Nghiên Cứu">
 						<div className={cx('menu-frame')}>
-							<MenuItem title={'Đăng Ký'} to={config.routes.registerResearch} />
-							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} />
+							<MenuItem text={'Đăng Ký'} to={config.routes.registerResearch} />
+							<MenuItem text={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} />
 						</div>
 					</ParentMenuItem>
 					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
 						<div className={cx('menu-frame')}>
-							<MenuItem title={'Đăng ký đề tài'} to={config.routes.registerTopic} />
-							<MenuItem title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
-							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
+							<MenuItem text={'Đăng ký đề tài'} to={config.routes.registerTopic} />
+							<MenuItem text={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
+							<MenuItem text={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
 						</div>
 					</ParentMenuItem>
 					<ParentMenuItem icon={faGear} text="Quản Lý Tài Khoản">
 						<div className={cx('menu-frame')}>
-							<MenuItem title={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
-							<MenuItem title={'Thành Tích'} to={config.routes.achievement} />
+							<MenuItem text={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
+							<MenuItem text={'Thành Tích'} to={config.routes.achievement} />
 						</div>
 					</ParentMenuItem>
+					<ParentMenuItem text="Giáo Viên"></ParentMenuItem>
 					<ParentMenuItem icon={faBox} text="Quản Lý Chung">
 						<div className={cx('menu-frame')}>
-							<MenuItem title={'Phân nhóm	đề tài'} to={config.routes.topicGroup} />
-							<MenuItem title={'Lập đợt tiến độ'} to={config.routes.setupProgress} />
-							<MenuItem title={'Theo dõi tiến độ'} to={config.routes.trackProgress} />
+							<MenuItem text={'Phân Nhóm Đề Tài'} to={config.routes.topicGroup} />
+							<MenuItem text={'Lập Đợt Tiến Độ'} to={config.routes.setupProgress} />
+							<MenuItem text={'Theo Dõi Tiến Độ'} to={config.routes.trackProgress} />
 						</div>
 					</ParentMenuItem>
 					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
 						<div className={cx('menu-frame')}>
-							<MenuItem title={'Thêm đề tài'} to={config.routes.addTopic} />
-							<MenuItem title={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
-							<MenuItem title={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
+							<MenuItem text={'Thêm đề tài'} to={config.routes.addTopic} />
+							<MenuItem text={'Danh Sách Đề Tài'} to={config.routes.listTopic} />
+							<MenuItem text={'Đề Tài Chờ Duyệt'} to={config.routes.approvalTopic} />
+							<MenuItem text={'Đề Tài Phụ Trách'} to={config.routes.chargeOfTopic} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faReceipt} text="Quản Lý Hội Đồng">
+						<div className={cx('menu-frame')}>
+							<MenuItem text={'Danh Sách Hội Đồng'} to={config.routes.listCouncil} />
+							<MenuItem text={'Lập Phiếu Điểm'} to={config.routes.makeScoreCard} />
+							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />
 						</div>
 					</ParentMenuItem>
 				</Menu>
