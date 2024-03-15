@@ -41,6 +41,13 @@
 .img-frame {
 	display: none;
 }
+
+.button-offcanvas {
+	display: none;
+	text-align: center;
+	width: 34px;
+}
+
 @media (min-width: 1024px) {
 	.item-open-sidebar {
 		display: none;
@@ -83,6 +90,9 @@
 		width: 100%;
 	}
 	.menu-mobile {
+		display: block;
+	}
+	.button-offcanvas {
 		display: block;
 	}
 }

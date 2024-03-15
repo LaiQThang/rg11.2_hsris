@@ -10,20 +10,16 @@ import config from '~/config';
 import { faBars, faBell, faFile, faHome, faPen } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/Components/Button';
 import img from '~/assets/img';
-
-import Sidebar from '../Sidebar';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Sidebar from '~/layouts/components/SidebarResponsive';
+import Buttonn from 'react-bootstrap/Button';
 const cx = classNames.bind(styles);
 
 function Header() {
 	const [show, setShow] = useState(false);
 
-	const handleOpen = ()=>{
-		setShow(true)
-	}
-
-	const handleClose = ()=>{
-		setShow(false)
-	}
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 	return (
 		<div className={cx('wrapper')}>
 			<div className={cx('img-frame')}>
@@ -52,39 +48,21 @@ function Header() {
 						icon={<FontAwesomeIcon icon={faBell} />}
 					/>
 
-					<button
-						className="btn btn-primary"
+					<Buttonn
+						className={cx('button-offcanvas')}
 						type="button"
 						data-bs-toggle="offcanvas"
 						data-bs-target="#offcanvasWithBackdrop"
 						aria-controls="offcanvasWithBackdrop"
-						onClick={handleOpen}
+						onClick={handleShow}
 					>
 						<FontAwesomeIcon icon={faBars} />
-					</button>
+					</Buttonn>
 
-					<div
-						className="offcanvas offcanvas-start"
-						tabIndex={-1}
-						id="offcanvasWithBackdrop"
-						aria-labelledby="offcanvasWithBackdropLabel"
-						show = {show}
-					>
-						<div className="offcanvas-header">
-							<h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
-								Offcanvas with backdrop
-							</h5>
-							<button
-								type="button"
-								className="btn-close text-reset"
-								data-bs-dismiss="offcanvas"
-								aria-label="Close"
-							/>
-						</div>
-						<div className="offcanvas-body">
-							<Sidebar />
-						</div>
-					</div>
+					<Offcanvas show={show} onHide={handleClose}>
+						<Offcanvas.Header closeButton></Offcanvas.Header>
+						<Sidebar></Sidebar>
+					</Offcanvas>
 
 					<Button text leftIcon={<FontAwesomeIcon icon={faPen} />}>
 						Đăng Ký Đề Tài
