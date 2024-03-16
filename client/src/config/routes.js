@@ -14,6 +14,7 @@ const routes = {
 	registerResearch: '/registerResearch',
 	registerTopic: '/registerTopic',
 	detailResearch: '/detailResearch/:id',
+	detailTopic:'/detailTopic/:id',
 	login: '/auth/login',
 	//Giang Vien
 	topicGroup: '/topicGroup',
@@ -21,6 +22,10 @@ const routes = {
 	trackProgress: '/trackProgress',
 	trackProgressDetail: '/trackProgressDetail',
 	setupProgress: '/setupProgress',
+
+	//QTV
+	addResearch: '/addResearch',
+	reviewTopic: '/reviewTopic'
 };
 
 export default routes;

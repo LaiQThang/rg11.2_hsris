@@ -1,4 +1,5 @@
 .wrapper {
+	position: relative;
 	display: flex;
 	background-color: #F5F6F9;
 }
@@ -16,3 +17,14 @@
 }
 
 /* Các kiểu CSS tùy chỉnh cho các component Header và Sidebar */
+@media (min-width: 1024px){
+    
+}
+@media (max-width: 1023px) and (min-width: 744px){
+    .sidebar{
+		position: absolute;
+	}
+}
+@media (max-width: 743px){
+    
+}

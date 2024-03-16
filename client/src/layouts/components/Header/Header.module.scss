@@ -67,3 +67,11 @@
 .text{
 	cursor: pointer;
 }
+.bars{
+	padding: 8px 12px;
+	cursor: pointer;
+	&:hover {
+		background-color: rgba(22, 24, 35, 0.05);
+		color:#1B2C95;
+	}
+}

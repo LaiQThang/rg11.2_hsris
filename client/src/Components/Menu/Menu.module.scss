@@ -49,10 +49,8 @@
 }
 
 @media (max-width: 743px) {
-	.menu-item:first-child {
-		display: none;
-	}
-	.title {
-		display: none;
+	.menu-item {
+		font-size: 10px;
+		padding: 4px;
 	}
 }

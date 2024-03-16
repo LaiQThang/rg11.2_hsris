@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Menu from '~/Components/Menu';
 import { MenuItem } from '~/Components/Menu';
 import config from '~/config';
-import { faBell, faFile, faHome, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBell, faFile, faHome, faPen } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/Components/Button';
 const cx = classNames.bind(styles);
 
@@ -15,9 +15,9 @@ function toggleSidebar() {
 	sidebar.classList.toggle('open');
 }
 
-function Header() {
+function Header({ toggleSidebar,isSidebarVisible}) {
 	return (
-		<div className={cx('wrapper')}>
+		<div className={cx('wrapper')} style={{width: !isSidebarVisible ? '100%' : 'calc(100% - 220px)'}}>
 			<div className={cx('inner')}>
 				<div className={cx('language')}>
 					<div className={cx('text')}>ENGLISH</div>
@@ -47,6 +47,8 @@ function Header() {
 					<Button text leftIcon={<FontAwesomeIcon icon={faPen} />}>
 						Đăng Ký Đề Tài
 					</Button>
+					<FontAwesomeIcon icon={faBars} className={cx('bars')} onClick={toggleSidebar}/>
+					
 				</Menu>
 			</div>
 		</div>

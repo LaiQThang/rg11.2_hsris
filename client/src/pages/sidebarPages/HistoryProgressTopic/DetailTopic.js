@@ -1,65 +1,60 @@
-import { useParams } from 'react-router-dom'
-import Styles from './DetailResearch.module.scss'
-import classNames from 'classnames/bind'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import {useNavigate} from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
-import { showToast } from '~/Components/ToastMessage/Toast';
+import classNames from "classnames/bind";
+import Styles from "./DetailTopic.module.scss"
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import { showToast } from "~/Components/ToastMessage/Toast";
+import * as Result from "~/apiService/authService"
+import { useAuth } from "~/Components/Auth";
 
 const cx = classNames.bind(Styles)
-function DetailResearch(){
-    const {id} = useParams();
-    const [data,setData] = useState([])
-    const dataId = data.filter(data=>data.id===id)
 
+function DetailTopic(){
+    const {id} = useParams()
+    const [data,setData] = useState([])
+    const auth = useAuth()
+    const tokenBearer = auth.getTokens()
     const handlesShowNotification =()=>{
-       const show =  window.confirm("Bạn có chắc với lựa chọn này");
-       if(show){
-        showToast('success', 'Đăng kí thành công!');
-       }
-    }
-    useEffect(()=>{
+        const show =  window.confirm("Bạn có chắc với lựa chọn này");
+        if(show){
+         showToast('success', 'Đăng kí thành công!');
+        }
+     }
+     useEffect(()=>{
         fetchApi()
     },[])
     const fetchApi = async ()=>{
-        try{
-            const res = await axios.get('https://64dc69d1e64a8525a0f672e2.mockapi.io/LoginApi')
-            const data = res.data
-            setData(data)
-        }
-        catch(e){
-            console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', e);
-        }
-    }
-
-    return (
+		let result
+		result = await Result.detailTopic(tokenBearer,id)
+		setData(result.data)
+	}
+    return(
         <div className={cx('container')}>
             <ToastContainer/>
-{
-    dataId.map(data=><div className={cx('table')} key ={data.id}>
-        <div className={cx('header')}>Hướng nghiên cứu - Lịch sử đăng ký - Chi tiết HNC</div>
+            <div className={cx('table')} key ={data.id}>
+        <div className={cx('header')}>Quản lý đề tài - Lịch sử đăng kí</div>
                 <div className={cx('line')}></div>
                 <div className={cx('wrapper')}>
-                <div className={cx('name')}>Chi tiết hướng nghiên cứu</div>
+                <div className={cx('name')}>Chi tiết đề tài</div>
                     <div className={cx('line-1')}>
                         <div className={cx('research-name')}>
-                            <div className={cx('text')}>Tên hướng nghiên cứu: </div>
+                            <div className={cx('text')}>Tên đề tài: </div>
                             <div className={cx('content')}>{data.ResearchName}</div>
                         </div>
                         <div className={cx('research-name')}>
-                            <div className={cx('text')}>Ngày tạo: </div>
+                            <div className={cx('text')}>Ngày lập: </div>
                             <div className={cx('content')}>{data.year}</div>
                         </div>
                     </div>
                     <div className={cx('line-2')}>
                         <div className={cx('research-name')}>
-                            <div className={cx('text')}>Mã hướng nghiên cứu: </div>
+                            <div className={cx('text')}>Mã đề tài: </div>
                             <div className={cx('content')}>{data.id}</div>
                         </div>
                         <div className={cx('research-name')}>
-                            <div className={cx('text')}>Số lượng người tham gia: </div>
-                            <div className={cx('content')}>{data.peopleJoin}</div>
+                            <div className={cx('text')}>Ngày hoàn thành: </div>
+                            <div className={cx('content')}>{data.year}</div>
                         </div>
                     </div>
                 <div className={cx('text')}>Tóm tắt</div>
@@ -74,9 +69,8 @@ function DetailResearch(){
                     <button className={cx('register') } onClick = {handlesShowNotification}>Đăng ký</button>
                 </div>
                 </div>
-    </div>)
-}
     </div>
+        </div>
     )
 }
-export default DetailResearch
+export default DetailTopic
