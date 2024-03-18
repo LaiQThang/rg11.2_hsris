@@ -46,6 +46,9 @@
 	display: none;
 	text-align: center;
 	width: 34px;
+	background-color: #57c7c7;
+	border: none;
+	border-radius: 6px;
 }
 
 @media (min-width: 1024px) {
@@ -58,12 +61,16 @@
 }
 
 @media (max-width: 1023px) and (min-width: 744px) {
+	.wrapper{
+	width: calc(100% - 190px);
+	}
 	.nav-item {
 		font-size: 13px;
 	}
 	.menu-mobile {
 		display: none;
 	}
+	
 }
 
 @media (max-width: 743px) {

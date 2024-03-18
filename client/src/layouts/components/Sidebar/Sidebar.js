@@ -87,7 +87,15 @@ function Sidebar() {
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Danh Sách Hội Đồng'} to={config.routes.listCouncil} />
 							<MenuItem text={'Lập Phiếu Điểm'} to={config.routes.makeScoreCard} />
-							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />
+							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />	
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem text="Quản Trị Viên"></ParentMenuItem>
+					<ParentMenuItem icon={faBox} text="Quản Lý HNC">
+						<div className={cx('menu-frame')}>
+							<MenuItem text={'Phân Công Giảng Viên'} to={config.routes.appointmentOfTeacher} />
+							<MenuItem text={'Thêm Hội Đồng'} to={config.routes.addCouncil} />
+							<MenuItem text={'Theo Dõi Tiến Độ'} to={config.routes.trackProgress} />
 						</div>
 					</ParentMenuItem>
 				</Menu>

@@ -48,16 +48,12 @@ function Header() {
 						icon={<FontAwesomeIcon icon={faBell} />}
 					/>
 
-					<Buttonn
+					<button
 						className={cx('button-offcanvas')}
-						type="button"
-						data-bs-toggle="offcanvas"
-						data-bs-target="#offcanvasWithBackdrop"
-						aria-controls="offcanvasWithBackdrop"
 						onClick={handleShow}
 					>
 						<FontAwesomeIcon icon={faBars} />
-					</Buttonn>
+					</button>
 
 					<Offcanvas show={show} onHide={handleClose}>
 						<Offcanvas.Header closeButton></Offcanvas.Header>

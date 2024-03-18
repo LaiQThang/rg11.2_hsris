@@ -29,6 +29,9 @@ const routes = {
 	listCouncil: '/listCouncil',
 	makeScoreCard: '/makeScoreCard',
 	listScoreCard: '/listScoreCard',
+	//admin
+	appointmentOfTeacher : '/appointmentOfTeacher',
+	addCouncil : '/addCouncil',
 };
 
 export default routes;

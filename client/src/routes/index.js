@@ -27,6 +27,8 @@ import ChargeOfTopicDetail from '~/pages/sidebarPages/ChargeOfTopic/ChargeOfTopi
 import ListCouncil from '~/pages/sidebarPages/ListCouncil/ListCouncil';
 import MakeScoreCard from '~/pages/sidebarPages/MakeScoreCard/MakeScoreCard';
 import ListScoreCard from '~/pages/sidebarPages/ListScoreCard/ListScoreCard';
+import AppointmentOfTeacher from '~/pages/sidebarPages/AppointmentOfTeacher/AppointmentOfTeacher';
+import AddCouncil from '~/pages/sidebarPages/AddCouncil/AddCouncil';
 const publicRoutes = [
 	{ path: config.routes.home, component: Home },
 	{ path: config.routes.notification, component: Notification },
@@ -56,6 +58,8 @@ const publicRoutes = [
 	{ path: config.routes.listCouncil, component: ListCouncil },
 	{ path: config.routes.makeScoreCard, component: MakeScoreCard },
 	{ path: config.routes.listScoreCard, component: ListScoreCard },
+	{ path: config.routes.appointmentOfTeacher, component: AppointmentOfTeacher },
+	{ path: config.routes.addCouncil, component: AddCouncil },
 ];
 
 const privateRoutes = [];
