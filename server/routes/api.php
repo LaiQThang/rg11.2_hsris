@@ -55,6 +55,10 @@ Route::group([
     Route::get('/ct-detai-finally', [CTDeTaiController::class, 'getFinally']);
 
     Route::apiResource('/baocaodetai', BaoCaoDeTaiController::class);
+    Route::get('/baocaodetai-getall', [BaoCaoDeTaiController::class, 'getAllTienDo']);
+    Route::get('/baocaodetai-getone', [BaoCaoDeTaiController::class, 'getTienDo']);
+
+
     Route::apiResource('/ct-baocaosinhvien', CTBaoCaoSVController::class);
     Route::apiResource('/ct-huongnghiencuu', CTHuongNghienCuuController::class);
     Route::apiResource('/bienbanphancong', BienBanPhanCongController::class);

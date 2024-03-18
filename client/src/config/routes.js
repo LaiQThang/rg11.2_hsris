@@ -30,8 +30,10 @@ const routes = {
 	makeScoreCard: '/makeScoreCard',
 	listScoreCard: '/listScoreCard',
 	//admin
-	appointmentOfTeacher : '/appointmentOfTeacher',
-	addCouncil : '/addCouncil',
+	appointmentOfTeacher: '/appointmentOfTeacher',
+	addCouncil: '/addCouncil',
+	addResearch: '/addResearch',
+	reviewTopic: '/reviewTopic',
 };
 
 export default routes;

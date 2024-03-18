@@ -3,6 +3,7 @@ import { publicRoutes } from '~/routes';
 import DefaultLayout from '~/layouts/DefaultLayout/DefaultLayout';
 import { Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AuthProvider from './Components/Auth';
 
 function App() {
 	return (

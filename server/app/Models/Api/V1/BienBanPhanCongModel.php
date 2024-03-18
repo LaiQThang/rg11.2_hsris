@@ -61,7 +61,7 @@ class BienBanPhanCongModel extends ApiModel
 
     public function updateBienBan($request, $id)
     {
-        dd($id);
+        dd($request);
     }
 
     public function getBienBan($filter, $year)
