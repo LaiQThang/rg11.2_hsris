@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 
@@ -48,4 +49,10 @@ class huongnghiencuu extends Model
     {
         return $this->hasMany(ct_hncgv::class, 'idHNC', 'idHNC');
     }
+
+    public function hNCSinhVien() : BelongsToMany
+    {
+        return $this->belongsToMany(sinhvien::class, 'ct_hnc', 'idHNC', 'idSV')->withPivot('idGV', 'tinhTrangSV');
+    }
+
 }

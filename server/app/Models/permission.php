@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 
@@ -36,6 +37,11 @@ class permission extends Model
     public function permissionDetail() : HasMany 
     {
         return $this->hasMany(permission_detail::class, 'permission_id', 'id');
+    }
+
+    public function permissionList() : BelongsToMany 
+    {
+        return $this->belongsToMany(permission_list::class, 'permission_details', 'permission_id', 'permission_list_id');
     }
 
     public function sinhVien() : HasMany

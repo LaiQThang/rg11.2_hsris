@@ -1,7 +1,9 @@
 .wrapper {
 	position: relative;
 	display: flex;
-	background-color: #F5F6F9;
+	justify-content: flex-start;
+	align-items: flex-start;
+	background-color: #f5f6f9;
 }
 
 .container {
@@ -17,3 +19,4 @@
 }
 
 /* Các kiểu CSS tùy chỉnh cho các component Header và Sidebar */
+//responsive

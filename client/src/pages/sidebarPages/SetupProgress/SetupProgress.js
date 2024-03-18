@@ -8,33 +8,33 @@ function SetupProgress() {
 			<div className={cx('inner')}>
 				<div className={cx('name-page')}>Quản lý chung - Lập đợt tiến độ</div>
 
-				<div className={cx('frame-common')}>
-					<div className={cx('frame-container')}>
-						<div className={cx('frame-desc')}>
-							<div className={cx('frame-text')}>Tiến độ đề tài</div>
-							<div className={cx('frame-year')}>
-								<label className={cx('frame-text')} htmlFor="year">
-									Năm học :
-								</label>
-								<select className={cx('year')} id="year" name="year">
-									<option value="2020-2021">2020-2021</option>
-									<option value="2021-2022">2021-2022</option>
-									<option value="2022-2023">2022-2023</option>
-									<option value="2023-2024">2023-2024</option>
-								</select>
-							</div>
+				<div className={cx('frame-container')}>
+					<div className={cx('frame-desc')}>
+						<div className={cx('text')}>Danh sách sinh viên đăng ký hướng nghiên cứu</div>
+						<div className={cx('frame-year')}>
+							<label className={cx('text')} htmlFor="year">
+								Năm học :
+							</label>
+							<select className={cx('year')} id="year" name="year">
+								<option value="2020-2021">2020-2021</option>
+								<option value="2021-2022">2021-2022</option>
+								<option value="2022-2023">2022-2023</option>
+								<option value="2023-2024">2023-2024</option>
+							</select>
 						</div>
+					</div>
 
-						<div className={cx('frame-container-border')}>
-							<div className={cx('frame-container-inner')}>
-								<div className={cx('container-wrap')}>
-									<div className={cx('frame-item')}>
-										<div className={cx('frame-item-desc')}>
-											<div className={cx('frame-item-text')}>Tên nhóm</div>
+					<div className={cx('border')}>
+						<div className={cx('content')}>
+							<div className={cx('content-list-name')}>
+								<div className={cx('content-item-name')}>
+									<div className={cx('item')}>
+										<div className={cx('item-title')}>Tên nhóm</div>
+										<div className={cx('item-content')}>
 											<select
-												className={cx('name-item-group')}
-												id="name-item-group"
-												name="name-item-group"
+												className={cx('custom-select')}
+												id="custom-select"
+												name="custom-select"
 											>
 												<option value="Nhóm 1">Nhóm 1</option>
 												<option value="Nhóm 2">Nhóm 2</option>
@@ -42,64 +42,63 @@ function SetupProgress() {
 											</select>
 										</div>
 									</div>
-
-									<div className={cx('frame-item')}>
-										<div className={cx('frame-item-desc')}>
-											<div className={cx('frame-item-text')}>Tên đề tài</div>
-											<div className={cx('frame-item-content')}>
+								</div>
+								<div className={cx('content-item-name')}>
+									<div className={cx('item')}>
+										<div className={cx('item-title')}>Tên đề tài</div>
+										<div className={cx('item-content')}>
+											<div className={cx('item-text')}>
 												Tìm hiểu ReactJS phát triển hệ thống quản lý Nghiên cứu khoa học tương
 												thích đa thiết bị
 											</div>
 										</div>
 									</div>
 								</div>
-								<div className={cx('frame-container-progress')}>
-									<div className={cx('frame-desc-progress')}>
-										<div className={cx('frame-item-text')}>Tiến độ</div>
-										<button className={cx('button-add')}>+</button>
-									</div>
-									<div className={cx('frame-container-border')}>
-										<div className={cx('frame-progress-timeline')}>
-											<div className={cx('progress-item')}>
-												<div className={cx('progress-item-card')}>
-													<div className={cx('frame-item-text')}>Ngày bắt đầu</div>
-													<input type="date" className={cx('input-item')} />
-												</div>
-												<div className={cx('progress-item-card')}>
-													<div className={cx('frame-item-text')}>Ngày kết thúc</div>
-													<input type="date" className={cx('input-item')} />
-												</div>
-												<button className={cx('button-remove')}>-</button>
-											</div>
+							</div>
 
-											<div className={cx('progress-item')}>
-												<div className={cx('progress-item-card')}>
-													<div className={cx('frame-item-text')}>Ngày bắt đầu</div>
+							<div className={cx('content-progress')}>
+								<div className={cx('progress-spacing')}>
+									<div className={cx('progress-title')}>Tiến độ</div>
+									<button className={cx('btn-add')}>+</button>
+								</div>
+
+								<div className={cx('border')}>
+									<div className={cx('progress-timeline')}>
+										<div className={cx('progress-item')}>
+											<div className={cx('progress-item-card')}>
+												<div className={cx('item-title')}>Ngày bắt đầu</div>
+												<div className={cx('item-content')}>
 													<input type="date" className={cx('input-item')} />
 												</div>
-												<div className={cx('progress-item-card')}>
-													<div className={cx('frame-item-text')}>Ngày kết thúc</div>
-													<input type="date" className={cx('input-item')} />
-												</div>
-												<button className={cx('button-remove')}>-</button>
 											</div>
-											<div className={cx('progress-item')}>
-												<div className={cx('progress-item-card')}>
-													<div className={cx('frame-item-text')}>Ngày bắt đầu</div>
+											<div className={cx('progress-item-card')}>
+												<div className={cx('item-title')}>Ngày kết thúc</div>
+												<div className={cx('item-content')}>
 													<input type="date" className={cx('input-item')} />
 												</div>
-												<div className={cx('progress-item-card')}>
-													<div className={cx('frame-item-text')}>Ngày kết thúc</div>
-													<input type="date" className={cx('input-item')} />
-												</div>
-												<button className={cx('button-remove')}>-</button>
 											</div>
+											<button className={cx('btn-del')}>-</button>
+										</div>
+										<div className={cx('progress-item')}>
+											<div className={cx('progress-item-card')}>
+												<div className={cx('item-title')}>Ngày bắt đầu</div>
+												<div className={cx('item-content')}>
+													<input type="date" className={cx('input-item')} />
+												</div>
+											</div>
+											<div className={cx('progress-item-card')}>
+												<div className={cx('item-title')}>Ngày kết thúc</div>
+												<div className={cx('item-content')}>
+													<input type="date" className={cx('input-item')} />
+												</div>
+											</div>
+											<button className={cx('btn-del')}>-</button>
 										</div>
 									</div>
 								</div>
 
-								<div className={cx('button-container')}>
-									<button className={cx('button-submit')}>Lưu</button>
+								<div className={cx('btn-container')}>
+									<button className={cx('btn-submit')}>Lưu</button>
 								</div>
 							</div>
 						</div>
