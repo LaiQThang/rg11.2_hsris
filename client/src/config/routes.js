@@ -23,9 +23,6 @@ const routes = {
 	trackProgressDetail: '/trackProgressDetail',
 	setupProgress: '/setupProgress',
 
-	//QTV
-	addResearch: '/addResearch',
-	reviewTopic: '/reviewTopic'
 };
 
 export default routes;
