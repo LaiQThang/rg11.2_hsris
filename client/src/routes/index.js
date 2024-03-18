@@ -61,7 +61,7 @@ const publicRoutes = [
 	{ path: config.routes.listScoreCard, component: ListScoreCard },
 	{ path: config.routes.appointmentOfTeacher, component: AppointmentOfTeacher },
 	{ path: config.routes.addCouncil, component: AddCouncil },
-
+];
 const privateRoutes = [];
 
 export { publicRoutes, privateRoutes };
