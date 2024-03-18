@@ -14,7 +14,8 @@
 		background-color: rgba(22, 24, 35, 0.05);
 	}
 }
-.active{
+
+.active {
 	display: flex;
 	align-items: center;
 	font-size: 16px;
@@ -24,11 +25,15 @@
 	letter-spacing: 0.32px;
 	text-decoration: none;
 	padding: 8px 12px;
-	background-color: #EADAAF;
-	color:#1B2C95;
-	&:hover{
-		opacity:0.9;
+	background-color: #eadaaf;
+	color: #1b2c95;
+	&:hover {
+		opacity: 0.9;
 	}
+}
+
+.text {
+	font-size: 14px;
 }
 .icon {
 	padding: 0 4px;
@@ -41,17 +46,17 @@
 @media (min-width: 1024px) {
 }
 
-@media (max-width: 1023px) and (min-width: 744px) {
+@media (max-width: 1023px) and (min-width: 743px) {
 	.menu-item {
 		font-size: 12px;
 		padding: 4px;
 	}
+	.text {
+		font-size: 12px;
+	}
 }
 
 @media (max-width: 743px) {
-	.menu-item:first-child {
-		display: none;
-	}
 	.title {
 		display: none;
 	}

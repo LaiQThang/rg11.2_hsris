@@ -1,17 +1,16 @@
-import styles from './AddTopic.module.scss';
+import styles from './ListTopic.module.scss';
 import classNames from 'classnames/bind';
 
-import { Link } from 'react-router-dom';
-import config from '~/config';
 const cx = classNames.bind(styles);
-function AddTopic() {
+
+function ListTopicDetail() {
 	return (
 		<div className={cx('wrapper')}>
 			<div className={cx('inner')}>
 				<div className={cx('name-page')}>Quản lý chung - Phân nhóm đề tài</div>
 				<div className={cx('frame-container')}>
 					<div className={cx('frame-desc')}>
-						<div className={cx('text')}>Thêm đề tài</div>
+						<div className={cx('text')}>Danh sách sinh viên đăng ký hướng nghiên cứu</div>
 						<div className={cx('frame-year')}>
 							<label className={cx('text')} htmlFor="year">
 								Năm học :
@@ -30,12 +29,12 @@ function AddTopic() {
 							<div className={cx('content-list-card')}>
 								<div className={cx('content-item-card')}>
 									<div className={cx('item')}>
-										<div className={cx('item-title')}>Tên nhóm</div>
+										<div className={cx('item-title')}>Hướng nghiên cứu</div>
 										<div className={cx('item-content')}>
 											<select
-												className={cx('custom-select')}
-												id="custom-select"
-												name="custom-select"
+												className={cx('custom-select-detail')}
+												id="custom-select-detail"
+												name="custom-select-detail"
 											>
 												<option value="Khai phá dữ liệu">Khai phá dữ liệu</option>
 												<option value="Lập trình web">Lập trình web</option>
@@ -75,10 +74,13 @@ function AddTopic() {
 								</div>
 							</div>
 
-							<div className={cx('btn-container')}>
-								<Link className={cx('btn-save')} to={config.routes.trackProgress}>
-									Lưu
-								</Link>
+							<div className={cx('item')}>
+								<div className={cx('btn-container-detail')}>
+									<button className={cx('btn-pre')}>Quay Lại</button>
+									<span className={cx('space')} />
+
+									<button className={cx('btn-submit')}>Lưu</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -88,4 +90,4 @@ function AddTopic() {
 	);
 }
 
-export default AddTopic;
+export default ListTopicDetail;

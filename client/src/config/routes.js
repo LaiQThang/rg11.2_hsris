@@ -1,5 +1,4 @@
 const routes = {
-	
 	logout: '/auth/logout',
 	home: '/',
 	notification: '/notification',
@@ -21,6 +20,18 @@ const routes = {
 	trackProgress: '/trackProgress',
 	trackProgressDetail: '/trackProgressDetail',
 	setupProgress: '/setupProgress',
+	approvalTopic: '/approvalTopic',
+	listTopic: '/listTopic',
+	chargeOfTopic: '/chargeOfTopic',
+	listTopicDetail: '/listTopicDetail',
+	approvalTopicDetail: '/approvalTopicDetail',
+	chargeOfTopicDetail: '/chargeOfTopicDetail',
+	listCouncil: '/listCouncil',
+	makeScoreCard: '/makeScoreCard',
+	listScoreCard: '/listScoreCard',
+	//admin
+	appointmentOfTeacher : '/appointmentOfTeacher',
+	addCouncil : '/addCouncil',
 };
 
 export default routes;

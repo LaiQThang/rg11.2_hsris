@@ -1,29 +1,33 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
-//import Offcanvas from 'react-bootstrap/Offcanvas';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Menu from '~/Components/Menu';
 import { MenuItem } from '~/Components/Menu';
 import config from '~/config';
-import { faBell, faFile, faHome, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBell, faFile, faHome, faPen } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/Components/Button';
+import img from '~/assets/img';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Sidebar from '~/layouts/components/SidebarResponsive';
+import Buttonn from 'react-bootstrap/Button';
 const cx = classNames.bind(styles);
 
-function toggleSidebar() {
-	var sidebar = document.getElementById('sidebar');
-	sidebar.classList.toggle('open');
-}
-
 function Header() {
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 	return (
 		<div className={cx('wrapper')}>
+			<div className={cx('img-frame')}>
+				<Link to={config.routes.home}>
+					<img className={cx('img-logo')} src={img.logo} alt="HSRIS" />
+				</Link>
+			</div>
 			<div className={cx('inner')}>
-				<div className={cx('language')}>
-					<div className={cx('text')}>ENGLISH</div>
-					<span className={cx('text')}>|</span>
-					<div className={cx('text')}>Tiếng Việt</div>
-				</div>
 				<Menu className={cx('nav-list')}>
 					<MenuItem
 						className={cx('nav-item')}
@@ -43,7 +47,19 @@ function Header() {
 						to={config.routes.notification}
 						icon={<FontAwesomeIcon icon={faBell} />}
 					/>
-					<MenuItem title={'Hoạt Động'} to={config.routes.work} icon={<FontAwesomeIcon icon={faFile} />} />
+
+					<button
+						className={cx('button-offcanvas')}
+						onClick={handleShow}
+					>
+						<FontAwesomeIcon icon={faBars} />
+					</button>
+
+					<Offcanvas show={show} onHide={handleClose}>
+						<Offcanvas.Header closeButton></Offcanvas.Header>
+						<Sidebar></Sidebar>
+					</Offcanvas>
+
 					<Button text leftIcon={<FontAwesomeIcon icon={faPen} />}>
 						Đăng Ký Đề Tài
 					</Button>

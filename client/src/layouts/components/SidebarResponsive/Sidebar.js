@@ -10,6 +10,7 @@ import img from '~/assets/img';
 import Image from '~/Components/Image';
 import Menu from '~/Components/Menu';
 import { MenuItem } from '~/Components/Menu';
+import './Sidebar.css';
 const cx = classNames.bind(styles);
 
 function ParentMenuItem({ icon, text, children }) {
@@ -37,6 +38,7 @@ function Sidebar() {
 					<Link to={config.routes.home}>
 						<img className={cx('img-logo')} src={img.logo} alt="HSRIS" />
 					</Link>
+					{/* {console.log(closeButton)} */}
 				</div>
 				<div className={cx('user-infor')}>
 					<Image className={cx('user-avatar')} alt="NO-IMAGE" src={img.noImage} />
@@ -87,15 +89,7 @@ function Sidebar() {
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Danh Sách Hội Đồng'} to={config.routes.listCouncil} />
 							<MenuItem text={'Lập Phiếu Điểm'} to={config.routes.makeScoreCard} />
-							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />	
-						</div>
-					</ParentMenuItem>
-					<ParentMenuItem text="Quản Trị Viên"></ParentMenuItem>
-					<ParentMenuItem icon={faBox} text="Quản Lý HNC">
-						<div className={cx('menu-frame')}>
-							<MenuItem text={'Phân Công Giảng Viên'} to={config.routes.appointmentOfTeacher} />
-							<MenuItem text={'Thêm Hội Đồng'} to={config.routes.addCouncil} />
-							<MenuItem text={'Theo Dõi Tiến Độ'} to={config.routes.trackProgress} />
+							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />
 						</div>
 					</ParentMenuItem>
 				</Menu>
