@@ -95,54 +95,8 @@
 .item-text {
 	letter-spacing: 1.2px;
 }
-
-//table
-.table {
-	border-collapse: collapse;
-	width: 100%;
-	margin: 0;
-}
-
-th,
-td {
-	padding: 8px;
-	text-align: center;
-	vertical-align: middle;
-}
-
-.table-inner-row {
-	border-bottom: 1px solid #ccc;
-}
-.table-inner-row:nth-child(odd) {
-	background: rgba(217, 217, 217, 0.4);
-}
-.table-inner-row:nth-child(even) {
-	background: rgba(217, 217, 217, 0.1);
-}
-.table-header-row {
-	background-color: rgba(243, 128, 32, 0.1) !important;
-	border-bottom: 2px solid #f38020 !important;
-}
-
-.table-header-cell {
-	color: var(--Back, #2d323e);
-	font-feature-settings: 'salt' on;
-	font-weight: 700;
-	border-bottom: 1px solid #d9d9d917;
-}
-
-//button
-.btn-comment,
 .btn-save {
 	background: #1b2c95;
-}
-.btn-back {
-	background: #f38020;
-}
-
-.btn-comment,
-.btn-back,
-.btn-save {
 	padding: 8px;
 	font-size: 12px;
 	letter-spacing: 1.44px;
@@ -152,15 +106,10 @@ td {
 	width: 80px;
 	text-align: center;
 }
-
 .btn-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-.space {
-	width: 20px;
 }
 
 
@@ -197,14 +146,6 @@ td {
 		padding: 2px 4px;
 	}
 
-	//table
-	.table{
-		margin-top: 16px;
-	}
-	.table-header-cell, .table-inner-row-content{
-		padding: 6px 4px;
-		font-size: 12px;
-	}
 	//content
 	.item{
 		padding: 6px 0;
@@ -221,9 +162,10 @@ td {
 		font-size: 12px;
 	}
 
-	.btn-comment,
-	.btn-back,
-	.btn-save {
+	.btn-container{
+		margin-top: 12px;
+	}
+	.btn-save{
 		font-size: 10px;
 	}
 }
@@ -257,33 +199,16 @@ td {
 		padding: 2px 4px;
 	}
 
-	//table
-	.table-header-cell{
-		padding: 4px 2px;
-		font-size: 10px;
-	}
-	
-	.table-inner-row-content{
-		padding: 4px 2px;
-		font-size: 12px;
-	}
-
 	//content
-	.content{
-		padding: 0 4px 16px;
-	}
 	.item{
 		padding: 4px 0;
 	}
 	.item-title{
 		font-size: 11px;
 	}
-	.item-content{
-		padding: 4px;
-	}
 	.item-text,.custom-select,
 	.input{
-		font-size: 11px;
+		font-size: 12px;
 	}
 
 	.content-list-card{
@@ -296,9 +221,7 @@ td {
 	.btn-container{
 		margin-top: 12px;
 	}
-	.btn-comment,
-	.btn-save, .btn-back{
+	.btn-save{
 		font-size: 10px;
-		padding: 6px 4px;
 	}
 }

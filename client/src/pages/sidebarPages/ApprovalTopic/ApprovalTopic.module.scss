@@ -51,6 +51,7 @@
 	width: 100%;
 	padding: 0 10px 16px;
 }
+
 .content-list-card {
 	display: flex;
 	justify-content: space-between;
@@ -82,30 +83,85 @@
 	background-color: #fff;
 	letter-spacing: 1.2px;
 }
+
 .custom-select,
-.input {
+.custom-select-detail {
 	width: 100%;
+	padding: 6px 12px;
+	border-radius: 6px;
 	border: none;
 	outline: none;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	white-space: pre-wrap;
-	background-color: unset;
+	font-size: 12px;
+	letter-spacing: 1.44px;
 }
+
+.custom-select {
+	background-color: rgba(27, 44, 149, 0.9);
+	font-weight: 700;
+	color: rgb(255, 255, 255);
+}
+.custom-select option {
+	background: rgb(255, 255, 255);
+	color: #000;
+}
+
 .item-text {
 	letter-spacing: 1.2px;
 }
 
+.btn-fix {
+	background-color: #009b10cc;
+	border-radius: 6px;
+	padding: 6px 8px;
+	border: none;
+	color: #fff;
+	font-size: 12px;
+	text-decoration: none;
+	font-weight: 700;
+	letter-spacing: 1.44px;
+}
+
+.btn-container, .btn-container-detail {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn-submit,
+.btn-pre {
+	padding: 8px;
+	font-size: 12px;
+	color: #fff;
+	border-radius: 6px;
+	text-decoration: none;
+	width: 80px;
+	font-weight: 700;
+	letter-spacing: 1.44px;
+	text-align: center;
+	border: none;
+}
+
+.btn-submit {
+	background: #1b2c95;
+}
+
+.btn-pre {
+	background: rgba(255, 165, 0, 0.9);
+}
+.space {
+	width: 12px;
+}
 //table
 .table {
 	border-collapse: collapse;
+	padding: 10px 0;
 	width: 100%;
-	margin: 0;
+	margin-top: 10px;
 }
 
 th,
 td {
-	padding: 8px;
+	padding: 16px 8px;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -120,8 +176,8 @@ td {
 	background: rgba(217, 217, 217, 0.1);
 }
 .table-header-row {
-	background-color: rgba(243, 128, 32, 0.1) !important;
-	border-bottom: 2px solid #f38020 !important;
+	background-color: rgba(243, 128, 32, 0.1);
+	border-bottom: 2px solid #f38020;
 }
 
 .table-header-cell {
@@ -131,42 +187,39 @@ td {
 	border-bottom: 1px solid #d9d9d917;
 }
 
-//button
-.btn-comment,
-.btn-save {
-	background: #1b2c95;
-}
-.btn-back {
-	background: #f38020;
+.table-inner-row-content {
+	max-width: 400px;
 }
 
-.btn-comment,
-.btn-back,
-.btn-save {
-	padding: 8px;
-	font-size: 12px;
-	letter-spacing: 1.44px;
-	color: #fff;
-	border-radius: 6px;
-	text-decoration: none;
-	width: 80px;
-	text-align: center;
-}
-
-.btn-container {
+//next-page
+.list-number-page {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
+	margin-top: 12px;
 }
 
-.space {
-	width: 20px;
+.btn {
+	border: none;
+	background-color: #fff;
+	padding: 5px 8px;
+	font-size: 18px;
+	margin: 0 4px;
 }
 
+.btn:hover {
+	cursor: pointer;
+	background-color: #1b2c95;
+	color: #fff;
+}
 
 
 //responsive
 @media (min-width: 1024px) {
+	.custom-select{
+		width: 90px;
+	}
 }
 
 @media (max-width: 1023px) and (min-width: 743px) {
@@ -205,26 +258,26 @@ td {
 		padding: 6px 4px;
 		font-size: 12px;
 	}
+
 	//content
 	.item{
 		padding: 6px 0;
 	}
-	.item-title{
+	.item-title, .custom-select,
+	.btn-fix{
 		font-size: 10px;
 	}
 	.item-text{
 		font-size: 12px;
 	}
 
-	.custom-select,
-	.input{
-		font-size: 12px;
+	.custom-select{
+		width: 110px;
 	}
-
-	.btn-comment,
-	.btn-back,
-	.btn-save {
-		font-size: 10px;
+	
+	.btn{
+		font-size: 13px;
+		padding: 4px 6px;
 	}
 }
 
@@ -266,26 +319,28 @@ td {
 	.table-inner-row-content{
 		padding: 4px 2px;
 		font-size: 12px;
+		max-width: 150px;
+	}
+
+	.table-header-cell:nth-child(3),
+	.table-inner-row-content:nth-child(3) {
+    	display: none;
 	}
 
 	//content
-	.content{
-		padding: 0 4px 16px;
-	}
 	.item{
 		padding: 4px 0;
 	}
 	.item-title{
 		font-size: 11px;
 	}
-	.item-content{
-		padding: 4px;
-	}
-	.item-text,.custom-select,
-	.input{
-		font-size: 11px;
-	}
 
+	.custom-select{
+		width: 60px;
+		font-size: 9px;
+		font-weight: 600;
+		padding: 4px 6px;
+	}
 	.content-list-card{
 		flex-direction: column;
 	}
@@ -294,11 +349,21 @@ td {
 	}
 
 	.btn-container{
-		margin-top: 12px;
+		flex-direction: column;
 	}
-	.btn-comment,
-	.btn-save, .btn-back{
+	.btn-fix{
 		font-size: 10px;
 		padding: 6px 4px;
+	}
+	.btn-submit,
+	.btn-pre{
+		font-size: 11px;
+		padding: 6px 8px;
+		font-weight: 600;
+	}
+	
+	.btn{
+		font-size: 12px;
+		padding: 4px 6px;
 	}
 }

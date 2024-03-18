@@ -1,10 +1,10 @@
-import styles from './AddTopic.module.scss';
-import classNames from 'classnames/bind';
-
-import { Link } from 'react-router-dom';
 import config from '~/config';
+import styles from './ApprovalTopic.module.scss';
+import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
+
 const cx = classNames.bind(styles);
-function AddTopic() {
+function ApprovalTopicDetail() {
 	return (
 		<div className={cx('wrapper')}>
 			<div className={cx('inner')}>
@@ -32,15 +32,7 @@ function AddTopic() {
 									<div className={cx('item')}>
 										<div className={cx('item-title')}>Tên nhóm</div>
 										<div className={cx('item-content')}>
-											<select
-												className={cx('custom-select')}
-												id="custom-select"
-												name="custom-select"
-											>
-												<option value="Khai phá dữ liệu">Khai phá dữ liệu</option>
-												<option value="Lập trình web">Lập trình web</option>
-												<option value="Thiết kế đồ họa">Thiết kế đồ họa</option>
-											</select>
+											<div className={cx('item-text')}>Khai phá dữ liệu</div>
 										</div>
 									</div>
 								</div>
@@ -48,7 +40,7 @@ function AddTopic() {
 									<div className={cx('item')}>
 										<div className={cx('item-title')}>Tên đề tài</div>
 										<div className={cx('item-content')}>
-											<textarea type="text" className={cx('input')} placeholder="Tên đề tài" />
+											<div className={cx('item-text')}>Khai phá dữ liệu</div>
 										</div>
 									</div>
 								</div>
@@ -57,27 +49,46 @@ function AddTopic() {
 							<div className={cx('item')}>
 								<div className={cx('item-title')}>Hướng nghiên cứu</div>
 								<div className={cx('item-content')}>
-									<textarea type="text" className={cx('input')} placeholder="Tóm tắt" />
+									<div className={cx('item-text')}>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+										Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+										unknown printer took a galley of type and scrambled it to make a type specimen
+										book.
+									</div>
 								</div>
 							</div>
 
 							<div className={cx('item')}>
 								<div className={cx('item-title')}>Mục tiêu</div>
 								<div className={cx('item-content')}>
-									<textarea type="text" className={cx('input')} placeholder="Mục tiêu" />
+									<div className={cx('item-text')}>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+										Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+										unknown printer took a galley of type and scrambled it to make a type specimen
+										book.
+									</div>
 								</div>
 							</div>
 
 							<div className={cx('item')}>
 								<div className={cx('item-title')}>Phạm vi</div>
 								<div className={cx('item-content')}>
-									<textarea type="text" className={cx('input')} placeholder="Phạm vi" />
+									<div className={cx('item-text')}>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+										Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+										unknown printer took a galley of type and scrambled it to make a type specimen
+										book.
+									</div>
 								</div>
 							</div>
 
-							<div className={cx('btn-container')}>
-								<Link className={cx('btn-save')} to={config.routes.trackProgress}>
-									Lưu
+							<div className={cx('btn-container-detail')}>
+								<Link className={cx('btn-pre')} to={config.routes.approvalTopic}>
+									Quay Lại
+								</Link>
+								<span className={cx('space')} />
+								<Link className={cx('btn-submit')} to={config.routes.approvalTopic}>
+									Duyệt
 								</Link>
 							</div>
 						</div>
@@ -88,4 +99,4 @@ function AddTopic() {
 	);
 }
 
-export default AddTopic;
+export default ApprovalTopicDetail;
