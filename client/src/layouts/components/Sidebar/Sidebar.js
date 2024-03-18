@@ -29,9 +29,9 @@ function ParentMenuItem({ icon, text, children }) {
 	);
 }
 
-function Sidebar() {
+function Sidebar({isSidebarVisible,toggleSidebar }) {
 	return (
-		<div className={cx('wrapper')}>
+		<div className={cx(isSidebarVisible ? 'visible' : 'hidden')}>
 			<div className={cx('inner')}>
 				<div className={cx('img-frame')}>
 					<Link to={config.routes.home}>
@@ -96,6 +96,12 @@ function Sidebar() {
 							<MenuItem text={'Phân Công Giảng Viên'} to={config.routes.appointmentOfTeacher} />
 							<MenuItem text={'Thêm Hội Đồng'} to={config.routes.addCouncil} />
 							<MenuItem text={'Theo Dõi Tiến Độ'} to={config.routes.trackProgress} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Thêm HNC'} to={config.routes.addResearch} />
+							<MenuItem title={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
 						</div>
 					</ParentMenuItem>
 				</Menu>

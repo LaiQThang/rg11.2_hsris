@@ -4,10 +4,13 @@ import { faAngleDown, faAngleLeft, faAngleRight, faAngleUp } from "@fortawesome/
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useTable } from "react-table";
 import { showToast } from "~/Components/ToastMessage/Toast";
 import { ToastContainer } from "react-toastify";
+import * as Result from "~/apiService/authService"
+import { useAuth } from "~/Components/Auth";
+import { useMediaQuery } from "react-responsive";
 
 const cx = classNames.bind(Styles)
 
@@ -15,10 +18,14 @@ function RegisterTopic() {
 	const [showYear,setShowYear] =  useState(false)
 	const [data,setData] = useState([])
   	const [currentPage, setCurrentPage] = useState(1);
-	const [activeYear,setActiveYear] = useState('all')
+	const [activeYear,setActiveYear] = useState('2024')
 	const [activeChose,setActiveChosse] = useState('recommend')
 	const [getId,setGetId] = useState(null)
 	const topicId = data.filter(data=>data.id === getId)
+	const auth = useAuth()
+	const tokenBearer = auth.getTokens()
+	console.log(tokenBearer)
+	const year = activeYear
 	const columns = useMemo(()=>[
 		{
 			Header: "STT",
@@ -28,7 +35,7 @@ function RegisterTopic() {
 		{
 			Header: "Tên đề tài",
 			col: "col-2",
-			accessor: "ResearchName"
+			accessor: "name"
 		},
 		{
 			Header: "Tóm tắt",
@@ -48,24 +55,34 @@ function RegisterTopic() {
 		{
 			Header: "Ghi chú",
 			col: "col-2",
-			accessor: "note"
+			accessor: "comment"
 		}
 	],[])
-	
-	const dataYear = data.filter(data=>data.year.includes(activeYear))
+	const isSmallScreen = useMediaQuery({ maxWidth: 713 });
+	const isLargeSmallScreen = useMediaQuery({ minWidth: 714, maxWidth: 846 });
+  	const isMediumScreen = useMediaQuery({ minWidth: 847, maxWidth: 1023 });
+    if (isSmallScreen) {
+      columns.splice(2,3)
+    }
+	else if(isMediumScreen){
+		columns.splice(2,1)
+	}
+	else if(isLargeSmallScreen){
+		columns.splice(2,2)
+	}
 	const itemsPerPage = 5;
-	const totalItems = dataYear.length !== 0 ? dataYear.length : data.length;
+	const totalItems = data.length;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
-	const displayedData = dataYear.length !== 0 ? dataYear.slice(startIndex, endIndex) : data.slice(startIndex, endIndex);
+	const displayedData = data.slice(startIndex, endIndex);
 	const {
 		getTableProps,
 		getTableBodyProps,
 		headerGroups,
 		rows,
 		prepareRow,
-	  } = useTable({ columns, data: displayedData });
+	  } = useTable({ columns, data: displayedData});
 	const handleActiveYear = (e)=>{
 		setActiveYear(e)
 	}
@@ -87,10 +104,7 @@ function RegisterTopic() {
 		}
 	  }
 	  const handleShowNotification =()=>{
-		const show =  window.confirm("Bạn có chắc với lựa chọn này");
-		if(show){
-		 showToast('success', 'Đăng kí thành công!');
-		}
+		// return <Link to = {`/detailTopic/${topicId.id}`} key = {topicId.id}></Link>2
 	 }
 	// Hàm xử lý chuyển đến trang trước
 	const goToPreviousPage = () => {
@@ -109,16 +123,11 @@ function RegisterTopic() {
         fetchApi()
     },[])
     const fetchApi = async ()=>{
-        try{
-            const res = await axios.get('https://64dc69d1e64a8525a0f672e2.mockapi.io/LoginApi')
-            const data = res.data
-            setData(data)
-        }
-        catch(e){
-            console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', e);
-        }
-    }
-
+		let result
+		result = await Result.registerTopic(tokenBearer,year)
+		setData(result.data)
+	}
+	console.log(data)
 	return (
 		<div className={cx('container')}>
 			<ToastContainer/>
@@ -132,10 +141,9 @@ function RegisterTopic() {
 					</div>
 					{
 						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2066' && 'year-active')} onClick ={()=> handleActiveYear('2066')}>2021-2022</li>
-						<li className={cx(activeYear === '2078' && 'year-active')} onClick ={()=> handleActiveYear('2078')}>2022-2023</li>
-						<li className={cx(activeYear === '2094' && 'year-active')} onClick ={()=> handleActiveYear('2094')}>2023-2024</li>
-						<li className={cx(activeYear === 'all' && 'year-active')} onClick = {()=> handleActiveYear('all')}>Tất cả</li>
+						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
+						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
+						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>2023-2024</li>
 					</ul>)
 					}
 				</div>
@@ -190,10 +198,10 @@ function RegisterTopic() {
 									</div>
 									<div className={cx('box')}>
 										<div className={cx('text')}>Phạm vi:</div>
-										<div className={cx('short')}>{data.note}</div>
+										<div className={cx('short')}>{data.target}</div>
 									</div>
 									<div className={cx('footer')}>
-										<button className={cx('register') } onClick = {handleShowNotification}>Đăng ký</button>
+										<Link to ={`/detailTopic/${data.id}`} className={cx('register') } onClick = {handleShowNotification}>Đăng ký</Link>
 									</div>
 								</div>
 							))}

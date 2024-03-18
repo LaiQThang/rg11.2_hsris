@@ -10,6 +10,7 @@ import ProFile from '~/pages/sidebarPages/ProFile/ProFile';
 import ProgressTopic from '~/pages/sidebarPages/ProgressTopic/ProgressTopic';
 import RegisterResearch from '~/pages/sidebarPages/RegisterResearch/RegisterResearch';
 import DetailResearch from '~/pages/sidebarPages/DetailResearch/DetailResearch';
+import DetailTopic from '~/pages/sidebarPages/HistoryProgressTopic/DetailTopic';
 import RegisterTopic from '~/pages/sidebarPages/RegisterTopic/RegisterTopic';
 import Login from '~/pages/Login/login';
 import AddTopic from '~/pages/sidebarPages/AddTopic/AddTopic';
@@ -61,7 +62,6 @@ const publicRoutes = [
 	{ path: config.routes.appointmentOfTeacher, component: AppointmentOfTeacher },
 	{ path: config.routes.addCouncil, component: AddCouncil },
 ];
-
 const privateRoutes = [];
 
 export { publicRoutes, privateRoutes };
