@@ -6,8 +6,6 @@
 
     .table{
         position: relative;
-        max-width:980px;
-        width: 100%;
         height: auto;
         background-color: white;
         box-shadow: 4px 4px rgba(0, 0, 0, 0.02);
@@ -15,7 +13,6 @@
         border-radius: 6px;
         .text{
             color: #000;
-            font-size: 17px;
             font-weight: 700;
             line-height: 24px;
             margin-right: 10px;
@@ -24,7 +21,6 @@
             margin: 20px 0;
             border: 0.2px solid #393939;
             padding: 8px 15px;
-            font-size: 14px;
             font-weight: 400;
             line-height: 150%;
         }
@@ -71,40 +67,84 @@
                 line-height: 22px; 
             }
             .line-1{
-                display:flex;
                 margin-bottom: 20px;
                 .research-name{
                     display:flex;
-                    min-width: 450px;
+                    min-width: 60%;
+                    margin-bottom: 20px;
                     .content{
                         color: #000;
-                        font-size: 15px;
                         font-weight: 400;
                         line-height: 24px;
                     }
                 }
             }
             .line-2{
-                display:flex;
                 margin-bottom: 20px;
                 .research-name{
                     display:flex;
-                    min-width: 450px;
+                    min-width: 60%;
+                    margin-bottom: 20px;
                     .text{
                         color: #000;
-                        font-size: 17px;
                         font-weight: 700;
                         line-height: 24px;
                         margin-right: 10px;
                     }
                     .content{
                         color: #000;
-                        font-size: 15px;
                         font-weight: 400;
                         line-height: 24px;
                     }
                 }
             }
+        }
+    }
+}
+@media (min-width: 1024px) {
+    .table{
+        width: 90%;
+        .line-1, .line-2{
+            display:flex;
+            .text{
+                font-size: 17px;
+            }
+            .content{
+                font-size: 15px;
+            }
+            .short{
+                font-size: 14px;
+            }
+        }
+    }
+}
+@media (max-width: 1023px) and (min-width: 744px) {
+    .table{
+        width: 90%;
+        .text{
+            font-size: 16px;
+        }
+        .content{
+            font-size: 14px;
+        }
+        .short{
+            font-size: 13px;
+        }
+    }
+    
+}
+
+@media (max-width: 743px) {
+	.table{
+        width: 90%;
+        .text{
+            font-size: 15px;
+        }
+        .content{
+            font-size: 13px;
+        }
+        .short{
+            font-size: 13px;
         }
     }
 }
