@@ -6,3 +6,6 @@
   width:20px !important;
   height:20px !important;
 }
+.Toastify{
+  z-index: 999;
+}

@@ -13,6 +13,7 @@ const routes = {
 	registerResearch: '/registerResearch',
 	registerTopic: '/registerTopic',
 	detailResearch: '/detailResearch/:id',
+	detailTopic:'/detailTopic/:id',
 	login: '/auth/login',
 	//Giang Vien
 	topicGroup: '/topicGroup',
@@ -30,8 +31,10 @@ const routes = {
 	makeScoreCard: '/makeScoreCard',
 	listScoreCard: '/listScoreCard',
 	//admin
-	appointmentOfTeacher : '/appointmentOfTeacher',
-	addCouncil : '/addCouncil',
+	appointmentOfTeacher: '/appointmentOfTeacher',
+	addCouncil: '/addCouncil',
+	addResearch: '/addResearch',
+	reviewTopic: '/reviewTopic',
 };
 
 export default routes;

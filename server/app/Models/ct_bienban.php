@@ -16,6 +16,8 @@ class ct_bienban extends Model
 
     protected $table = 'ct_bienban';
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'id',
         'idBB',
@@ -24,7 +26,8 @@ class ct_bienban extends Model
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
     }

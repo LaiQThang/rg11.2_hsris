@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -98,4 +99,19 @@ class giangvien extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(phieudiem::class, 'idGV', 'idGV');   
     }
+
+    // public function giangVien_CTHNC() : HasMany
+    // {
+    //     return $this->hasMany(ct_hnc::class, 'idGV', 'idGV');
+    // }
+    public function giangVien_CTHNC() : BelongsToMany
+    {
+        return $this->belongsToMany(huongnghiencuu::class, 'ct_hnc', 'idGV', 'idHNC');
+    }
+
+    public function giangVien_BienBan() :HasMany
+    {
+        return $this->hasMany(bienbanphancong::class, 'idGV', 'idGV');
+    }
+
 }

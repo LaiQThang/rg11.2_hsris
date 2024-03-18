@@ -18,7 +18,7 @@ class SinhVienResource extends JsonResource
             'id' => $this->idSV,
             'code' => $this->maSV,
             'name' => $this->tenSV,
-            'avatar' => $this->anhDD,
+            'avatar' => 'https://lh3.google.com/u/0/d/'.$this->anhDD,
             'class' => $this->lopHC,
             'status' => $this->tinhTrang,
             'favorite' => $this->soThich,

@@ -7,7 +7,8 @@ import axios from "axios";
 import config from "~/config";
 import { MenuItem } from "~/Components/Menu";
 import { Link } from "react-router-dom";
-import { useTable } from "react-table";
+import { useBlockLayout, useTable } from "react-table";
+import { useMediaQuery } from "react-responsive";
 
 const cx = classNames.bind(Styles)
 
@@ -15,7 +16,7 @@ function RegisterResearch() {
 	const [showYear,setShowYear] =  useState(false)
 	const [data,setData] = useState([])
   	const [currentPage, setCurrentPage] = useState(1);
-	const [activeYear,setActiveYear] = useState('all')
+	const [activeYear,setActiveYear] = useState('all');
 	const columns = useMemo(()=>[
 		{
 			Header: "STT",
@@ -48,7 +49,19 @@ function RegisterResearch() {
 			accessor: "note"
 		}
 	],[])
-	
+	const isSmallScreen = useMediaQuery({ maxWidth: 713 });
+	const isLargeSmallScreen = useMediaQuery({ minWidth: 714, maxWidth: 846 });
+  	const isMediumScreen = useMediaQuery({ minWidth: 847, maxWidth: 1023 });
+    if (isSmallScreen) {
+      columns.splice(2,3)
+    }
+	else if(isMediumScreen){
+		columns.splice(2,1)
+	}
+	else if(isLargeSmallScreen){
+		columns.splice(2,2)
+	}
+  console.log(columns)
 	const dataYear = data.filter(data=>data.year.includes(activeYear))
 	const itemsPerPage = 5;
 	const totalItems = dataYear.length !== 0 ? dataYear.length : data.length;
@@ -62,7 +75,7 @@ function RegisterResearch() {
 		headerGroups,
 		rows,
 		prepareRow,
-	  } = useTable({ columns, data: displayedData });
+	  } = useTable({ columns, data: displayedData },useBlockLayout);
 	const handleActiveYear = (e)=>{
 		setActiveYear(e)
 	}
@@ -108,42 +121,42 @@ function RegisterResearch() {
 					</div>
 					{
 						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2066' && 'year-active')} onClick ={()=> handleActiveYear('2066')}>2021-2022</li>
-						<li className={cx(activeYear === '2078' && 'year-active')} onClick ={()=> handleActiveYear('2078')}>2022-2023</li>
-						<li className={cx(activeYear === '2094' && 'year-active')} onClick ={()=> handleActiveYear('2094')}>2023-2024</li>
+						<li className={cx(activeYear === '2021' && 'year-active')} onClick ={()=> handleActiveYear('2021')}>2021-2022</li>
+						<li className={cx(activeYear === '1990' && 'year-active')} onClick ={()=> handleActiveYear('1990')}>2022-2023</li>
+						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>2023-2024</li>
 						<li className={cx(activeYear === 'all' && 'year-active')} onClick = {()=> handleActiveYear('all')}>Tất cả</li>
 					</ul>)
 					}
 				</div>
-				<div className={cx('grid')}>
 				<div className={cx('name')}>Danh sách đăng ký hướng nghiên cứu</div>
-				<table {...getTableProps()}>
-					<thead>
-						{headerGroups.map(headerGroup => (
-						<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-							{headerGroup.headers.map(column => (
-							<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`} >{column.render("Header")}</th>
-							))}
-						</tr>
-						))}
-					</thead>
-					<tbody {...getTableBodyProps()}>
-						{rows.map(row => {
-						prepareRow(row);
-						return (
-							<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
-								{row.cells.map(cell => (
-									<td {...cell.getCellProps()} >
-										<Link to ={`/detailResearch/${row.values.id }`} key ={row.values.id} className={cx('link')}>
-											{cell.render('Cell')}
-										</Link>
-									</td>
+				<div className={cx('grid')}>
+					<table {...getTableProps()} style={{ margin: 'auto', width: '70%' }}>
+						<thead>
+							{headerGroups.map(headerGroup => (
+							<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
+								{headerGroup.headers.map(column => (
+								<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`}>{column.render("Header")}</th>
 								))}
 							</tr>
-						);
-						})}
-					</tbody>
-    			</table>
+							))}
+						</thead>
+						<tbody {...getTableBodyProps()}>
+							{rows.map(row => {
+							prepareRow(row);
+							return (
+								<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
+									{row.cells.map(cell => (
+										<td {...cell.getCellProps()} >
+											<Link to ={`/detailResearch/${row.values.id }`} key ={row.values.id} className={cx('link')}>
+												{cell.render('Cell')}
+											</Link>
+										</td>
+									))}
+								</tr>
+							);
+							})}
+						</tbody>
+					</table>
 				</div>
 				<div className={cx('page-number')}>
 					<button className ={cx('button')} onClick={goToPreviousPage} disabled={currentPage === 1}>

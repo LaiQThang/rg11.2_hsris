@@ -9,10 +9,8 @@ import { showToast } from '~/Components/ToastMessage/Toast';
 
 const cx = classNames.bind(Styles)
 function DetailResearch(){
-    const navigate = useNavigate()
     const {id} = useParams();
     const [data,setData] = useState([])
-    const [toast,setToast] = useState(false)
     const dataId = data.filter(data=>data.id===id)
 
     const handlesShowNotification =()=>{

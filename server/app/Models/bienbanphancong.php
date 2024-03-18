@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class bienbanphancong extends Model
 {
@@ -15,6 +16,8 @@ class bienbanphancong extends Model
     public $incrementing = false;
 
     protected $table = 'bienbanphancongs';
+
+    protected $primaryKey = 'idBB';
 
     protected $fillable = [
         'idBB',
@@ -27,8 +30,14 @@ class bienbanphancong extends Model
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
+    }
+
+    public function bienBan_SinhVien() : BelongsToMany
+    {
+        return $this->belongsToMany(sinhvien::class, 'ct_bienban', 'idBB', 'idSV');
     }
 }

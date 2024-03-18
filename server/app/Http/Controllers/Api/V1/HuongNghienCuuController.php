@@ -23,14 +23,20 @@ class HuongNghienCuuController extends Controller
 
         $includeHNCGV = $request->query('includeCT');
 
+        $filterYear = $request->query('y');
+        // dd($filterYear);
+
         $huongnghiencuu = huongnghiencuu::where($filterItems);
 
         if($includeHNCGV){
             $huongnghiencuu = $huongnghiencuu->with('hNCGiangVien');
         }
+        if($filterYear){
+            $huongnghiencuu = $huongnghiencuu->whereYear('ngayTao', $filterYear);
+        }
 
         
-        return new HuongNghienCuuCollection($huongnghiencuu->paginate()->appends($request->query()));
+        return new HuongNghienCuuCollection($huongnghiencuu->paginate(5)->appends($request->query()));
     }
 
     /**
