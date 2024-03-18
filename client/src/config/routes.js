@@ -22,7 +22,6 @@ const routes = {
 	trackProgress: '/trackProgress',
 	trackProgressDetail: '/trackProgressDetail',
 	setupProgress: '/setupProgress',
-
 };
 
 export default routes;
