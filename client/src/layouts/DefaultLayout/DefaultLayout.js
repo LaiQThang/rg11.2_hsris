@@ -7,7 +7,7 @@ import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
-	const [isSidebarVisible, setSidebarVisible] = useState(false);
+	const [isSidebarVisible, setSidebarVisible] = useState(true);
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
   };

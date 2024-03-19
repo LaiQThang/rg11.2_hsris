@@ -15,13 +15,16 @@ const cx = classNames.bind(Styles)
 function reviewTopic() {
     const [data,setData] = useState([])
 	const [currentPage, setCurrentPage] = useState(1);
-	const [status, setStatus] = useState('done')
+	const [status, setStatus] = useState('')
 	const itemsPerPage = 8;
 	const totalItems = data.length;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
 	const displayedData = data.slice(startIndex, endIndex);
+	const handleStatus = (item)=>{
+		setStatus(item)
+	}
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
 	  };
@@ -56,9 +59,9 @@ function reviewTopic() {
 			accessor: "peopleJoin",
 			Cell:()=>{
 					return(
-						<select className={cx(status === 'done' ? 'done' : 'wait')}>
-							<option onClick={()=>setStatus('done')}>Đã duyệt</option>
-							<option onClick={()=>setStatus('wait')}>Chờ duyệt</option>
+						<select className={cx(status === 'wait' ? 'wait' : 'done')}>
+							<option>Đã duyệt</option>
+							<option>Chờ duyệt</option>
 						</select>
 					)
 				}
