@@ -10,6 +10,11 @@
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1; /* Chiếm phần còn lại của wrapper */
+	margin-left: 220px;
+}
+
+.sidebar {
+	position: fixed;
 }
 
 .content {
@@ -20,3 +25,8 @@
 
 /* Các kiểu CSS tùy chỉnh cho các component Header và Sidebar */
 //responsive
+@media (max-width: 743px) {
+	.container {
+		margin-left: 0;
+	}
+}

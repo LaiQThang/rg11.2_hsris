@@ -8,15 +8,15 @@ const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
 	const [isSidebarVisible, setSidebarVisible] = useState(true);
-  const toggleSidebar = () => {
-    setSidebarVisible(!isSidebarVisible);
-  };
+	const toggleSidebar = () => {
+		setSidebarVisible(!isSidebarVisible);
+	};
 	return (
 		<div className={cx('wrapper')}>
 			<Sidebar isSidebarVisible={isSidebarVisible} />
 			<div className={cx('container')}>
-				<Header toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible}/>
-				<div className={cx('content')} >{children}</div>
+				<Header toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />
+				<div className={cx('content')}>{children}</div>
 			</div>
 		</div>
 	);

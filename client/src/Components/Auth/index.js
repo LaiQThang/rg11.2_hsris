@@ -31,7 +31,7 @@ function AuthProvider({ children }) {
 	};
 	const getTokens = () => {
 		const items = JSON?.parse(localStorage?.getItem('token'));
-		return items.access_token;
+		return items;
 	};
 	return (
 		<AuthContext.Provider value={{ user, password, data, token, login, logout, setTokens, getTokens, getEmails }}>

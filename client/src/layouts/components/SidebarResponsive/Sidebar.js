@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
@@ -93,7 +92,27 @@ function Sidebar() {
 							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />
 						</div>
 					</ParentMenuItem>
+					<ParentMenuItem text="Quản Trị Viên"></ParentMenuItem>
+					<ParentMenuItem icon={faBox} text="Quản Lý HNC">
+						<div className={cx('menu-frame')}>
+							<MenuItem text={'Phân Công Giảng Viên'} to={config.routes.appointmentOfTeacher} />
+							<MenuItem text={'Thêm Hội Đồng'} to={config.routes.addCouncil} />
+							<MenuItem text={'Theo Dõi Tiến Độ'} to={config.routes.trackProgress} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
+						<div className={cx('menu-frame')}>
+							<MenuItem title={'Thêm HNC'} to={config.routes.addResearch} />
+							<MenuItem title={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
+						</div>
+					</ParentMenuItem>
 				</Menu>
+			</div>
+			<div className={cx('logout')}>
+				<a href="auth/login">Đăng xuất</a>
+				<p>Phiên bản 1.0</p>
+				<p>Website được phát triển bởi RG11.11</p>
+				<p>Nghiên cứu khoa học 2023-2024</p>
 			</div>
 		</div>
 	);

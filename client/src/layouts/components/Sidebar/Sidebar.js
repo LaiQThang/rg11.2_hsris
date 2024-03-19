@@ -10,6 +10,7 @@ import img from '~/assets/img';
 import Image from '~/Components/Image';
 import Menu from '~/Components/Menu';
 import { MenuItem } from '~/Components/Menu';
+import { Button } from 'react-bootstrap';
 const cx = classNames.bind(styles);
 
 function ParentMenuItem({ icon, text, children }) {
@@ -87,7 +88,7 @@ function Sidebar() {
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Danh Sách Hội Đồng'} to={config.routes.listCouncil} />
 							<MenuItem text={'Lập Phiếu Điểm'} to={config.routes.makeScoreCard} />
-							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />	
+							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />
 						</div>
 					</ParentMenuItem>
 					<ParentMenuItem text="Quản Trị Viên"></ParentMenuItem>
@@ -105,6 +106,12 @@ function Sidebar() {
 						</div>
 					</ParentMenuItem>
 				</Menu>
+			</div>
+			<div className={cx('logout')}>
+				<a href="auth/login">Đăng xuất</a>
+				<p>Phiên bản 1.0</p>
+				<p>Website được phát triển bởi RG11.11</p>
+				<p>Nghiên cứu khoa học 2023-2024</p>
 			</div>
 		</div>
 	);
