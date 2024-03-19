@@ -29,9 +29,9 @@ function ParentMenuItem({ icon, text, children }) {
 	);
 }
 
-function Sidebar({isSidebarVisible,toggleSidebar }) {
+function Sidebar() {
 	return (
-		<div className={cx(isSidebarVisible ? 'visible' : 'hidden')}>
+		<div className={cx('wrapper')}>
 			<div className={cx('inner')}>
 				<div className={cx('img-frame')}>
 					<Link to={config.routes.home}>

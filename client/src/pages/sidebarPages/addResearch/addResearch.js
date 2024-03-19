@@ -15,7 +15,7 @@ function addResearch(){
     const handleShowNotification =()=>{
        const show =  window.confirm("Bạn có chắc với lựa chọn này");
        if(show){
-		showToast('success', 'Hủy đăng kí thành công!');
+		showToast('success', 'Thêm HNC thành công!');
        }
     }
     // useEffect(()=>{
