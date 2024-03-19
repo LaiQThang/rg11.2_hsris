@@ -13,7 +13,9 @@ use App\Http\Controllers\Api\V1\SinhVienController;
 use App\Http\Controllers\Api\V1\HNCGiangVienController;
 use App\Http\Controllers\Api\V1\HNCSinhVienController;
 use App\Http\Controllers\Api\V1\HuongNghienCuuController;
+use App\Http\Controllers\Api\V1\permissionController;
 use App\Http\Controllers\Authentication\V1\AuthController;
+use App\Models\permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +66,9 @@ Route::group([
     Route::get('/giai-thuong-sv', [GiaiThuongController::class, 'getGiaiThuongSV']);
 
     Route::post('students/bulk', [SinhVienController::class, 'bulkStore']);
+
+    Route::apiResource('/permission', permissionController::class);
+
 });
 
 
