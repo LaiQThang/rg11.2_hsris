@@ -53,7 +53,7 @@ function ProFile() {
     },[])
 	const fetchApi = async()=>{
 		let result;
-		result = await Result.profileStudent(username,tokenBearer);
+		result = await Result.profileStudent(username,tokenBearer.access_token);
 		setUserInfo(result)
 	}
 	return (
