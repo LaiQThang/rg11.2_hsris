@@ -9,6 +9,7 @@ import { MenuItem } from "~/Components/Menu";
 import { Link } from "react-router-dom";
 import { useBlockLayout, useTable } from "react-table";
 import { useMediaQuery } from "react-responsive";
+import * as Result from '~/apiService/authService'
 
 const cx = classNames.bind(Styles)
 
@@ -16,17 +17,13 @@ function RegisterResearch() {
 	const [showYear,setShowYear] =  useState(false)
 	const [data,setData] = useState([])
   	const [currentPage, setCurrentPage] = useState(1);
-	const [activeYear,setActiveYear] = useState('all');
+	const [activeYear,setActiveYear] = useState('2024');
+	const [number,setNumber] = useState(0)
 	const columns = useMemo(()=>[
-		{
-			Header: "STT",
-			col: "col-1",
-			accessor: "id"
-		},
 		{
 			Header: "Tên HNC",
 			col: "col-2",
-			accessor: "ResearchName"
+			accessor: "name"
 		},
 		{
 			Header: "Tóm tắt",
@@ -61,14 +58,12 @@ function RegisterResearch() {
 	else if(isLargeSmallScreen){
 		columns.splice(2,2)
 	}
-  console.log(columns)
-	const dataYear = data.filter(data=>data.year.includes(activeYear))
 	const itemsPerPage = 5;
-	const totalItems = dataYear.length !== 0 ? dataYear.length : data.length;
+	const totalItems = data.length;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
-	const displayedData = dataYear.length !== 0 ? dataYear.slice(startIndex, endIndex) : data.slice(startIndex, endIndex);
+	const displayedData = data.slice(startIndex, endIndex)
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -95,20 +90,16 @@ function RegisterResearch() {
 	  const handleShowYear = ()=>{
 		setShowYear(!showYear)
 	}
-	useEffect(()=>{
-        fetchApi()
-    },[])
     const fetchApi = async ()=>{
-        try{
-            const res = await axios.get('https://64dc69d1e64a8525a0f672e2.mockapi.io/LoginApi')
-            const data = res.data
-            setData(data)
-        }
-        catch(e){
-            console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', e);
-        }
+       let result
+	   result = Result.getResearch(activeYear)
+	   return result
     }
-
+	useEffect(()=>{
+		fetchApi().then((data)=>{
+			setData(data.data)
+		})
+	},[])
 	return (
 		<div className={cx('container')}>
 			<div className= {cx('table')}>
@@ -121,19 +112,20 @@ function RegisterResearch() {
 					</div>
 					{
 						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2021' && 'year-active')} onClick ={()=> handleActiveYear('2021')}>2021-2022</li>
-						<li className={cx(activeYear === '1990' && 'year-active')} onClick ={()=> handleActiveYear('1990')}>2022-2023</li>
+						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
+						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
 						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>2023-2024</li>
-						<li className={cx(activeYear === 'all' && 'year-active')} onClick = {()=> handleActiveYear('all')}>Tất cả</li>
 					</ul>)
 					}
 				</div>
 				<div className={cx('name')}>Danh sách đăng ký hướng nghiên cứu</div>
 				<div className={cx('grid')}>
-					<table {...getTableProps()} style={{ margin: 'auto', width: '70%' }}>
+					<table {...getTableProps()}>
 						<thead>
 							{headerGroups.map(headerGroup => (
+					
 							<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
+								<th>STT</th>
 								{headerGroup.headers.map(column => (
 								<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`}>{column.render("Header")}</th>
 								))}
@@ -141,13 +133,14 @@ function RegisterResearch() {
 							))}
 						</thead>
 						<tbody {...getTableBodyProps()}>
-							{rows.map(row => {
+							{rows.map((row,rowIndex) => {
 							prepareRow(row);
 							return (
 								<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
+									<td>{rowIndex + 1}</td>
 									{row.cells.map(cell => (
 										<td {...cell.getCellProps()} >
-											<Link to ={`/detailResearch/${row.values.id }`} key ={row.values.id} className={cx('link')}>
+											<Link to ={`/detailResearch/${row.original.id}`} key ={row.values.id} className={cx('link')}>
 												{cell.render('Cell')}
 											</Link>
 										</td>

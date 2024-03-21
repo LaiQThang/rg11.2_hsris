@@ -6,31 +6,29 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import { showToast } from '~/Components/ToastMessage/Toast';
+import * as Result from '~/apiService/authService'
 
 const cx = classNames.bind(Styles)
 function DetailResearch(){
     const {id} = useParams();
     const [data,setData] = useState([])
+    const fetchApi = async ()=>{
+        let result
+        result = Result.getResearch()
+        return result
+     }
+     useEffect(()=>{
+         fetchApi().then((data)=>{
+             setData(data.data)
+         })
+     },[])
     const dataId = data.filter(data=>data.id===id)
-
+    console.log(dataId)
     const handlesShowNotification =()=>{
        const show =  window.confirm("Bạn có chắc với lựa chọn này");
        if(show){
         showToast('success', 'Đăng kí thành công!');
        }
-    }
-    useEffect(()=>{
-        fetchApi()
-    },[])
-    const fetchApi = async ()=>{
-        try{
-            const res = await axios.get('https://64dc69d1e64a8525a0f672e2.mockapi.io/LoginApi')
-            const data = res.data
-            setData(data)
-        }
-        catch(e){
-            console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', e);
-        }
     }
 
     return (
@@ -45,21 +43,17 @@ function DetailResearch(){
                     <div className={cx('line-1')}>
                         <div className={cx('research-name')}>
                             <div className={cx('text')}>Tên hướng nghiên cứu: </div>
-                            <div className={cx('content')}>{data.ResearchName}</div>
+                            <div className={cx('content')}>{data.name}</div>
                         </div>
                         <div className={cx('research-name')}>
                             <div className={cx('text')}>Ngày tạo: </div>
-                            <div className={cx('content')}>{data.year}</div>
+                            <div className={cx('content')}>{data.dateCreated}</div>
                         </div>
                     </div>
                     <div className={cx('line-2')}>
                         <div className={cx('research-name')}>
-                            <div className={cx('text')}>Mã hướng nghiên cứu: </div>
-                            <div className={cx('content')}>{data.id}</div>
-                        </div>
-                        <div className={cx('research-name')}>
                             <div className={cx('text')}>Số lượng người tham gia: </div>
-                            <div className={cx('content')}>{data.peopleJoin}</div>
+                            <div className={cx('content')}>{data.quantity}</div>
                         </div>
                     </div>
                 <div className={cx('text')}>Tóm tắt</div>
