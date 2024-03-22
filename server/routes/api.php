@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\CTDeTaiController;
 use App\Http\Controllers\Api\V1\CTHuongNghienCuuController;
 use App\Http\Controllers\Api\V1\DeTaiController;
 use App\Http\Controllers\Api\V1\GiaiThuongController;
+use App\Http\Controllers\Api\V1\GiangVienController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\SinhVienController;
@@ -66,6 +67,7 @@ Route::group([
     Route::get('/giai-thuong-sv', [GiaiThuongController::class, 'getGiaiThuongSV']);
 
     Route::post('students/bulk', [SinhVienController::class, 'bulkStore']);
+    Route::get('giangvien', [GiangVienController::class, 'index']);
 
     Route::apiResource('/permission', permissionController::class);
 

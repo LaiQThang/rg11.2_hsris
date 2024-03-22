@@ -17,6 +17,7 @@ class GiangVienClientResource extends JsonResource
         return [
             'name' => $this->tenGV,
             'avatar' => $this->anhDD,
+            'code' => $this->maGV,
             'dateOfBirth' => $this->ngaySinh,
             'email' => $this->email,
             'phone' => $this->soDT,
