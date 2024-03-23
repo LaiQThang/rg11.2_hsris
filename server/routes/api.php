@@ -54,6 +54,10 @@ Route::group([
     Route::apiResource('/hncsinhvien', HNCSinhVienController::class);
     Route::apiResource('/detai', DeTaiController::class);
 
+    Route::post('/detai-giangvien', [DeTaiController::class, 'addDTGV']);
+    Route::get('/detai-giangvien-xetduyet', [DeTaiController::class, 'listDTXetDuyet']);
+    Route::post('/detai-giangvien-xetduyet-post', [DeTaiController::class, 'postDTXetDuyet']);
+
     Route::apiResource('/ct-detai', CTDeTaiController::class);
     Route::get('/ct-detai-finally', [CTDeTaiController::class, 'getFinally']);
 
