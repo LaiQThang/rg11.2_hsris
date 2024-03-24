@@ -25,6 +25,7 @@ class GiangVienClientResource extends JsonResource
             'sex' => $this->gioiTinh,
             'level' => $this->trinhDo,
             'special' => $this->chuyenNganh,
+            'permissionId' => $this->permissionId,
         ];
     }
 }

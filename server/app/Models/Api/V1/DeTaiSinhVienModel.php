@@ -39,7 +39,7 @@ class DeTaiSinhVienModel extends ApiModel
     {
         try{
             $idHNC = $this->getIdHNC($idUser, (new DateTime())->format('Y'));
-            if($idHNC == false)
+            if($idHNC == false || $idHNC == null)
             {
                 return false;
             }
