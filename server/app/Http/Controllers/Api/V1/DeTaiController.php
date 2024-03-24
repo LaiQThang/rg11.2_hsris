@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\StoreDeTaiSVRequest;
-use App\Http\Resources\V1\DeTaiCollection;
-use App\Models\Api\V1\DeTaiGiangVienModel;
-use App\Models\Api\V1\DeTaiSinhVienModel;
-use App\Models\detai;
 use Exception;
-use Google\Service\CloudDeploy\Rollback;
+use App\Models\detai;
 use Illuminate\Http\Request;
 use PHPUnit\Event\TestSuite\Loaded;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\DeTaiResource;
+use Google\Service\CloudDeploy\Rollback;
+use App\Models\Api\V1\DeTaiSinhVienModel;
+use App\Http\Resources\V1\DeTaiCollection;
+use App\Http\Resources\V1\DeTaiXDResource;
+use App\Models\Api\V1\DeTaiGiangVienModel;
+use App\Http\Requests\V1\StoreDeTaiSVRequest;
 
 class DeTaiController extends Controller
 {
@@ -76,7 +78,9 @@ class DeTaiController extends Controller
     {
         try{
             if($res = $this->modelDeTaiGV->listDeTaiXD()){
+                // return new DeTaiXDResource($res);
                 return new DeTaiCollection($res);
+                // return $res;
             }
             return response()->json(['Message' => 'Not Founds'], 404);
         }

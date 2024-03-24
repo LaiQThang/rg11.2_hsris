@@ -39,7 +39,7 @@ class DeTaiGiangVienModel extends ApiModel
     public function listDeTaiXD()
     {
         try{
-           return detai::where([['idGV', $this->getidGV()], ['trangthaiGV', 0]])->whereYear('ngayLap', request()->year)->get();
+           return detai::with('HNC')->where([['idGV', $this->getidGV()], ['trangthaiGV', 0]])->whereYear('ngayLap', request()->year)->get();
         }
         catch(Exception $e){
             return false;
