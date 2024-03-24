@@ -67,4 +67,9 @@ class detai extends Model
     {
         return $this->belongsTo(giangvien::class, 'idGV', 'idGV');
     }
+
+    public function HNC() : BelongsTo
+    {
+        return $this->belongsTo(huongnghiencuu::class, 'idHNC', 'idHNC');
+    }
 }

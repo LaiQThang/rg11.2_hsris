@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\V1\HNCGiangVienController;
 use App\Http\Controllers\Api\V1\HNCSinhVienController;
 use App\Http\Controllers\Api\V1\HuongNghienCuuController;
 use App\Http\Controllers\Api\V1\permissionController;
+use App\Http\Controllers\Api\V1\XetDuyetAdminController;
 use App\Http\Controllers\Authentication\V1\AuthController;
 use App\Models\permission;
 
@@ -74,6 +75,10 @@ Route::group([
     Route::get('giangvien', [GiangVienController::class, 'index']);
 
     Route::apiResource('/permission', permissionController::class);
+
+    Route::group(['prefix' => 'xet-duyet'], function() {
+        Route::get('list', [XetDuyetAdminController::class, 'list']);
+    });
 
 });
 
