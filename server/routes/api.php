@@ -78,6 +78,7 @@ Route::group([
 
     Route::group(['prefix' => 'xet-duyet'], function() {
         Route::get('list', [XetDuyetAdminController::class, 'list']);
+        Route::post('update', [XetDuyetAdminController::class, 'update']);
     });
 
 });

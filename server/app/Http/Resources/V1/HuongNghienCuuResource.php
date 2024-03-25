@@ -23,7 +23,8 @@ class HuongNghienCuuResource extends JsonResource
             'target' => $this->mucTieu,
             'limit' => $this->phamVi,
             'note' => $this->ghiChu,
-            'hnc' => HNCGiangVienResource::collection($this->whenLoaded('hNCGiangVien'))
+            'hnc' => HNCGiangVienResource::collection($this->whenLoaded('hNCGiangVien')),
+            'topic' => DeTaiResource::collection($this->whenLoaded('deTai')),
         ];
     }
 }
