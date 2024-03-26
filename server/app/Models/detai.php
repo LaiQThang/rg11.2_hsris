@@ -34,6 +34,7 @@ class detai extends Model
         'idHNC',
         'idHD',
         'idGT',
+        'idBB',
         'diemF',
         'trangThaiGV',
         'trangThaiQT',

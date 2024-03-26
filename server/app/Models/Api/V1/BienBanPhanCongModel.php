@@ -7,6 +7,7 @@ use App\Models\Api\ApiModel;
 use App\Models\bienbanphancong;
 use App\Models\ct_bienban;
 use App\Models\ct_hnc;
+use App\Models\detai;
 use App\Models\giangvien;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

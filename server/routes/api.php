@@ -63,6 +63,8 @@ Route::group([
     Route::get('/ct-detai-finally', [CTDeTaiController::class, 'getFinally']);
 
     Route::apiResource('/baocaodetai', BaoCaoDeTaiController::class);
+    Route::get('/baocaodetai-listnhom', [BaoCaoDeTaiController::class, 'listnhom']);
+    
     Route::apiResource('/ct-baocaosinhvien', CTBaoCaoSVController::class);
     Route::apiResource('/ct-huongnghiencuu', CTHuongNghienCuuController::class);
     Route::apiResource('/bienbanphancong', BienBanPhanCongController::class);

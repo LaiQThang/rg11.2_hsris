@@ -11,6 +11,8 @@ use App\Models\sinhvien;
 use App\Models\Api\ApiModel;
 use App\Http\Resources\V1\DeTaiResource;
 use App\Http\Resources\V1\DeTaiCollection;
+use App\Models\bienbanphancong;
+use App\Models\ct_bienban;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DeTaiSinhVienModel extends ApiModel
@@ -44,6 +46,8 @@ class DeTaiSinhVienModel extends ApiModel
                 return false;
             }
             $idGV = ct_hncgv::where('idHNC',$idHNC)->first()->toArray()['idGV'];
+            $bienban = ct_bienban::where('idSV', $idUser)->first();
+            $idBB = $bienban->idBB;
             $detai = detai::create([
                 'tenDT' => $request->name,
                 'tomTat' => $request->summary,
@@ -54,6 +58,7 @@ class DeTaiSinhVienModel extends ApiModel
                 'trangThaiGV' => 0,
                 'idGV' => $idGV,
                 'idHNC' => $idHNC,
+                'idBB' => $idBB
             ]);
             if($detai){
                 ct_detai::create([
