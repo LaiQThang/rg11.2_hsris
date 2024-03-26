@@ -7,15 +7,16 @@ use App\Models\detai;
 use PhpParser\Node\Expr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\V1\DeTaiCollection;
 use App\Models\Api\V1\BaoCaoDeTaiModel;
+use App\Http\Resources\V1\DeTaiCollection;
+use App\Http\Requests\V1\StoreBaoCaoDeTaiRequest;
 
 class BaoCaoDeTaiController extends Controller
 {
     private $model;
     private $idUser;
-    public function __construct() {
-        $this->model = new BaoCaoDeTaiModel();
+    public function __construct(BaoCaoDeTaiModel $model) {
+        $this->model = $model;
         $this->idUser = $this->getidSV();
         
     }
@@ -28,11 +29,18 @@ class BaoCaoDeTaiController extends Controller
         return response($this->model->ApiResponse($arr));
     }
 
-    public function store(Request $request)
+    public function store(StoreBaoCaoDeTaiRequest $request)
     {
-        $list = detai::where('idGV', $this->getidGV())->get();
-        dd($list->toArray());
-
+        if(! $this->model->getidGV())
+        {
+            return response()->json(['Message' => 'Login is continue'], 500);
+        }
+        $result = $this->model->store($request);
+        if($result == true)
+        {
+            return response()->json(['Message' => 'Successful'], 200);
+        }
+        return response()->json(['Message' => $result], 500);
     }
 
     public function listnhom()
