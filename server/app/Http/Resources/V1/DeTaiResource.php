@@ -25,6 +25,7 @@ class DeTaiResource extends JsonResource
             'status' => $this->trangThaiGV,
             'idHNC' => $this->idHNC,
             'idBB' => $this->idBB,
+            'idHD' => $this->idHD,
             'hnc' => new HuongNghienCuuResource($this->whenLoaded('HNC')),
             
             'cup' => new GiaiThuongResource($this->whenLoaded('giaiThuong')),

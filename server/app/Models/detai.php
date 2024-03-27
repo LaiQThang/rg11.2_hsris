@@ -73,4 +73,10 @@ class detai extends Model
     {
         return $this->belongsTo(huongnghiencuu::class, 'idHNC', 'idHNC');
     }
+
+    public function deTai_baoCao() : BelongsTo
+    {
+        return $this->belongsTo(ct_baocaodetai::class, 'idDT', 'idDT');
+    }
+    
 }

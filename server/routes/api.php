@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\SinhVienController;
 use App\Http\Controllers\Api\V1\HNCGiangVienController;
 use App\Http\Controllers\Api\V1\HNCSinhVienController;
+use App\Http\Controllers\Api\V1\HoiDongController;
 use App\Http\Controllers\Api\V1\HuongNghienCuuController;
+use App\Http\Controllers\Api\V1\NhanXetDeTaiController;
 use App\Http\Controllers\Api\V1\permissionController;
 use App\Http\Controllers\Api\V1\XetDuyetAdminController;
 use App\Http\Controllers\Authentication\V1\AuthController;
@@ -81,6 +83,20 @@ Route::group([
     Route::group(['prefix' => 'xet-duyet'], function() {
         Route::get('list', [XetDuyetAdminController::class, 'list']);
         Route::post('update', [XetDuyetAdminController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'hoidong'], function() {
+        Route::post('/', [HoiDongController::class, 'store']);
+        Route::get('/list', [HoiDongController::class, 'listCouncil']);
+        Route::get('/list-teacher', [HoiDongController::class, 'listCouncilTeacher']);
+        Route::get('/view-point', [HoiDongController::class, 'listCouncilPoint']);
+        Route::get('/list-no-council', [HoiDongController::class, 'listNoCouncil']);
+        Route::post('/point', [HoiDongController::class, 'pointCard']);
+    });
+
+    Route::group(['prefix' => 'nhanxet'], function() {
+        Route::post('/', [NhanXetDeTaiController::class, 'store']);
+        Route::get('/view', [NhanXetDeTaiController::class, 'viewStore']);
     });
 
 });
