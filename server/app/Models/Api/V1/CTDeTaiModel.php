@@ -19,14 +19,21 @@ class CTDeTaiModel extends ApiModel
         try{
             $bienban = ct_bienban::where('idSV', $idUser)->first();
             $idBB = $bienban->idBB;
+            $list = ct_bienban::where('idBB', $idBB)->get()->toArray();
+
+            foreach($list as $val)
+            {
+                ct_detai::create([
+                    'idSV' => $val['idSV'],
+                    'idDT' => $idDT
+                ]);
+            }
+
             $detai = detai::find($idDT);
             $detai->update([
                 'idBB' => $idBB
             ]);
-            ct_detai::create([
-                'idSV' => $idUser,
-                'idDT' => $idDT
-            ]);
+            
             return true;
         }
         catch(Exception $e){

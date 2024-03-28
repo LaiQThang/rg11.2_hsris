@@ -60,11 +60,16 @@ class DeTaiSinhVienModel extends ApiModel
                 'idHNC' => $idHNC,
                 'idBB' => $idBB
             ]);
+
             if($detai){
-                ct_detai::create([
-                    'idDT' => $detai->idDT,
-                    'idSV' => $idUser,
-                ]);
+                $list = ct_bienban::where('idBB', $idBB)->get()->toArray();
+                foreach($list as $val)
+                {
+                    ct_detai::create([
+                        'idSV' => $val['idSV'],
+                        'idDT' => $detai->idDT
+                    ]);
+                }
             }
             else{
                 return false;

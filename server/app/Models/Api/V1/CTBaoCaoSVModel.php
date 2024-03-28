@@ -16,7 +16,7 @@ class CTBaoCaoSVModel extends ApiModel
 
     public function addFileBaoCaoSV($request, $idSV)
     {
-
+        
         if($request->hasFile('file') && $request->idBC != null && $idSV != null)
         {
             try{
