@@ -99,6 +99,13 @@ Route::group([
         Route::get('/view', [NhanXetDeTaiController::class, 'viewStore']);
     });
 
+    Route::group(['prefix' => 'giaithuong'], function() {
+        Route::post('/', [GiaiThuongController::class, 'updateCup']);
+        Route::get('/tinhdiem', [GiaiThuongController::class, 'CalculatorPoint']);
+        Route::post('/capnhatdiem', [GiaiThuongController::class, 'UpdatePoint']);
+        Route::get('/list', [GiaiThuongController::class, 'ListCup']);
+    });
+
 });
 
 

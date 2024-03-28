@@ -16,20 +16,21 @@ class NhanXetDeTaiController extends Controller
 
     public function viewStore()
     {
-        $idGV = $this->getidGV();
-        $gv = giangvien::find($idGV);
-        // $res = $gv->giangVien_BienBan()->with('bienBan_deTai')->with('deTai_baoCao')->get()->toArray();
-        $res2 = GiangVien::join('bienbanphancongs', function($join) use ($idGV) {
-            $join->on('giangviens.idGV', '=', 'bienbanphancongs.idGV')
-                 ->where('giangviens.idGV', '=', $idGV);
-        })
-        ->join('detais', 'detais.idBB', '=', 'bienbanphancongs.idBB')
-        ->join('ct_baocaodetai', 'ct_baocaodetai.idDT', '=', 'detais.idDT')
-        ->join('ct_baocaosv', 'ct_baocaosv.idBC', '=', 'ct_baocaodetai.idBC')
-        ->join('sinhviens', 'sinhviens.idSV', '=', 'ct_baocaosv.idSV')
-        ->join('baocaodetais', 'baocaodetais.idBC', '=', 'ct_baocaosv.idBC')
-        ->select('sinhviens.tenSV', 'bienbanphancongs.tenBB', 'detais.tenDT', 'ct_baocaosv.fileTaiNguyen', 'baocaodetais.ngayKetThuc')
-        ->get()->toArray();
-        dd($res2);
+        if(empty($this->getidGV()))
+        {
+            return response()->json(["Message" => "Login is continued"], 500);
+        }
+        $res = $this->model->viewCreate();
+        return response($this->ApiResponse($res));
+    }
+
+    public function store()
+    {
+        $response = $this->model->store();
+        if($response === true)
+        {
+            return response()->json(["Message" => "Successful"], 200);
+        }
+        return response()->json(["Message" => $response], 500);
     }
 }

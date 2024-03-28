@@ -26,11 +26,11 @@ class CTBaoCaoSVController extends Controller
     public function store(Request $request)
     {
         $check = $this->model->addFileBaoCaoSV($request, $this->idSV);
-        if($check)
+        if($check === true)
         {
             return response()->json(["Message" => "Success"], 200);
         }
-            return response()->json(["Message" => "Error"], 404);
+            return response()->json(["Message" => $check], 404);
     }
 
     public function show(string $id)

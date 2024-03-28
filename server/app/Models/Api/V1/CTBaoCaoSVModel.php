@@ -6,7 +6,7 @@ use App\Models\Api\ApiModel;
 use App\Models\baocaodetai;
 use App\Models\ct_baocaosv;
 use App\Models\ct_bienban;
-use App\Services\GoogleDrive;
+use App\Helpers\GoogleDrive;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -32,7 +32,7 @@ class CTBaoCaoSVModel extends ApiModel
                 return true;
             }
             catch(Exception $e){
-                return false;
+                return $e->getMessage();
             }
         }
 

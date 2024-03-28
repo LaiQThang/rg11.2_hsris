@@ -87,7 +87,8 @@ class HoiDongModel extends ApiModel
             $topicArr = $request->topicArr;
             $data = [
                 "idGV" => $idGV,
-                "ngayLap" => now()->format('Y-m-d')
+                "ngayLap" => now()->format('Y-m-d'),
+                "idHD" => $request->idHD
             ];
 
             foreach($topicArr as $val)
