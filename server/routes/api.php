@@ -48,7 +48,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => ['api', 'bearerValidate'],
     'prefix' => 'v1'
 ], function(){
     Route::apiResource('/huongnghiencuu', HuongNghienCuuController::class);

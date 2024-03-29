@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\V1\Authentication::class,
+           
         ],
     ];
 
@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'authClassify' => \App\Http\Middleware\V1\Authentication::class,
         'authorizationClassify' => \App\Http\Middleware\V1\Authorization::class,
         'validatePermission' => \App\Http\Middleware\V1\ValidatePermission::class,
+        'bearerValidate' =>  \App\Http\Middleware\V1\Authentication::class,
     ];
 }

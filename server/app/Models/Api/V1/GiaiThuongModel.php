@@ -32,8 +32,10 @@ class GiaiThuongModel extends ApiModel
             return detai::join('phieudiems', function($join) use ($year) {
                 $join->on('phieudiems.idDT', '=', 'detais.idDT')
                 ->whereYear('phieudiems.ngayLap', $year);})
-                   ->select('detais.idDT', 'detais.tenDT', DB::raw('SUM(phieudiems.diem) AS TongDiem'))
-                   ->groupBy('detais.tenDT', 'detais.idDT')
+                ->join('hoidongs', 'hoidongs.idHD', '=', 'detais.idHD')
+                ->join('huongnghiencuus', 'huongnghiencuus.idHNC', '=', 'detais.idHNC')
+                   ->select( 'detais.idDT', DB::raw('SUM(phieudiems.diem) AS TongDiem'), 'hoidongs.tenHD', 'huongnghiencuus.tenHNC')
+                   ->groupBy('detais.tenDT', 'detais.idDT', 'hoidongs.tenHD', 'huongnghiencuus.tenHNC')
                    ->get()->toArray();
         } catch(Exception $e){
             return $e->getMessage();
