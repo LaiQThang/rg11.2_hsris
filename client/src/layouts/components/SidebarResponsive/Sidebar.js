@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,9 @@ import img from '~/assets/img';
 import Image from '~/Components/Image';
 import Menu from '~/Components/Menu';
 import { MenuItem } from '~/Components/Menu';
+import * as Result from '~/apiService/authService'
 import './Sidebar.css';
+import { useAuth } from '~/Components/Auth';
 const cx = classNames.bind(styles);
 
 function ParentMenuItem({ icon, text, children }) {
@@ -31,6 +33,45 @@ function ParentMenuItem({ icon, text, children }) {
 }
 
 function Sidebar() {
+	const [permission,setPermission] = useState('')
+	const [infor,setInfor] = useState({})
+	const auth = useAuth()
+	const username = auth.getEmails()
+	const tokenBearer = auth.getTokens()
+	const fetchApi = async()=>{
+		let result;
+		result = await Result.profileStudent(username,tokenBearer.access_token);
+		return result;
+	}
+	const fetchApiPermission = async(id)=>{
+		let result;
+		result = await Result.permission(id);
+		return result;
+	}
+	function callApi(){
+		return new Promise(function(resolve,reject){
+			console.log("call API create User");
+			const res = fetchApi();
+			if(res){
+				resolve(res);
+			} 
+			reject('Error');
+		});
+	}
+	useEffect(()=>{
+	callApi()
+		.then(function(res){
+			setInfor(res)
+			return  fetchApiPermission(res.permissionId)
+		})
+		.then(function(res) {
+			setPermission(res.data);
+		})
+		.catch(function(error){
+			console.log(error);
+		});
+	},[])
+	console.log(infor)
 	return (
 		<div className={cx('wrapper')}>
 			<div className={cx('inner')}>
@@ -41,16 +82,19 @@ function Sidebar() {
 					{/* {console.log(closeButton)} */}
 				</div>
 				<div className={cx('user-infor')}>
-					<Image className={cx('user-avatar')} alt="NO-IMAGE" src={img.noImage} />
+				<img className={cx('user-avatar')} alt="" src={infor.avatar}/>
 					<div className={cx('user-decs')}>
-						<div className={cx('user-name')}>Phạm Quang Thắng</div>
-						<div className={cx('user-class')}>21A100100100</div>
+						<div className={cx('user-name')}>{infor.name}</div>
+						<div className={cx('user-class')}>{infor.code}</div>
 					</div>
 				</div>
 
 				{/* ----------------Menu Sidebar----------------- */}
 				<Menu className={cx('menu-list')}>
-					<ParentMenuItem icon={faMortarBoard} text="Hướng Nghiên Cứu">
+					{
+						permission === 'sinhvien' && (
+							<>
+							<ParentMenuItem icon={faMortarBoard} text="Hướng Nghiên Cứu">
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Đăng Ký'} to={config.routes.registerResearch} />
 							<MenuItem text={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} />
@@ -69,7 +113,13 @@ function Sidebar() {
 							<MenuItem text={'Thành Tích'} to={config.routes.achievement} />
 						</div>
 					</ParentMenuItem>
-					<ParentMenuItem text="Giáo Viên"></ParentMenuItem>
+							</>
+						)
+					}
+					{
+						permission === 'giangvien' && (
+							<>
+								<ParentMenuItem text="Giáo Viên"></ParentMenuItem>
 					<ParentMenuItem icon={faBox} text="Quản Lý Chung">
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Phân Nhóm Đề Tài'} to={config.routes.topicGroup} />
@@ -92,6 +142,12 @@ function Sidebar() {
 							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />
 						</div>
 					</ParentMenuItem>
+							</>
+						)
+					}
+					{
+						permission === 'admin' && (
+							<>
 					<ParentMenuItem text="Quản Trị Viên"></ParentMenuItem>
 					<ParentMenuItem icon={faBox} text="Quản Lý HNC">
 						<div className={cx('menu-frame')}>
@@ -106,10 +162,13 @@ function Sidebar() {
 							<MenuItem title={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
 						</div>
 					</ParentMenuItem>
+							</>
+						)
+					}
 				</Menu>
 			</div>
 			<div className={cx('logout')}>
-				<a href="auth/login">Đăng xuất</a>
+				<a href="/auth/login">Đăng xuất</a>
 				<p>Phiên bản 1.0</p>
 				<p>Website được phát triển bởi RG11.11</p>
 				<p>Nghiên cứu khoa học 2023-2024</p>

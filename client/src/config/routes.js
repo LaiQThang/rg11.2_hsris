@@ -25,7 +25,7 @@ const routes = {
 	listTopic: '/listTopic',
 	chargeOfTopic: '/chargeOfTopic',
 	listTopicDetail: '/listTopicDetail',
-	approvalTopicDetail: '/approvalTopicDetail',
+	approvalTopicDetail: '/approvalTopicDetail/:id',
 	chargeOfTopicDetail: '/chargeOfTopicDetail',
 	listCouncil: '/listCouncil',
 	makeScoreCard: '/makeScoreCard',
@@ -35,6 +35,8 @@ const routes = {
 	addCouncil: '/addCouncil',
 	addResearch: '/addResearch',
 	reviewTopic: '/reviewTopic',
+	detailReviewTopic: '/detailReviewTopic/:id',
+	awardReview: '/awardReview',
 };
 
 export default routes;

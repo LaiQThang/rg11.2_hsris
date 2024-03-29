@@ -45,7 +45,7 @@ function Sidebar() {
 	}
 	const fetchApiPermission = async(id)=>{
 		let result;
-		result = await Result.permission(id);
+		result = await Result.permission(id,tokenBearer.access_token);
 		return result;
 	}
 	function callApi(){
@@ -156,6 +156,7 @@ function Sidebar() {
 						<div className={cx('menu-frame')}>
 							<MenuItem title={'Thêm HNC'} to={config.routes.addResearch} />
 							<MenuItem title={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
+							<MenuItem title={'Xét giải'} to={config.routes.awardReview} />
 						</div>
 					</ParentMenuItem>
 							</>
@@ -164,7 +165,7 @@ function Sidebar() {
 				</Menu>
 			</div>
 			<div className={cx('logout')}>
-				<a href="auth/login">Đăng xuất</a>
+				<a href="/auth/login">Đăng xuất</a>
 				<p>Phiên bản 1.0</p>
 				<p>Website được phát triển bởi RG11.11</p>
 				<p>Nghiên cứu khoa học 2023-2024</p>

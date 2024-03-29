@@ -33,6 +33,8 @@ import AddCouncil from '~/pages/sidebarPages/AddCouncil/AddCouncil';
 import reviewTopic from '~/pages/sidebarPages/reviewTopic/reviewTopic';
 import RequireAuth from '~/Components/Auth/RequiedAuth';
 import addResearch from '~/pages/sidebarPages/addResearch/addResearch';
+import detailReviewTopic from '~/pages/sidebarPages/detailReviewTopic/detailReviewTopic';
+import awardReview from '~/pages/sidebarPages/awardReview/awardReview';
 const publicRoutes = [
 	{ path: config.routes.home, component: Home, auth: RequireAuth },
 	{ path: config.routes.notification, component: Notification, auth: RequireAuth },
@@ -67,6 +69,8 @@ const publicRoutes = [
 	{ path: config.routes.listScoreCard, component: ListScoreCard, auth: RequireAuth },
 	{ path: config.routes.appointmentOfTeacher, component: AppointmentOfTeacher, auth: RequireAuth },
 	{ path: config.routes.addCouncil, component: AddCouncil, auth: RequireAuth },
+	{ path: config.routes.detailReviewTopic, component: detailReviewTopic, auth: RequireAuth },
+	{ path: config.routes.awardReview, component: awardReview, auth: RequireAuth },
 ];
 const privateRoutes = [];
 

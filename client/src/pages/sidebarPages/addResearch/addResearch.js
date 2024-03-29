@@ -12,7 +12,12 @@ const cx = classNames.bind(Styles)
 
 function addResearch() {
 	const [data, setData] = useState([])
+	const [teacher,setTeacher] = useState([]) 
+	const [id ,setId] = useState('')
 	const { register, handleSubmit, reset, watch } = useForm()
+	const handleGetId = (e) =>{
+		setId(e.target.value)
+	}
 	// const handleSubmitForm = () => {
 	// 	const fetchApi = async () => {
 	// 		let result;
@@ -20,6 +25,7 @@ function addResearch() {
 	// 	}
 	// 	fetchApi()
 	// }
+	console.log(id);
 	const onSubmit = async (data) => {
 		// async request which may result error
 		try {
@@ -40,6 +46,18 @@ function addResearch() {
 			console.log(e);
 		}
 	}
+	useEffect(()=>
+	{
+		fetchApiTeacher().then((res)=>{
+			setTeacher(res.data)
+		})
+	},[])
+	const fetchApiTeacher = async ()=>{
+		let result
+		result = await Result.getNameTeacher()
+		return result
+	}
+	console.log(watch('id'))
 	return (
 		<div className={cx('container')}>
 			<ToastContainer />
@@ -48,6 +66,12 @@ function addResearch() {
 				<div className={cx('line')}></div>
 				<div className={cx('wrapper')}>
 					<div className={cx('name')}>Thêm hướng nghiên cứu</div>
+					<div className={cx('teacher-chose')}>Chọn giảng viên hướng dẫn</div>
+					<select className={cx('option')} onChange={handleGetId} {...register('idGV')}>
+						{
+							teacher.map(data=>(<option key ={data.id}  value={data.idGV} className={cx('data-option')} >{data.tenGV}</option>))
+						}
+					</select>
 					<div className={cx('line-1')}>
 						<div className={cx('research-name')}>
 							<div className={cx('text')}>Tên hướng nghiên cứu: </div>
@@ -75,7 +99,7 @@ function addResearch() {
 						<input type='text' {...register("note")} required/>
 					</div>
 					<div className={cx('footer')}>
-						<button className={cx('register')} >Thêm</button>
+						<button className={cx('register')}>Thêm</button>
 					</div>
 				</div>
 			</form>

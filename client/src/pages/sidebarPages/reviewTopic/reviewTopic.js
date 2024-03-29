@@ -4,26 +4,57 @@ import Styles from './reviewTopic.module.scss'
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useTable } from "react-table";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight, faCircleCheck, faClose, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faCircleCheck, faClose, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { showToast } from "~/Components/ToastMessage/Toast";
 import { ToastContainer } from "react-toastify";
+import * as Result from '~/apiService/authService'
 import { useMediaQuery } from "react-responsive";
+import config from "~/config";
 
 const cx = classNames.bind(Styles)
 function reviewTopic() {
+	const [showYear,setShowYear] =  useState(false)
+	const [activeYear,setActiveYear] = useState('2024');
     const [data,setData] = useState([])
+	const [newData,setNewData] = useState([])
 	const [currentPage, setCurrentPage] = useState(1);
-	const [status, setStatus] = useState('')
-	const itemsPerPage = 8;
+	const [idHNC, setIdHNC] = useState(data.idHNC)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(()=>{
+		const dataOne = data.filter(data=>data.id === idHNC)
+		if(dataOne.length > 0){
+			const topics = dataOne[0].topic;
+			const newIdNameArray = topics.map(topic => ({
+				idHNC: topic.idHNC,
+				name: topic.name,
+				dateCreate:topic.dateCreate,
+				id:topic.id
+			}))
+			setNewData(newIdNameArray)
+		}
+	},[data,idHNC])
+	const itemsPerPage = 5;
 	const totalItems = data.length;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
-	const displayedData = data.slice(startIndex, endIndex);
-	const handleStatus = (item)=>{
-		setStatus(item)
+	const displayedData = newData.slice(startIndex, endIndex);
+	const handleShowYear = ()=>{
+		setShowYear(!showYear)
+	}
+	const handleActiveYear = (e)=>{
+			setActiveYear(e)
+			if(activeYear !== e){
+				setNewData([])
+			}
+	}
+	// const handleStatus = (item)=>{
+	// 	setStatus(item)
+	// }
+	const handleGetId =(e)=>{
+		setIdHNC(e.target.value)
 	}
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
@@ -41,28 +72,24 @@ function reviewTopic() {
 		{
 			Header: "Tên đề tài",
 			col: "col-3",
-			accessor: "ResearchName"
+			accessor: "name"
 		},
 		{
 			Header: "Hướng nghiên cứu",
 			col: "col-3",
-			accessor: "limit"
+			accessor: "idHNC"
 		},
         {
             Header: "Ngày tạo",
             col: "col-2",
-            accessor: "date"
+            accessor: "dateCreate"
         },
 		{
 			Header: "Trạng thái",
 			col: "col-2",
-			accessor: "peopleJoin",
 			Cell:()=>{
 					return(
-						<select className={cx(status === 'wait' ? 'wait' : 'done')}>
-							<option>Đã duyệt</option>
-							<option>Chờ duyệt</option>
-						</select>
+						<div className={cx('wait')}>Chờ duyệt</div>
 					)
 				}
 		},
@@ -74,9 +101,10 @@ function reviewTopic() {
             Header: "Lựa chọn",
 			accessor: 'id',
 			col: 'col-2',
-			Cell: () => {
+			Cell: ({ row }) => {
+				const { id } = row.original;
 				return (
-						<Link className = {cx('button')}>
+						<Link to ={`/detailReviewTopic/${id}`} className = {cx('button')}>
                             Xem
 						</Link>
 				)
@@ -104,19 +132,15 @@ function reviewTopic() {
 		headerGroups,
 		rows,
 		prepareRow,
-	  } = useTable({ columns: columnsWithButton, data: displayedData });
+	  } = useTable({ columns: columnsWithButton, data: displayedData});
 	  useEffect(()=>{
-        fetchApi()
-    },[])
+        fetchApi().then((res)=>{
+			setData(res.data)
+		})
+    },[activeYear])
 	const fetchApi = async ()=>{
-        try{
-            const res = await axios.get('https://64dc69d1e64a8525a0f672e2.mockapi.io/LoginApi')
-            const data = res.data
-            setData(data)
-        }
-        catch(e){
-            console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', e);
-        }
+       let result = Result.getTopicAdmin(activeYear)
+	   return result
     }
 	return (
 		<div className={cx('container')}>
@@ -129,10 +153,25 @@ function reviewTopic() {
 					<div className={cx('table')}>
                         <div className={cx('research')}>
                             <div className={cx('name')}>Hướng nghiên cứu</div>
-                            <select className={cx('research-name')}>
-                                {data.map(data=>(<option key={data.id}>{data.research}</option>))}
+                            <select className={cx('research-name')} onChange={handleGetId}>
+								<option>---Lựa chọn---</option>
+                                {data.map(data=>(<option key={data.id} value={data.id}>{data.name}</option>))}
                             </select>
                         </div>
+						<div className={cx('chose')}> 
+					<div className={cx('chose-year')}>
+						<div className={cx('text')}>Năm học</div>
+						<FontAwesomeIcon icon={showYear ? faAngleUp : faAngleDown} onClick={handleShowYear}/>
+					</div>
+					{
+						showYear && (<ul className={cx('option')}>
+						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
+						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
+						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>&2023-2024</li>
+					</ul>)
+					}
+					</div>
+						{newData.length >0 ? (<div className={cx('data-table')}>
 						<table {...getTableProps()} className={cx('table-inside')}>
 								<thead>
 									{headerGroups.map(headerGroup => (
@@ -147,7 +186,7 @@ function reviewTopic() {
 									{rows.map(row => {
 									prepareRow(row);
 									return (
-										<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
+										<tr {...row.getRowProps()} className={cx('grid-content')}>
 											{row.cells.map(cell => (
 												<td {...cell.getCellProps()} >
 													<div className={cx('link')}>
@@ -159,6 +198,7 @@ function reviewTopic() {
 									})}
 								</tbody>
 							</table>
+						</div>) : (<div>Không có dữ liệu của HNC</div>)}
 							<div className={cx('page-number')}>
 								<button className ={cx('button')} onClick={goToPreviousPage} disabled={currentPage === 1}>
 									<FontAwesomeIcon icon={faAngleLeft}/>

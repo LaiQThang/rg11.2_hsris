@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import * as Result from "~/apiService/authService"
 import { useAuth } from "~/Components/Auth";
 import { useMediaQuery } from "react-responsive";
+import { useForm } from "react-hook-form";
 
 const cx = classNames.bind(Styles)
 
@@ -24,14 +25,9 @@ function RegisterTopic() {
 	const topicId = data.filter(data=>data.id === getId)
 	const auth = useAuth()
 	const tokenBearer = auth.getTokens()
-	console.log(tokenBearer)
 	const year = activeYear
+	const {register,handleSubmit,reset,watch} = useForm()
 	const columns = useMemo(()=>[
-		{
-			Header: "STT",
-			col: "col-1",
-			accessor: "id"
-		},
 		{
 			Header: "Tên đề tài",
 			col: "col-2",
@@ -91,21 +87,24 @@ function RegisterTopic() {
 	  };
 	  const handleActiveChose = (item)=>{
 		setActiveChosse(item)
-		if(item === 'register' && getId === null){
-			alert('Vui lòng chọn đề tài để đăng kí')
-			setActiveChosse('recommend')
-		}
 	  }
-	  const handleGetInfomation =(id) =>{
-		const confirm = window.confirm('Bạn có chắc với lựa chọn này?')
-		if(confirm){
-			setGetId(id)
-			setActiveChosse('register')
+	const handleShowNotification = async(data)=>{
+		console.log(data)
+		try{
+		let result = await Result.updateNewTopic(data,tokenBearer.access_token)
+		console.log(result);
+		if(result){
+			showToast('success','Thêm đề tài thành công')
+			reset()
 		}
-	  }
-	  const handleShowNotification =()=>{
-		// return <Link to = {`/detailTopic/${topicId.id}`} key = {topicId.id}></Link>2
-	 }
+		else{
+			showToast('error','Thêm đề tài thất bại')
+		}
+	}
+	catch(e){
+		console.error('Xảy ra lỗi khi lấy dữ liệu! ',e)
+	}
+}
 	// Hàm xử lý chuyển đến trang trước
 	const goToPreviousPage = () => {
 		setCurrentPage((prevPage) => prevPage - 1);
@@ -120,11 +119,11 @@ function RegisterTopic() {
 		setShowYear(!showYear)
 	}
 	useEffect(()=>{
-        fetchApi()
+        fetchApi();
     },[])
     const fetchApi = async ()=>{
 		let result
-		result = await Result.registerTopic(tokenBearer,year)
+		result = await Result.registerTopic(tokenBearer.access_token,year)
 		setData(result.data)
 	}
 	console.log(data)
@@ -154,10 +153,12 @@ function RegisterTopic() {
 				</div>
 				{
 					activeChose === 'recommend' ? (
-						<table {...getTableProps()}>
+						<div className={cx('table-content')}>
+							<table {...getTableProps()}>
 							<thead>
 								{headerGroups.map(headerGroup => (
 								<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
+									<th>STT</th>
 									{headerGroup.headers.map(column => (
 									<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`} >{column.render("Header")}</th>
 									))}
@@ -165,13 +166,14 @@ function RegisterTopic() {
 								))}
 							</thead>
 							<tbody {...getTableBodyProps()}>
-								{rows.map(row => {
+								{rows.map((row,rowIndex)=> {
 								prepareRow(row);
 								return (
-									<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')} onClick ={()=>handleGetInfomation(row.original.id)}>
+									<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
+										<td>{rowIndex + 1}</td>
 										{row.cells.map(cell => (
 											<td {...cell.getCellProps()} >
-												<Link className={cx('link')}>
+												<Link className={cx('link')} to ={`/detailTopic/${row.original.id}`}>
 													{cell.render('Cell')}
 												</Link></td>
 										))}
@@ -179,32 +181,35 @@ function RegisterTopic() {
 								);
 								})}
 							</tbody>
-						</table>) : (
+						</table>
+						</div>) : (
 							<div>
-								{topicId.map(data=>(
-								<div className={cx('register-topic')} key ={data.id}>
+								<form className={cx('register-topic')} key ={data.id}>
 									<div className={cx('text-register-topic')}>Điền đầy đủ thông tin dưới đây</div>
 									<div className={cx('box')}>
 										<div className={cx('text')}>Tên đề tài:</div>
-										<div className={cx('short')}>{data.summary}</div>
+										<input  className={cx('short')} type='text' id='name' {...register('name')} required/>
 									</div>
 									<div className={cx('box')}>
 										<div className={cx('text')}>Tóm tắt:</div>
-										<div className={cx('short')}>{data.target}</div>
+										<input className={cx('short')} type='text' id='name' {...register('summary')} required/>
 									</div>
 									<div className={cx('box')}>
 										<div className={cx('text')}>Mục tiêu:</div>
-										<div className={cx('short')}>{data.limit}</div>
+										<input className={cx('short')} type='text' id='name' {...register('target')} required/>
 									</div>
 									<div className={cx('box')}>
 										<div className={cx('text')}>Phạm vi:</div>
-										<div className={cx('short')}>{data.target}</div>
+										<input className={cx('short')} type='text' id='name' {...register('limit')} required/>
+									</div>
+									<div className={cx('box')}>
+										<div className={cx('text')}>Ghi chú:</div>
+										<input className={cx('short')} type='text' id='name' {...register('comment')} required/>
 									</div>
 									<div className={cx('footer')}>
-										<Link to ={`/detailTopic/${data.id}`} className={cx('register') } onClick = {handleShowNotification}>Đăng ký</Link>
+										<div className={cx('register')}  onClick={handleSubmit(handleShowNotification)}>Thêm đề tài</div>
 									</div>
-								</div>
-							))}
+								</form>
 							</div>
 							
 						)
