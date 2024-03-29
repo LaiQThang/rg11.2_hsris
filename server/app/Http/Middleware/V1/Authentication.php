@@ -15,20 +15,13 @@ class Authentication
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $checkMail = $request->email;   
-        // dd($checkMail);
-        $validate = explode("@", $checkMail)[1];
-        if($validate == 'hou.edu.vn'){
-            app('App\Http\Controllers\Authentication\V1\AuthController')->middleware('auth:apiTeacher', ['except' => ['login']]);
-            return $next($request);
-        }else if($validate == 'students.hou.edu.vn'){
-            app('App\Http\Controllers\Authentication\V1\AuthController')->middleware('auth:apiStudent', ['except' => ['login']]);
-            return $next($request);
-        }
-        else{
+        $teacher = auth('apiTeacher')->user();
+        $student = auth('apiStudent')->user();
+        if($teacher === null && $student === null)
+        {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        // return $next($request);
+        
+        return $next($request);
     }
 }

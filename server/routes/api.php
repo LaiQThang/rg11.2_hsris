@@ -53,7 +53,7 @@ Route::group([
 ], function(){
     Route::apiResource('/huongnghiencuu', HuongNghienCuuController::class);
     Route::apiResource('/hncgiangvien', HNCGiangVienController::class);
-    Route::apiResource('/students', SinhVienController::class)->middleware(['authorizationClassify', 'validatePermission']);
+    Route::apiResource('/students', SinhVienController::class);
     Route::apiResource('/hncsinhvien', HNCSinhVienController::class);
     Route::apiResource('/detai', DeTaiController::class);
 
