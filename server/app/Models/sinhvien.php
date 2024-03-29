@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Http\Middleware\Authenticate;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Http\Middleware\Authenticate;
+use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class sinhvien extends Authenticatable implements JWTSubject
 {
@@ -83,6 +84,9 @@ class sinhvien extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(detai::class, 'ct_detai', 'idSV', 'idDT');
     }
-
+    public function permissionId() : BelongsTo
+    {
+        return $this->belongsTo(permission::class, 'permissionId', 'id');
+    }
  
 }

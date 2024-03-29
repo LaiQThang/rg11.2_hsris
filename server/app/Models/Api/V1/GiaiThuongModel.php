@@ -34,7 +34,7 @@ class GiaiThuongModel extends ApiModel
                 ->whereYear('phieudiems.ngayLap', $year);})
                 ->join('hoidongs', 'hoidongs.idHD', '=', 'detais.idHD')
                 ->join('huongnghiencuus', 'huongnghiencuus.idHNC', '=', 'detais.idHNC')
-                   ->select( 'detais.idDT', DB::raw('SUM(phieudiems.diem) AS TongDiem'), 'hoidongs.tenHD', 'huongnghiencuus.tenHNC')
+                   ->select( 'detais.idDT', DB::raw('SUM(phieudiems.diem) AS TongDiem'), 'hoidongs.tenHD', 'huongnghiencuus.tenHNC', 'detais.tenDT')
                    ->groupBy('detais.tenDT', 'detais.idDT', 'hoidongs.tenHD', 'huongnghiencuus.tenHNC')
                    ->get()->toArray();
         } catch(Exception $e){

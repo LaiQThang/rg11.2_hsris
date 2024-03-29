@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
@@ -117,6 +118,11 @@ class giangvien extends Authenticatable implements JWTSubject
     public function hoidong() : BelongsToMany
     {
         return $this->belongsToMany(hoidong::class, 'ct_hoidongGV', 'idGV', 'idHD');
+    }
+
+    public function permissionId() : BelongsTo
+    {
+        return $this->belongsTo(permission::class, 'permissionId', 'id');
     }
 
 }

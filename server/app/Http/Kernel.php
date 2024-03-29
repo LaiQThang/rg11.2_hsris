@@ -68,6 +68,6 @@ class Kernel extends HttpKernel
         'authClassify' => \App\Http\Middleware\V1\Authentication::class,
         'authorizationClassify' => \App\Http\Middleware\V1\Authorization::class,
         'validatePermission' => \App\Http\Middleware\V1\ValidatePermission::class,
-        'bearerValidate' =>  \App\Http\Middleware\V1\Authentication::class,
+        'permissionValidate' =>  \App\Http\Middleware\V1\Authentication::class,
     ];
 }
