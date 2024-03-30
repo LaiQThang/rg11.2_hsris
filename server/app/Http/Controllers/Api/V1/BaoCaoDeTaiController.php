@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\V1\DeTaiCollection;
-use App\Http\Resources\V1\DeTaiResource;
-use App\Models\Api\V1\BaoCaoDeTaiModel;
 use Exception;
-use Illuminate\Http\Request;
+use App\Models\detai;
 use PhpParser\Node\Expr;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Api\V1\BaoCaoDeTaiModel;
+use App\Http\Resources\V1\DeTaiCollection;
+use App\Http\Requests\V1\StoreBaoCaoDeTaiRequest;
 
 class BaoCaoDeTaiController extends Controller
 {
     private $model;
     private $idUser;
-    public function __construct() {
-        $this->model = new BaoCaoDeTaiModel();
+    public function __construct(BaoCaoDeTaiModel $model) {
+        $this->model = $model;
         $this->idUser = $this->getidSV();
+        
     }
     public function index()
     {
@@ -27,35 +29,40 @@ class BaoCaoDeTaiController extends Controller
         return response($this->model->ApiResponse($arr));
     }
 
-    public function getAllTienDo(Request $request)
+    public function store(StoreBaoCaoDeTaiRequest $request)
     {
-        $year = $request->year;
-        if($rsl = $this->model->getAllTienDo($year))
+        if(! $this->model->getidGV())
         {
-            return new DeTaiCollection($rsl);
+            return response()->json(['Message' => 'Login is continue'], 500);
         }
-        else{
-            return response()->json(['Message' => 'Login is continue'], 500);    
+        $result = $this->model->store($request);
+        if($result == true)
+        {
+            return response()->json(['Message' => 'Successful'], 200);
         }
+        return response()->json(['Message' => $result], 500);
     }
 
-    public function getTienDo(Request $request)
+    public function listnhom()
     {
-        $idDT = $request->idDT;
-        $rsl = $this->model->getTienDo($idDT);
-        dd($rsl);
-        if($rsl == false)
+        if(!$this->getidGV())
         {
-            return response()->json(['Message' => 'Login is continue'], 500);   
+            return response()->json(['Message' => 'Login is continue'], 500);
         }
-        else{
-            return response($this->model->ApiResponse($rsl));
+        try{
+            if(isset(request()->b))
+            {
+                $list = detai::where([['idGV', $this->getidGV()], ['idBB', request()->b]])->whereYear('ngayLap', request()->y)->get();
+            }
+            else
+            {
+                $list = detai::where('idGV', $this->getidGV())->whereYear('ngayLap', request()->y)->get();
+            }
+                return new DeTaiCollection($list);
+        }catch(Exception $e){
+            return response()->json(['Message' => $e], 500);
         }
-    }
 
-    public function store(Request $request)
-    {
-        $this->model->addTienDo($request);
     }
 
     public function edit(string $id)
