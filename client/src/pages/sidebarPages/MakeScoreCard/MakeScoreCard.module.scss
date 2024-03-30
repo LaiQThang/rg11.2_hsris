@@ -2,14 +2,63 @@
 	display: flex;
 	justify-content: center;
 	padding: 12px 0 50px 0;
-}
-.inner {
-	width: 80%;
-	min-width: 800px;
-	border-radius: 4px;
-	padding: 4px 8px;
-	background: #fff;
-	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+	.inner {
+		position: relative;
+		width: 90%;
+		min-width: 800px;
+		border-radius: 4px;
+		padding: 4px 8px;
+		background: #fff;
+		box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+		.note-no-data{
+			padding: 10px;
+			text-align: center;
+		}
+		.chose{
+			position: absolute;
+			right:0;
+			top: 0;
+			padding: 8px 30px;
+			.chose-year{
+				display:flex;
+				align-items: center;
+				padding:3px 10px;
+				border-radius: 5px;
+				border: 0.5px solid #000;
+				background: #FFF;
+				.text{
+					color: #000;
+					font-size: 15px;
+					font-weight: 400;
+					line-height: normal;
+					letter-spacing: 0.36px;
+					margin-right: 5px;
+				}
+			}
+			.option{
+				border-radius: 5px;
+				border: 0.5px solid #000;
+				background: #FFF;
+				padding:0;
+				li{
+					list-style: none;
+					color: #000;
+					text-align: center;
+					font-size: 13px;
+					font-weight: 400;
+					line-height: 18px; /* 184.615% */
+					cursor: pointer;
+					&:hover{
+						background-color: #d9d9d9;
+					}
+				}
+				.year-active{
+					background-color: #FFE4B3;
+				}
+			}
+		}
+	}
+	
 }
 
 .name-page {

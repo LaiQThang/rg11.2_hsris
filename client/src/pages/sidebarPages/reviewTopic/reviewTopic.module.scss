@@ -35,6 +35,50 @@
             .table{
                 border: 1px solid #929292;
                 border-radius: 3px;
+                position: relative;
+                .chose{
+                    position: absolute;
+                    right:0;
+                    top: 0;
+                    padding: 8px 30px;
+                    .chose-year{
+                        display:flex;
+                        align-items: center;
+                        padding:3px 10px;
+                        border-radius: 5px;
+                        border: 0.5px solid #000;
+                        background: #FFF;
+                        .text{
+                            color: #000;
+                            font-size: 15px;
+                            font-weight: 400;
+                            line-height: normal;
+                            letter-spacing: 0.36px;
+                            margin-right: 5px;
+                        }
+                    }
+                    .option{
+                        border-radius: 5px;
+                        border: 0.5px solid #000;
+                        background: #FFF;
+                        padding:0;
+                        li{
+                            list-style: none;
+                            color: #000;
+                            text-align: center;
+                            font-size: 13px;
+                            font-weight: 400;
+                            line-height: 18px; /* 184.615% */
+                            cursor: pointer;
+                            &:hover{
+                                background-color: #d9d9d9;
+                            }
+                        }
+                        .year-active{
+                            background-color: #FFE4B3;
+                        }
+                    }
+                }
                 .research{
                     margin-bottom: 5%;
                     .name{
@@ -53,6 +97,11 @@
                         font-size: 14px;
                         letter-spacing: 1.3px;
                     }
+                }
+                .data-table{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
                 .table-inside{
                     .grid-title{
@@ -75,14 +124,6 @@
                         }
                         
                     }
-                    .grid-content-light{
-                        background-color: #fff;
-                        border-bottom: solid 1px #999999;
-                        &:hover{
-                            background-color: #98d7f7;
-                        }
-                        
-                    }
                     .link{
                         color: #000;
                         -webkit-box-orient: vertical;
@@ -94,7 +135,7 @@
                         line-height: 150%;
                         font-size: 15px;
                         font-weight: 400;
-                        text-align: left;
+                        width: 125px;
                         &:hover{
                             color:#000
                         }
@@ -107,17 +148,6 @@
                             line-height: 20px;
                             background-color: #30AC3C;
                             padding:8px 10px
-                        }
-                        .done{
-                            background-color: #32419F;
-                            color: #FFF;
-                            font-size: 14px;
-                            padding: 2px 0;
-                            letter-spacing: 1.05px;
-                            text-align: center;
-                            border-radius: 5px;
-                            margin-right: 15px;
-                            font-weight: 600;
                         }
                         .wait{
                             background-color: #F38020;
