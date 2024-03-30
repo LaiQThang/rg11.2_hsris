@@ -31,6 +31,16 @@ class Controller extends BaseController
         return false;
     }
 
+    public function getidGV()
+    {
+        $user = auth('apiTeacher')->user();
+        if($user != null)
+        {
+            return $user->idGV;
+        }
+        return false;
+    }
+
     public function ApiResponse($array) 
     {
         return [

@@ -15,6 +15,7 @@ class GiaiThuongResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->idGT,
             'name' => $this->tenGiai,
             'prizePrice' => $this->giaTriGiai,
             'dateCreated' => $this->ngayLap,

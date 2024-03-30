@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Helpers;
 
 use Exception;
 use Google_Client;
 use Google_Service_Drive;
 use Google_Service_Drive_DriveFile;
-use Illuminate\Support\Arr;
+
 class GoogleDrive {
 
     public static function POST($file)

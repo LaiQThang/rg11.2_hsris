@@ -1,12 +1,20 @@
 .wrapper {
+	position: relative;
 	display: flex;
-	background-color: #F5F6F9;
+	justify-content: flex-start;
+	align-items: flex-start;
+	background-color: #f5f6f9;
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1; /* Chiếm phần còn lại của wrapper */
+	margin-left: 220px;
+}
+
+.sidebar {
+	position: fixed;
 }
 
 .content {
@@ -16,3 +24,9 @@
 }
 
 /* Các kiểu CSS tùy chỉnh cho các component Header và Sidebar */
+//responsive
+@media (max-width: 743px) {
+	.container {
+		margin-left: 0;
+	}
+}

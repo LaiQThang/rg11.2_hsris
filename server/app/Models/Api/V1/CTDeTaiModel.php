@@ -6,6 +6,8 @@ use Exception;
 use App\Models\ct_detai;
 use App\Models\sinhvien;
 use App\Models\Api\ApiModel;
+use App\Models\ct_bienban;
+use App\Models\detai;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CTDeTaiModel extends ApiModel
@@ -15,10 +17,23 @@ class CTDeTaiModel extends ApiModel
     public function addCTDeTai($idUser, $idDT) : bool
     {
         try{
-            ct_detai::create([
-                'idSV' => $idUser,
-                'idDT' => $idDT
+            $bienban = ct_bienban::where('idSV', $idUser)->first();
+            $idBB = $bienban->idBB;
+            $list = ct_bienban::where('idBB', $idBB)->get()->toArray();
+
+            foreach($list as $val)
+            {
+                ct_detai::create([
+                    'idSV' => $val['idSV'],
+                    'idDT' => $idDT
+                ]);
+            }
+
+            $detai = detai::find($idDT);
+            $detai->update([
+                'idBB' => $idBB
             ]);
+            
             return true;
         }
         catch(Exception $e){

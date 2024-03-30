@@ -2,9 +2,13 @@
 
 namespace App\Models\Api\V1;
 
-use App\Http\Resources\V1\DeTaiResource;
-use App\Models\Api\ApiModel;
 use App\Models\sinhvien;
+use App\Models\phieudiem;
+use App\Models\Api\ApiModel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\V1\DeTaiResource;
+use App\Models\detai;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class GiaiThuongModel extends ApiModel
@@ -19,5 +23,42 @@ class GiaiThuongModel extends ApiModel
             return $arr;
         }
         return false;
+    }
+
+    public function CalculatorPoint()
+    {
+        try{
+            $year = request()->y;
+            return detai::join('phieudiems', function($join) use ($year) {
+                $join->on('phieudiems.idDT', '=', 'detais.idDT')
+                ->whereYear('phieudiems.ngayLap', $year);})
+                ->join('hoidongs', 'hoidongs.idHD', '=', 'detais.idHD')
+                ->join('huongnghiencuus', 'huongnghiencuus.idHNC', '=', 'detais.idHNC')
+                   ->select( 'detais.idDT', DB::raw('SUM(phieudiems.diem) AS TongDiem'), 'hoidongs.tenHD', 'huongnghiencuus.tenHNC', 'detais.tenDT')
+                   ->groupBy('detais.tenDT', 'detais.idDT', 'hoidongs.tenHD', 'huongnghiencuus.tenHNC')
+                   ->get()->toArray();
+        } catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function UpdatePoint($request)
+    {
+        try{
+            $postData = request()->all();
+            foreach($postData as $val)
+            {
+                $topic = detai::find($val['idDT']);
+                if(!empty($topic))
+                {
+                    $topic->update([
+                        'diemF' => $val['TongDiem']
+                    ]);
+                }
+            }
+            return true;
+        } catch(Exception $e){
+            return $e->getMessage();
+        }
     }
 }

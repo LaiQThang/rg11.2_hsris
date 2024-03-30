@@ -10,6 +10,9 @@ use App\Models\huongnghiencuu;
 use App\Filters\V1\HuongNghienCuuFilter;
 use App\Http\Requests\V1\StoreHuongNghienCuuRequest;
 use App\Http\Requests\V1\UpdateHuongNghienCuuRequest;
+use App\Models\ct_hnc;
+use App\Models\ct_hncgv;
+use Illuminate\Database\QueryException;
 
 class HuongNghienCuuController extends Controller
 {
@@ -49,7 +52,23 @@ class HuongNghienCuuController extends Controller
      */
     public function store(StoreHuongNghienCuuRequest $request)
     {
-        return new HuongNghienCuuResource(huongnghiencuu::create($request->all()));
+        try{
+            $res = huongnghiencuu::create($request->except('idGV'));
+            $arr = [
+                'idHNC' => $res->idHNC,
+                'idGV' => $request->idGV
+            ];
+            $arr2 = [
+                'idHNC' => $res->idHNC,
+                'idGV' => $request->idGV,
+                'idSV' => null,
+            ];
+            ct_hnc::create($arr);
+            ct_hncgv::create($arr2);
+            return new HuongNghienCuuResource($res);
+        }catch(QueryException $e){
+            return response()->json(["message" => "Error"], 500);
+        }
     }
 
     /**
