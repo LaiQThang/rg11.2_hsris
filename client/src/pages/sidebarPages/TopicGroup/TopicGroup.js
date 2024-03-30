@@ -7,6 +7,7 @@ import { useAuth } from '~/Components/Auth';
 import { showToast } from '~/Components/ToastMessage/Toast';
 import { ToastContainer } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { Value } from 'sass';
 
 const cx = classNames.bind(styles);
 
@@ -53,7 +54,6 @@ function TopicGroup() {
 		} else {
 			setArrStudents(prevArrStudents => [...prevArrStudents, id]);
 		}
-		
 	};
 	const handleDeleteStudent = (id) => {
 		const updatedStudents = arrStudents.filter(idStudent => id !== idStudent);
@@ -63,7 +63,6 @@ function TopicGroup() {
 		fetchApi().then((data)=>{
 			setData(data.data)
 		})
-		console.log(filterHNC);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 	const fetchApi = async ()=>{
@@ -72,37 +71,36 @@ function TopicGroup() {
 		return result
 	}
 
-	const posthApi = async () => {
-		try {
-			const result = await Result.postTopicGroup(groupName,'' ,'',arrStudents,idHNC, tokenBearer.access_token);
-			return result;
-		} catch (error) {
-			console.error('Đã xảy ra lỗi khi gửi dữ liệu:', error);
-			throw error;
-		}
+	const posthApi = async (alldata)=>{
+		let result
+		result = await Result.postTopicGroup(alldata, tokenBearer.access_token)
+        return result;
 	}
 	
-	const handlesShowNotification = () => {
-		const show = window.confirm("Bạn có chắc chắn với lựa chọn này?");
-		if (show) {
-			posthApi()
-				.then((res) => {
-					if (res) {
-						showToast('success', 'Đăng kí thành công!');
-					} else {
-						showToast('error', 'Đăng kí thất bại!');
-					}
-				})
-				.catch((error) => {
-					console.error('Lỗi khi xử lý yêu cầu:', error);
-					showToast('error', 'Đã xảy ra lỗi khi gửi yêu cầu!');
-				});
-		}
+	const handlesShowNotification =(data)=>{
+		console.log(data);
+		const show =  window.confirm("Bạn có chắc với lựa chọn này");
+		if(show){
+			posthApi(data)
+                .then(function(res) {
+                    if(res){
+                    showToast('success', 'Đăng kí thành công!');
+                    return window.location.href = 'http://localhost:3000/historyRegisterResearch';
+
+                    } else{
+                        showToast('error', 'Đăng kí thất bại!');
+                    }
+                })
+                .catch(function(error){
+                    console.log(error);
+                });	
+	 	}
 	}
 
 	return (
 		<div className={cx('wrapper')}>
 			            <ToastContainer/>
+
 			<div className={cx('inner')}>
 				<div className={cx('name-page')}>Quản lý chung - Phân nhóm đề tài</div>
 
@@ -226,6 +224,7 @@ function TopicGroup() {
                                                     </div>
 													<input 
 														type="hidden" 
+														{...register('students')} // Truyền ID vào register ở đây
 														value={selectedStudent.id} // Giá trị của input
 													/>
                                                     <button className={cx('btn-del')}  onClick={() => handleDeleteStudent(selectedStudent.id)}>Xóa</button>
