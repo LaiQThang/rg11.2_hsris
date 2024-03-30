@@ -157,10 +157,11 @@
             font-size: 18px;
             line-height: 22px; 
         }
+        table{
+            width: 30%;
+        }
     }
-    table{
-        width: 30%;
-    }
+    
 }
 @media (max-width: 1023px) and (min-width: 744px) {
     .table{

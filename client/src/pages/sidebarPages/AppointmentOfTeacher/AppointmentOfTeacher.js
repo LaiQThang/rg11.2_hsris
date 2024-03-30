@@ -2,10 +2,40 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './AppointmentOfTeacher.module.scss';
 import classNames from 'classnames/bind';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function AppointmentOfTeacher() {
+    const [selectedYear, setSelectedYear] = useState('2020');
+    const [dataFromApi, setDataFromApi] = useState(null);
+
+    useEffect(() => {
+        // Hàm này được gọi mỗi khi selectedYear thay đổi
+        if (selectedYear !== '') {
+            // Gửi yêu cầu đến API để lấy dữ liệu dựa trên năm đã chọn
+            fetchContentData(selectedYear);
+        }
+    }, [selectedYear]);
+
+    const handleYearChange = (event) => {
+        const selectedYearValue = event.target.value;
+        setSelectedYear(selectedYearValue);
+    };
+
+    const fetchContentData = (year) => {
+        // Gửi yêu cầu đến API để lấy dữ liệu dựa trên năm đã chọn
+        // Ví dụ: 
+        fetch(`your_api_endpoint/${year}`)
+            .then(response => response.json())
+            .then(data => {
+                // Cập nhật state của contentData với dữ liệu mới nhận được từ API
+                setDataFromApi(data);
+            })
+            .catch(error => {
+                console.error('Error fetching content data:', error);
+            });
+    };
     return ( <div className={cx('wrapper')}>
     <div className={cx('inner')}>
         <div className={cx('name-page')}>Quản lý chung - Phân nhóm đề tài</div>
@@ -16,10 +46,10 @@ function AppointmentOfTeacher() {
                 <div className={cx('frame-year')}>
 
                     <select className={cx('year')} id="year" name="year">
-                        <option value="2020-2021">2020-2021</option>
-                        <option value="2021-2022">2021-2022</option>
-                        <option value="2022-2023">2022-2023</option>
-                        <option value="2023-2024">2023-2024</option>
+                        <option className={cx(selectedYear === '2020' && 'year-active')} value="2020">2020-2021</option>
+                        <option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2021-2022</option>
+                        <option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2022-2023</option>
+                        <option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2023-2024</option>
                     </select>
                 </div>
             </div>
