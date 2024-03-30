@@ -164,7 +164,7 @@ function Sidebar() {
 				</Menu>
 			</div>
 			<div className={cx('logout')}>
-				<a href="auth/login">Đăng xuất</a>
+				<a href="/auth/login">Đăng xuất</a>
 				<p>Phiên bản 1.0</p>
 				<p>Website được phát triển bởi RG11.11</p>
 				<p>Nghiên cứu khoa học 2023-2024</p>

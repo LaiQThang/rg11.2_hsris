@@ -144,3 +144,182 @@ export const registerTopic = async (tokenBearer,year) => {
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
     }
 };
+
+export const postDetailReseach = async (idHNC, idSV) => {
+    try {
+        const array = {
+            idHNC: idHNC,
+            idSV: idSV,
+        }
+        const config= {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            //'Authorization': `Bearer ${tokenBearer}`
+        }
+    }
+    const res = await request.post('/v1/hncsinhvien', array,config);
+    return res;
+    }
+    catch (error)
+    {
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
+    }
+};
+export const getAllHNC = async(year, tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+            params:{
+                y: year,
+            }
+        }
+        const res = await request.get('/v1/ct-huongnghiencuu',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const postTopicGroup = async(name, note, contents, listStudents,HNC, tokenBearer )=>{
+    try{
+        const array = {
+            name: name,
+            note: note,
+            contents: contents,
+            students: listStudents,
+            HNC: HNC,
+
+        }
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                 'Authorization':` Bearer ${tokenBearer}`
+            },
+        }
+        const res = await request.post('/v1/bienbanphancong', array,header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const getSetupProgress = async(year, tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+            params:{
+                y: year,
+            }
+        }
+        const res = await request.get('/v1/baocaodetai-listnhom',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const postSetupProgress = async(idDT, idBB,timeArray, tokenBearer )=>{
+    try{
+        const array = {
+            idDT: idDT,
+            idBB: idBB,
+            timeArray: timeArray
+        }
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                 'Authorization':` Bearer ${tokenBearer}`
+            },
+        }
+        const res = await request.post('/v1/baocaodetai', array,header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const getAllTeacher = async()=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                //'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const res = await request.get('/v1/giangvien',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const getTopicNoCouncil = async(year)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                //'Authorization': `Bearer ${tokenBearer}`
+            },
+            params:{
+                y: year,
+            }
+
+        }
+        const res = await request.get('/v1/hoidong/list-no-council',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const postAddCouoncil = async(tenHD, ngayCham,diaDiem, ghiChu,topicArr, teacherArr, tokenBearer )=>{
+    try{
+        const array = {
+            tenHD: tenHD,
+            ngayCham: ngayCham,
+            diaDiem: diaDiem,
+            ghiChu: ghiChu,
+            topicArr: topicArr,
+            teacherArr: teacherArr,
+        }
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                 'Authorization':` Bearer ${tokenBearer}`
+            },
+        }
+        const res = await request.post('/v1/hoidong', array,header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
