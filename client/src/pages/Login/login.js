@@ -13,7 +13,7 @@ const cx = classNames.bind(styles)
 function Login(){
     // Khai báo các thuộc tính
     const [showModal,setShowModal] = useState(false)
-    const [hidePassword, sethidePassword] = useState(true)
+    const [hidePassword, sethidePassword] = useState(false)
     const [password,setPassword] = useState('')
     const [username,setUsername] = useState('')
     const [message,setMessage] = useState('')

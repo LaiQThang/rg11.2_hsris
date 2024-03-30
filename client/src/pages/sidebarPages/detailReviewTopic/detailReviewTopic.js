@@ -19,7 +19,7 @@ function detailReviewTopic(){
     const handlesShowNotification =async()=>{
         const show =  window.confirm("Bạn có chắc với lựa chọn này");
         if(show){
-            let result = await Result.browseTopicAdmin(id)
+            let result = await Result.browseTopicAdmin(id, tokenBearer.access_token)
             if(result){
                 showToast('success', 'Duyệt đề tài thành công!');
                 setTimeout(()=>{

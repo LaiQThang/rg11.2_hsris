@@ -60,9 +60,6 @@ function Header() {
 						<Sidebar></Sidebar>
 					</Offcanvas>
 
-					<Button text leftIcon={<FontAwesomeIcon icon={faPen} />}>
-						Đăng Ký Đề Tài
-					</Button>
 				</Menu>
 			</div>
 		</div>

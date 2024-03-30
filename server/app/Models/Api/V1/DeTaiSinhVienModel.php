@@ -21,6 +21,10 @@ class DeTaiSinhVienModel extends ApiModel
     public function getAllDeTai($idUser, $request)
     {
         $idHNC = $this->getIdHNC($idUser, $request->year);
+        if($idHNC == null) 
+        {
+            return response()->json($this->ApiResponse([]));
+        }
         return new DeTaiCollection(detai::where([['idHNC', $idHNC], ['trangThaiGV', 1]])->paginate(5)->appends($request->query()));
     }
 
@@ -80,13 +84,17 @@ class DeTaiSinhVienModel extends ApiModel
         }
     }
 
-    private function getIdHNC($idUser, $year) : string
+    private function getIdHNC($idUser, $year)
     {
         try{
             $sinhvien = sinhvien::find($idUser);
             $hnc = $sinhvien->historyResearchStudent()->whereYear('ngayTao', $year)->first();
-            $idHNC = $hnc->toArray()['idHNC'];
-            return $idHNC;
+            if(isset($hnc))
+            {
+                $idHNC = $hnc->toArray()['idHNC'];
+                return $idHNC;
+            }
+            return null;
         } catch(Exception $e){
             return false;
         }

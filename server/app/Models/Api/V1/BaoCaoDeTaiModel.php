@@ -17,11 +17,14 @@ class BaoCaoDeTaiModel extends ApiModel
     {
         $sinhvien = sinhvien::find($idUser);
         $detai = $sinhvien->detailsDeTai()->whereYear('ngayLap', $year)->first();
-        $idDT = $detai->idDT;
-        $dtfind = detai::find($idDT);
-        $baocao = $dtfind->detailsBaoCao()->get()->toArray();
-        // dd($baocao);
-        return $baocao;
+        if(isset($detai))
+        {
+            $idDT = $detai->idDT;
+            $dtfind = detai::find($idDT);
+            $baocao = $dtfind->detailsBaoCao()->get()->toArray();
+            return $baocao;
+        }
+        return [];
     }
 
     public function getAllTienDo($year)

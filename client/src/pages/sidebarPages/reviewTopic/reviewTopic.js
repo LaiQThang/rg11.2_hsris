@@ -11,6 +11,7 @@ import { showToast } from "~/Components/ToastMessage/Toast";
 import { ToastContainer } from "react-toastify";
 import * as Result from '~/apiService/authService'
 import { useMediaQuery } from "react-responsive";
+import { useAuth } from "~/Components/Auth";
 import config from "~/config";
 
 const cx = classNames.bind(Styles)
@@ -21,6 +22,8 @@ function reviewTopic() {
 	const [newData,setNewData] = useState([])
 	const [currentPage, setCurrentPage] = useState(1);
 	const [idHNC, setIdHNC] = useState(data.idHNC)
+	const auth = useAuth()
+    const tokenBearer = auth.getTokens()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(()=>{
 		const dataOne = data.filter(data=>data.id === idHNC)
@@ -139,7 +142,7 @@ function reviewTopic() {
 		})
     },[activeYear])
 	const fetchApi = async ()=>{
-       let result = Result.getTopicAdmin(activeYear)
+       let result = Result.getTopicAdmin(tokenBearer.access_token, activeYear)
 	   return result
     }
 	return (

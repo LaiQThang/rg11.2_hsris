@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useBlockLayout, useTable } from "react-table";
 import { useMediaQuery } from "react-responsive";
 import * as Result from '~/apiService/authService'
+import { useAuth } from "~/Components/Auth";
 
 const cx = classNames.bind(Styles)
 
@@ -19,6 +20,8 @@ function RegisterResearch() {
   	const [currentPage, setCurrentPage] = useState(1);
 	const [activeYear,setActiveYear] = useState('2024');
 	const [number,setNumber] = useState(0)
+	const auth = useAuth()
+	const tokenBearer = auth.getTokens()
 	const columns = useMemo(()=>[
 		{
 			Header: "Tên HNC",
@@ -92,7 +95,7 @@ function RegisterResearch() {
 	}
     const fetchApi = async ()=>{
        let result
-	   result = Result.getResearch(activeYear)
+	   result = Result.getResearch(tokenBearer.access_token, activeYear)
 	   return result
     }
 	useEffect(()=>{

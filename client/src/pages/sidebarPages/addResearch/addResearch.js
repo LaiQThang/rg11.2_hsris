@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { showToast } from '~/Components/ToastMessage/Toast';
 import { ToastContainer } from 'react-toastify';
 import * as Result from '~/apiService/authService'
+import { useAuth } from "~/Components/Auth";
 const cx = classNames.bind(Styles)
 
 function addResearch() {
@@ -15,6 +16,8 @@ function addResearch() {
 	const [teacher,setTeacher] = useState([]) 
 	const [id ,setId] = useState('')
 	const { register, handleSubmit, reset, watch } = useForm()
+	const auth = useAuth()
+	const tokenBearer = auth.getTokens()
 	const handleGetId = (e) =>{
 		setId(e.target.value)
 	}
@@ -32,7 +35,7 @@ function addResearch() {
 			// await fetch()
 			console.log(data);
 
-			const result = await Result.updateResearch(data);
+			const result = await Result.updateResearch(data, tokenBearer.access_token);
 			if (result) {
 				showToast('success', "Thêm hướng nghiên cứu thành công!")
 				reset();
@@ -54,7 +57,7 @@ function addResearch() {
 	},[])
 	const fetchApiTeacher = async ()=>{
 		let result
-		result = await Result.getNameTeacher()
+		result = await Result.getNameTeacher(tokenBearer.access_token)
 		return result
 	}
 	console.log(watch('id'))

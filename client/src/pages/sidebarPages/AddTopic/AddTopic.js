@@ -23,7 +23,7 @@ function AddTopic() {
 		})
 	},[])
 	const fetchApi = async()=>{
-		let result = Result.getResearch(year)
+		let result = Result.getResearch(tokenBearer.access_token, year)
 		return result
 	}
 	const handleGetId = (e)=>{

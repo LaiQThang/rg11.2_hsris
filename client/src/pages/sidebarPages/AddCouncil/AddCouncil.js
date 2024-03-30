@@ -77,14 +77,14 @@ function AddCouncil() {
 	//fetchAPI Topic
 	const fetchApiTopic = async ()=>{
 		let result
-		result = await Result.getTopicNoCouncil(selectedYear)
+		result = await Result.getTopicNoCouncil(tokenBearer.access_token, selectedYear)
 		return result
 	}
 
 	//fetchAPI Teacher
 	const fetchApiTeacher = async ()=>{
 		let result
-		result = await Result.getAllTeacher()
+		result = await Result.getAllTeacher(tokenBearer.access_token)
 		return result
 	}
 

@@ -18,7 +18,7 @@ function DetailResearch(){
 
     const fetchApi = async ()=>{
         let result
-        result = Result.getResearch()
+        result = Result.getResearch(tokenBearer.access_token)
         return result
      }
 
@@ -34,7 +34,7 @@ function DetailResearch(){
             callApi()
                 .then(function(res){
                     console.log(res)
-                    return  Result.postDetailReseach(id,res.id)
+                    return  Result.postDetailReseach(tokenBearer.access_token, id,res.id)
                 })
                 .then(function(res) {
                     if(res){

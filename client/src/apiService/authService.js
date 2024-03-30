@@ -87,7 +87,7 @@ export const permission = async (id,tokenBearer) => {
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
     }
 };
-export const updateResearch = async (data) => {
+export const updateResearch = async (data, tokenBearer) => {
     try {
         
         const header = {
@@ -95,7 +95,7 @@ export const updateResearch = async (data) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                // 'Authorization': `Bearer ${tokenBearer}`
+                'Authorization': `Bearer ${tokenBearer}`
             }
         }
         const res = await request.post('/v1/huongnghiencuu', data, header);
@@ -157,14 +157,14 @@ export const AddTopic = async(data,tokenBearer) =>{
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
     }
 }
-export const getResearch = async(year)=>{
+export const getResearch = async(tokenBearer, year)=>{
     try{
         const header = {
 
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                // 'Authorization': `Bearer ${tokenBearer}`
+                'Authorization': `Bearer ${tokenBearer}`
             },
             params:{
                 year: year,
@@ -237,13 +237,13 @@ export const browseTopic = async (tokenBearer,id) => {
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
     }
 };
-export const browseTopicAdmin = async (id) => {
+export const browseTopicAdmin = async (id, tokenBearer) => {
     try {
         const config= {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            // 'Authorization': `Bearer ${tokenBearer}`
+            'Authorization': `Bearer ${tokenBearer}`
         },
     }
     const data = {
@@ -340,12 +340,13 @@ export const updateAward = async (data,tokenBearer) => {
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
     }
 };
-export const getNameTeacher = async()=>{
+export const getNameTeacher = async(tokenBearer)=>{
     try{
         const config ={
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
             }
         }
         const res = await request.get('/v1/giangvien',config)
@@ -375,14 +376,14 @@ export const postTopicGroup = async(data, tokenBearer )=>{
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
-export const getTopicAdmin = async(year,id)=>{
+export const getTopicAdmin = async(tokenBearer, year,id)=>{
     try{
         const header = {
 
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                //  'Authorization': `Bearer ${tokenBearer}`
+                 'Authorization': `Bearer ${tokenBearer}`
             },
             params:{
                 y:year,
@@ -494,7 +495,7 @@ export const getAward = async(tokenBearer)=>{
     }
 }
 
-export const postDetailReseach = async (idHNC, idSV) => {
+export const postDetailReseach = async (tokenBearer, idHNC, idSV) => {
     try {
         const array = {
             idHNC: idHNC,
@@ -504,7 +505,7 @@ export const postDetailReseach = async (idHNC, idSV) => {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            //'Authorization': `Bearer ${tokenBearer}`
+            'Authorization': `Bearer ${tokenBearer}`
         }
     }
     const res = await request.post('/v1/hncsinhvien', array,config);
@@ -580,14 +581,14 @@ export const postSetupProgress = async(idDT, idBB,timeArray, tokenBearer )=>{
     }
 }
 
-export const getAllTeacher = async()=>{
+export const getAllTeacher = async(tokenBearer)=>{
     try{
         const header = {
 
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                //'Authorization': `Bearer ${tokenBearer}`
+                'Authorization': `Bearer ${tokenBearer}`
             },
 
         }
@@ -599,14 +600,14 @@ export const getAllTeacher = async()=>{
     }
 }
 
-export const getTopicNoCouncil = async(year)=>{
+export const getTopicNoCouncil = async(tokenBearer, year)=>{
     try{
         const header = {
 
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                //'Authorization': `Bearer ${tokenBearer}`
+                'Authorization': `Bearer ${tokenBearer}`
             },
             params:{
                 y: year,
