@@ -5,7 +5,7 @@ namespace App\Models\Api\V1;
 use App\Models\Api\ApiModel;
 use App\Models\giangvien;
 use App\Models\sinhvien;
-use App\Services\GoogleDrive;
+use App\Helpers\GoogleDrive;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

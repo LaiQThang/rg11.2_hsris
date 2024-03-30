@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 
@@ -16,6 +17,8 @@ class hoidong extends Model
     public $incrementing = false;
 
     protected $table = 'hoidongs';
+
+    protected $primaryKey = 'idHD';
 
     protected $fillable = [
         'idHD',
@@ -30,7 +33,8 @@ class hoidong extends Model
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
     }
@@ -43,5 +47,10 @@ class hoidong extends Model
     public function phieuDiem() : HasMany 
     {
         return $this->hasMany(phieudiem::class, 'idHD', 'idHD');    
+    }
+
+    public function detai_hoidong() : HasMany
+    {
+        return $this->hasMany(detai::class, 'idHD', 'idHD');
     }
 }

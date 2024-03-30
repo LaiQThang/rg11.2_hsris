@@ -5,7 +5,9 @@ namespace App\Models;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class bienbanphancong extends Model
 {
@@ -39,5 +41,10 @@ class bienbanphancong extends Model
     public function bienBan_SinhVien() : BelongsToMany
     {
         return $this->belongsToMany(sinhvien::class, 'ct_bienban', 'idBB', 'idSV');
+    }
+
+    public function bienBan_deTai() : BelongsTo
+    {
+        return $this->belongsTo(detai::class, 'idBB', 'idBB');
     }
 }

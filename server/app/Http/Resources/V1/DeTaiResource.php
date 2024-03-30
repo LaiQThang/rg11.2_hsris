@@ -21,7 +21,12 @@ class DeTaiResource extends JsonResource
             'target' => $this->mucTieu,
             'limit' => $this->phamVi,
             'comment' => $this->nhanXet,
+            'dateCreate' => $this->ngayLap,
             'status' => $this->trangThaiGV,
+            'idHNC' => $this->idHNC,
+            'idBB' => $this->idBB,
+            'idHD' => $this->idHD,
+            'hnc' => new HuongNghienCuuResource($this->whenLoaded('HNC')),
             
             'cup' => new GiaiThuongResource($this->whenLoaded('giaiThuong')),
             'teacher' => new GiangVienClientResource($this->whenLoaded('giangVien')),

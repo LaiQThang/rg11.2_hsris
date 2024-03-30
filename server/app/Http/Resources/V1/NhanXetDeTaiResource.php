@@ -5,7 +5,7 @@ namespace App\Http\Resources\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GiaiThuongResource extends JsonResource
+class NhanXetDeTaiResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,12 +14,6 @@ class GiaiThuongResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'id' => $this->idGT,
-            'name' => $this->tenGiai,
-            'prizePrice' => $this->giaTriGiai,
-            'dateCreated' => $this->ngayLap,
-            'summary' => $this->moTa,
-        ];
+        return parent::toArray($request);
     }
 }

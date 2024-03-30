@@ -34,6 +34,7 @@ class detai extends Model
         'idHNC',
         'idHD',
         'idGT',
+        'idBB',
         'diemF',
         'trangThaiGV',
         'trangThaiQT',
@@ -67,4 +68,15 @@ class detai extends Model
     {
         return $this->belongsTo(giangvien::class, 'idGV', 'idGV');
     }
+
+    public function HNC() : BelongsTo
+    {
+        return $this->belongsTo(huongnghiencuu::class, 'idHNC', 'idHNC');
+    }
+
+    public function deTai_baoCao() : BelongsTo
+    {
+        return $this->belongsTo(ct_baocaodetai::class, 'idDT', 'idDT');
+    }
+    
 }

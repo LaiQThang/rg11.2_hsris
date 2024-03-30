@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Authentication\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\UpdateProfileRequest;
+use App\Http\Resources\V1\GiangVienClientResource;
 use App\Http\Resources\V1\SinhVienResource;
 use App\Models\Api\V1\AccountModel;
 use App\Models\giangvien;
@@ -80,7 +81,7 @@ class AuthController extends Controller
     {
         $check = $this->validatePerson(request());
         if($check == 'hou.edu.vn'){
-            return response()->json(auth('apiTeacher')->user());
+            return response()->json(new GiangVienClientResource(auth('apiTeacher')->user()));
         }else if($check == 'students.hou.edu.vn'){
             // dd(new SinhVienResource(auth('apiStudent')->user()));
             // dd(123);

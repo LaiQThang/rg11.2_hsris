@@ -16,6 +16,8 @@ class ct_hoidonggv extends Model
 
     protected $table = 'ct_hoidonggv';
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'id',
         'idHD',
@@ -24,7 +26,8 @@ class ct_hoidonggv extends Model
 
     protected static function boot()
     {
-        parent::creating(function($model){
+        parent::boot();
+        self::creating(function($model){
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
         });
     }
