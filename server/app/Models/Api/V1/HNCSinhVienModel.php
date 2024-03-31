@@ -33,7 +33,8 @@ class HNCSinhVienModel extends ApiModel
             }
             else{
                 $res->update([
-                    'idSV' => $request->idSV
+                    'idSV' => $request->idSV,
+                    'dateCreate' => now()->format('Y-m-d')
                 ]);
             }
             ct_hncsv::create($request->all());

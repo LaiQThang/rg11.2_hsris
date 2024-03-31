@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\V1\HuongNghienCuuController;
 use App\Http\Controllers\Api\V1\NhanXetDeTaiController;
 use App\Http\Controllers\Api\V1\permissionController;
 use App\Http\Controllers\Api\V1\XetDuyetAdminController;
+use App\Http\Controllers\Api\V1\ValidateViewController;
 use App\Http\Controllers\Authentication\V1\AuthController;
 use App\Models\permission;
 use App\Models\permission_detail;
@@ -111,4 +112,11 @@ Route::group([
         Route::get('/list', [GiaiThuongController::class, 'ListCup']);
     });
 
+});
+
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'valit'
+], function() {
+    Route::get('/', [ValidateViewController::class, 'RegisterTopic']);
 });
