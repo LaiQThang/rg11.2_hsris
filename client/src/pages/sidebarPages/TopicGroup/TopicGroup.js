@@ -63,9 +63,8 @@ function TopicGroup() {
 		fetchApi().then((data)=>{
 			setData(data.data)
 		})
-		console.log(filterHNC);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+	},[selectedYear])
 	const fetchApi = async ()=>{
 		let result
 		result = await Result.getAllHNC(selectedYear, tokenBearer.access_token)
@@ -88,6 +87,10 @@ function TopicGroup() {
 			posthApi()
 				.then((res) => {
 					if (res) {
+						setGroupName("")
+						fetchApi().then((data)=>{
+							setData(data.data)
+						})
 						showToast('success', 'Đăng kí thành công!');
 					} else {
 						showToast('error', 'Đăng kí thất bại!');
@@ -112,10 +115,11 @@ function TopicGroup() {
 						<div className={cx('frame-year')}>
 
 						<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
-							<option className={cx(selectedYear === '2020' && 'year-active')} value="2020">2020-2021</option>
-                        	<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2021-2022</option>
-                        	<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2022-2023</option>
-                        	<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2023-2024</option>
+							<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
+                        	<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+                        	<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+                        	<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
+							
 						</select>
 					</div>
 				</div>
@@ -216,7 +220,7 @@ function TopicGroup() {
 
 									<div className={cx('item-wrap')}>
 										<div className={cx('item-title')}>Thành viên được chọn(*)</div>
-										<div className={cx('notify')}>Thành viên không được để trống</div>
+										{showNotify && <div className={cx('notify')}>Thành viên không được để trống</div>}
 
 										{filterHNC.map(newData =>
                                             newData.students.filter(dataStudents =>arrStudents.includes(dataStudents.id)).map((selectedStudent) => (
