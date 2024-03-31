@@ -158,7 +158,7 @@ export const getResearch = async (tokenBearer, year) => {
 				y: year,
 			},
 		};
-		const res = await request.get('/v1/huongnghiencuu', header);
+		const res = await request.get('/v1/valit/researchTeacher', header);
 		return res.data;
 	} catch (e) {
 		console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e);

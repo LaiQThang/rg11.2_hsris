@@ -16,7 +16,9 @@ function AddTopic() {
 	const[id,setId] = useState('')
 	const auth = useAuth()
 	const tokenBearer = auth.getTokens()
-	const year ='2024'
+	const d = new Date();
+	const year = d.getFullYear();
+
 	useEffect(()=>{
 		fetchApi().then((res)=>{
 			setDataHNC(res.data)

@@ -23,7 +23,7 @@ class XetDuyetAdminController extends Controller
         {
             return new HuongNghienCuuCollection($res);
         }
-        return response()->json(["Message" => "Error", 500]);
+        return response()->json(["Message" => "Error"], 500);
     }
 
     public function update()
