@@ -655,22 +655,3 @@ export const postAddCouoncil = async(tenHD, ngayCham,diaDiem, ghiChu,topicArr, t
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
-
-export const getValiResearch= async(tokenBearer)=>{
-    try{
-        const header = {
-
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${tokenBearer}`
-            },
-
-        }
-        const res = await request.get('/v1/valit/research',header)
-        return res.data
-    }
-    catch(e){
-        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
-    }
-}
