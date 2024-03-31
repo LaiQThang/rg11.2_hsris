@@ -754,3 +754,25 @@ export const getValiResearch= async(tokenBearer)=>{
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
+
+export const authorization= async(tokenBearer, email)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const data = {
+            email: email
+        }
+        const res = await request.get('/auth/refresh', data,header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}

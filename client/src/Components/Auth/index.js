@@ -25,6 +25,7 @@ function AuthProvider({ children }) {
 	const setTokens = (token) => {
 		localStorage.setItem('token', JSON.stringify(token));
 	};
+
 	const getEmails = () => {
 		const email = JSON?.parse(localStorage?.getItem('email'));
 		return email;

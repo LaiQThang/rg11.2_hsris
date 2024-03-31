@@ -45,7 +45,7 @@ function Sidebar() {
 	}
 	const fetchApiPermission = async(id)=>{
 		let result;
-		result = await Result.permission(id);
+		result = await Result.permission(id, tokenBearer.access_token);
 		return result;
 	}
 	function callApi(){

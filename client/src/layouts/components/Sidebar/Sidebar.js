@@ -73,7 +73,9 @@ function Sidebar() {
 	},[])
 	return (
 		<div className={cx('wrapper')}>
-			<div className={cx('inner')}>
+			{
+				infor ? (
+					<div className={cx('inner')}>
 				<div className={cx('img-frame')}>
 					<Link to={config.routes.home}>
 						<img className={cx('img-logo')} src={img.logo} alt="HSRIS" />
@@ -162,6 +164,8 @@ function Sidebar() {
 					}
 				</Menu>
 			</div>
+				) : ''
+			}
 			<div className={cx('logout')}>
 				<a href="/auth/login">Đăng xuất</a>
 				<p>Phiên bản 1.0</p>
