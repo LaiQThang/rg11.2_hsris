@@ -24,7 +24,7 @@ class CTDeTaiController extends Controller
         {
             return response($this->ApiResponse($result));
         }
-        return response()->json($this->ApiResponse([]), 500);
+        return response()->json($this->ApiResponse([]), 200);
     }
 
     public function getFinally()
