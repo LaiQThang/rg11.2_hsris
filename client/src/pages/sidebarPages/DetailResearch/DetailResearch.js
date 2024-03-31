@@ -39,7 +39,9 @@ function DetailResearch(){
                 .then(function(res) {
                     if(res){
                     showToast('success', 'Đăng kí thành công!');
-                    return window.location.href = 'http://localhost:3000/historyRegisterResearch';
+                    setTimeout(()=>{
+                        return window.location.href = 'http://localhost:3000/historyRegisterResearch';
+                    },2000)
 
                     } else{
                         showToast('error', 'Đăng kí thất bại!');

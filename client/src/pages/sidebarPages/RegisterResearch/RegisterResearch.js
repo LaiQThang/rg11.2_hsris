@@ -17,9 +17,9 @@ const cx = classNames.bind(Styles)
 function RegisterResearch() {
 	const [showYear,setShowYear] =  useState(false)
 	const [data,setData] = useState([])
+	const [dateCreate,setDateCreate] = useState('')
   	const [currentPage, setCurrentPage] = useState(1);
-	const [activeYear,setActiveYear] = useState('2024');
-	const [number,setNumber] = useState(0)
+	const [activeYear,setActiveYear] = useState('');
 	const auth = useAuth()
 	const tokenBearer = auth.getTokens()
 	const columns = useMemo(()=>[
@@ -93,84 +93,85 @@ function RegisterResearch() {
 	  const handleShowYear = ()=>{
 		setShowYear(!showYear)
 	}
+	useEffect(()=>{
+		fetchApi().then((data)=>{
+			setData(data.data)
+		})
+		fetchApiDateCreate().then((res)=>{
+			console.log(res);
+			setDateCreate(res)
+		})
+	},[])
+	
     const fetchApi = async ()=>{
        let result
 	   result = Result.getResearch(tokenBearer.access_token, activeYear)
 	   return result
     }
-	useEffect(()=>{
-		fetchApi().then((data)=>{
-			setData(data.data)
-		})
-	},[])
+	const fetchApiDateCreate = async ()=>{
+		let result
+		result = Result.getDateRegisterResearch(tokenBearer.access_token)
+		return result
+	 }
 	return (
 		<div className={cx('container')}>
 			<div className= {cx('table')}>
 				<div className={cx('header')}>Hướng nghiên cứu - Đăng ký</div>
 				<div className={cx('line')}></div>
-				<div className={cx('chose')}> 
-					<div className={cx('chose-year')}>
-						<div className={cx('text')}>Năm học</div>
-						<FontAwesomeIcon icon={showYear ? faAngleUp : faAngleDown} onClick={handleShowYear}/>
-					</div>
-					{
-						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
-						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
-						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>2023-2024</li>
-					</ul>)
-					}
-				</div>
 				<div className={cx('name')}>Danh sách đăng ký hướng nghiên cứu</div>
-				<div className={cx('grid')}>
-					<table {...getTableProps()}>
-						<thead>
-							{headerGroups.map(headerGroup => (
-					
-							<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-								<th>STT</th>
-								{headerGroup.headers.map(column => (
-								<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`}>{column.render("Header")}</th>
-								))}
-							</tr>
-							))}
-						</thead>
-						<tbody {...getTableBodyProps()}>
-							{rows.map((row,rowIndex) => {
-							prepareRow(row);
-							return (
-								<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
-									<td>{rowIndex + 1}</td>
-									{row.cells.map(cell => (
-										<td {...cell.getCellProps()} >
-											<Link to ={`/detailResearch/${row.original.id}`} key ={row.values.id} className={cx('link')}>
-												{cell.render('Cell')}
-											</Link>
-										</td>
+				{
+					dateCreate ? (<div className={cx('done-register')} >Bạn đã đăng kí hướng nghiên cứu</div>) : (
+						<><div className={cx('grid')}>
+						<table {...getTableProps()}>
+							<thead>
+								{headerGroups.map(headerGroup => (
+						
+								<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
+									<th>STT</th>
+									{headerGroup.headers.map(column => (
+									<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`}>{column.render("Header")}</th>
 									))}
 								</tr>
-							);
-							})}
-						</tbody>
-					</table>
-				</div>
-				<div className={cx('page-number')}>
-					<button className ={cx('button')} onClick={goToPreviousPage} disabled={currentPage === 1}>
-						<FontAwesomeIcon icon={faAngleLeft}/>
-					</button>
-					{Array.from({ length: totalPages }, (_, index) => (
-					<button
-						className ={cx(currentPage === index + 1 ? 'button-active' : 'button')}
-						key={index + 1}
-						onClick={() => handlePageChange(index + 1)}
-					>
-						{index + 1}
-					</button>
-					))}
-					<button className ={cx('button')} onClick={goToNextPage} disabled={currentPage === totalPages}>
-						<FontAwesomeIcon icon={faAngleRight}/>
-					</button>
-     			</div>
+								))}
+							</thead>
+							<tbody {...getTableBodyProps()}>
+								{rows.map((row,rowIndex) => {
+								prepareRow(row);
+								return (
+									<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
+										<td>{rowIndex + 1}</td>
+										{row.cells.map(cell => (
+											<td {...cell.getCellProps()} >
+												<Link to ={`/detailResearch/${row.original.id}`} key ={row.values.id} className={cx('link')}>
+													{cell.render('Cell')}
+												</Link>
+											</td>
+										))}
+									</tr>
+								);
+								})}
+							</tbody>
+						</table>
+					</div>
+					<div className={cx('page-number')}>
+						<button className ={cx('button')} onClick={goToPreviousPage} disabled={currentPage === 1}>
+							<FontAwesomeIcon icon={faAngleLeft}/>
+						</button>
+						{Array.from({ length: totalPages }, (_, index) => (
+						<button
+							className ={cx(currentPage === index + 1 ? 'button-active' : 'button')}
+							key={index + 1}
+							onClick={() => handlePageChange(index + 1)}
+						>
+							{index + 1}
+						</button>
+						))}
+						<button className ={cx('button')} onClick={goToNextPage} disabled={currentPage === totalPages}>
+							<FontAwesomeIcon icon={faAngleRight}/>
+						</button>
+					 </div></>
+					)
+				}
 			</div>
 		</div>
 	);

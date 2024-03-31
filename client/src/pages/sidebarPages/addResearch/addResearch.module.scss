@@ -12,10 +12,9 @@
         overflow: hidden;
         border-radius: 6px;
         .input-bottom{
-            input{
+            .text-area{
                 margin: 10px 0;
                 width: 100%;
-                padding: 2px;
             }
 
         }
@@ -37,6 +36,21 @@
             display:flex;
             justify-content: end;
             margin-top: 10px;
+            .disable{
+                flex-shrink: 0;
+                padding: 5px 15px;
+                border:none;
+                background-color: #3241A0;
+                color:#fff;
+                font-size: 16px;
+                border-radius: 3px;
+                text-align: center;
+                font-weight: 600;
+                line-height: 20px;
+                letter-spacing: 2.88px;
+                    cursor: no-drop;
+                    opacity: 0.4;
+            }
             .register{
                 flex-shrink: 0;
                 padding: 5px 15px;
