@@ -71,7 +71,8 @@ class DeTaiSinhVienModel extends ApiModel
                 {
                     ct_detai::create([
                         'idSV' => $val['idSV'],
-                        'idDT' => $detai->idDT
+                        'idDT' => $detai->idDT,
+                        'dateCreate' => now()->format('Y-m-d')
                     ]);
                 }
             }

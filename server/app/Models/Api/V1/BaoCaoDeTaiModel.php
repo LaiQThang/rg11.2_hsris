@@ -2,11 +2,12 @@
 
 namespace App\Models\Api\V1;
 
-use App\Models\Api\ApiModel;
-use App\Models\ct_baocaodetai;
+use Exception;
 use App\Models\detai;
 use App\Models\sinhvien;
-use Exception;
+use App\Models\baocaodetai;
+use App\Models\Api\ApiModel;
+use App\Models\ct_baocaodetai;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BaoCaoDeTaiModel extends ApiModel
@@ -51,8 +52,31 @@ class BaoCaoDeTaiModel extends ApiModel
         }
     }
 
-    public function addTienDo($request)
+    public function store($request)
     {
-        dd($request->all());
+        try{
+            $idDT = $request->idDT;
+            $idGV = $this->getidGV();
+            $timeArray = $request->timeArray;
+            $arr = [
+                'tinhTrang' => 0,
+                'idGV' => $idGV
+            ];
+
+            foreach($timeArray as $value)
+            {
+                $query = array_merge($arr, $value);
+                //Nếu ko có $idDT thì lưu fail
+                $result = baocaodetai::create($query);
+                ct_baocaodetai::create([
+                    'idDT' => $idDT,
+                    'idBC' => $result->idBC
+                ]);
+            }
+            return true;
+        }
+        catch(Exception $e){
+            return $e;
+        }
     }
 }
