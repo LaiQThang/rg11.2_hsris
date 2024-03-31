@@ -655,7 +655,6 @@ export const postAddCouoncil = async(tenHD, ngayCham,diaDiem, ghiChu,topicArr, t
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
-
 export const checkReport = async(idBC, tokenBearer)=>{
     try{
         const header = {
