@@ -111,7 +111,7 @@ Route::group([
         Route::post('/capnhatdiem', [GiaiThuongController::class, 'UpdatePoint']);
         Route::get('/list', [GiaiThuongController::class, 'ListCup']);
     });
-    
+
     Route::group([
         'middleware' => ['api'],
         'prefix' => 'valit'
@@ -119,6 +119,7 @@ Route::group([
         Route::get('/', [ValidateViewController::class, 'RegisterTopic']);
         Route::get('/research', [ValidateViewController::class, 'RegisterResearch']);
         Route::get('/researchTeacher', [ValidateViewController::class, 'Research']);
+        Route::get('/report', [ValidateViewController::class, 'checkReport']);
     });
 });
 
