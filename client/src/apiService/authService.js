@@ -170,7 +170,7 @@ export const getResearch = async(tokenBearer, year)=>{
                 y: year,
             }
         }
-        const res = await request.get('/v1/huongnghiencuu',header)
+        const res = await request.get('/v1/researchTeacher',header)
         return res.data
     }
     catch(e){

@@ -232,8 +232,8 @@ function TopicGroup() {
 														type="hidden" 
 														value={selectedStudent.id} // Giá trị của input
 													/>
-                                                    <button className={cx('btn-del')}  onClick={() => handleDeleteStudent(selectedStudent.id)}>Xóa</button>
-                                                </div>
+													<button className={cx('btn-del')}  onClick={() => handleDeleteStudent(selectedStudent.id)}>Xóa</button>
+												</div>
                                             ))
                                         )}
 									</div>

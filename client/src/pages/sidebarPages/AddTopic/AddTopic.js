@@ -21,8 +21,9 @@ function AddTopic() {
 	const[id,setId] = useState('')
 	const auth = useAuth()
 	const tokenBearer = auth.getTokens()
-	const year ='2024'
-	
+	const d = new Date();
+	const year = d.getFullYear();
+
 	const handleChangInput = (e) => {
 		const inputValue = e.target.value;
 		// Kiểm tra từng trường và cập nhật hiển thị thông báo tương ứng
