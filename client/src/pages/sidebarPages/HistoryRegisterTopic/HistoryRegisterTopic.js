@@ -52,7 +52,6 @@ function HistoryRegisterTopic() {
 		  icon: faCheckDouble
 		},
 	  ];
-
 	return (
 	<div className={cx('container')}>
 			<div className= {cx('table')}>
@@ -88,7 +87,7 @@ function HistoryRegisterTopic() {
 					<div className={cx('name')}>Chi tiết đề tài vừa đăng kí</div>
 						<div className={cx('line-1')}>
 							<div className={cx('research-name')}>
-								<div className={cx('text')}>Tên đề tài: </div>
+								<label className={cx('text')}>Tên đề tài: </label>
 								<div className={cx('content')}>{data.tenDT}</div>
 							</div>
 							<div className={cx('research-name-1')}>
@@ -99,7 +98,13 @@ function HistoryRegisterTopic() {
 						<div className={cx('line-2')}>
 							<div className={cx('research-name')}>
 								<div className={cx('text')}>Ngày hoàn thành: </div>
-								<div className={cx('content')}>{data.ngayHoanThanh}</div>
+								<div className={cx('content')}>{data.ngayHoanThanh ? data.ngayHoanThanh : 'Chưa hoàn thành'}</div>
+							</div>
+						</div>
+						<div className={cx('line-2')}>
+							<div className={cx('research-name')}>
+								<div className={cx('text')}>Đạt giải: </div>
+								<div className={cx('content', 'cup')}>{data.giai_thuong ? data.giai_thuong.tenGiai : 'Bạn chưa đạt giải'}</div>
 							</div>
 						</div>
 						<div className={cx('box')}>
@@ -118,10 +123,10 @@ function HistoryRegisterTopic() {
 							<div className={cx('text')}>Ghi chú</div>
 							<div className={cx('short')}>{data.nhanXet}</div>
 						</div>
-					<div className={cx('footer')}>
+					{/* <div className={cx('footer')}>
 						<div className={cx('time-out')}>Thời gian hủy trước ngày: 11/12/2023</div>
 						<button className={cx('destroy') }>Hủy</button>
-					</div>
+					</div> */}
 				</div>)
 		):  <div style={{textAlign :"center"}}>{`Không có dữ liệu của năm ${activeYear}`} </div>}
     			</div>

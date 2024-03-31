@@ -170,7 +170,28 @@ export const getResearch = async(tokenBearer, year)=>{
                 y: year,
             }
         }
-        const res = await request.get('/v1/researchTeacher',header)
+        const res = await request.get('/v1/huongnghiencuu',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const getResearch2 = async(tokenBearer, year)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+            params:{
+                y: year,
+            }
+        }
+        const res = await request.get('/v1/valit/researchTeacher',header)
         return res.data
     }
     catch(e){

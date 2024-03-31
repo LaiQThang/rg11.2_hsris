@@ -52,7 +52,7 @@ function AddTopic() {
 		})
 	},[])
 	const fetchApi = async()=>{
-		let result = Result.getResearch(tokenBearer.access_token, year)
+		let result = Result.getResearch2(tokenBearer.access_token, year)
 		return result
 	}
 	const handleGetId = (e)=>{

@@ -61,7 +61,7 @@ class CTDeTaiModel extends ApiModel
         $idSV = $this->getidSV();
         if( $idSV != null && $y != null){
             $user = sinhvien::find($idSV);
-            $history = $user->detailsDeTai()->whereYear('ngayLap', $y)->get()->toArray();
+            $history = $user->detailsDeTai()->with('giaiThuong')->whereYear('ngayLap', $y)->get()->toArray();
             return $history;
         }
         return null;
