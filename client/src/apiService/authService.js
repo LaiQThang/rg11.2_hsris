@@ -655,3 +655,24 @@ export const postAddCouoncil = async(tenHD, ngayCham,diaDiem, ghiChu,topicArr, t
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
+
+export const checkReport = async(idBC, tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+            data : {
+                idBC: idBC
+            }
+        }
+        const res = await request.get('/v1/valit/report', header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
