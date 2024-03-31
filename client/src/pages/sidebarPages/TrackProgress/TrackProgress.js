@@ -16,8 +16,7 @@ const cx = classNames.bind(styles);
 function TrackProgress() {
 	const auth = useAuth()
 	const tokenBearer = auth.getTokens()
-	const [showYear,setShowYear] =  useState(false)
-	const [activeYear,setActiveYear] = useState('2024');
+	const [selectedYear, setSelectedYear] = useState('2024');
 	const [data,setData] = useState([])
 	const [group,setGroup] = useState('')
 	const [fileChange, setFileChange] = useState(null);
@@ -35,12 +34,8 @@ function TrackProgress() {
 
 
 	const [file,selectedFile] = useState(null)
-
-	const handleShowYear = ()=>{
-		setShowYear(!showYear)
-	}
-	const handleActiveYear = (e)=>{
-			setActiveYear(e)
+	const handleYearChange = (e)=>{
+		setSelectedYear(e)
 	}
 	const handleHideLoadFile = ()=>{
 		setHideLoadFile(false)
@@ -126,10 +121,10 @@ function TrackProgress() {
 		feitchApi().then((res)=>{
 			setData(res.data);
 		})
-	},[activeYear])
+	},[selectedYear])
 	const dataGroup = data.filter(data=>data.tenBB === group)
 	const feitchApi = async()=>{
-		let result = Result.getTrackProgress(activeYear,tokenBearer.access_token)
+		let result = Result.getTrackProgress(selectedYear,tokenBearer.access_token)
 		return result
 	}
 	return (
@@ -140,20 +135,15 @@ function TrackProgress() {
 				<div className={cx('frame-container')}>
 					<div className={cx('frame-desc')}>
 						<div className={cx('text')}>Danh sách các tiến độ thực hiện đề tài</div>
-						<div className={cx('chose')}> 
-					<div className={cx('chose-year')}>
-						<div className={cx('text')}>Năm học</div>
-						<FontAwesomeIcon icon={showYear ? faAngleUp : faAngleDown} onClick={handleShowYear}/>
-					</div>
-					{
-						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
-						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
-						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>2023-2024</li>
-					</ul>)
-					}
-					</div>
-					</div>
+						<div className={cx('frame-year')}>
+							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
+								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
+								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
+							</select>
+						</div>
+						</div>
 
 					<div className={cx('border')}>
 						<div className={cx('content')}>
