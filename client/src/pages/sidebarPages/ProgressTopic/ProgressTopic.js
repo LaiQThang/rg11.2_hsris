@@ -30,6 +30,7 @@ function ProgressTopic() {
 	const [message,setMessage] = useState('')
 	const [successSubmitForm,setSuccessSubmitForm] = useState(false)
 	const [year,setYear]=useState('2024')
+	const [check,setCheck]=useState(false);
 	const auth = useAuth()
 	const tokenBear = auth.getTokens()
 	const itemsPerPage = 8;
@@ -173,8 +174,8 @@ function ProgressTopic() {
 				if(row.original.tinhTrang === 1){
 				};
 				return (
-						<button className = {cx('button')} onClick = {()=>row.original.tinhTrang === 0 ? handleSubmitReport(value) : ''}>
-							{row.original.tinhTrang === 1 ? 'Đã nộp' : 'Nộp'}
+						<button className = {cx('button')} onClick = {()=>handleSubmitReport(value) }>
+							{check === 0 ? 'Đã nộp' : 'Nộp'}
 						</button>
 				)
 			}
@@ -206,11 +207,16 @@ function ProgressTopic() {
         fetchApi().then((res)=>{
 			setData(res.data);
 		})
+
     },[])
 	const fetchApi = async ()=>{
             const res = Result.getProgressTopic('2024',tokenBear.access_token)
 			return res
     }
+	const fetchApi2 = async ()=>{
+		const res = Result.checkReport( selectedRow,tokenBear.access_token)
+		return res
+}
 	return (
 		<div className={cx('container')}>
 			<ToastContainer/>

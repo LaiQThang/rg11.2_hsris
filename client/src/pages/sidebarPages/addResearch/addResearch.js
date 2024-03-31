@@ -13,14 +13,41 @@ const cx = classNames.bind(Styles)
 
 function addResearch() {
 	const [data, setData] = useState([])
-	const [teacher,setTeacher] = useState([]) 
+	const [teacher,setTeacher] = useState([])
+	const [num, setNum] = useState('');
+	const [submit, setSubmit] = useState(false)
 	const [id ,setId] = useState('')
-	const { register, handleSubmit, reset, watch } = useForm()
+	const { register, handleSubmit, reset, watch,setValue } = useForm()
 	const auth = useAuth()
 	const tokenBearer = auth.getTokens()
+	const currentDate = new Date().toISOString()
 	const handleGetId = (e) =>{
 		setId(e.target.value)
 	}
+	const handleChangeDate = (event) => {
+		const inputNum = event.target.value;
+		if (inputNum >= currentDate) {
+			setValue("dateCreated",inputNum)
+			setSubmit(true)
+		}
+		else{
+			setSubmit(false)
+			showToast('error','Ngày tạo phải lớn hơn hoặc bằng ngày hiện tại')
+		}
+	};
+	const handleChangeNumber = (event) => {
+		const inputNum = event.target.value;
+		if(inputNum !== ''){
+			if (!isNaN(inputNum) && inputNum >= 5 && inputNum <= 9) {
+						setValue("quantity",inputNum)
+						setSubmit(true)
+					}
+					else{
+						setSubmit(false)
+						showToast('error','Số nhập vào phải từ 5 đến 9')
+					}
+		}
+	};
 	// const handleSubmitForm = () => {
 	// 	const fetchApi = async () => {
 	// 		let result;
@@ -31,9 +58,9 @@ function addResearch() {
 	console.log(id);
 	const onSubmit = async (data) => {
 		// async request which may result error
+		console.log(data);
 		try {
 			// await fetch()
-			console.log(data);
 
 			const result = await Result.updateResearch(data, tokenBearer.access_token);
 			if (result) {
@@ -60,7 +87,6 @@ function addResearch() {
 		result = await Result.getNameTeacher(tokenBearer.access_token)
 		return result
 	}
-	console.log(watch('id'))
 	return (
 		<div className={cx('container')}>
 			<ToastContainer />
@@ -71,6 +97,7 @@ function addResearch() {
 					<div className={cx('name')}>Thêm hướng nghiên cứu</div>
 					<div className={cx('teacher-chose')}>Chọn giảng viên hướng dẫn</div>
 					<select className={cx('option')} onChange={handleGetId} {...register('idGV')}>
+						<option>--Chọn giảng viên hướng dẫn--</option>
 						{
 							teacher.map(data=>(<option key ={data.id}  value={data.idGV} className={cx('data-option')} >{data.tenGV}</option>))
 						}
@@ -82,27 +109,27 @@ function addResearch() {
 						</div>
 						<div className={cx('research-name')}>
 							<div className={cx('text')}>Ngày tạo: </div>
-							<input type='date' {...register("dateCreated")} required/>
+							<input type='date' onChange={handleChangeDate} required/>
 						</div>
 					</div>
 					<div className={cx('line-2')}>
 						<div className={cx('research-name')}>
 							<div className={cx('text')}>Số lượng người tham gia: </div>
-							<input type='text' {...register("quantity")} required/>
+							<input type="number" onChange={handleChangeNumber} required/>
 						</div>
 					</div>
 					<div className={cx('input-bottom')}>
 						<div className={cx('text')}>Tóm tắt</div>
-						<input type='text' {...register("summary")} required/>
+						<textarea className={cx('text-area')} type='text' {...register("summary")} required/>
 						<div className={cx('text')}>Mục tiêu</div>
-						<input type='text' {...register("target")} required/>
+						<textarea className={cx('text-area')} type='text' {...register("target")} required/>
 						<div className={cx('text')}>Phạm Vi</div>
-						<input type='text' {...register("limit")} required/>
+						<textarea className={cx('text-area')} type='text' {...register("limit")} required/>
 						<div className={cx('text')}>Ghi chú</div>
-						<input type='text' {...register("note")} required/>
+						<textarea className={cx('text-area')} type='text' {...register("note")} required/>
 					</div>
-					<div className={cx('footer')}>
-						<button className={cx('register')}>Thêm</button>
+					<div className={cx('footer')} >
+						<button className={cx(submit ? 'register' : 'disable')}>Thêm</button>
 					</div>
 				</div>
 			</form>
