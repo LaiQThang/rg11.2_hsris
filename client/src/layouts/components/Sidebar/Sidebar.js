@@ -115,7 +115,6 @@ function Sidebar() {
 					{
 						permission === 'giangvien' && (
 							<>
-							<ParentMenuItem text="Giáo Viên"></ParentMenuItem>
 					<ParentMenuItem icon={faBox} text="Quản Lý Chung">
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Phân Nhóm Đề Tài'} to={config.routes.topicGroup} />
@@ -144,7 +143,6 @@ function Sidebar() {
 					{
 						permission === 'admin' && (
 							<>
-							<ParentMenuItem text="Quản Trị Viên"></ParentMenuItem>
 					<ParentMenuItem icon={faBox} text="Quản Lý HNC">
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Phân Công Giảng Viên'} to={config.routes.appointmentOfTeacher} />

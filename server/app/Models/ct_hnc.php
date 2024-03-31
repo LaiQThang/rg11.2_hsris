@@ -23,6 +23,7 @@ class ct_hnc extends Model
         'idHNC',
         'idGV',
         'idSV',
+        'dateCreate'
     ];
 
     protected static function boot()

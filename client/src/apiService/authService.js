@@ -167,10 +167,10 @@ export const getResearch = async(tokenBearer, year)=>{
                 'Authorization': `Bearer ${tokenBearer}`
             },
             params:{
-                year: year,
+                y: year,
             }
         }
-        const res = await request.get('/v1/huongnghiencuu',header)
+        const res = await request.get('/v1/researchTeacher',header)
         return res.data
     }
     catch(e){
@@ -359,7 +359,7 @@ export const getNameTeacher = async(tokenBearer)=>{
 // thang
 
 
-export const postTopicGroup = async(data, tokenBearer )=>{
+export const postTopicGroup = async(name, note ,contents,listStudents,HNC, tokenBearer )=>{
     try{
         const header = {
 
@@ -369,7 +369,15 @@ export const postTopicGroup = async(data, tokenBearer )=>{
                  'Authorization': `Bearer ${tokenBearer}`
             },
         }
-        const res = await request.get('/v1/bienbanphancong', data,header)
+        const data = {
+            name: name,
+            note: note,
+            contents: contents,
+            students: listStudents,
+            HNC: HNC,
+
+        }
+        const res = await request.post('/v1/bienbanphancong', data,header)
         return res.data
     }
     catch(e){
@@ -621,7 +629,66 @@ export const getTopicNoCouncil = async(tokenBearer, year)=>{
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
+export const getHistoryRegisterResearch = async(year,tokenBearer)=>{
+    try{
+        const header = {
 
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+            params:{
+                y: year,
+            }
+
+        }
+        const res = await request.get('/v1/hncsinhvien/1',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const getHistoryRegisterTopic = async(year,tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+            params:{
+                y: year,
+            }
+
+        }
+        const res = await request.get('/v1/ct-detai',header)
+        console.log(res);
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const getDateRegisterResearch = async(tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+        }
+        const res = await request.get('/v1/valit',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
 export const postAddCouoncil = async(tenHD, ngayCham,diaDiem, ghiChu,topicArr, teacherArr, tokenBearer )=>{
     try{
         const array = {
@@ -641,6 +708,46 @@ export const postAddCouoncil = async(tenHD, ngayCham,diaDiem, ghiChu,topicArr, t
             },
         }
         const res = await request.post('/v1/hoidong', array,header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const checkReport = async(idBC, tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+            data : {
+                idBC: idBC
+            }
+        }
+        const res = await request.get('/v1/valit/report', header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
+export const getValiResearch= async(tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const res = await request.get('/v1/valit/research',header)
         return res.data
     }
     catch(e){

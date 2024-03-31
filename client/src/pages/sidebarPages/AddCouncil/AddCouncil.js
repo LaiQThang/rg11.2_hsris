@@ -21,12 +21,12 @@ function AddCouncil() {
 	const [gradingDate, setGradingDate] = useState('')
 	const [address, setAddress] = useState('')
 	const [note, setNote] = useState('')
-	const [idTopic, setIDTopic] = useState([])
 	const [idTeacher, setIDTeacher] = useState([])
 
 	const [arrTopic, setArrTopic] = useState([])
 	const [arrTeacher, setArrTeacher] = useState([])
-
+	const [showTeacherNotify, setShowTeacherNotify] = useState(false);
+    const [showTopicNotify, setShowTopicNotify] = useState(false);
 	const handleYearChange = (event) => {
         const selectedYearValue = event.target.value;
         setSelectedYear(selectedYearValue);
@@ -35,9 +35,13 @@ function AddCouncil() {
 	const handleChangeCouncil = (e) => {
 		setNameCouncil(e.target.value)
 	}
+	const checkNotify = () => {
+        setShowTeacherNotify(arrTeacher.length === 0);
+        setShowTopicNotify(arrTopic.length === 0);
+    };
 	useEffect(()=>{
-		console.log(idTopic);
-	},[idTopic])
+		checkNotify()
+	},[arrTeacher, arrTopic])
 	const handleChangeAddress = (e) => {
 		setAddress(e.target.value)
 	}
@@ -63,7 +67,6 @@ function AddCouncil() {
 
 	//them topic
 	const handleAddTopic = (id)=> {
-		setIDTopic(id);
 		if (arrTopic.length === 0) {
 			setArrTopic([id]);
 		} else {
@@ -191,7 +194,7 @@ function AddCouncil() {
 								</div>
 							</div>
 
-							<div className={cx('content-list-card')}>
+							{/* <div className={cx('content-list-card')}>
 								<div className={cx('content-item-card')}>
 								<div className={cx('item')}>
                                     <div className={cx('item-title')}>Tìm Kiếm Giảng Viên</div>
@@ -207,7 +210,7 @@ function AddCouncil() {
                                     </div>
                                 </div>
 							</div>
-							</div>
+							</div> */}
 
 							<div className={cx('content-list-card')}>
 								<div className={cx('content-item-card')}>
@@ -229,7 +232,7 @@ function AddCouncil() {
 								<div className={cx('content-item-card')}>
 								<div className={cx('item-wrap')}>
                                 <div className={cx('item-title')}>Giảng viên được chọn(*)</div>
-                                <div className={cx('notify')}>Giảng viên không được để trống</div>
+                                {showTeacherNotify && <div className={cx('notify')}>Giảng viên không được để trống</div>}
 										{dataTeacher.filter(valueTeacher => arrTeacher.includes(valueTeacher.idGV)).map(selectedTeacher => (
 											<div key={selectedTeacher.idGV} className={cx('item-child')}>
 												<div className={cx('item-content')}>
@@ -266,7 +269,7 @@ function AddCouncil() {
 								<div className={cx('content-item-card')}>
 								<div className={cx('item-wrap')}>
                                 <div className={cx('item-title')}>Đề Tài được chọn(*)</div>
-                                <div className={cx('notify')}>Đề Tài không được để trống</div>
+                                {showTopicNotify && <div className={cx('notify')}>Đề Tài không được để trống</div>}
 										{dataTopic.filter(valueTopic => arrTopic.includes(valueTopic.id)).map(selectedTopic => (
 											<div key={selectedTopic.id} className={cx('item-child')}>
 												<div className={cx('item-content')}>

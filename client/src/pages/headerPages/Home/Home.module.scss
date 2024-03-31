@@ -57,3 +57,9 @@
 .img-logo {
 	width: 100%;
 }
+
+@media (max-width:743px) {
+	.inner{
+		max-width: 450px;
+	}
+}

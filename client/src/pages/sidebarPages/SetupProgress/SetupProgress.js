@@ -16,7 +16,7 @@ function SetupProgress() {
 	const [idGroupName, setIDGroupName] = useState('')
 	const [idTopic, SetIDTopic] = useState('')
 	const [progressList, setProgressList] = useState([]); // State để lưu trữ danh sách các đợt tiến độ
-
+	const [checkSubmit, setCheckSubmit] = useState(false)
 	
 	const handleYearChange = (event) => {
         const selectedYearValue = event.target.value;
@@ -55,6 +55,7 @@ function SetupProgress() {
 
 	//Add Progress
 	const handleAddProgress = () => {
+		setCheckSubmit(false)
 		// Thêm một đợt tiến độ mới vào danh sách
 		setProgressList(prevList => [...prevList, { nameReport: '', startDate: '', endDate: '' }]);
 	  };
@@ -86,6 +87,8 @@ function SetupProgress() {
 		newList[index].nameReport = event.target.value
     	setProgressList(newList)
 	}
+
+	//Nut Luu
 	const handleSubmit = () =>{
 		const show = window.confirm("Bạn có chắc chắn với lựa chọn này?");
 		if (show) {
@@ -106,6 +109,8 @@ function SetupProgress() {
 				posthApi()
 					.then((res) => {
 						if (res) {
+							setCheckSubmit(true)
+							setProgressList([]);
 							showToast('success', 'Đăng kí thành công!');
 						} else {
 							showToast('error', 'Đăng kí thất bại!');
@@ -157,11 +162,10 @@ function SetupProgress() {
 						<div className={cx('text')}>Danh sách sinh viên đăng ký hướng nghiên cứu</div>
 						<div className={cx('frame-year')}>
 							<select className={cx('year')} id="year" name="year" onClick={handleYearChange}>
-								<option className={cx(selectedYear === '2020' && 'year-active')} value="2020">2020-2021</option>
-								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2021-2022</option>
-								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2022-2023</option>
-								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2023-2024</option>
-								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2024-2025</option>
+								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
+								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
 							</select>
 						</div>
 					</div>
@@ -196,7 +200,7 @@ function SetupProgress() {
 														return (
 														<div
 															key={newData.id} 
-															className={cx('item-text')}>{newData.id}</div>
+															className={cx('item-text')}>{newData.name}</div>
 														);
 													} else {
 														return null; 
@@ -216,8 +220,8 @@ function SetupProgress() {
 									<div className={cx('progress-title')}>Tiến độ</div>
 									<button onClick={handleAddProgress} className={cx('btn-add')}>+</button>
 								</div>
-								<div  className={cx('border')}>
-								{progressList.map((progress, index) => (
+								{checkSubmit ? (<div></div>):(<div  className={cx('border')}>
+									{progressList.map((progress, index) => (
 									<div key={index}className={cx('progress-timeline')}>
 										<div className={cx('progress-item-card')}>
 												<div className={cx('item-title')}>Tên Báo Cáo</div>
@@ -243,7 +247,7 @@ function SetupProgress() {
 										</div>
 									</div>
 								))}
-									</div>
+									</div>)}
 
 								<div className={cx('btn-container')}>
 									<button onClick={handleSubmit} className={cx('btn-submit')}>Lưu</button>

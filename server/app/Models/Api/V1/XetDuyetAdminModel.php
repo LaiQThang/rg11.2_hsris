@@ -17,19 +17,19 @@ class XetDuyetAdminModel extends Model
             if($id = request()->i)
             {
                 $res = huongnghiencuu::with(['deTai' => function ($query)  {
-                    $query->where('trangThaiGV', '=', '1');
+                    $query->where('trangThaiGV', '=', '1')->whereNotNull('idBB');
                 }])->whereYear('ngayTao', request()->y)->where('idHNC', $id)->has('deTai')->get();
             }
             else
             {
                 $res = huongnghiencuu::with(['deTai' => function ($query)  {
-                    $query->where('trangThaiGV', '=', '1');
+                    $query->where('trangThaiGV', '=', '1')->whereNotNull('idBB');
                 }])->whereYear('ngayTao', request()->y)->has('deTai')->get();
             }
             return $res;
         }
         catch(Exception $e){
-            return false;
+            return $e;
         }
     }
 }

@@ -16,17 +16,19 @@ import { useForm } from "react-hook-form";
 const cx = classNames.bind(Styles)
 
 function RegisterTopic() {
-	const [showYear,setShowYear] =  useState(false)
+	const currentYear = new Date().getFullYear();
 	const [data,setData] = useState([])
   	const [currentPage, setCurrentPage] = useState(1);
-	const [activeYear,setActiveYear] = useState('2024')
 	const [activeChose,setActiveChosse] = useState('recommend')
 	const [getId,setGetId] = useState(null)
 	const topicId = data.filter(data=>data.id === getId)
 	const auth = useAuth()
 	const tokenBearer = auth.getTokens()
-	const year = activeYear
 	const {register,handleSubmit,reset,watch} = useForm()
+
+	const [checked,setChecked] = useState(true)
+	const [checkedValiResearch,setCheckedValiResearch] = useState(false)
+
 	const columns = useMemo(()=>[
 		{
 			Header: "Tên đề tài",
@@ -79,9 +81,7 @@ function RegisterTopic() {
 		rows,
 		prepareRow,
 	  } = useTable({ columns, data: displayedData});
-	const handleActiveYear = (e)=>{
-		setActiveYear(e)
-	}
+
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
 	  };
@@ -115,17 +115,28 @@ function RegisterTopic() {
 				setCurrentPage(prevPage + 1)
 		});
 	};
-	  const handleShowYear = ()=>{
-		setShowYear(!showYear)
-	}
+
 	useEffect(()=>{
         fetchApi();
+		fetchApiValiResearch()
     },[])
     const fetchApi = async ()=>{
 		let result
-		result = await Result.registerTopic(tokenBearer.access_token,year)
+		result = await Result.registerTopic(tokenBearer.access_token,currentYear)
 		setData(result.data)
+		if(data.length > 0){
+			setChecked(false)
+		}
+		else{
+			setChecked(true)
+		}
 	}
+	//check du lieu sinh vien da dang ky chua
+	const fetchApiValiResearch = async ()=>{
+		setCheckedValiResearch(await Result.getValiResearch(tokenBearer.access_token))
+		return checkedValiResearch
+	}
+
 	console.log(data)
 	return (
 		<div className={cx('container')}>
@@ -133,58 +144,47 @@ function RegisterTopic() {
 			<div className= {cx('table')}>
 				<div className={cx('header')}>Quản lý đề tài - Đăng ký đề tài</div>
 				<div className={cx('line')}></div>
-				<div className={cx('chose')}> 
-					<div className={cx('chose-year')}>
-						<div className={cx('text')}>Năm học</div>
-						<FontAwesomeIcon icon={showYear ? faAngleUp : faAngleDown} onClick={handleShowYear}/>
-					</div>
-					{
-						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
-						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
-						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>2023-2024</li>
-					</ul>)
-					}
-				</div>
-				<div className={cx('grid')}>
+				{checkedValiResearch ? (<div className={cx('checkedValiResearch')}>Bạn đã đăng ký đề tài rồi !</div>) : (<div className={cx('grid')}>
 				<div className={cx('name')}>
 					<div className={cx(activeChose === 'recommend' ? 'active' : 'topic')} onClick ={()=>handleActiveChose('recommend')}>Gợi ý đề tài</div>
 					<div className={cx(activeChose === 'register' ? 'active' : 'topic')} onClick ={()=>handleActiveChose('register')}>Đăng ký đề tài</div>
 				</div>
 				{
-					activeChose === 'recommend' ? (
+					activeChose === 'recommend' ? ( checked === true ? (<div className={cx('message')}>Hiện chưa có đề tài gợi ý!</div>) : (
 						<div className={cx('table-content')}>
-							<table {...getTableProps()}>
-							<thead>
-								{headerGroups.map(headerGroup => (
-								<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-									<th>STT</th>
-									{headerGroup.headers.map(column => (
-									<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`} >{column.render("Header")}</th>
-									))}
-								</tr>
-								))}
-							</thead>
-							<tbody {...getTableBodyProps()}>
-								{rows.map((row,rowIndex)=> {
-								prepareRow(row);
-								return (
-									<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
-										<td>{rowIndex + 1}</td>
-										{row.cells.map(cell => (
-											<td {...cell.getCellProps()} >
-												<Link className={cx('link')} to ={`/detailTopic/${row.original.id}`}>
-													{cell.render('Cell')}
-												</Link></td>
+								<table {...getTableProps()}>
+								<thead>
+									{headerGroups.map(headerGroup => (
+									<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
+										<th>STT</th>
+										{headerGroup.headers.map(column => (
+										<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`} >{column.render("Header")}</th>
 										))}
 									</tr>
-								);
-								})}
-							</tbody>
-						</table>
-						</div>) : (
+									))}
+								</thead>
+								<tbody {...getTableBodyProps()}>
+									{rows.map((row,rowIndex)=> {
+									prepareRow(row);
+									return (
+										<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
+											<td>{rowIndex + 1}</td>
+											{row.cells.map(cell => (
+												<td {...cell.getCellProps()} >
+													<Link className={cx('link')} to ={`/detailTopic/${row.original.id}`}>
+														{cell.render('Cell')}
+													</Link></td>
+											))}
+										</tr>
+									);
+									})}
+								</tbody>
+							</table>
+						</div>
+					)
+							) : (
 							<div>
-								<form className={cx('register-topic')} key ={data.id}>
+								<form className={cx('register-topic')} key ={data.id} onSubmit={handleSubmit(handleShowNotification)}>
 									<div className={cx('text-register-topic')}>Điền đầy đủ thông tin dưới đây</div>
 									<div className={cx('box')}>
 										<div className={cx('text')}>Tên đề tài:</div>
@@ -207,16 +207,15 @@ function RegisterTopic() {
 										<input className={cx('short')} type='text' id='name' {...register('comment')} required/>
 									</div>
 									<div className={cx('footer')}>
-										<div className={cx('register')}  onClick={handleSubmit(handleShowNotification)}>Thêm đề tài</div>
+										<button className={cx('register')}>Thêm đề tài</button>
 									</div>
 								</form>
 							</div>
 							
 						)
 				}
-				</div>
-				{
-					activeChose === 'recommend' ? (<div className={cx('page-number')}>
+				</div>)}
+				{checkedValiResearch ? (<div></div>) : (<div>{activeChose === 'recommend' ? (checked ? (<div></div>) : (<div className={cx('page-number')}>
 					<button className ={cx('button')} onClick={goToPreviousPage} disabled={currentPage === 1}>
 						<FontAwesomeIcon icon={faAngleLeft}/>
 					</button>
@@ -232,9 +231,9 @@ function RegisterTopic() {
 					<button className ={cx('button')} onClick={goToNextPage} disabled={currentPage === totalPages}>
 						<FontAwesomeIcon icon={faAngleRight}/>
 					</button>
-     			</div>) : (<div>
-				</div>)
-				}
+     				</div>)) : (<div></div>)
+				}</div>)}
+				
 			</div>
 		</div>
 	);

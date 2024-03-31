@@ -26,13 +26,15 @@ class HNCSinhVienModel extends ApiModel
                 $arr = [
                     'idHNC' => $request->idHNC,
                     'idGV' => ct_hncgv::where('idHNC', $request->idHNC)->first('idGV')->toArray()["idGV"],
-                    'idSV' => $request->idSV
+                    'idSV' => $request->idSV,
+                    'dateCreate' => now()->format('Y-m-d')
                 ];
                 ct_hnc::create($arr);
             }
             else{
                 $res->update([
-                    'idSV' => $request->idSV
+                    'idSV' => $request->idSV,
+                    'dateCreate' => now()->format('Y-m-d')
                 ]);
             }
             ct_hncsv::create($request->all());

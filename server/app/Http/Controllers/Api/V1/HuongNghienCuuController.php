@@ -38,8 +38,7 @@ class HuongNghienCuuController extends Controller
             $huongnghiencuu = $huongnghiencuu->whereYear('ngayTao', $filterYear);
         }
 
-        
-        return new HuongNghienCuuCollection($huongnghiencuu->paginate(5)->appends($request->query()));
+        return new HuongNghienCuuCollection($huongnghiencuu->get());
     }
 
     /**
@@ -67,7 +66,7 @@ class HuongNghienCuuController extends Controller
             ct_hncgv::create($arr2);
             return new HuongNghienCuuResource($res);
         }catch(QueryException $e){
-            return response()->json(["message" => "Error"], 500);
+            return response()->json(["message" => $e->getMessage()], 500);
         }
     }
 
