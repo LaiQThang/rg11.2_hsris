@@ -22,6 +22,7 @@ class ct_detai extends Model
         'id',
         'idDT',
         'idSV',
+        'dateCreate',
     ];
 
     protected static function boot()
