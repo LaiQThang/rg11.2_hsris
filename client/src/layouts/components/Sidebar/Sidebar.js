@@ -154,9 +154,9 @@ function Sidebar() {
 					</ParentMenuItem>
 					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
 						<div className={cx('menu-frame')}>
-							<MenuItem title={'Thêm HNC'} to={config.routes.addResearch} />
-							<MenuItem title={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
-							<MenuItem title={'Xét giải'} to={config.routes.awardReview} />
+							<MenuItem text={'Thêm HNC'} to={config.routes.addResearch} />
+							<MenuItem text={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
+							<MenuItem text={'Xét giải'} to={config.routes.awardReview} />
 						</div>
 					</ParentMenuItem>
 							</>
