@@ -27,6 +27,7 @@ function reviewTopic() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(()=>{
 		const dataOne = data.filter(data=>data.id === idHNC)
+		console.log(dataOne);
 		if(dataOne.length > 0){
 			const topics = dataOne[0].topic;
 			const newIdNameArray = topics.map(topic => ({

@@ -74,9 +74,6 @@ function RegisterResearch() {
 		rows,
 		prepareRow,
 	  } = useTable({ columns, data: displayedData },useBlockLayout);
-	const handleActiveYear = (e)=>{
-		setActiveYear(e)
-	}
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
 	  };

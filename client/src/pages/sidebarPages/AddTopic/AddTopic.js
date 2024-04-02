@@ -102,6 +102,7 @@ function AddTopic() {
 												onChange={handleGetId}
 												{...register('idHNC')}
 											>
+												<option>--Chọn HNC--</option>
 												{
 													dataHNC.map(data=>(
 														<option key ={data.id} value={data.id}>{data.name}</option>

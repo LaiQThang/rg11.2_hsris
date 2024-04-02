@@ -143,15 +143,11 @@
                     margin-bottom: 2%;
                 }
                 .box{
-                    display:flex;
-                    align-items: center;
                     .text{
                         color: #000;
                         font-size: 16px;
                         font-weight: 700;
                         line-height: 24px;
-                        width:20%;
-                        padding:0 15px;
                     }
                     .short{
                         margin: 20px 0;
@@ -264,4 +260,33 @@
     color: #ea0c0c;
     font-weight: 700;
     padding: 100px 0;
+}
+@media (max-width : 743px) {
+    .box{
+        display:flex;
+        flex-direction: column;
+        .text{
+            width:100%;
+        }
+    }
+}
+@media (min-width : 744px) and (max-width : 1023px){
+    .box{
+        display:flex;
+        align-items: center;
+        padding:0 15px;
+        .text{
+            width:30%;
+        }
+    }
+}
+@media (min-width : 1024px) {
+    .box{
+        display:flex;
+        align-items: center;
+        padding:0 15px;
+        .text{
+            width:20%;
+        }
+    }
 }

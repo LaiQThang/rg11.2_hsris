@@ -56,7 +56,7 @@ function DetailTopic(){
                 <div className={cx('text')}>Phạm Vi</div>
                 <div className={cx('short')}>{data.limit}</div>
                 <div className={cx('text')}>Ghi chú</div>
-                <div className={cx('short')}>{data.note}</div>
+                <div className={cx('short')}>{data.note ? data.note : 'Không có ghi chú'}</div>
                 <div className={cx('footer')}>
                     <button className={cx('register') } onClick = {handlesShowNotification}>Đăng ký</button>
                 </div>

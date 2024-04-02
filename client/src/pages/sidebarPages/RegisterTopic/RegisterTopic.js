@@ -26,7 +26,7 @@ function RegisterTopic() {
 	const tokenBearer = auth.getTokens()
 	const {register,handleSubmit,reset,watch} = useForm()
 
-	const [checked,setChecked] = useState(true)
+	const [checked,setChecked] = useState(false)
 	const [checkedValiResearch,setCheckedValiResearch] = useState(false)
 
 	const columns = useMemo(()=>[
@@ -58,7 +58,7 @@ function RegisterTopic() {
 	],[])
 	const isSmallScreen = useMediaQuery({ maxWidth: 713 });
 	const isLargeSmallScreen = useMediaQuery({ minWidth: 714, maxWidth: 846 });
-  	const isMediumScreen = useMediaQuery({ minWidth: 847, maxWidth: 1023 });
+  	const isMediumScreen = useMediaQuery({ minWidth: 847, maxWidth: 1200 });
     if (isSmallScreen) {
       columns.splice(2,3)
     }
@@ -117,19 +117,15 @@ function RegisterTopic() {
 	};
 
 	useEffect(()=>{
-        fetchApi();
+        fetchApi().then((res)=>{
+			setData(res.data)
+		});
 		fetchApiValiResearch()
     },[])
     const fetchApi = async ()=>{
 		let result
 		result = await Result.registerTopic(tokenBearer.access_token,currentYear)
-		setData(result.data)
-		if(data.length > 0){
-			setChecked(false)
-		}
-		else{
-			setChecked(true)
-		}
+		return result
 	}
 	//check du lieu sinh vien da dang ky chua
 	const fetchApiValiResearch = async ()=>{
@@ -150,7 +146,7 @@ function RegisterTopic() {
 					<div className={cx(activeChose === 'register' ? 'active' : 'topic')} onClick ={()=>handleActiveChose('register')}>Đăng ký đề tài</div>
 				</div>
 				{
-					activeChose === 'recommend' ? ( checked === true ? (<div className={cx('message')}>Hiện chưa có đề tài gợi ý!</div>) : (
+					activeChose === 'recommend' ? ( data.length > 0  ? (
 						<div className={cx('table-content')}>
 								<table {...getTableProps()}>
 								<thead>
@@ -181,7 +177,7 @@ function RegisterTopic() {
 								</tbody>
 							</table>
 						</div>
-					)
+					) : (<div className={cx('message')}>Hiện chưa có đề tài gợi ý!</div>)
 							) : (
 							<div>
 								<form className={cx('register-topic')} key ={data.id} onSubmit={handleSubmit(handleShowNotification)}>
