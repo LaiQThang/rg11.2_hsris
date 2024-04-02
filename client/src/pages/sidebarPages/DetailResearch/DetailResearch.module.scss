@@ -23,6 +23,12 @@
             padding: 4px 15px;
             font-weight: 400;
             line-height: 150%;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 3;
+            line-clamp: 3; 
         }
         .footer{
             width: 100%;
@@ -118,9 +124,27 @@
         }
     }
 }
-@media (max-width: 1023px) and (min-width: 744px) {
+@media (max-width: 1023px) and (min-width: 892px) {
     .table{
         width: 90%;
+        .text{
+            font-size: 16px;
+        }
+        .content{
+            font-size: 14px;
+        }
+        .short{
+            font-size: 13px;
+        }
+    }
+    
+}
+@media (max-width: 892px) and (min-width: 744px) {
+    .table{
+        width: 90%;
+        .research-name{
+            flex-direction: column;
+        }
         .text{
             font-size: 16px;
         }
@@ -137,6 +161,9 @@
 @media (max-width: 743px) {
 	.table{
         width: 90%;
+        .research-name{
+            flex-direction: column;
+        }
         .text{
             font-size: 15px;
         }
@@ -145,12 +172,6 @@
         }
         .short{
             font-size: 13px;
-            text-decoration: none;
-                -webkit-box-orient: vertical;
-                display: -webkit-box;
-                overflow: hidden;
-                -webkit-line-clamp: 3; /* Number of lines to show */
-                line-clamp: 3; 
         }
     }
 }

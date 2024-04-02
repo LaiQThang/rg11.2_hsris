@@ -38,7 +38,7 @@ function ApprovalTopic() {
 				<div className={cx('name-page')}>Quản lý chung - Đề tài chờ duyệt</div>
 				<div className={cx('frame-container')}>
 					<div className={cx('frame-desc')}>
-						<div className={cx('text')}>Thêm đề tài</div>
+						<div className={cx('text')}>Đề tài chờ duyệt</div>
 						<div className={cx('frame-year')}>
 							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
 								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
