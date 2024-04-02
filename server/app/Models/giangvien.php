@@ -122,7 +122,7 @@ class giangvien extends Authenticatable implements JWTSubject
 
     public function hoidong() : BelongsToMany
     {
-        return $this->belongsToMany(hoidong::class, 'ct_hoidongGV', 'idGV', 'idHD');
+        return $this->belongsToMany(hoidong::class, 'ct_hoidonggv', 'idGV', 'idHD');
     }
 
     public function permissionId() : BelongsTo
