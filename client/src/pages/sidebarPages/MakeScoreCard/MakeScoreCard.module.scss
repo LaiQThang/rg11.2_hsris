@@ -166,6 +166,7 @@ td {
 .table-header-row {
 	background-color: rgba(243, 128, 32, 0.1);
 	border-bottom: 2px solid #f38020;
+	text-align: center;
 }
 
 .table-header-cell {
@@ -198,7 +199,13 @@ td {
 	border: none;
 	background: #1b2c95;
 }
-
+.name-topic{
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 
 //responsive

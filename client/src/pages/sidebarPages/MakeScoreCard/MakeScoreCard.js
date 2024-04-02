@@ -49,7 +49,10 @@ function MakeScoreCard() {
 	},[data,id])
 	useEffect(()=>{
 		fetchApi().then((res)=>{
-			setData(res.data);
+			if(res)
+			{
+				setData(res.data);
+			}
 		})
 	},[selectedYear])
 	const fetchApi = async()=>{
@@ -67,10 +70,10 @@ function MakeScoreCard() {
 						<div className={cx('frame-year')}>
 
 							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
 								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
 								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
 								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
-								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
 								
 							</select>
 						</div>
@@ -79,7 +82,7 @@ function MakeScoreCard() {
 					<div className={cx('border')}>
 						<div className={cx('content')}>
 							<div className={cx('item')}>
-								<div className={cx('item-title')}>Tên nhóm</div>
+								<div className={cx('item-title')}>Tên hội đồng</div>
 								<div className={cx('item-content')}>
 									<select className={cx('custom-select')} id="custom-select" name="custom-select" {...register('idHD')}onChange={e=>handleGetId(e)}>
 										<option>-Lựa chọn-</option>
@@ -94,17 +97,19 @@ function MakeScoreCard() {
 								<table className={cx('table')}>
 									<thead className={cx('table-header')}>
 										<tr className={cx('table-header-row')}>
-											<th className={cx('table-header-cell')}>Tên Đề Tài</th>
-											<th className={cx('table-header-cell')}>Tên Phiếu</th>
+											<th className={cx('table-header-cell')}>Tên đề tài</th>
+											<th className={cx('table-header-cell')}>Tên phiếu</th>
 											<th className={cx('table-header-cell')}>Điểm</th>
-											<th className={cx('table-header-cell')}>Ghi Chú</th>
+											<th className={cx('table-header-cell')}>Ghi chú</th>
 										</tr>
 									</thead>
 									<tbody>
 										{ newData.map((data,index)=>(
 											<tr className={cx('table-inner-row')} key ={data.id}>
 											<td className={cx('table-inner-row-content')}>
-												{data.name}
+												<div className={cx('name-topic')}>
+													{data.name}
+												</div>
 											</td>
 											<td className={cx('table-inner-row-content')}>
 											<input className={cx('input')} type="text" value={data.id}  {...register(`topicArr[${index}].idDT`)}style={{display :'none'}}/>

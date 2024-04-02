@@ -60,10 +60,10 @@ function HistoryRegisterTopic() {
 						<div className={cx('text-name')}>Lịch sử đăng ký đề tài</div>
 						<div className={cx('frame-year')}>
 							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
 								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
 								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
 								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
-								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
 							</select>
 						</div>
 					</div>
