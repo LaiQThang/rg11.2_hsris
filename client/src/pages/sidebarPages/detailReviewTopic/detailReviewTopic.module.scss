@@ -68,6 +68,8 @@
             }
             .line-1{
                 margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
                 .research-name{
                     display:flex;
                     flex-direction: column;

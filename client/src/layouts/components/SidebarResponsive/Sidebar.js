@@ -149,7 +149,7 @@ function Sidebar() {
 							<>
 					<ParentMenuItem icon={faBox} text="Quản lý chung">
 						<div className={cx('menu-frame')}>
-							<MenuItem text={'Thêm HNC'} to={config.routes.addResearch} />
+							<MenuItem text={'Thêm hướng nghiên cứu'} to={config.routes.addResearch} />
 							<MenuItem text={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
 						</div>
 					</ParentMenuItem>
