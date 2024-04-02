@@ -26,7 +26,7 @@ function RegisterTopic() {
 	const tokenBearer = auth.getTokens()
 	const {register,handleSubmit,reset,watch} = useForm()
 
-	const [checked,setChecked] = useState(true)
+	const [checked,setChecked] = useState(false)
 	const [checkedValiResearch,setCheckedValiResearch] = useState(false)
 
 	const columns = useMemo(()=>[
@@ -58,7 +58,7 @@ function RegisterTopic() {
 	],[])
 	const isSmallScreen = useMediaQuery({ maxWidth: 713 });
 	const isLargeSmallScreen = useMediaQuery({ minWidth: 714, maxWidth: 846 });
-  	const isMediumScreen = useMediaQuery({ minWidth: 847, maxWidth: 1023 });
+  	const isMediumScreen = useMediaQuery({ minWidth: 847, maxWidth: 1200 });
     if (isSmallScreen) {
       columns.splice(2,3)
     }
@@ -117,19 +117,15 @@ function RegisterTopic() {
 	};
 
 	useEffect(()=>{
-        fetchApi();
+        fetchApi().then((res)=>{
+			setData(res.data)
+		});
 		fetchApiValiResearch()
     },[])
     const fetchApi = async ()=>{
 		let result
 		result = await Result.registerTopic(tokenBearer.access_token,currentYear)
-		setData(result.data)
-		if(data.length > 0){
-			setChecked(false)
-		}
-		else{
-			setChecked(true)
-		}
+		return result
 	}
 	//check du lieu sinh vien da dang ky chua
 	const fetchApiValiResearch = async ()=>{
@@ -150,38 +146,47 @@ function RegisterTopic() {
 					<div className={cx(activeChose === 'register' ? 'active' : 'topic')} onClick ={()=>handleActiveChose('register')}>Đăng ký đề tài</div>
 				</div>
 				{
-					activeChose === 'recommend' ? ( checked === true ? (<div className={cx('message')}>Hiện chưa có đề tài gợi ý!</div>) : (
-						<div className={cx('table-content')}>
-								<table {...getTableProps()}>
-								<thead>
-									{headerGroups.map(headerGroup => (
-									<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-										<th>STT</th>
-										{headerGroup.headers.map(column => (
-										<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`} >{column.render("Header")}</th>
-										))}
-									</tr>
-									))}
-								</thead>
-								<tbody {...getTableBodyProps()}>
-									{rows.map((row,rowIndex)=> {
-									prepareRow(row);
-									return (
-										<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
-											<td>{rowIndex + 1}</td>
-											{row.cells.map(cell => (
-												<td {...cell.getCellProps()} >
-													<Link className={cx('link')} to ={`/detailTopic/${row.original.id}`}>
-														{cell.render('Cell')}
-													</Link></td>
-											))}
-										</tr>
-									);
-									})}
-								</tbody>
-							</table>
-						</div>
-					)
+					activeChose === 'recommend' ? ( data.length > 0  ? (
+						<div className={cx('content')}>
+						<table className={cx('table')}>
+							<thead className={cx('table-header')}>
+								<tr className={cx('table-header-row')}>
+									<th className={cx('table-header-cell')}>STT</th>
+									<th className={cx('table-header-cell')}>Tên đề tài</th>
+									<th className={cx('table-header-cell')}>Tóm tắt</th>
+									<th className={cx('table-header-cell')}>Mục tiêu</th>
+									<th className={cx('table-header-cell')}>Phạm vi</th>
+								</tr>
+							</thead>
+							<tbody>
+								{displayedData.map((data,index)=>(
+									<tr className={cx('table-inner-row')} key ={index}>
+										<td className={cx('table-inner-row-content')}>
+											<div className={cx('name-topic')}>{index + 1}</div>
+										</td>
+										<td className={cx('table-inner-row-content')}><Link to={`/detailTopic/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.name}</div></Link></td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailTopic/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.summary}</div></Link>
+										
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailTopic/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.target}</div></Link>
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailTopic/${data.id}`} className={cx('link')}>
+										<div className={cx('name-topic')}>{data.limit}</div>
+											</Link>
+										</td>
+										
+								</tr>
+									
+								))}
+							</tbody>
+						</table>
+					</div>
+					) : (<div className={cx('message')}>Hiện chưa có đề tài gợi ý!</div>)
 							) : (
 							<div>
 								<form className={cx('register-topic')} key ={data.id} onSubmit={handleSubmit(handleShowNotification)}>

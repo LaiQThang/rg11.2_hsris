@@ -13,6 +13,7 @@ import img from '~/assets/img';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Sidebar from '~/layouts/components/SidebarResponsive';
 import Buttonn from 'react-bootstrap/Button';
+import './Header.css'
 const cx = classNames.bind(styles);
 
 function Header() {

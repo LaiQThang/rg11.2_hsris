@@ -40,7 +40,7 @@ function DetailResearch(){
                     if(res){
                     showToast('success', 'Đăng kí thành công!');
                     setTimeout(()=>{
-                        return window.location.href = 'http://localhost:3000/historyRegisterResearch';
+                        return window.location.href = '/historyRegisterResearch';
                     },2000)
 
                     } else{
@@ -73,7 +73,7 @@ function DetailResearch(){
     return (
         <div className={cx('container')}>
             <ToastContainer/>
-{
+{ dataId.length > 0 &&
     dataId.map(data=><div className={cx('table')} key ={data.id}>
         <div className={cx('header')}>Hướng nghiên cứu - Lịch sử đăng ký - Chi tiết HNC</div>
                 <div className={cx('line')}></div>

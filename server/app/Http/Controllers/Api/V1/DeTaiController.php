@@ -53,7 +53,7 @@ class DeTaiController extends Controller
             {
                 return response()->json(['Message' => 'Successful'], 200);
             }
-            return response()->json(['Message' => 'Not Found'], 404);
+            return response()->json(['Message' => 'Not Found2'], 404);
         }
         catch(Exception $e){
             return response()->json(['Message' => 'Not Found'], 404);

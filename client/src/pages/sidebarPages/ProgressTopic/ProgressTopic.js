@@ -225,7 +225,7 @@ function ProgressTopic() {
 				<div className={cx('line')}></div>
 				<div className={cx('table-progress')}>
 					<div className={cx('title')}>Tiến độ đề tài </div>
-					<div className={cx('table')}>
+					{data.length > 0 ? (<><div className={cx('table')}>
 						<table {...getTableProps()} className={cx('table-inside')}>
 								<thead>
 									{headerGroups.map(headerGroup => (
@@ -269,7 +269,7 @@ function ProgressTopic() {
 								<button className ={cx('button')} onClick={goToNextPage} disabled={currentPage === totalPages}>
 									<FontAwesomeIcon icon={faAngleRight}/>
 								</button>
-     						</div>
+     						</div></>) : <div style={{textAlign:'center',padding:'20px'}}>Chưa có tiến độ cần thực hiện</div>}
 					</div>
 				{
 					showReportForm && (

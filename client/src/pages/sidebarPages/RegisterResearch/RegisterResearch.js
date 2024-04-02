@@ -25,27 +25,22 @@ function RegisterResearch() {
 	const columns = useMemo(()=>[
 		{
 			Header: "Tên HNC",
-			col: "col-2",
 			accessor: "name"
 		},
 		{
 			Header: "Tóm tắt",
-			col: "col-3",
 			accessor: "summary"
 		},
 		{
 			Header: "Mục tiêu",
-			col: "col-2",
 			accessor: "target"
 		},
 		{
 			Header: "Phạm vi",
-			col: "col-2",
 			accessor: "limit"
 		},
 		{
 			Header: "Ghi chú",
-			col: "col-2",
 			accessor: "note"
 		}
 	],[])
@@ -74,9 +69,6 @@ function RegisterResearch() {
 		rows,
 		prepareRow,
 	  } = useTable({ columns, data: displayedData },useBlockLayout);
-	const handleActiveYear = (e)=>{
-		setActiveYear(e)
-	}
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
 	  };
@@ -113,6 +105,7 @@ function RegisterResearch() {
 		result = Result.getDateRegisterResearch(tokenBearer.access_token)
 		return result
 	 }
+	 console.log(data);
 	return (
 		<div className={cx('container')}>
 			<div className= {cx('table')}>
@@ -121,35 +114,48 @@ function RegisterResearch() {
 				<div className={cx('name')}>Danh sách đăng ký hướng nghiên cứu</div>
 				{
 					dateCreate ? (<div className={cx('done-register')} >Bạn đã đăng kí hướng nghiên cứu</div>) : (
-						<><div className={cx('grid')}>
-						<table {...getTableProps()}>
-							<thead>
-								{headerGroups.map(headerGroup => (
-						
-								<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-									<th>STT</th>
-									{headerGroup.headers.map(column => (
-									<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`}>{column.render("Header")}</th>
-									))}
+						<><div className={cx('content')}>
+						<table className={cx('table')}>
+							<thead className={cx('table-header')}>
+								<tr className={cx('table-header-row')}>
+									<th className={cx('table-header-cell')}>STT</th>
+									<th className={cx('table-header-cell')}>Tên HNC</th>
+									<th className={cx('table-header-cell')}>Tóm tắt</th>
+									<th className={cx('table-header-cell')}>Mục tiêu</th>
+									<th className={cx('table-header-cell')}>Phạm vi</th>
+									<th className={cx('table-header-cell')}>Ghi chú</th>
 								</tr>
-								))}
 							</thead>
-							<tbody {...getTableBodyProps()}>
-								{rows.map((row,rowIndex) => {
-								prepareRow(row);
-								return (
-									<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
-										<td>{rowIndex + 1}</td>
-										{row.cells.map(cell => (
-											<td {...cell.getCellProps()} >
-												<Link to ={`/detailResearch/${row.original.id}`} key ={row.values.id} className={cx('link')}>
-													{cell.render('Cell')}
-												</Link>
-											</td>
-										))}
-									</tr>
-								);
-								})}
+							<tbody>
+								{displayedData.map((data,index)=>(
+									<tr className={cx('table-inner-row')} key ={index}>
+<td className={cx('table-inner-row-content')}>
+											<div className={cx('name-topic')}>{index + 1}</div>
+										</td>
+										<td className={cx('table-inner-row-content')}><Link to={`/detailResearch/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.name}</div></Link></td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailResearch/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.summary}</div></Link>
+										
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailResearch/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.target}</div></Link>
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailResearch/${data.id}`} className={cx('link')}>
+										<div className={cx('name-topic')}>{data.limit}</div>
+											</Link>
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailResearch/${data.id}`} className={cx('link')}>
+										<div className={cx('name-topic')}>{data.note}</div>
+										</Link>
+										</td>
+										
+								</tr>
+									
+								))}
 							</tbody>
 						</table>
 					</div>

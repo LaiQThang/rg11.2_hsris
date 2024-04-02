@@ -38,13 +38,13 @@ function ApprovalTopic() {
 				<div className={cx('name-page')}>Quản lý chung - Đề tài chờ duyệt</div>
 				<div className={cx('frame-container')}>
 					<div className={cx('frame-desc')}>
-						<div className={cx('text')}>Thêm đề tài</div>
+						<div className={cx('text')}>Đề tài chờ duyệt</div>
 						<div className={cx('frame-year')}>
 							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
 								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
 								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
 								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
-								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
 							</select>
 						</div>
 					</div>
@@ -62,10 +62,12 @@ function ApprovalTopic() {
 									</tr>
 								</thead>
 								<tbody>
-									{data.map(data=>(
+									{data.length === 0 ? (<div></div>) : (data.map(data=>(
 										<tr className={cx('table-inner-row')} key ={data.id}>
 											<td className={cx('table-inner-row-content')}>
-												{data.name}
+												<div className={cx('name-topic')}>
+													{data.name}
+												</div>
 											</td>
 											<td className={cx('table-inner-row-content')}>{data.hnc.name}</td>
 											<td className={cx('table-inner-row-content')}>
@@ -88,11 +90,11 @@ function ApprovalTopic() {
 												</div>
 										</td>
 									</tr>
-									))}
+									)))}
 								</tbody>
 							</table>
 
-							<div className={cx('list-number-page')}>
+							{/* <div className={cx('list-number-page')}>
 								<button className={cx('btn')}>
 									<FontAwesomeIcon icon={faAngleLeft} />
 								</button>
@@ -108,7 +110,7 @@ function ApprovalTopic() {
 								<button className={cx('btn')}>
 									<FontAwesomeIcon icon={faAngleRight} />
 								</button>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>

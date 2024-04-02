@@ -158,6 +158,7 @@ function TrackProgress() {
 												name="custom-select"
 												onChange={e=>handleChoseGroup(e)}
 											>
+												<option>Chọn nhóm</option>
 												{tenBB.map((item, index)=>(<option key={index} value={item}>{item}</option>))}
 											</select>
 										</div>
@@ -176,47 +177,51 @@ function TrackProgress() {
 									</tr>
 								</thead>
 								<tbody>
-									{dataGroup.length === 0 ? data.map(data=>(
-										<tr className={cx('table-inner-row')} key ={data.id}>
-										<td className={cx('table-inner-row-content')}>{data.tenSV}</td>
-										<td className={cx('table-inner-row-content')}>
-											<div className={cx('data')}>{data.fileTaiNguyen}</div>
-										</td>
-										<td className={cx('table-inner-row-content')}>
-											<div className={cx('item-content')}>
-												{data.ngayKetThuc}
-											</div>
-										</td>
-										<td className={cx('table-inner-row-content')}>
-											<div className={cx('name-topic')}>{data.tenDT}</div>
-										</td>
-										<td className={cx('table-inner-row-content')}>
-											<div className={cx('btn-comment')} onClick={()=>handleSubmitReport(data.id)}>
-												Nhận xét
-											</div>
-										</td>
-									</tr>
-									)) : dataGroup.map(data=>(
-										<tr className={cx('table-inner-row')} key ={data.id}>
-										<td className={cx('table-inner-row-content')}>{data.tenSV}</td>
-										<td className={cx('table-inner-row-content')}>
-											<div className={cx('data')}>{data.fileTaiNguyen}</div>
-										</td>
-										<td className={cx('table-inner-row-content')}>
-											<div className={cx('item-content')}>
-												{data.ngayKetThuc}
-											</div>
-										</td>
-										<td className={cx('table-inner-row-content')}>
-											<div className={cx('name-topic')}>{data.tenDT}</div>
-										</td>
-										<td className={cx('table-inner-row-content')}>
-											<div className={cx('btn-comment')} onClick={()=>handleSubmitReport(data.id)} >
-												Nhận xét
-											</div>
-										</td>
-									</tr>
-									))}
+									{
+										data.length === 0 ? (<div></div>) : (
+											dataGroup.length === 0 ? data.map(data=>(
+												<tr className={cx('table-inner-row')} key ={data.id}>
+												<td className={cx('table-inner-row-content')}>{data.tenSV}</td>
+												<td className={cx('table-inner-row-content')}>
+													<div  className={cx('data')}>{<FontAwesomeIcon className={cx('icon-data')} icon={faFileLines}/>}</div>
+												</td>
+												<td className={cx('table-inner-row-content')}>
+													<div className={cx('date-deadline')}>
+														{data.ngayKetThuc}
+													</div>
+												</td>
+												<td className={cx('table-inner-row-content')}>
+													<div className={cx('name-topic')}>{data.tenDT}</div>
+												</td>
+												<td className={cx('table-inner-row-content')}>
+													<div className={cx('btn-comment')} onClick={()=>handleSubmitReport(data.id)}>
+														Nhận xét
+													</div>
+												</td>
+											</tr>
+											)) : dataGroup.map(data=>(
+												<tr className={cx('table-inner-row')} key ={data.id}>
+												<td className={cx('table-inner-row-content')}>{data.tenSV}</td>
+												<td className={cx('table-inner-row-content')}>
+													<a href={data.fileTaiNguyen} className={cx('data')}>{<FontAwesomeIcon className={cx('icon-data')} icon={faFileLines}/>}</a>
+												</td>
+												<td className={cx('table-inner-row-content')}>
+												<div className={cx('date-deadline')}>
+														{data.ngayKetThuc}
+													</div>
+												</td>
+												<td className={cx('table-inner-row-content')}>
+													<div className={cx('name-topic')}>{data.tenDT}</div>
+												</td>
+												<td className={cx('table-inner-row-content')}>
+													<div className={cx('btn-comment')} onClick={()=>handleSubmitReport(data.id)} >
+														Nhận xét
+													</div>
+												</td>
+											</tr>
+											))
+										)
+									}
 								</tbody>
 							</table>
 						</div>

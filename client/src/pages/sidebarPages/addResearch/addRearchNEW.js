@@ -55,11 +55,13 @@ function addResearch() {
 	// 	}
 	// 	fetchApi()
 	// }
+	console.log(id);
 	const onSubmit = async (data) => {
 		// async request which may result error
 		console.log(data);
 		try {
 			// await fetch()
+
 			const result = await Result.updateResearch(data, tokenBearer.access_token);
 			if (result) {
 				showToast('success', "Thêm hướng nghiên cứu thành công!")
@@ -111,7 +113,7 @@ function addResearch() {
 											>
 													<option>--Chọn giảng viên hướng dẫn--</option>
 													{
-														teacher.length === 0 ? (<div></div>) : (teacher.map(data=>(<option key ={data.id}  value={data.idGV} className={cx('data-option')} >{data.tenGV}</option>)))
+														teacher.map(data=>(<option key ={data.id}  value={data.idGV} className={cx('data-option')} >{data.tenGV}</option>))
 													}
 											</select>
 										</div>

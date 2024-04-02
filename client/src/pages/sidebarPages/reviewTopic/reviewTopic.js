@@ -16,8 +16,7 @@ import config from "~/config";
 
 const cx = classNames.bind(Styles)
 function reviewTopic() {
-	const [showYear,setShowYear] =  useState(false)
-	const [activeYear,setActiveYear] = useState('2024');
+	const [selectedYear,setSelectedYear] = useState('2024');
     const [data,setData] = useState([])
 	const [newData,setNewData] = useState([])
 	const [currentPage, setCurrentPage] = useState(1);
@@ -27,10 +26,11 @@ function reviewTopic() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(()=>{
 		const dataOne = data.filter(data=>data.id === idHNC)
+		console.log(dataOne);
 		if(dataOne.length > 0){
 			const topics = dataOne[0].topic;
 			const newIdNameArray = topics.map(topic => ({
-				idHNC: topic.idHNC,
+				tenHNC: topic.tenHNC,
 				name: topic.name,
 				dateCreate:topic.dateCreate,
 				id:topic.id
@@ -44,15 +44,11 @@ function reviewTopic() {
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
 	const displayedData = newData.slice(startIndex, endIndex);
-	const handleShowYear = ()=>{
-		setShowYear(!showYear)
-	}
-	const handleActiveYear = (e)=>{
-			setActiveYear(e)
-			if(activeYear !== e){
-				setNewData([])
-			}
-	}
+	const handleYearChange = (event) => {
+        const selectedYearValue = event.target.value;
+        setSelectedYear(selectedYearValue);
+    };
+
 	// const handleStatus = (item)=>{
 	// 	setStatus(item)
 	// }
@@ -140,9 +136,9 @@ function reviewTopic() {
         fetchApi().then((res)=>{
 			setData(res.data)
 		})
-    },[activeYear])
+    },[selectedYear])
 	const fetchApi = async ()=>{
-       let result = Result.getTopicAdmin(tokenBearer.access_token, activeYear)
+       let result = Result.getTopicAdmin(tokenBearer.access_token, selectedYear)
 	   return result
     }
 	return (
@@ -151,8 +147,18 @@ function reviewTopic() {
 			<div className={cx('wrapper')}>
 				<div className={cx('header')}>Quản lý đề tài - Xét duyệt đề tài</div>
 				<div className={cx('line')}></div>
+				<div className={cx('frame-desc')}>
+						<div className={cx('text')}>Danh sách đề tài theo hướng nghiên cứu</div>
+						<div className={cx('frame-year')}>
+							<select className={cx('year')} id="year" name="year" onClick={handleYearChange}>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
+								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
+							</select>
+						</div>
+					</div>
 				<div className={cx('table-progress')}>
-					<div className={cx('title')}>Danh sách đề tài theo hướng nghiên cứu</div>
 					<div className={cx('table')}>
                         <div className={cx('research')}>
                             <div className={cx('name')}>Hướng nghiên cứu</div>
@@ -161,47 +167,43 @@ function reviewTopic() {
                                 {data.map(data=>(<option key={data.id} value={data.id}>{data.name}</option>))}
                             </select>
                         </div>
-						<div className={cx('chose')}> 
-					<div className={cx('chose-year')}>
-						<div className={cx('text')}>Năm học</div>
-						<FontAwesomeIcon icon={showYear ? faAngleUp : faAngleDown} onClick={handleShowYear}/>
-					</div>
-					{
-						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
-						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
-						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>&2023-2024</li>
-					</ul>)
-					}
-					</div>
-						{newData.length >0 ? (<div className={cx('data-table')}>
-						<table {...getTableProps()} className={cx('table-inside')}>
-								<thead>
-									{headerGroups.map(headerGroup => (
-									<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-										{headerGroup.headers.map(column => (
-										<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-3`} >{column.render("Header")}</th>
-										))}
-									</tr>
-									))}
-								</thead>
-								<tbody {...getTableBodyProps()}>
-									{rows.map(row => {
-									prepareRow(row);
-									return (
-										<tr {...row.getRowProps()} className={cx('grid-content')}>
-											{row.cells.map(cell => (
-												<td {...cell.getCellProps()} >
-													<div className={cx('link')}>
-														{cell.render('Cell')}
-													</div></td>
-											))}
-										</tr>
-									);
-									})}
-								</tbody>
-							</table>
-						</div>) : (<div>Không có dữ liệu của HNC</div>)}
+						
+						{newData.length >0 ? (<div className={cx('content')}>
+						<table className={cx('table')}>
+							<thead className={cx('table-header')}>
+								<tr className={cx('table-header-row')}>
+									<th className={cx('table-header-cell')}>STT</th>
+									<th className={cx('table-header-cell')}>Tên đề tài</th>
+									<th className={cx('table-header-cell')}>Ngày tạo</th>
+									<th className={cx('table-header-cell')}>Trạng thái</th>
+									<th className={cx('table-header-cell')}>Lựa chọn</th>
+								</tr>
+							</thead>
+							<tbody>
+								{newData.map((data,index)=>(
+									<tr className={cx('table-inner-row')} key ={index}>
+<td className={cx('table-inner-row-content')}>
+											<div className={cx('name-topic')}>{index + 1}</div>
+										</td>
+										<td className={cx('table-inner-row-content')}><div className={cx('name-topic')}>{data.name}</div></td>
+										<td className={cx('table-inner-row-content')}>
+										<div className={cx('name-topic')}>{data.dateCreate}</div>
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										
+										<div className={cx('wait')}>Chờ duyệt</div>
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to ={`/detailReviewTopic/${data.id}`} className={cx('link')}><div className = {cx('button')}>Xem</div></Link>
+										</td>
+										
+								</tr>
+									
+								))}
+							</tbody>
+						</table>
+					</div>) : (<div>Không có dữ liệu của HNC</div>)}
 							<div className={cx('page-number')}>
 								<button className ={cx('button')} onClick={goToPreviousPage} disabled={currentPage === 1}>
 									<FontAwesomeIcon icon={faAngleLeft}/>

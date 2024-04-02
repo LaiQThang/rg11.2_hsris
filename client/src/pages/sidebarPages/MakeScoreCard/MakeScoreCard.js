@@ -10,11 +10,10 @@ import { showToast } from '~/Components/ToastMessage/Toast';
 import { ToastContainer } from 'react-toastify';
 const cx = classNames.bind(styles);
 function MakeScoreCard() {
-	const [showYear,setShowYear] =  useState(false)
+	const [selectedYear, setSelectedYear] = useState('2024');
 	const [data,setData] = useState([])
 	const [id,setId] = useState([])
 	const [newData,setNewData] = useState([])
-	const [activeYear,setActiveYear] = useState('2024');
 	const {register,handleSubmit} = useForm()
 	const auth = useAuth()
 	const tokenBaerer = auth.getTokens()
@@ -31,12 +30,10 @@ function MakeScoreCard() {
 	const handleGetId = (e)=>{
 		setId(e.target.value);
 	}
-	const handleShowYear = ()=>{
-		setShowYear(!showYear)
-	}
-	const handleActiveYear = (e)=>{
-			setActiveYear(e)
-	}
+	const handleYearChange = (event) => {
+        const selectedYearValue = event.target.value;
+        setSelectedYear(selectedYearValue);
+    };
 	useEffect(()=>{
 		const dataOne = data.filter(data=>data.id === id)
 		if(dataOne.length > 0){
@@ -52,11 +49,14 @@ function MakeScoreCard() {
 	},[data,id])
 	useEffect(()=>{
 		fetchApi().then((res)=>{
-			setData(res.data);
+			if(res)
+			{
+				setData(res.data);
+			}
 		})
-	},[activeYear])
+	},[selectedYear])
 	const fetchApi = async()=>{
-		let result = Result.getViewPoint(activeYear,tokenBaerer.access_token)
+		let result = Result.getViewPoint(selectedYear,tokenBaerer.access_token)
 		return result
 	}
 	return (
@@ -65,31 +65,28 @@ function MakeScoreCard() {
 			<div className={cx('inner')}>
 				<div className={cx('name-page')}>Quản lý chung - Phân nhóm đề tài</div>
 				<div className={cx('frame-container')}>
-					<div className={cx('frame-desc')}>
+				<div className={cx('frame-desc')}>
 						<div className={cx('text')}>Phiếu điểm</div>
-						<div className={cx('chose')}> 
-					<div className={cx('chose-year')}>
-						<div className={cx('text')}>Năm học</div>
-						<FontAwesomeIcon icon={showYear ? faAngleUp : faAngleDown} onClick={handleShowYear}/>
-					</div>
-					{
-						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
-						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
-						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>2023-2024</li>
-					</ul>)
-					}
-					</div>
+						<div className={cx('frame-year')}>
+
+							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
+								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
+								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+								
+							</select>
+						</div>
 					</div>
 
 					<div className={cx('border')}>
 						<div className={cx('content')}>
 							<div className={cx('item')}>
-								<div className={cx('item-title')}>Tên nhóm</div>
+								<div className={cx('item-title')}>Tên hội đồng</div>
 								<div className={cx('item-content')}>
 									<select className={cx('custom-select')} id="custom-select" name="custom-select" {...register('idHD')}onChange={e=>handleGetId(e)}>
 										<option>-Lựa chọn-</option>
-										{data.map(data=>(<option key={data.id} value={data.id}>{data.name}</option>))}
+										{data.length === 0 ? (<div></div>) : (data.map(data=>(<option key={data.id} value={data.id}>{data.name}</option>)))}
 									</select>
 								</div>
 							</div>
@@ -100,17 +97,19 @@ function MakeScoreCard() {
 								<table className={cx('table')}>
 									<thead className={cx('table-header')}>
 										<tr className={cx('table-header-row')}>
-											<th className={cx('table-header-cell')}>Tên Đề Tài</th>
-											<th className={cx('table-header-cell')}>Tên Phiếu</th>
+											<th className={cx('table-header-cell')}>Tên đề tài</th>
+											<th className={cx('table-header-cell')}>Tên phiếu</th>
 											<th className={cx('table-header-cell')}>Điểm</th>
-											<th className={cx('table-header-cell')}>Ghi Chú</th>
+											<th className={cx('table-header-cell')}>Ghi chú</th>
 										</tr>
 									</thead>
 									<tbody>
 										{ newData.map((data,index)=>(
 											<tr className={cx('table-inner-row')} key ={data.id}>
 											<td className={cx('table-inner-row-content')}>
-												{data.name}
+												<div className={cx('name-topic')}>
+													{data.name}
+												</div>
 											</td>
 											<td className={cx('table-inner-row-content')}>
 											<input className={cx('input')} type="text" value={data.id}  {...register(`topicArr[${index}].idDT`)}style={{display :'none'}}/>

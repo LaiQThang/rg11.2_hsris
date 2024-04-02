@@ -53,14 +53,14 @@ function Login(){
                 auth.setTokens(result);
                 navigate(redirectPath, { replace: true });
             }
+            else
+            {
+                setMessage('Thông tin tài khoản, mật khẩu không chính xác!')
+            }
         }
         fetchApi();
     }
 
-            //  console.log(username);
-            //  console.log(password);
-
-    // render giao diện
     return (
         <div className = {cx('wrapper')}>
             <div className={cx('identify')}>

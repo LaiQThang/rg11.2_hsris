@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Authentication\V1;
 
+use App\Models\sinhvien;
+use App\Models\giangvien;
+use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Models\Api\V1\AccountModel;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
+use App\Http\Resources\V1\SinhVienResource;
 use App\Http\Requests\V1\UpdateProfileRequest;
 use App\Http\Resources\V1\GiangVienClientResource;
-use App\Http\Resources\V1\SinhVienResource;
-use App\Models\Api\V1\AccountModel;
-use App\Models\giangvien;
-use App\Models\sinhvien;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -140,7 +141,22 @@ class AuthController extends Controller
 
     public function refresh()
     {
-        // return $this->respondWithToken(auth()->refresh());
+        if(Auth::guard('apiTeacher')->check())
+        {
+            return response()->json([
+                'access_token' => auth('apiTeacher')->refresh(),
+                'token_type' => 'bearer',
+                'expires_in' => auth('apiTeacher')->factory()->getTTL() * 60
+            ]);
+        }
+        else if(Auth::guard('apiStudent')->check())
+        {
+            return response()->json([
+                'access_token' => auth('apiStudent')->refresh(),
+                'token_type' => 'bearer',
+                'expires_in' => auth('apiStudent')->factory()->getTTL() * 60
+            ]);
+        }
     }
 
     protected function respondWithToken($token, $permission)

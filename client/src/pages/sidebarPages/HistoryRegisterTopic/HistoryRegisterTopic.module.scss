@@ -26,48 +26,30 @@
             background-color: #8793;
         }
         .grid{
-            position: relative;
             padding: 30px 50px;
-            .chose{
-                position: absolute;
-                right:0;
-                top: 0;
-                padding: 8px 30px;
-                .chose-year{
-                    display:flex;
-                    align-items: center;
-                    padding:3px 10px;
-                    border-radius: 5px;
-                    border: 0.5px solid #000;
-                    background: #FFF;
-                    .text{
-                        color: #000;
-                        font-size: 15px;
-                        font-weight: 400;
-                        line-height: normal;
-                        letter-spacing: 0.36px;
-                        margin-right: 5px;
-                    }
+            .frame-desc {
+                display: flex;
+                align-items: center;
+                padding: 12px 0;
+                .text-name{
+                    flex: 1;
+                    font-weight: 400;
+                    margin-right: 4px;
+                    margin-bottom: 20px;
                 }
-                .option{
-                    border-radius: 5px;
-                    border: 0.5px solid #000;
-                    background: #FFF;
-                    padding:0;
-                    li{
-                        list-style: none;
-                        color: #000;
-                        text-align: center;
-                        font-size: 13px;
-                        font-weight: 400;
-                        line-height: 18px; /* 184.615% */
-                        cursor: pointer;
-                        &:hover{
-                            background-color: #d9d9d9;
-                        }
+                .frame-year{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .year{
+                        padding: 3px 10px;
+                        border-radius: 5px;
                     }
-                    .year-active{
-                        background-color: #FFE4B3;
+                    .text{
+                        flex: 1;
+                        font-size: 18px;
+                        font-weight: 400;
+                        margin-right: 4px;
                     }
                 }
             }
@@ -85,7 +67,7 @@
                 border: 1px solid #313131;
                 border-radius: 10px;
                 padding: 8% 8%;
-                margin : 2% 0;
+                margin : 30px 0;
                 .each-progress{
                     position: relative;
                     width: 26%;
@@ -140,8 +122,7 @@
             }
             .box{
                 display:flex;
-                align-items: center;
-                margin: 2% 0;
+                margin: 20px 0;
                 .text{
                     color: #000;
                     font-size: 16px;
@@ -153,11 +134,18 @@
                 .short{
                     border: 0.2px solid #393939;
                     width: 100%;
-                    padding: 8px 15px;
+                    padding: 4px 15px;
                     font-size: 14px;
                     font-weight: 400;
                     line-height: 150%;
                     border-radius: 5px;
+                    text-decoration: none;
+                    -webkit-box-orient: vertical;
+                    display: -webkit-box;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 3; /* Number of lines to show */
+                    line-clamp: 3; 
                 }
             }
             .footer{
@@ -190,78 +178,24 @@
             }
             .wrapper{
                 .name{
-                    margin-bottom: 2%;
+                    margin-bottom: 30px;
                 }
                 .line-1{
-                    margin-bottom: 1%;
-                    .research-name-1{
+                    flex-direction: column;                      
+                    .research-name{
                         display:flex;
-                        min-width: 50%;
+                        margin-bottom: 20px;
                         .text{
                             color: #000;
                             font-size: 16px;
                             font-weight: 700;
                             line-height: 24px;
                             margin-right: 2%;
+
                         }
                         .content{
                             color: #000;
                             font-size: 14px;
-                            font-weight: 400;
-                            line-height: 24px;
-                        }
-                    }
-                        
-                    .research-name{
-                        display:flex;
-                        flex-direction: column;
-                        min-width: 50%;
-                        .text{
-                            color: #000;
-                            font-size: 16px;
-                            font-weight: 700;
-                            line-height: 24px;
-                            margin-right: 2%;
-                        }
-                        .content{
-                            color: #000;
-                            font-size: 14px;
-                            font-weight: 400;
-                            line-height: 24px;
-                        }
-                    }
-                }
-                .line-2{
-                    .research-name-1{
-                        display:flex;
-                        min-width: 25%;
-                        .text{
-                            color: #000;
-                            font-size: 16px;
-                            font-weight: 700;
-                            line-height: 24px;
-                            margin-right: 2%;
-                        }
-                        .content{
-                            color: #000;
-                            font-size: 15px;
-                            font-weight: 400;
-                            line-height: 24px;
-                        }
-                    }
-                    .research-name{
-                        display:flex;
-                        min-width: 38%;
-                        .text{
-                            color: #000;
-                            font-size: 16px;
-                            font-weight: 700;
-                            line-height: 24px;
-                            margin-right: 2%;
-                        }
-                        .content{
-                            color: #000;
-                            font-size: 15px;
                             font-weight: 400;
                             line-height: 24px;
                         }
@@ -271,7 +205,27 @@
         }
     }
 }
-@media (min-width: 1036px){
+
+.cup{
+    font-size: 20px;
+    font-weight: 600 !important;
+    color: #e79e00de !important;
+}
+@media (min-width: 1250px){
+    .box{
+       align-items: center;
+        .text{
+            margin-bottom: 10px;
+        }
+    }
+    .line-1{
+        .research-name{
+            flex-direction: row;
+        }
+   }
+    .text-name{
+        font-size: 20px;
+    }
     .line-2, .line-1{
         display:flex;
     }
@@ -282,22 +236,57 @@
         display: block;
     }
 }
-@media (max-width: 1036px) and (min-width: 743px){
+@media (max-width: 1249px) and (min-width: 743px){
+    .box{
+        align-items: center;
+        .text{
+            margin-bottom: 10px;
+        }
+    }
+    .line-1{
+        .research-name{
+            flex-direction: row;
+        }
+        .research-name:first-child{
+            flex-direction: column;
+        }
+   }
+    .text-name{
+        font-size: 20px;
+    }
     .line-1{
         display:flex;
     }
-    .progress{
-        display: flex;
-    }
-}
-@media (max-width: 743px){
     .progress{
         display: none;
     }
     .name-1{
         display: none;
     }
-    .text{
-        text-align: center;
+}
+@media (max-width: 743px){
+    .frame-desc {
+        flex-direction: column;
+        margin-bottom: 20px;
+        .text-name{
+            font-size: 18px;
+        }
+    }
+    .progress{
+        display: none;
+    }
+   .line-1{
+        .research-name{
+            flex-direction: column;
+        }
+   }
+    .name-1{
+        display: none;
+    }
+    .box{
+        flex-direction: column;
+        .text{
+            margin-bottom: 10px;
+        }
     }
 }
