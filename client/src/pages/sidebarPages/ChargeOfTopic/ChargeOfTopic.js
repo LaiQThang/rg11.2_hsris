@@ -14,9 +14,6 @@ function ChargeOfTopic() {
 					<div className={cx('frame-desc')}>
 						<div className={cx('text')}>Danh sách sinh viên đăng ký hướng nghiên cứu</div>
 						<div className={cx('frame-year')}>
-							<label className={cx('text')} htmlFor="year">
-								Năm học :
-							</label>
 							<select className={cx('year')} id="year" name="year">
 								<option value="2020-2021">2020-2021</option>
 								<option value="2021-2022">2021-2022</option>

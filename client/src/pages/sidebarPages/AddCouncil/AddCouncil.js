@@ -141,11 +141,10 @@ function AddCouncil() {
 						<div className={cx('text')}>Thêm hội đồng</div>
 						<div className={cx('frame-year')}>
 							<select className={cx('year')} id="year" name="year" onClick={handleYearChange}>
-								<option className={cx(selectedYear === '2020' && 'year-active')} value="2020">2020-2021</option>
-								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2021-2022</option>
-								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2022-2023</option>
-								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2023-2024</option>
-								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2024-2025</option>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
+								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
 							</select>
 						</div>
 					</div>
@@ -217,14 +216,14 @@ function AddCouncil() {
 									<div className={cx('item-wrap')}>
 		                                <div className={cx('item-title')}>Danh sách giảng viên</div>
 										{
-											dataTeacher.map(valueData => 
+											dataTeacher.length == 0 ? (<div></div>) : (dataTeacher.map(valueData => 
 												<div key={valueData.idGV} className={cx('item-child')}>
 		                                    		<div className={cx('item-content')}>
 													<div className={cx('item-text')}>{valueData.tenGV}</div>
 		                                    		</div>
 		                                    		<button onClick={()=> handleAddTeacher(valueData.idGV)} className={cx('btn-add')}>Thêm</button>
 		                                		</div>
-											)
+											))
 										}
 		                            </div>
 								</div>
@@ -233,7 +232,7 @@ function AddCouncil() {
 								<div className={cx('item-wrap')}>
                                 <div className={cx('item-title')}>Giảng viên được chọn(*)</div>
                                 {showTeacherNotify && <div className={cx('notify')}>Giảng viên không được để trống</div>}
-										{dataTeacher.filter(valueTeacher => arrTeacher.includes(valueTeacher.idGV)).map(selectedTeacher => (
+										{dataTeacher.length === 0 ? (<div></div>) : (dataTeacher.filter(valueTeacher => arrTeacher.includes(valueTeacher.idGV)).map(selectedTeacher => (
 											<div key={selectedTeacher.idGV} className={cx('item-child')}>
 												<div className={cx('item-content')}>
 												<div className={cx('item-text')}>{selectedTeacher.tenGV}</div>
@@ -245,7 +244,7 @@ function AddCouncil() {
 													/>
 												<button onClick={()=>handleDeleteTeacher(selectedTeacher.idGV)} className={cx('btn-del')}>Xóa</button>
 											</div>
-										))}
+										)))}
                                
                             </div>
 								</div>
@@ -255,14 +254,14 @@ function AddCouncil() {
 								<div className={cx('content-item-card')}>
 									<div className={cx('item-wrap')}>
 		                                <div className={cx('item-title')}>Danh sách Đề Tài</div>
-											{dataTopic.map(valueData => 
+											{dataTopic.length === 0 ? (<div></div>) : (dataTopic.map(valueData => 
 												<div key={valueData.id} className={cx('item-child')}>
 		                                    		<div className={cx('item-content')}>
 													<div className={cx('item-text')}>{valueData.name}</div>
 		                                    		</div>
 		                                    		<button onClick={()=> handleAddTopic(valueData.id)} className={cx('btn-add')}>Thêm</button>
 		                                		</div>
-											)}
+											))}
 		                            </div>
 								</div>
 
@@ -270,7 +269,7 @@ function AddCouncil() {
 								<div className={cx('item-wrap')}>
                                 <div className={cx('item-title')}>Đề Tài được chọn(*)</div>
                                 {showTopicNotify && <div className={cx('notify')}>Đề Tài không được để trống</div>}
-										{dataTopic.filter(valueTopic => arrTopic.includes(valueTopic.id)).map(selectedTopic => (
+										{dataTopic.length === 0 ? (<div></div>) : (dataTopic.filter(valueTopic => arrTopic.includes(valueTopic.id)).map(selectedTopic => (
 											<div key={selectedTopic.id} className={cx('item-child')}>
 												<div className={cx('item-content')}>
 												<div className={cx('item-text')}>{selectedTopic.name}</div>
@@ -282,7 +281,7 @@ function AddCouncil() {
 													/>
 												<button onClick={()=>handleDeleteTopic(selectedTopic.id)} className={cx('btn-del')}>Xóa</button>
 											</div>
-										))}
+										)))}
 
                                 
                             </div>

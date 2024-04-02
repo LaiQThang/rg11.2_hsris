@@ -62,7 +62,7 @@ function ApprovalTopic() {
 									</tr>
 								</thead>
 								<tbody>
-									{data.map(data=>(
+									{data.length === 0 ? (<div></div>) : (data.map(data=>(
 										<tr className={cx('table-inner-row')} key ={data.id}>
 											<td className={cx('table-inner-row-content')}>
 												{data.name}
@@ -88,11 +88,11 @@ function ApprovalTopic() {
 												</div>
 										</td>
 									</tr>
-									))}
+									)))}
 								</tbody>
 							</table>
 
-							<div className={cx('list-number-page')}>
+							{/* <div className={cx('list-number-page')}>
 								<button className={cx('btn')}>
 									<FontAwesomeIcon icon={faAngleLeft} />
 								</button>
@@ -108,7 +108,7 @@ function ApprovalTopic() {
 								<button className={cx('btn')}>
 									<FontAwesomeIcon icon={faAngleRight} />
 								</button>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>

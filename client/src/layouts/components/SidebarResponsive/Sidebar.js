@@ -94,23 +94,23 @@ function Sidebar() {
 					{
 						permission === 'sinhvien' && (
 							<>
-							<ParentMenuItem icon={faMortarBoard} text="Hướng Nghiên Cứu">
+							<ParentMenuItem icon={faMortarBoard} text="Hướng nghiên cứu">
 						<div className={cx('menu-frame')}>
-							<MenuItem text={'Đăng Ký'} to={config.routes.registerResearch} />
-							<MenuItem text={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterResearch} />
+							<MenuItem text={'Đăng ký'} to={config.routes.registerResearch} />
+							<MenuItem text={'Lịch sử đăng ký'} to={config.routes.historyRegisterResearch} />
 						</div>
 					</ParentMenuItem>
-					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
+					<ParentMenuItem icon={faMortarBoard} text="Quản lý đề tài">
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Đăng ký đề tài'} to={config.routes.registerTopic} />
-							<MenuItem text={'Tiến Độ Đề Tài'} to={config.routes.progressTopic} />
-							<MenuItem text={'Lịch Sử Đăng Ký'} to={config.routes.historyRegisterTopic} />
+							<MenuItem text={'Tiến độ đề tài'} to={config.routes.progressTopic} />
+							<MenuItem text={'Lịch sử đăng ký'} to={config.routes.historyRegisterTopic} />
 						</div>
 					</ParentMenuItem>
-					<ParentMenuItem icon={faGear} text="Quản Lý Tài Khoản">
+					<ParentMenuItem icon={faGear} text="Quản lý tài khoản">
 						<div className={cx('menu-frame')}>
-							<MenuItem text={'Hồ Sơ Cá Nhân'} to={config.routes.profile} />
-							<MenuItem text={'Thành Tích'} to={config.routes.achievement} />
+							<MenuItem text={'Hồ sơ cá nhân'} to={config.routes.profile} />
+							<MenuItem text={'Thành tích'} to={config.routes.achievement} />
 						</div>
 					</ParentMenuItem>
 							</>
@@ -119,27 +119,26 @@ function Sidebar() {
 					{
 						permission === 'giangvien' && (
 							<>
-								<ParentMenuItem text="Giáo Viên"></ParentMenuItem>
-					<ParentMenuItem icon={faBox} text="Quản Lý Chung">
+					<ParentMenuItem icon={faBox} text="Quản lý chung">
 						<div className={cx('menu-frame')}>
-							<MenuItem text={'Phân Nhóm Đề Tài'} to={config.routes.topicGroup} />
-							<MenuItem text={'Lập Đợt Tiến Độ'} to={config.routes.setupProgress} />
-							<MenuItem text={'Theo Dõi Tiến Độ'} to={config.routes.trackProgress} />
+							<MenuItem text={'Phân nhóm đề tài'} to={config.routes.topicGroup} />
+							<MenuItem text={'Lập đợt tiến độ'} to={config.routes.setupProgress} />
+							<MenuItem text={'Theo dõi tiến độ'} to={config.routes.trackProgress} />
 						</div>
 					</ParentMenuItem>
-					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
+					<ParentMenuItem icon={faMortarBoard} text="Quản lý đề tài">
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Thêm đề tài'} to={config.routes.addTopic} />
-							<MenuItem text={'Danh Sách Đề Tài'} to={config.routes.listTopic} />
-							<MenuItem text={'Đề Tài Chờ Duyệt'} to={config.routes.approvalTopic} />
-							<MenuItem text={'Đề Tài Phụ Trách'} to={config.routes.chargeOfTopic} />
+							<MenuItem text={'Đề tài chờ duyệt'} to={config.routes.approvalTopic} />
+							<MenuItem text={'Danh sách đề tài (UPDATING)'} to={config.routes.listTopic} />
+							<MenuItem text={'Đề tài phụ trách (UPDATING)'} to={config.routes.chargeOfTopic} />
 						</div>
 					</ParentMenuItem>
-					<ParentMenuItem icon={faReceipt} text="Quản Lý Hội Đồng">
+					<ParentMenuItem icon={faReceipt} text="Quản lý hội đồng">
 						<div className={cx('menu-frame')}>
-							<MenuItem text={'Danh Sách Hội Đồng'} to={config.routes.listCouncil} />
-							<MenuItem text={'Lập Phiếu Điểm'} to={config.routes.makeScoreCard} />
-							<MenuItem text={'Danh Sách Phiếu Điểm'} to={config.routes.listScoreCard} />
+							<MenuItem text={'Lập phiếu đểm'} to={config.routes.makeScoreCard} />
+							<MenuItem text={'Danh sách hội đồng (UPDATING)'} to={config.routes.listCouncil} />
+							<MenuItem text={'Danh sách phiếu điểm (UPDATING)'} to={config.routes.listScoreCard} />
 						</div>
 					</ParentMenuItem>
 							</>
@@ -148,18 +147,20 @@ function Sidebar() {
 					{
 						permission === 'admin' && (
 							<>
-					<ParentMenuItem text="Quản Trị Viên"></ParentMenuItem>
-					<ParentMenuItem icon={faBox} text="Quản Lý HNC">
-						<div className={cx('menu-frame')}>
-							<MenuItem text={'Phân Công Giảng Viên'} to={config.routes.appointmentOfTeacher} />
-							<MenuItem text={'Thêm Hội Đồng'} to={config.routes.addCouncil} />
-							<MenuItem text={'Theo Dõi Tiến Độ'} to={config.routes.trackProgress} />
-						</div>
-					</ParentMenuItem>
-					<ParentMenuItem icon={faMortarBoard} text="Quản Lý Đề Tài">
+					<ParentMenuItem icon={faBox} text="Quản lý chung">
 						<div className={cx('menu-frame')}>
 							<MenuItem text={'Thêm HNC'} to={config.routes.addResearch} />
 							<MenuItem text={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faMortarBoard} text="Quản lý hội đồng">
+						<div className={cx('menu-frame')}>
+							{/*<MenuItem text={'Phân công giảng viên'} to={config.routes.appointmentOfTeacher}/>*/}
+							<MenuItem text={'Thêm hội đồng'} to={config.routes.addCouncil} />
+						</div>
+					</ParentMenuItem>
+					<ParentMenuItem icon={faMortarBoard} text="Quản lý giải">
+						<div className={cx('menu-frame')}>
 							<MenuItem text={'Xét giải'} to={config.routes.awardReview} />
 						</div>
 					</ParentMenuItem>

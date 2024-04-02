@@ -55,13 +55,11 @@ function addResearch() {
 	// 	}
 	// 	fetchApi()
 	// }
-	console.log(id);
 	const onSubmit = async (data) => {
 		// async request which may result error
 		console.log(data);
 		try {
 			// await fetch()
-
 			const result = await Result.updateResearch(data, tokenBearer.access_token);
 			if (result) {
 				showToast('success', "Thêm hướng nghiên cứu thành công!")
@@ -88,52 +86,105 @@ function addResearch() {
 		return result
 	}
 	return (
-		<div className={cx('container')}>
-			<ToastContainer />
-			<form className={cx('table')} key={data.id} onSubmit={handleSubmit(onSubmit)}>
-				<div className={cx('header')}>Hướng nghiên cứu - Thêm HNC</div>
-				<div className={cx('line')}></div>
-				<div className={cx('wrapper')}>
-					<div className={cx('name')}>Thêm hướng nghiên cứu</div>
-					<div className={cx('teacher-chose')}>Chọn giảng viên hướng dẫn</div>
-					<select className={cx('option')} onChange={handleGetId} {...register('idGV')}>
-						<option>--Chọn giảng viên hướng dẫn--</option>
-						{
-							teacher.map(data=>(<option key ={data.id}  value={data.idGV} className={cx('data-option')} >{data.tenGV}</option>))
-						}
-					</select>
-					<div className={cx('line-1')}>
-						<div className={cx('research-name')}>
-							<div className={cx('text')}>Tên hướng nghiên cứu: </div>
-							<input type='text' id='name' {...register('name', { require: true })} required/>
+		<div className={cx('wrapper')}>
+			<ToastContainer/>
+			<div className={cx('inner')}>
+				<div className={cx('name-page')}>Hướng nghiên cứu - Thêm HNC</div>
+				<div className={cx('frame-container')}>
+					<div className={cx('frame-desc')}>
+						<div className={cx('text')}>Thêm hướng nghiên cứu</div>
+
+					</div>
+						<form className={cx('table')} onSubmit={handleSubmit(onSubmit)}>
+						<div className={cx('border')}>
+						<div className={cx('content')}>
+							<div className={cx('content-list-card')}>
+								<div className={cx('content-item-card')}>
+									<div className={cx('item')}>
+										<div className={cx('item-title')}>Chọn giảng viên hướng dẫn</div>
+										<div className={cx('item-content')}>
+											<select
+												className={cx('custom-select')}
+												id="custom-select"
+												name="custom-select"
+												onChange={handleGetId} {...register('idGV')}
+											>
+													<option>--Chọn giảng viên hướng dẫn--</option>
+													{
+														teacher.length === 0 ? (<div></div>) : (teacher.map(data=>(<option key ={data.id}  value={data.idGV} className={cx('data-option')} >{data.tenGV}</option>)))
+													}
+											</select>
+										</div>
+									</div>
+								</div>
+								<div className={cx('content-item-card')}>
+								<div className={cx('item')}>
+									<div className={cx('item-title')}>Tên hướng nghiên cứu</div>
+									<div className={cx('item-content')}>
+									<input className={cx('input')} type='text' id='name' {...register('name', { require: true })} required/>
+									</div>
+								</div>
+								</div>
+							</div>
+
+							<div className={cx('content-list-card')}>
+								<div className={cx('content-item-card')}>
+									<div className={cx('item')}>
+										<div className={cx('item-title')}>Ngày tạo</div>
+										<div className={cx('item-content')}>
+										<input className={cx('input')} type='date' onChange={handleChangeDate} required/>
+										</div>
+									</div>
+								</div>
+								<div className={cx('content-item-card')}>
+								<div className={cx('item')}>
+									<div className={cx('item-title')}>Số lượng người tham gia</div>
+									<div className={cx('item-content')}>
+									<input className={cx('input')} type="number" onChange={handleChangeNumber} required/>									</div>
+								</div>
+								</div>
+							</div>
+
+							<div className={cx('item')}>
+								<div className={cx('item-title')}>Tóm tắt</div>
+								<div className={cx('item-content')}>
+								<textarea className={cx('input')} type='text' {...register("summary")} required/>
+								</div>
+							</div>
+
+							<div className={cx('item')}>
+								<div className={cx('item-title')}>Mục tiêu</div>
+								<div className={cx('item-content')}>
+								<textarea className={cx('input')} type='text' {...register("target")} required/>
+								</div>
+							</div>
+
+							<div className={cx('item')}>
+								<div className={cx('item-title')}>Phạm vi</div>
+								<div className={cx('item-content')}>
+								<textarea className={cx('input')} type='text' {...register("limit")} required/>
+								</div>
+							</div>
+
+							<div className={cx('item')}>
+								<div className={cx('item-title')}>Ghi chú</div>
+								<div className={cx('item-content')}>
+								<textarea className={cx('input')} type='text' {...register("note")} required/>
+								</div>
+							</div>
+
+							<div className={cx('btn-container')}>
+								<button className={cx('btn-save')}>
+									Lưu
+								</button>
+							</div>
 						</div>
-						<div className={cx('research-name')}>
-							<div className={cx('text')}>Ngày tạo: </div>
-							<input type='date' onChange={handleChangeDate} required/>
-						</div>
+
 					</div>
-					<div className={cx('line-2')}>
-						<div className={cx('research-name')}>
-							<div className={cx('text')}>Số lượng người tham gia: </div>
-							<input type="number" onChange={handleChangeNumber} required/>
-						</div>
-					</div>
-					<div className={cx('input-bottom')}>
-						<div className={cx('text')}>Tóm tắt</div>
-						<textarea className={cx('text-area')} type='text' {...register("summary")} required/>
-						<div className={cx('text')}>Mục tiêu</div>
-						<textarea className={cx('text-area')} type='text' {...register("target")} required/>
-						<div className={cx('text')}>Phạm Vi</div>
-						<textarea className={cx('text-area')} type='text' {...register("limit")} required/>
-						<div className={cx('text')}>Ghi chú</div>
-						<textarea className={cx('text-area')} type='text' {...register("note")} required/>
-					</div>
-					<div className={cx('footer')} >
-						<button className={cx(submit ? 'register' : 'disable')}>Thêm</button>
-					</div>
+						</form>
 				</div>
-			</form>
+			</div>
 		</div>
-	)
+		)
 }
 export default addResearch
