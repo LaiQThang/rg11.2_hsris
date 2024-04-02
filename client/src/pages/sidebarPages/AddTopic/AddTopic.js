@@ -79,7 +79,6 @@ function AddTopic() {
 	return (
 		<div className={cx('wrapper')}>
 			<ToastContainer/>
-			<form className={cx('table')} onSubmit={handleSubmit(handleAddTopic)}>
 			<div className={cx('inner')}>
 				<div className={cx('name-page')}>Quản lý chung - Thêm đề tài</div>
 				<div className={cx('frame-container')}>
@@ -88,7 +87,9 @@ function AddTopic() {
 
 					</div>
 
+						<form className={cx('table')} onSubmit={handleSubmit(handleAddTopic)}>
 					<div className={cx('border')}>
+
 						<div className={cx('content')}>
 							<div className={cx('content-list-card')}>
 								<div className={cx('content-item-card')}>
@@ -103,9 +104,11 @@ function AddTopic() {
 												{...register('idHNC')}
 											>
 												{
-													dataHNC.map(data=>(
-														<option key ={data.id} value={data.id}>{data.name}</option>
-													))
+													dataHNC.length === 0 ? (<div></div>) : (
+														dataHNC.map(data=>(
+															<option key ={data.id} value={data.id}>{data.name}</option>
+														))
+													)
 												}
 											</select>
 										</div>
@@ -152,10 +155,11 @@ function AddTopic() {
 								</button>
 							</div>
 						</div>
+
 					</div>
+						</form>
 				</div>
 			</div>
-			</form>
 		</div>
 	);
 }

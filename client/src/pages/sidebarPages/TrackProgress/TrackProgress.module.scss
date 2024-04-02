@@ -3,55 +3,10 @@
 	justify-content: center;
 	padding: 12px 0 50px 0;
 	height: calc(100vh + 250px);
-	.data{
-		text-decoration: underline;
-		color:#1b2c95;
-		cursor: pointer;
-		max-width: 150px;
-		overflow: hidden;
-	}
-	.chose{
-		position: absolute;
-		right:0;
-		top: 0;
-		padding: 8px 30px;
-		.chose-year{
-			display:flex;
-			align-items: center;
-			padding:3px 10px;
-			border-radius: 5px;
-			border: 0.5px solid #000;
-			background: #FFF;
-			.text{
-				color: #000;
-				font-size: 15px;
-				font-weight: 400;
-				line-height: normal;
-				letter-spacing: 0.36px;
-				margin-right: 5px;
-			}
-		}
-		.option{
-			border-radius: 5px;
-			border: 0.5px solid #000;
-			background: #FFF;
-			padding:0;
-			li{
-				list-style: none;
-				color: #000;
-				text-align: center;
-				font-size: 13px;
-				font-weight: 400;
-				line-height: 18px; /* 184.615% */
-				cursor: pointer;
-				&:hover{
-					background-color: #d9d9d9;
-				}
-			}
-			.year-active{
-				background-color: #FFE4B3;
-			}
-		}
+	.icon-data{
+		padding: 10px;
+		font-size: 20px;
+		color: #115bee;
 	}
 	.inner {
 		position: relative;
@@ -307,6 +262,16 @@
 	color: #5c6873;
 	margin-bottom: 4px;
 }
+.date-deadline{
+	white-space: nowrap;
+}
+.name-topic{
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 .item-content {
 	border: 1px solid rgba(27, 44, 149, 0.8);
@@ -365,6 +330,7 @@ td {
 	font-feature-settings: 'salt' on;
 	font-weight: 700;
 	border-bottom: 1px solid #d9d9d917;
+	text-align: center !important;
 }
 
 //button
@@ -378,14 +344,15 @@ td {
 
 .btn-comment,
 .btn-back,
-.btn-save {
+.btn-save 
+{
+	white-space: nowrap;
 	padding: 8px;
 	font-size: 12px;
 	letter-spacing: 1.44px;
 	color: #fff;
 	border-radius: 6px;
 	text-decoration: none;
-	width: 80px;
 	text-align: center;
 	cursor: pointer;
 }
@@ -414,6 +381,10 @@ td {
 }
 
 @media (max-width: 1023px) and (min-width: 743px) {
+	.date-deadline{
+	font-size: 12px;
+		
+	}
 	.inner{
 		width: 95%;
 	}
@@ -511,7 +482,10 @@ td {
 	
 	.table-inner-row-content{
 		padding: 4px 2px;
-		font-size: 12px;
+		font-size: 11px;
+	}
+	.date-deadline{
+		font-size: 9px;
 	}
 
 	//content
@@ -538,14 +512,13 @@ td {
 	.content-item-card{
 		width: 100%;
 	}
-
 	.btn-container{
 		margin-top: 12px;
 	}
 	.btn-comment,
 	.btn-save, .btn-back{
-		font-size: 10px;
-		padding: 6px 4px;
+		font-size: 8px;
+		padding: 4px ;
 	}
 }
 @media (min-width: 1024px) {

@@ -114,15 +114,15 @@ function TopicGroup() {
 						<div className={cx('text')}>Danh sách sinh viên đăng ký hướng nghiên cứu</div>
 						<div className={cx('frame-year')}>
 
-						<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
-							<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
-                        	<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
-                        	<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
-                        	<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
-							
-						</select>
+							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
+								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
+								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
+								
+							</select>
+						</div>
 					</div>
-				</div>
 
 					<table className={cx('table')}>
 						<thead className={cx('table-header')}>
@@ -133,22 +133,23 @@ function TopicGroup() {
 							</tr>
 						</thead>
 						{
-							data.map(newData => 
-								<tbody key={newData.id}>
-							<tr className={cx('table-inner-row')}>
-								<td className={cx('table-inner-row-content')}>{newData.name}</td>
-								<td className={cx('table-inner-row-content')}>
-									{
-										newData.students.map(dataStudents=>
-											<div key={dataStudents.id}>{dataStudents.name}</div>
-										)
-									}
-								</td>
-								<td className={cx('table-inner-row-content')}>{newData.quantity}</td>
-							</tr>
-							
-						</tbody>
-						)
+							data.length > 0 ?
+								(data.map(newData => 
+									<tbody key={newData.id}>
+								<tr className={cx('table-inner-row')}>
+									<td className={cx('table-inner-row-content')}>{newData.name}</td>
+									<td className={cx('table-inner-row-content')}>
+										{
+											newData.students.map(dataStudents=>
+												<div key={dataStudents.id}>{dataStudents.name}</div>
+											)
+										}
+									</td>
+									<td className={cx('table-inner-row-content')}>{newData.quantity}</td>
+								</tr>
+								
+							</tbody>)) : (<div></div>)
+
 						}
 						
 					</table>
@@ -172,15 +173,15 @@ function TopicGroup() {
 													onChange={handleChangeSelected}
 												>
 													<option >-- Select --</option>
-													{data.map(newData =>
-														<option key={newData.id} value={newData.id}>{newData.name}</option>)}
+													{data.length > 0 ? (data.map(newData =>
+														<option key={newData.id} value={newData.id}>{newData.name}</option>)) : (<div></div>)}
 												</select>
 											</div>
 										</div>
 									</div>
 									<div className={cx('item-wrap')}>
 										<div className={cx('item-title')}>Danh sách sinh viên</div>
-										{filterHNC.map(dataHNC =>
+										{filterHNC.length > 0 ? (filterHNC.map(dataHNC =>
 											dataHNC.students.map(dataStudents=>
 												{const handleAddStudentWithLogging = () => {
 													setIdStudent(dataStudents.id)
@@ -195,7 +196,7 @@ function TopicGroup() {
 														<button className={cx('btn-add')} onClick={handleAddStudentWithLogging}>Thêm</button>
 													</div>
 												);}
-										))
+										))) : (<div></div>)
 										}
 									</div>
 								</div>
@@ -222,7 +223,7 @@ function TopicGroup() {
 										<div className={cx('item-title')}>Thành viên được chọn(*)</div>
 										{showNotify && <div className={cx('notify')}>Thành viên không được để trống</div>}
 
-										{filterHNC.map(newData =>
+										{filterHNC.length > 0 ? (filterHNC.map(newData =>
                                             newData.students.filter(dataStudents =>arrStudents.includes(dataStudents.id)).map((selectedStudent) => (
                                                 <div key={selectedStudent.id} className={cx('item-child')}>
                                                     <div className={cx('item-content')}>
@@ -235,7 +236,7 @@ function TopicGroup() {
 													<button className={cx('btn-del')}  onClick={() => handleDeleteStudent(selectedStudent.id)}>Xóa</button>
 												</div>
                                             ))
-                                        )}
+                                        )) : (<div></div>)}
 									</div>
 								</div>
 							</div>
