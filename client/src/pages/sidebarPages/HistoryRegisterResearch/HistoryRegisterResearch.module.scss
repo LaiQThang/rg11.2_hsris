@@ -2,55 +2,37 @@
     display:flex;
     flex-direction: column;
     align-items: center;
-    padding:25px 0;
-
+    padding:20px 0;
     .table{
         position: relative;
+        width: 90%;
         height: auto;
         background-color: white;
         box-shadow: 4px 4px rgba(0, 0, 0, 0.02);
         overflow: hidden;
         border-radius: 6px;
-        .chose{
-            position: absolute;
-            right:0;
-            top: 25px;
-            padding: 8px 30px;
-            .chose-year{
-                display:flex;
-                align-items: center;
-                padding:3px 10px;
-                border-radius: 5px;
-                border: 0.5px solid #000;
-                background: #FFF;
-                .text{
-                    color: #000;
-                    font-size: 15px;
-                    font-weight: 400;
-                    line-height: normal;
-                    letter-spacing: 0.36px;
-                    margin-right: 5px;
-                }
+        .frame-desc {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            .text-name{
+                flex: 1;
+                font-weight: 400;
+                margin-right: 4px;
             }
-            .option{
-                border-radius: 5px;
-                border: 0.5px solid #000;
-                background: #FFF;
-                padding:0;
-                li{
-                    list-style: none;
-                    color: #000;
-                    text-align: center;
-                    font-size: 13px;
-                    font-weight: 400;
-                    line-height: 18px; /* 184.615% */
-                    cursor: pointer;
-                    &:hover{
-                        background-color: #d9d9d9;
-                    }
+            .frame-year{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .year{
+                    padding: 3px 10px;
+                    border-radius: 5px;
                 }
-                .year-active{
-                    background-color: #FFE4B3;
+                .text{
+                    flex: 1;
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin-right: 4px;
                 }
             }
         }
@@ -63,31 +45,9 @@
         .short{
             margin: 20px 0;
             border: 0.2px solid #393939;
-            padding: 8px 15px;
+            padding: 4px 15px;
             font-weight: 400;
             line-height: 150%;
-        }
-        .footer{
-            width: 100%;
-            display:flex;
-            justify-content: end;
-            .register{
-                flex-shrink: 0;
-                padding: 5px 15px;
-                border:none;
-                background-color: #3241A0;
-                color:#fff;
-                font-size: 16px;
-                border-radius: 3px;
-                text-align: center;
-                font-weight: 600;
-                line-height: 20px;
-                letter-spacing: 2.88px;
-                &:hover{
-                    cursor: pointer;
-                    opacity: 0.8;
-                }
-            }
         }
         .header{
             color: rgba(0, 0, 0, 0.60);
@@ -102,7 +62,6 @@
             background-color: #8793;
         }
         .wrapper{
-            padding: 0 45px 25px 45px;
             .name{
                 margin: 35px 0;
                 color: #000;
@@ -146,7 +105,13 @@
 }
 @media (min-width: 1024px) {
     .table{
-        width: 90%;
+        width: 100%;
+        .text-name{
+            font-size: 18px;
+        }
+        .wrapper{
+            padding: 0 45px 25px 45px;
+        }
         .line-1, .line-2{
             display:flex;
             .text{
@@ -164,6 +129,12 @@
 @media (max-width: 1023px) and (min-width: 744px) {
     .table{
         width: 90%;
+        .text-name{
+            font-size: 17px;
+        }
+        .wrapper{
+            padding: 0 45px 25px 45px;
+        }
         .text{
             font-size: 16px;
         }
@@ -179,7 +150,13 @@
 
 @media (max-width: 743px) {
 	.table{
-        width: 90%;
+        width: 100%;
+        .text-name{
+            font-size: 16px;
+        }
+        .wrapper{
+            padding: 0 25px 25px 25px;
+        }
         .text{
             font-size: 15px;
         }
@@ -188,6 +165,12 @@
         }
         .short{
             font-size: 13px;
+            text-decoration: none;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-line-clamp: 3; /* Number of lines to show */
+            line-clamp: 3; 
         }
     }
 }

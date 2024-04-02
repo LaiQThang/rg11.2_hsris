@@ -4,6 +4,7 @@
     align-items: center;
     .table{
         position: relative;
+        width: 90%;
         height: auto;
         margin-top: 35px;
         background-color: white;
@@ -97,6 +98,8 @@
                 padding:0 20px;
                 border-bottom: solid 2px #999999;
                 text-decoration: none;
+                display: flex;
+                align-items: center;
                 &:hover{
                     background-color: #b5bbed;
                 }
@@ -122,7 +125,6 @@
 }
 @media (min-width: 1024px) {
     .table{
-        width:90%;
         .page-number{
             display:flex;
             align-items: center;
@@ -168,7 +170,6 @@
 }
 @media (max-width: 1023px) and (min-width: 744px) {
     .table{
-        width:90%;
         .page-number{
             display:flex;
             align-items: center;
@@ -212,7 +213,6 @@
 
 @media (max-width: 743px) {
 	.table{
-        width:95%;
         .name{
             margin: 35px 20px;
             color: #000;

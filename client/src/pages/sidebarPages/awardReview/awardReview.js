@@ -24,8 +24,13 @@ function awardReview() {
     const [selectedAward, setSelectedAward] = useState([{ idDT: '', idGT: '' }]);
 	const [activeYear,setActiveYear] = useState('2024');
 	const [award,setAward] = useState([])
+	const [selectedYear, setSelectedYear] = useState('2024');
     const auth = useAuth()
     const tokenBearer = auth.getTokens()
+	const handleYearChange = (event) => {
+        const selectedYearValue = event.target.value;
+        setSelectedYear(selectedYearValue);
+    };
     const handleGetIdAward =(e,value)=>{
         setSelectedAward(prevState => {
             const newState = [...prevState];
@@ -59,36 +64,31 @@ function awardReview() {
     const handleUpdateAward = async()=>{
         let result = Result.updateAward(selectedAward,tokenBearer.access_token)
         if(result){
-            showToast('success','Cập nhật điểm thành công')
+            showToast('success','Cập nhật giải thành công')
         }
         else{
-            showToast('error','Cập nhật điểm thất bại')
+            showToast('error','Cập nhật giải thất bại')
         }
     }
 	const columns = useMemo(()=>[
 		{
 			Header: "Tên đề tài",
-			col: "col-2",
 			accessor: "tenDT"
 		},
 		{
 			Header: "Hướng nghiên cứu",
-			col: "col-3",
 			accessor: "tenHNC"
 		},
 		{
 			Header: "Hội đồng",
-			col: "col-2",
 			accessor: "tenHD"
 		},
 		{
 			Header: "Điểm",
-			col: "col-2",
 			accessor: "TongDiem"
 		},
         {
             Header: "Xét giải",
-            col: "col-2",
             accessor: 'idDT',
             Cell: ({ value }) => {
                 return (
@@ -101,24 +101,24 @@ function awardReview() {
                 );}
         }
 	],[award])
-	const isSmallScreen = useMediaQuery({ maxWidth: 713 });
-	const isLargeSmallScreen = useMediaQuery({ minWidth: 714, maxWidth: 846 });
+	const isSmallScreen = useMediaQuery({ maxWidth: 540 });
+	const isLargeSmallScreen = useMediaQuery({ minWidth: 541, maxWidth: 846 });
   	const isMediumScreen = useMediaQuery({ minWidth: 847, maxWidth: 1023 });
     if (isSmallScreen) {
-      columns.splice(2,3)
+      columns.splice(1,3)
     }
 	else if(isMediumScreen){
-		columns.splice(2,1)
+		columns.splice(1,2)
 	}
 	else if(isLargeSmallScreen){
-		columns.splice(2,2)
+		columns.splice(1,2)
 	}
 	const itemsPerPage = 5;
 	const totalItems = data.length;
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
-	const displayedData = data.slice(startIndex, endIndex)
+	const displayedData =data.slice(startIndex, endIndex)
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -126,9 +126,6 @@ function awardReview() {
 		rows,
 		prepareRow,
 	  } = useTable({ columns, data: displayedData },useBlockLayout);
-	const handleActiveYear = (e)=>{
-		setActiveYear(e)
-	}
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
 	  };
@@ -158,10 +155,10 @@ function awardReview() {
 		fetchApi().then((data)=>{
 			setData(data.data)
 		})
-	},[activeYear]) 
+	},[selectedYear]) 
     const fetchApi = async ()=>{
        let result
-	   result = Result.getPointAdmin(activeYear,tokenBearer.access_token)
+	   result = Result.getPointAdmin(selectedYear,tokenBearer.access_token)
 	   return result
     }
 	return (
@@ -170,23 +167,18 @@ function awardReview() {
 			<div className= {cx('table')}>
 				<div className={cx('header')}>Quản lý điểm - Xét giải</div>
 				<div className={cx('line')}></div>
-				<div className={cx('box-year')}>
-                    <div className={cx('name')}>Danh mục điểm thống kê theo HNC năm học </div>
-                    <div className={cx('chose')}>
-                        <div className={cx('chose-year')}>
-                            <div className={cx('text')}>Năm học</div>
-                            <FontAwesomeIcon icon={showYear ? faAngleUp : faAngleDown} onClick={handleShowYear}/>
-                        </div>
-                        {
-                            showYear && (<ul className={cx('option')}>
-                            <li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
-                            <li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
-                            <li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>2023-2024</li>
-                        </ul>)
-                        }
-                    </div>
-                </div>
-				<div className={cx('grid')}>
+				<div className={cx('frame-desc')}>
+						<div className={cx('text-name')}>Danh mục điểm thống kê theo HNC năm học</div>
+						<div className={cx('frame-year')}>
+							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
+								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
+								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
+							</select>
+						</div>
+				</div>
+				{data.length > 0 ? (<><div className={cx('grid')}>
 					<table {...getTableProps()}>
 						<thead>
 							{headerGroups.map(headerGroup => (
@@ -239,7 +231,7 @@ function awardReview() {
 					<button className ={cx('button')} onClick={goToNextPage} disabled={currentPage === totalPages}>
 						<FontAwesomeIcon icon={faAngleRight}/>
 					</button>
-     			</div>
+     			</div></>) : (<div style={{textAlign : 'center',padding: '10px'}}>Không có dữ liệu của năm {selectedYear}</div>)}
 			</div>
 		</div>
 	);

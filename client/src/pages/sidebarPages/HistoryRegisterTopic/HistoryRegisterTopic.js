@@ -12,22 +12,20 @@ const cx = classNames.bind(Styles)
 function HistoryRegisterTopic() {
     const [data,setData] = useState([])
 	const [showYear,setShowYear] =  useState(false)
-	const [activeYear,setActiveYear] = useState('2024');
+	const [selectedYear, setSelectedYear] = useState('2024');
 	const auth = useAuth()
 	const tokenBearer = auth.getTokens()
-	const handleShowYear = ()=>{
-		setShowYear(!showYear)
-	}
-	const handleActiveYear = (e)=>{
-			setActiveYear(e)
-	}
+	const handleYearChange = (event) => {
+        const selectedYearValue = event.target.value;
+        setSelectedYear(selectedYearValue);
+    };
 	useEffect(()=>{
         fetchApi().then((res)=>{
 			setData(res.data);
 		})
-    },[activeYear])
+    },[selectedYear])
     const fetchApi = async ()=>{
-        let result = Result.getHistoryRegisterTopic(activeYear,tokenBearer.access_token)
+        let result = Result.getHistoryRegisterTopic(selectedYear,tokenBearer.access_token)
 		return result
     }
 	const steps = [
@@ -58,18 +56,16 @@ function HistoryRegisterTopic() {
 				<div className={cx('header')}>Quản lý đề tài - Lịch sử đăng kí</div>
 				<div className={cx('line')}></div>
 				<div className={cx('grid')}>
-				<div className={cx('chose')}> 
-					<div className={cx('chose-year')}>
-						<div className={cx('text')}>Năm học</div>
-						<FontAwesomeIcon icon={showYear ? faAngleUp : faAngleDown} onClick={handleShowYear}/>
-					</div>
-					{
-						showYear && (<ul className={cx('option')}>
-						<li className={cx(activeYear === '2022' && 'year-active')} onClick ={()=> handleActiveYear('2022')}>2021-2022</li>
-						<li className={cx(activeYear === '2023' && 'year-active')} onClick ={()=> handleActiveYear('2023')}>2022-2023</li>
-						<li className={cx(activeYear === '2024' && 'year-active')} onClick ={()=> handleActiveYear('2024')}>&2023-2024</li>
-					</ul>)
-					}
+				<div className={cx('frame-desc')}>
+						<div className={cx('text-name')}>Lịch sử đăng ký đề tài</div>
+						<div className={cx('frame-year')}>
+							<select className={cx('year')} id="year" name="year" onChange={handleYearChange}>
+								<option className={cx(selectedYear === '2021' && 'year-active')} value="2021">2020-2021</option>
+								<option className={cx(selectedYear === '2022' && 'year-active')} value="2022">2021-2022</option>
+								<option className={cx(selectedYear === '2023' && 'year-active')} value="2023">2022-2023</option>
+								<option className={cx(selectedYear === '2024' && 'year-active')} value="2024">2023-2024</option>
+							</select>
+						</div>
 					</div>
 					<div className={cx('name-1')}>Theo dõi đề tài</div>
 					<div className={cx('progress')}>
@@ -90,18 +86,18 @@ function HistoryRegisterTopic() {
 								<label className={cx('text')}>Tên đề tài: </label>
 								<div className={cx('content')}>{data.tenDT}</div>
 							</div>
-							<div className={cx('research-name-1')}>
+							<div className={cx('research-name')}>
 								<div className={cx('text')}>Ngày lập: </div>
 								<div className={cx('content')}>{data.ngayLap}</div>
 							</div>
 						</div>
-						<div className={cx('line-2')}>
+						<div className={cx('line-1')}>
 							<div className={cx('research-name')}>
 								<div className={cx('text')}>Ngày hoàn thành: </div>
 								<div className={cx('content')}>{data.ngayHoanThanh ? data.ngayHoanThanh : 'Chưa hoàn thành'}</div>
 							</div>
 						</div>
-						<div className={cx('line-2')}>
+						<div className={cx('line-1')}>
 							<div className={cx('research-name')}>
 								<div className={cx('text')}>Đạt giải: </div>
 								<div className={cx('content', 'cup')}>{data.giai_thuong ? data.giai_thuong.tenGiai : 'Bạn chưa đạt giải'}</div>
@@ -128,7 +124,7 @@ function HistoryRegisterTopic() {
 						<button className={cx('destroy') }>Hủy</button>
 					</div> */}
 				</div>)
-		):  <div style={{textAlign :"center"}}>{`Không có dữ liệu của năm ${activeYear}`} </div>}
+		):  <div style={{textAlign :"center"}}>{`Không có dữ liệu của năm ${selectedYear}`} </div>}
     			</div>
 			
 			</div>
