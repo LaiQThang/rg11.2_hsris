@@ -40,7 +40,7 @@ function DetailResearch(){
                     if(res){
                     showToast('success', 'Đăng kí thành công!');
                     setTimeout(()=>{
-                        return window.location.href = 'http://localhost:3000/historyRegisterResearch';
+                        return window.location.href = '/historyRegisterResearch';
                     },2000)
 
                     } else{

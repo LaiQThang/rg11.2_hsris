@@ -147,36 +147,45 @@ function RegisterTopic() {
 				</div>
 				{
 					activeChose === 'recommend' ? ( data.length > 0  ? (
-						<div className={cx('table-content')}>
-								<table {...getTableProps()}>
-								<thead>
-									{headerGroups.map(headerGroup => (
-									<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-										<th>STT</th>
-										{headerGroup.headers.map(column => (
-										<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`} >{column.render("Header")}</th>
-										))}
-									</tr>
-									))}
-								</thead>
-								<tbody {...getTableBodyProps()}>
-									{rows.map((row,rowIndex)=> {
-									prepareRow(row);
-									return (
-										<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
-											<td>{rowIndex + 1}</td>
-											{row.cells.map(cell => (
-												<td {...cell.getCellProps()} >
-													<Link className={cx('link')} to ={`/detailTopic/${row.original.id}`}>
-														{cell.render('Cell')}
-													</Link></td>
-											))}
-										</tr>
-									);
-									})}
-								</tbody>
-							</table>
-						</div>
+						<div className={cx('content')}>
+						<table className={cx('table')}>
+							<thead className={cx('table-header')}>
+								<tr className={cx('table-header-row')}>
+									<th className={cx('table-header-cell')}>STT</th>
+									<th className={cx('table-header-cell')}>Tên đề tài</th>
+									<th className={cx('table-header-cell')}>Tóm tắt</th>
+									<th className={cx('table-header-cell')}>Mục tiêu</th>
+									<th className={cx('table-header-cell')}>Phạm vi</th>
+								</tr>
+							</thead>
+							<tbody>
+								{displayedData.map((data,index)=>(
+									<tr className={cx('table-inner-row')} key ={index}>
+										<td className={cx('table-inner-row-content')}>
+											<div className={cx('name-topic')}>{index + 1}</div>
+										</td>
+										<td className={cx('table-inner-row-content')}><Link to={`/detailTopic/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.name}</div></Link></td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailTopic/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.summary}</div></Link>
+										
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailTopic/${data.id}`} className={cx('link')}><div className={cx('name-topic')}>{data.target}</div></Link>
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<Link to={`/detailTopic/${data.id}`} className={cx('link')}>
+										<div className={cx('name-topic')}>{data.limit}</div>
+											</Link>
+										</td>
+										
+								</tr>
+									
+								))}
+							</tbody>
+						</table>
+					</div>
 					) : (<div className={cx('message')}>Hiện chưa có đề tài gợi ý!</div>)
 							) : (
 							<div>

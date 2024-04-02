@@ -161,6 +161,7 @@ function awardReview() {
 	   result = Result.getPointAdmin(selectedYear,tokenBearer.access_token)
 	   return result
     }
+	console.log(displayedData);
 	return (
 		<div className={cx('container')}>
             <ToastContainer/>
@@ -178,38 +179,52 @@ function awardReview() {
 							</select>
 						</div>
 				</div>
-				{data.length > 0 ? (<><div className={cx('grid')}>
-					<table {...getTableProps()}>
-						<thead>
-							{headerGroups.map(headerGroup => (
-					
-							<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-								<th>STT</th>
-								{headerGroup.headers.map(column => (
-								<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-2`}>{column.render("Header")}</th>
-								))}
-							</tr>
-							))}
-						</thead>
-						<tbody {...getTableBodyProps()}>
-							{rows.map((row,rowIndex) => {
-							prepareRow(row);
-							return (
-								<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
-									<td>{rowIndex + 1}</td>
-									{row.cells.map(cell => (
-										<td {...cell.getCellProps()} >
-											<div key ={row.values.id} className={cx('link')}>
-												{cell.render('Cell')}
-											</div>
-										</td>
-									))}
+				{data.length > 0 ? (<><div className={cx('content')}>
+						<table className={cx('table')}>
+							<thead className={cx('table-header')}>
+								<tr className={cx('table-header-row')}>
+									<th className={cx('table-header-cell')}>STT</th>
+									<th className={cx('table-header-cell')}>Tên đề tài</th>
+									<th className={cx('table-header-cell')}>Hướng nghiên cứu</th>
+									<th className={cx('table-header-cell')}>Hội đồng</th>
+									<th className={cx('table-header-cell')}>Điểm</th>
+									<th className={cx('table-header-cell')}>Xét giải</th>
 								</tr>
-							);
-							})}
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+								{displayedData.map((data,index)=>(
+									<tr className={cx('table-inner-row')} key ={index}>
+<td className={cx('table-inner-row-content')}>
+											<div className={cx('name-topic')}>{index + 1}</div>
+										</td>
+										<td className={cx('table-inner-row-content')}><div className={cx('name-topic')}>{data.tenDT}</div></td>
+										<td className={cx('table-inner-row-content')}>
+										<div className={cx('name-topic')}>{data.tenHNC}</div>
+										
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<div className={cx('name-topic')}>{data.tenHD}</div>
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<div className={cx('name-topic')}>{data.TongDiem}</div>
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<select className={cx('reward')} onChange={e=>handleGetIdAward(e)}>
+                        <option>-Chọn giải-</option>
+                        {award.map(item => (
+                            <option key={item.id} value ={item.id}>{item.name}</option>
+                        ))}
+                    </select>
+										</td>
+										
+								</tr>
+									
+								))}
+							</tbody>
+						</table>
+					</div>
                 <div className={cx('footer')}>
 						<button className={cx('register')} onClick ={handleUpdateScore}>Cập nhật điểm</button>
                         <button className={cx('register')} onClick ={handleUpdateAward}>Cập nhật giải</button>
