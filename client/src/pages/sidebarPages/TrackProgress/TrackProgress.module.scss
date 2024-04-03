@@ -98,6 +98,19 @@
                     }
                     .chose-file{
                         display:flex;
+                        .text-link{
+                            text-decoration: underline;
+                            font-size: 16px;
+                            font-weight: 700;
+                            letter-spacing: 0.36px;
+                            padding-right: 4px;
+                            cursor: pointer;
+                        }
+                        .text-upload{
+                            font-size: 16px;
+                            font-weight: 400;
+                            letter-spacing: 0.36px;
+                        }
                     }
                 }
                 .load-file{
@@ -509,35 +522,17 @@ td {
 	}
 }
 @media (min-width: 1024px) {
-	.text-link{
-        font-size: 16px;
-    }
-    .text-upload{
-        font-size: 16px;
-    }
     .modal-pw{
         min-width: 70%
     }
 }
 @media (max-width: 1023px) and (min-width: 744px) {
-	.text-link{
-        font-size: 15px;
-    }
-    .text-upload{
-        font-size: 15px;
-    }
     .modal-pw{
         min-width: 75%
     }
 }
 
 @media (max-width: 743px) {
-	.text-link{
-        font-size: 13px;
-    }
-    .text-upload{
-        font-size: 13px;
-    }
 
     .modal{
         font-size: 80%;
@@ -545,16 +540,4 @@ td {
             min-width: 85%
         }
     }
-}
-.text-link{
-	text-decoration: underline;
-	font-weight: 700;
-	letter-spacing: 0.36px;
-	padding-right: 4px;
-	cursor: pointer;
-}
-.text-upload{
-	font-weight: 400;
-	letter-spacing: 0.36px;
-	text-align: center;
 }
