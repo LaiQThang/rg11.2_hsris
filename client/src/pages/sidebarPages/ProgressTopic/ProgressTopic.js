@@ -225,34 +225,48 @@ function ProgressTopic() {
 				<div className={cx('line')}></div>
 				<div className={cx('table-progress')}>
 					<div className={cx('title')}>Tiến độ đề tài </div>
-					{data.length > 0 ? (<><div className={cx('table')}>
-						<table {...getTableProps()} className={cx('table-inside')}>
-								<thead>
-									{headerGroups.map(headerGroup => (
-									<tr {...headerGroup.getHeaderGroupProps() } className={cx('grid-title')}>
-										{headerGroup.headers.map(column => (
-										<th {...column.getHeaderProps()} scope="row" className={`${column.col} p-3`} >{column.render("Header")}</th>
-										))}
-									</tr>
-									))}
-								</thead>
-								<tbody {...getTableBodyProps()}>
-									{rows.map(row => {
-									prepareRow(row);
-									return (
-										<tr {...row.getRowProps()} className={cx(row.values.id % 2 === 0 ? 'grid-content' : 'grid-content-light')}>
-											{row.cells.map(cell => (
-												<td {...cell.getCellProps()} >
-													<Link className={cx('link')}>
-														{cell.render('Cell')}
-													</Link></td>
-											))}
-										</tr>
-									);
-									})}
-								</tbody>
-							</table>
-							</div>
+					{data.length > 0 ? (<><div className={cx('content')}>
+						<table className={cx('table')}>
+							<thead className={cx('table-header')}>
+								<tr className={cx('table-header-row')}>
+									<th className={cx('table-header-cell')}>STT</th>
+									<th className={cx('table-header-cell')}>Tiến độ</th>
+									<th className={cx('table-header-cell')}>Hạn đến</th>
+									<th className={cx('table-header-cell')}>Tình trạng</th>
+									<th className={cx('table-header-cell')}>Ghi chú</th>
+									<th className={cx('table-header-cell')}>Nộp báo cáo</th>
+								</tr>
+							</thead>
+							<tbody>
+								{data.map((data,index)=>(
+									<tr className={cx('table-inner-row')} key ={index}>
+<td className={cx('table-inner-row-content')}>
+											<div className={cx('name-topic')}>{index + 1}</div>
+										</td>
+										<td className={cx('table-inner-row-content')}><div className={cx('name-topic')}>{data.tenBC}</div></td>
+										<td className={cx('table-inner-row-content')}>
+										<div className={cx('name-topic')}>{data.ngayKetThuc}</div>
+											
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										
+										{data.tinhTrang === 0 ? <div className={cx('wait')}>Chờ</div> : <div className={cx('done')}>Hoàn thành</div>}
+										</td>
+										<td className={cx('table-inner-row-content')}>
+										<div >{data.ghiChu === null ? 'Không có' : data.note}</div>
+										</td>
+										
+										<td className={cx('table-inner-row-content')}>
+										<button className = {cx('button')} onClick = {()=>handleSubmitReport(data.idBC) }>
+							{check === 0 ? 'Đã nộp' : 'Nộp'}
+						</button>
+										</td>
+								</tr>
+									
+								))}
+							</tbody>
+						</table>
+					</div>
 							<div className={cx('page-number')}>
 								<button className ={cx('button')} onClick={goToPreviousPage} disabled={currentPage === 1}>
 									<FontAwesomeIcon icon={faAngleLeft}/>
