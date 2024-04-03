@@ -56,7 +56,7 @@ class BaoCaoDeTaiController extends Controller
             }
             else
             {
-                $list = detai::where('idGV', $this->getidGV())->whereYear('ngayLap', request()->y)->get();
+                $list = detai::with('bienban')->where('idGV', $this->getidGV())->whereYear('ngayLap', request()->y)->get();
             }
                 return new DeTaiCollection($list);
         }catch(Exception $e){

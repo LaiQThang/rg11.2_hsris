@@ -79,4 +79,8 @@ class detai extends Model
         return $this->belongsTo(ct_baocaodetai::class, 'idDT', 'idDT');
     }
     
+    public function bienban() : BelongsTo
+    {
+        return $this->belongsTo(bienbanphancong::class, 'idBB', 'idBB' );
+    }
 }

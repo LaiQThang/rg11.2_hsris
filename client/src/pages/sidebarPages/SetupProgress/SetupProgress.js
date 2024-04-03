@@ -150,7 +150,7 @@ function SetupProgress() {
 			setData(data.data)
 		})
 	},[selectedYear])
-
+console.log(data);
 	return (
 		<div className={cx('wrapper')}>
 			<ToastContainer/>
@@ -185,7 +185,9 @@ function SetupProgress() {
 												value={idGroupName}
 											>
 												{data.map(newData =>
-													<option key={newData.idBB} value={newData.idBB}>{newData.idBB}</option>)}
+												newData.idBB ? (<option key={newData.idBB} value={newData.idBB}>{newData.bienban.name}</option>) : ''
+													// <option key={newData.idBB} value={newData.bienban ? newData.bienban.name : ''}>{newData.bienban ? newData.bienban.name : ''}</option>)}
+													)}
 											</select>
 										</div>
 									</div>
