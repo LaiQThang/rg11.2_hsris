@@ -43,7 +43,7 @@ function awardReview() {
             return newState.filter(item => item.idDT !== '' && item.idGT !== '');
         });
     }
-    
+	console.log(selectedAward);
     const dataToSend = [];
     data.forEach(item => {
         const newDataItem = {
@@ -211,7 +211,7 @@ function awardReview() {
 										<div className={cx('name-topic')}>{data.TongDiem}</div>
 										</td>
 										<td className={cx('table-inner-row-content')}>
-										<select className={cx('reward')} onChange={e=>handleGetIdAward(e)}>
+										<select className={cx('reward')} onChange={e=>handleGetIdAward(e,data.idDT)}>
                         <option>-Chọn giải-</option>
                         {award.map(item => (
                             <option key={item.id} value ={item.id}>{item.name}</option>
