@@ -203,7 +203,7 @@ function TrackProgress() {
 												<tr className={cx('table-inner-row')} key ={data.id}>
 												<td className={cx('table-inner-row-content')}>{data.tenSV}</td>
 												<td className={cx('table-inner-row-content')}>
-												<a href={'https://drive.google.com/file/d/' + data.fileTaiNguyen + '/view'} className={cx('data')}>{<FontAwesomeIcon className={cx('icon-data')} icon={faFileLines}/>}</a>
+													<a href={data.fileTaiNguyen} className={cx('data')}>{<FontAwesomeIcon className={cx('icon-data')} icon={faFileLines}/>}</a>
 												</td>
 												<td className={cx('table-inner-row-content')}>
 												<div className={cx('date-deadline')}>
