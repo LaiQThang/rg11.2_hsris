@@ -121,5 +121,13 @@ Route::group([
         Route::get('/researchTeacher', [ValidateViewController::class, 'Research']);
         Route::get('/report', [ValidateViewController::class, 'checkReport']);
     });
+
 });
 
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'infoStudents'
+], function() {
+    Route::get('/', [SinhVienController::class, 'listStudents']);
+    Route::get('/info', [SinhVienController::class, 'infoStudents']);
+});

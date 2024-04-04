@@ -32,7 +32,7 @@ class BulkStoreSinhVienRequest extends FormRequest
             '*.class' => ['required'],
             '*.status' => ['required', Rule::in(['0', '1', '2', '3'])],
             '*.favorite' => ['nullable'],
-            '*.birthday' => ['required', 'date_format:Y-m-d'],
+            '*.birthday' => ['nullable', 'date_format:Y-m-d'],
             '*.idCard' => ['nullable'],
             '*.phone' => ['nullable'],
             '*.email' => ['nullable'],

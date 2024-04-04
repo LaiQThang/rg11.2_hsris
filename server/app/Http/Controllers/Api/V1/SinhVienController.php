@@ -96,4 +96,9 @@ class SinhVienController extends Controller
     {
         //
     }
+
+    public function listStudents()
+    {
+        return new SinhVienCollection(sinhvien::all());
+    }
 }
