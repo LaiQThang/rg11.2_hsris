@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\GiangVienCollection;
 use App\Models\Api\V1\GiangVienModel;
 use App\Models\giangvien;
 use Exception;
@@ -24,5 +25,10 @@ class GiangVienController extends Controller
         catch(Exception $e){
             return response()->json(['message' => 'Error query'], 500);
         }
+    }
+
+    public function listStudents()
+    {
+        return new GiangVienCollection(giangvien::all());
     }
 }

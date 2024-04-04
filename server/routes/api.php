@@ -17,9 +17,11 @@ use App\Http\Controllers\Api\V1\HoiDongController;
 use App\Http\Controllers\Api\V1\HuongNghienCuuController;
 use App\Http\Controllers\Api\V1\NhanXetDeTaiController;
 use App\Http\Controllers\Api\V1\permissionController;
+use App\Http\Controllers\Api\V1\StudentController;
 use App\Http\Controllers\Api\V1\XetDuyetAdminController;
 use App\Http\Controllers\Api\V1\ValidateViewController;
 use App\Http\Controllers\Authentication\V1\AuthController;
+use App\Models\Auth\GiangVien;
 use App\Models\permission;
 use App\Models\permission_detail;
 use App\Models\permission_list;
@@ -128,6 +130,13 @@ Route::group([
     'middleware' => ['api'],
     'prefix' => 'infoStudents'
 ], function() {
-    Route::get('/', [SinhVienController::class, 'listStudents']);
-    Route::get('/info', [SinhVienController::class, 'infoStudents']);
+    Route::get('/', [StudentController::class, 'listStudents']);
+    Route::get('/info', [StudentController::class, 'infoStudents']);
+});
+
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'infoTeacher'
+], function() {
+    Route::get('/', [GiangVienController::class, 'listStudents']);
 });
