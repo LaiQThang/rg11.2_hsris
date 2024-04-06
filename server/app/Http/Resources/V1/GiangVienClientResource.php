@@ -15,6 +15,7 @@ class GiangVienClientResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id_GV' => $this->idGV,
             'name' => $this->tenGV,
             'avatar' => $this->anhDD,
             'code' => $this->maGV,

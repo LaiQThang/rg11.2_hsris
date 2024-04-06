@@ -131,6 +131,7 @@ Route::group([
     'prefix' => 'infoStudents'
 ], function() {
     Route::get('/', [StudentController::class, 'listStudents']);
+    Route::get('/search', [StudentController::class, 'searchStudents']);
     Route::get('/info', [StudentController::class, 'infoStudents']);
 });
 
@@ -138,5 +139,9 @@ Route::group([
     'middleware' => ['api'],
     'prefix' => 'infoTeacher'
 ], function() {
-    Route::get('/', [GiangVienController::class, 'listStudents']);
+    Route::get('/', [GiangVienController::class, 'listTeachers']);
+    Route::get('/info', [GiangVienController::class, 'infoTeacher']);
+    Route::get('/search', [GiangVienController::class, 'searchTeacher']);
+    Route::post('/add', [GiangVienController::class, 'addTeacher']);
+    Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher']);
 });
