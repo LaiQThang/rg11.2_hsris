@@ -27,7 +27,7 @@ class StoreSinhVienRequest extends FormRequest
             'code' => ['required'],
             'name' => ['required'],
             'avatar' => ['nullable'],
-            'className' => ['nullable'],
+            'className' => ['required'],
             'status' => ['required', Rule::in(['0', '1', '2', '3'])],
             'favorite' => ['nullable'],
             'birthday' => ['nullable', 'date_format:Y-m-d'],
@@ -36,7 +36,7 @@ class StoreSinhVienRequest extends FormRequest
             'email' => ['nullable'],
             'sex' => ['nullable'],
             'address' => ['nullable'],
-            'passWord' => ['required'],
+            'passWord' => ['nullable'],
             'permissionId' => ['nullable'],
         ];
     }
@@ -56,6 +56,12 @@ class StoreSinhVienRequest extends FormRequest
             'diaChi' => $this->address,
             'matKhau' => Hash::make($this->passWord),
         ]);
+        if($this->passWord)
+        {
+            $this->merge([
+                'matKhau' => Hash::make($this->passWord)
+            ]);
+        }
     }
 }
 
