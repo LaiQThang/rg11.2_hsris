@@ -158,5 +158,4 @@ Route::group([
     Route::get('/list', [PermissionAdminController::class, 'permissionList']);
     Route::get('/detail', [PermissionAdminController::class, 'permissionDetail']);
     Route::post('/edit', [PermissionAdminController::class, 'editPermission']);
-    // Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher']);
 });

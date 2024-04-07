@@ -25,32 +25,35 @@ class PermissionAdminController extends Controller
 
     public function permissionDetail()
     {
-        return new PermissionCollection(permission::with('permissionList')->get());
+        $id = request()->id;
+        return new PermissionCollection(permission::with('permissionList')->where('id', $id)->get());
     }
 
-    public function editPermission()
+    public function editPermission(Request $request)
     {
         try{
-            $permissionArr = request()->all();
-            $arrDelete = [];
-            foreach($permissionArr as $key => $permission)
+            $id = request()->id;
+            $permission = permission::find($id);
+            $postDataArr = $request->permissionDetail;
+            if(!empty($permission))
             {
-                $response = permission_detail::where('permission_id', $key)->get();
-                if($response)
+                $permission->update([
+                    'tenQuyen' => $request->namePermission,
+                    'ghiChu' => $request->note
+                ]);
+                $permissionDetail = permission_detail::where('permission_id', $id)->get('id');
+                if(!empty($permissionDetail))
                 {
-                    $arrDelete[] = $response->toArray();
+                    $arrayDetail = $permissionDetail->toArray();
                 }
-                foreach($permission as $value)
+                foreach($postDataArr as $value)
                 {
                     permission_detail::create([
-                        'permission_id' => $key,
-                        'permission_list_id' => $value
+                        'permission_id' => $id,
+                        'permission_list_id' => $value,
                     ]);
                 }
-            }
-            foreach($arrDelete as $delete)
-            {
-                foreach($delete as $value)
+                foreach($arrayDetail as $value)
                 {
                     permission_detail::destroy($value['id']);
                 }
