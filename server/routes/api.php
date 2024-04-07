@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\V1\HNCSinhVienController;
 use App\Http\Controllers\Api\V1\HoiDongController;
 use App\Http\Controllers\Api\V1\HuongNghienCuuController;
 use App\Http\Controllers\Api\V1\NhanXetDeTaiController;
+use App\Http\Controllers\Api\V1\PermissionAdminController;
 use App\Http\Controllers\Api\V1\permissionController;
 use App\Http\Controllers\Api\V1\StudentController;
 use App\Http\Controllers\Api\V1\XetDuyetAdminController;
@@ -144,4 +145,16 @@ Route::group([
     Route::get('/search', [GiangVienController::class, 'searchTeacher']);
     Route::post('/add', [GiangVienController::class, 'addTeacher']);
     Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher']);
+});
+
+
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'permissionadmin'
+], function() {
+    Route::get('/', [PermissionAdminController::class, 'permission']);
+    Route::get('/list', [PermissionAdminController::class, 'permissionList']);
+    Route::get('/detail', [PermissionAdminController::class, 'permissionDetail']);
+    Route::post('/edit', [PermissionAdminController::class, 'editPermission']);
+    // Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher']);
 });
