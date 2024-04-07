@@ -101,4 +101,20 @@ class GiangVienController extends Controller
             return response()->json(['message' => 'Error', 'status' => 500], 500);
         }
     }
+
+    public function editTeacher(StoreGiangVienRequest $request)
+    {
+        try{
+            $teacher = giangvien::find($request->id_GV);
+            if(!empty($teacher))
+            {
+                $teacher->update($request->all());
+                return response()->json(['message' => 'Success', 'status' => 200], 200);
+            }
+            return response()->json(['message' => 'Teacher null', 'status' => 500], 500);
+
+        } catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 'status' => 500], 500);
+        }
+    }
 }

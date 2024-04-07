@@ -6,6 +6,7 @@ use App\Models\sinhvien;
 use Illuminate\Http\Request;
 use App\Filters\V1\SinhVienFilter;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\StoreSinhVienRequest;
 use App\Http\Resources\V1\DeTaiCollection;
 use App\Http\Resources\V1\SinhVienCollection;
 use App\Http\Resources\V1\SinhVienResource;
@@ -54,6 +55,22 @@ class StudentController extends Controller
                 "Message" => $e,
                 "Status" => 500
             ], 500);
+        }
+    }
+
+    public function editStudents(StoreSinhVienRequest $request)
+    {
+        try{
+            $student = sinhvien::find($request->id);
+            if(!empty($student))
+            {
+                $student->update($request->all());
+                return response()->json(['message' => 'Success', 'status' => 200], 200);
+            }
+            return response()->json(['message' => 'Student null', 'status' => 500], 500);
+
+        } catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 'status' => 500], 500);
         }
     }
 }

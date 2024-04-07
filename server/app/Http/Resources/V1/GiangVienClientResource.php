@@ -22,10 +22,11 @@ class GiangVienClientResource extends JsonResource
             'dateOfBirth' => $this->ngaySinh,
             'email' => $this->email,
             'phone' => $this->soDT,
-            'addres' => $this->diaChi,
+            'address' => $this->diaChi,
             'sex' => $this->gioiTinh,
             'level' => $this->trinhDo,
             'special' => $this->chuyenNganh,
+            'password' => $this->matKhau,
             'permissionId' => $this->permissionId,
         ];
     }

@@ -134,6 +134,7 @@ Route::group([
     Route::get('/', [StudentController::class, 'listStudents']);
     Route::get('/search', [StudentController::class, 'searchStudents']);
     Route::get('/info', [StudentController::class, 'infoStudents']);
+    Route::post('/edit', [StudentController::class, 'editStudents']);
 });
 
 Route::group([
@@ -145,6 +146,7 @@ Route::group([
     Route::get('/search', [GiangVienController::class, 'searchTeacher']);
     Route::post('/add', [GiangVienController::class, 'addTeacher']);
     Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher']);
+    Route::post('/edit', [GiangVienController::class, 'editTeacher']);
 });
 
 
