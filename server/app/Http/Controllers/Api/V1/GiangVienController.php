@@ -58,7 +58,7 @@ class GiangVienController extends Controller
             $detai = $teacher->deTai()->with('HNC', 'giaiThuong')->get();
             $array['topic'] = $detai;
             
-            $hnc = $teacher->giangVien_CTHNCGV()->get();
+            $hnc = $teacher->giangVien_CTHNCGV()->with('deTai')->get();
             $array['research'] = $hnc;
 
             return response()->json([
