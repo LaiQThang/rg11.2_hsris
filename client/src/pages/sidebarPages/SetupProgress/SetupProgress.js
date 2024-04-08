@@ -111,9 +111,9 @@ function SetupProgress() {
 						if (res) {
 							setCheckSubmit(true)
 							setProgressList([]);
-							showToast('success', 'Đăng kí thành công!');
+							showToast('success', 'Tạo tiến độ thành công!');
 						} else {
-							showToast('error', 'Đăng kí thất bại!');
+							showToast('error', 'Tạo tiến độ thất bại!');
 						}
 						console.log(res);
 					})
