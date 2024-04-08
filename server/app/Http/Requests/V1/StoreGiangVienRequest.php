@@ -45,7 +45,6 @@ class StoreGiangVienRequest extends FormRequest
             'soDT' => $this->phone,
             'gioiTinh' => $this->sex,
             'diaChi' => $this->address,
-            'matKhau' => Hash::make($this->passWord)
         ]);
         if(isset($this->passWord))
         {
