@@ -21,6 +21,20 @@
 	padding: 2px 8px 26px;
 }
 //heading
+.list-btn{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.item-btn{
+	font-size: 16px;
+	background-color: #3242A0;
+	padding: 12px 20px;
+	text-decoration: none;
+	color: #ffffff;
+	text-align: center;
+}
 .frame-desc {
 	display: flex;
 	align-items: center;
@@ -79,12 +93,14 @@ td {
 }
 
 .icon{
-    padding: 8px 20px;
+    padding: 6px 20px;
     font-size: 20px;
     font-weight: 200;
     border-radius: 4px;
     background-color: #D9D9D9;
     margin: 0 2px;
+	color: #000;
+	border: none;
 }
 .btn-add,
 .btn-del,
@@ -128,6 +144,9 @@ td {
 		padding: 2px 8px 26px;
 	}
 	//heading
+	.item-btn{
+		font-size: 11px;
+	}
 	.frame-desc {
 		display: flex;
 		align-items: center;
@@ -169,6 +188,10 @@ td {
 		padding: 2px 8px 26px;
 	}
 	//heading
+	.item-btn{
+		padding: 8px 10px;
+		font-size: 11px;
+	}
 	.frame-desc {
 		display: flex;
 		align-items: center;

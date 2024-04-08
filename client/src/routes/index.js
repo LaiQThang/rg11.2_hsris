@@ -39,6 +39,9 @@ import AddStudent from '~/pages/sidebarPages/AddStudent/AddStudent';
 import AddTeacher from '~/pages/sidebarPages/AddTeacher/AddTeacher';
 import PermissionType from '~/pages/sidebarPages/PermissionType/PermissionType';
 import Decentralization from '~/pages/sidebarPages/Decentralization/Decentralization';
+import AddStudentFile from '~/pages/sidebarPages/AddStudentFile/AddStudentFile';
+import AddTeacherFile from '~/pages/sidebarPages/AddTeacherFile/AddTeacherFile';
+
 const publicRoutes = [
 	{ path: config.routes.home, component: Home, auth: RequireAuth },
 	{ path: config.routes.notification, component: Notification, auth: RequireAuth },
@@ -79,6 +82,8 @@ const publicRoutes = [
 	{ path: config.routes.addTeacher, component: AddTeacher, auth: RequireAuth },
 	{ path: config.routes.permissionType, component: PermissionType, auth: RequireAuth },
 	{ path: config.routes.decentralization, component: Decentralization, auth: RequireAuth },
+	{ path: config.routes.addStudentFile, component: AddStudentFile, auth: RequireAuth },
+	{ path: config.routes.addTeacherFile, component: AddTeacherFile, auth: RequireAuth },
 
 ];
 const privateRoutes = [];

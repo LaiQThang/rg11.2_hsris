@@ -38,7 +38,9 @@ const routes = {
 	detailReviewTopic: '/detailReviewTopic/:id',
 	awardReview: '/awardReview',
 	addStudent: '/addStudent',
+	addStudentFile: '/addStudentFile',
 	addTeacher: '/addTeacher',
+	addTeacherFile: '/addTeacherFile',
 	permissionType: '/permissionType',
 	decentralization: '/decentralization/:id',
 

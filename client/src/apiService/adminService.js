@@ -12,7 +12,7 @@ export const postAddStudent = async(code, name,className, status,birthday, phone
             email: email,
             sex: sex,
             address: address,
-            password: password,
+            passWord: password,
             idCard : idCard,
             permissionId: "7fb1b312-1841-45ef-8f82-c572a08b2410",
         }
@@ -42,7 +42,7 @@ export const postAddTeacher = async(code, name,birthday, phone, email, sex, addr
             email: email,
             sex: sex,
             address: address,
-            password: password,
+            passWord: password,
             permissionId: "d289c64a-176f-45e0-aa48-49f1fdb8d965",
         }
         const header = {
@@ -53,15 +53,13 @@ export const postAddTeacher = async(code, name,birthday, phone, email, sex, addr
                  'Authorization':` Bearer ${tokenBearer}`
             },
         }
-        const res = await request.post('/v1/students', array,header)
+        const res = await request.post('/infoTeacher/add', array,header)
         return res.data
     }
     catch(e){
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
-
-
 export const getPermissionAdmin = async()=>{
     try{
         const header = {

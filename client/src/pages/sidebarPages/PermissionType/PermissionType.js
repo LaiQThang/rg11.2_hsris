@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -45,6 +46,13 @@ function PermissionType() {
             <div className={cx('inner')}>
                 <div className={cx('name-page')}>Quản lý tài khoản - Loại quyền</div>
                 <div className={cx('frame-container')}>
+                <div className={cx('list-btn')}>
+                    <Link  className={cx('item-btn')}to={config.routes.addStudent}>Thêm sinh viên</Link>
+                    <Link  className={cx('item-btn')}to={config.routes.addTeacher}>Thêm giảng viên</Link>
+                    <Link  className={cx('item-btn')}to={config.routes.addStudentFile}>Nhập file sinh viên</Link>
+                    <Link  className={cx('item-btn')}to={config.routes.addTeacherFile}>Nhập file giảng viên</Link>
+                    <Link  className={cx('item-btn')}to={config.routes.permissionType}>Loại quyền</Link>
+                </div>
                     <div className={cx('frame-desc')}>
 						<div className={cx('text')}>Loại quyền</div>
 						<button className={cx('btn-add')} onClick={handleAddPermission}>Thêm</button>

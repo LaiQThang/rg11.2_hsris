@@ -4,13 +4,11 @@ import { showToast } from '~/Components/ToastMessage/Toast';
 import { ToastContainer } from 'react-toastify';
 import * as Result from '~/apiService/adminService'
 import { useAuth } from "~/Components/Auth";
-import styles from './AddStudent.module.scss'
-import * as XLSX from 'xlsx';
-import config from '~/config';
-import { Link } from 'react-router-dom';
+import styles from './AddTeacher.module.scss'
 const cx = classNames.bind(styles)
 
-function AddStudent() {
+function AddTeacherFile() {
+    
     const [idSV,setIDSV] = useState('')
     const [name,setName] = useState('')
     const [birthday,setBirthday] = useState('')
@@ -22,6 +20,8 @@ function AddStudent() {
     const [phone,setPhone] = useState('')
     const [address,setAddress] = useState('')
     const [adminiClass, setAdminiClass] = useState('')
+    const [arr, setArr] = useState([])
+
     const auth = useAuth()
 	const tokenBearer = auth.getTokens()
 
@@ -61,13 +61,12 @@ function AddStudent() {
 
     const handleAddStudent = () => {
         const show = window.confirm("Bạn có chắc chắn với lựa chọn này?");
-        console.log(idSV,name,adminiClass, status,birthday, phone,email, sex,address,password,CCCD);
 		if (show) {
-
 			posthApi()
 				.then((res) => {
 					if (res) {
 						showToast('success', 'Thêm sinh viên thành công!');
+                        console.log(idSV,name,adminiClass, status,birthday, phone,email, sex,address,password,CCCD);
 					} else {
 						showToast('error', 'Thêm sinh viên thất bại!');
 					}
@@ -78,8 +77,7 @@ function AddStudent() {
 				});
 		}
     }
- 
-    //POST API
+     //POST API
 	const posthApi = async () => {
 		try {
 			const result = await Result.postAddStudent(idSV,name,adminiClass, status,birthday, phone,email, sex,address,password,CCCD, tokenBearer.access_token);
@@ -88,24 +86,17 @@ function AddStudent() {
 			console.error('Đã xảy ra lỗi khi gửi dữ liệu:', error);
 			throw error;
 		}
-	}  
-
+	}
     return ( 
         <div className={cx('wrapper')}>
         <ToastContainer/>
         <div className={cx('inner')}>
             <div className={cx('name-page')}>Quản lý sinh viên - Thêm sinh viên</div>
             <div className={cx('frame-container')}>
-            <div className={cx('list-btn')}>
-                    <Link  className={cx('item-btn')}to={config.routes.addStudent}>Thêm sinh viên</Link>
-                    <Link  className={cx('item-btn')}to={config.routes.addTeacher}>Thêm giảng viên</Link>
-                    <Link  className={cx('item-btn')}to={config.routes.addStudentFile}>Nhập file sinh viên</Link>
-                    <Link  className={cx('item-btn')}to={config.routes.addTeacherFile}>Nhập file giảng viên</Link>
-                    <Link  className={cx('item-btn')}to={config.routes.permissionType}>Loại quyền</Link>
-                </div>
                 <div className={cx('frame-desc')}>
                     <div className={cx('text')}>Thêm sinh viên</div>
                 </div>
+                    <form className={cx('table')}>
                     <div className={cx('border')}>
                     <div className={cx('content')}>
                         <div className={cx('content-list-card')}>
@@ -138,9 +129,9 @@ function AddStudent() {
                             </div>
                             <div className={cx('content-item-card')}>
                             <div className={cx('item')}>
-                                <div className={cx('item-title')}>Lớp hành chính</div>
+                                <div className={cx('item-title')}>Email</div>
                                 <div className={cx('item-content')}>
-                                <input value={adminiClass} onChange={handleSetAdminiClass} className={cx('input')} type='text' required/>
+                                <input value={email} onChange={handleSetEmail} className={cx('input')} type='email' required/>
                                 </div>
                             </div>
                             </div>
@@ -148,12 +139,11 @@ function AddStudent() {
                         <div className={cx('content-list-card')}>
                             <div className={cx('content-item-card')}>
                             <div className={cx('item')}>
-                                <div className={cx('item-title')}>Email</div>
+                                <div className={cx('item-title')}>Lớp hành chính</div>
                                 <div className={cx('item-content')}>
-                                <input value={email} onChange={handleSetEmail} className={cx('input')} type='email' required/>
+                                <input value={adminiClass} onChange={handleSetAdminiClass} className={cx('input')} type='text' required/>
                                 </div>
                             </div>
-                            
                             </div>
                             <div className={cx('content-item-card')}>
                             <div className={cx('item')}>
@@ -238,13 +228,11 @@ function AddStudent() {
                     </div>
 
                 </div>
-
-
-                
+                    </form>
             </div>
         </div>
     </div>
-    );
+     );
 }
 
-export default AddStudent;
+export default AddTeacherFile;
