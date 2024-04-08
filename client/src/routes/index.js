@@ -35,6 +35,10 @@ import RequireAuth from '~/Components/Auth/RequiedAuth';
 import addResearch from '~/pages/sidebarPages/addResearch/addResearch';
 import detailReviewTopic from '~/pages/sidebarPages/detailReviewTopic/detailReviewTopic';
 import awardReview from '~/pages/sidebarPages/awardReview/awardReview';
+import AddStudent from '~/pages/sidebarPages/AddStudent/AddStudent';
+import AddTeacher from '~/pages/sidebarPages/AddTeacher/AddTeacher';
+import PermissionType from '~/pages/sidebarPages/PermissionType/PermissionType';
+import Decentralization from '~/pages/sidebarPages/Decentralization/Decentralization';
 const publicRoutes = [
 	{ path: config.routes.home, component: Home, auth: RequireAuth },
 	{ path: config.routes.notification, component: Notification, auth: RequireAuth },
@@ -71,6 +75,11 @@ const publicRoutes = [
 	{ path: config.routes.addCouncil, component: AddCouncil, auth: RequireAuth },
 	{ path: config.routes.detailReviewTopic, component: detailReviewTopic, auth: RequireAuth },
 	{ path: config.routes.awardReview, component: awardReview, auth: RequireAuth },
+	{ path: config.routes.addStudent, component: AddStudent, auth: RequireAuth },
+	{ path: config.routes.addTeacher, component: AddTeacher, auth: RequireAuth },
+	{ path: config.routes.permissionType, component: PermissionType, auth: RequireAuth },
+	{ path: config.routes.decentralization, component: Decentralization, auth: RequireAuth },
+
 ];
 const privateRoutes = [];
 

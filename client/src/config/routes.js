@@ -37,6 +37,11 @@ const routes = {
 	reviewTopic: '/reviewTopic',
 	detailReviewTopic: '/detailReviewTopic/:id',
 	awardReview: '/awardReview',
+	addStudent: '/addStudent',
+	addTeacher: '/addTeacher',
+	permissionType: '/permissionType',
+	decentralization: '/decentralization/:id',
+
 };
 
 export default routes;
