@@ -31,7 +31,7 @@ class StoreGiangVienRequest extends FormRequest
             'email' => ['nullable'],
             'sex' => ['required'],
             'address' => ['nullable'],
-            'passWord' => ['required'],
+            'passWord' => ['nullable'],
             'permissionId' => ['nullable'],
         ];
     }
@@ -47,5 +47,11 @@ class StoreGiangVienRequest extends FormRequest
             'diaChi' => $this->address,
             'matKhau' => Hash::make($this->passWord)
         ]);
+        if(isset($this->passWord))
+        {
+            $this->merge([
+                'matKhau' => Hash::make($this->passWord)
+            ]);
+        }
     }
 }
