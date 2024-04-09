@@ -38,7 +38,6 @@ class PermissionAdminController extends Controller
             if(!empty($permission))
             {
                 $permission->update([
-                    'tenQuyen' => $request->namePermission,
                     'ghiChu' => $request->note
                 ]);
                 $permissionDetail = permission_detail::where('permission_id', $id)->get('id');
