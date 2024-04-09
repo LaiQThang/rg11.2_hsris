@@ -40,14 +40,7 @@ const routes = {
 	studentManagement:'/studentManagement',
 	teacherManagement:'/teacherManagement',
 	detailStudent:'/detailStudent/:id',
-	detailTeacher:'/detailTeacher/:id',
-	addStudent: '/addStudent',
-	addStudentFile: '/addStudentFile',
-	addTeacher: '/addTeacher',
-	addTeacherFile: '/addTeacherFile',
-	permissionType: '/permissionType',
-	decentralization: '/decentralization/:id'
-
+	detailTeacher:'/detailTeacher/:id'
 };
 
 export default routes;
