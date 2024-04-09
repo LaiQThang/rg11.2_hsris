@@ -157,3 +157,25 @@ export const getDetailPermissionAdmin = async(id)=>{
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
+export const postUpdatePermission = async(id,namePermission,permissionDetail,tokenBearer )=>{
+    try{
+        const array = {
+            id: id,
+            namePermission: namePermission,
+            permissionDetail: permissionDetail
+        }
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                 'Authorization':` Bearer ${tokenBearer}`
+            },
+        }
+        const res = await request.post('/permissionadmin/edit', array,header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
