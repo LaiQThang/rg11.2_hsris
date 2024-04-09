@@ -129,7 +129,7 @@ Route::group([
     });
 
     Route::group([
-        // 'middleware' => ['permissionValidate'],
+        'middleware' => ['permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m'],
         'prefix' => 'infoStudents'
     ], function () {
         Route::get('/', [StudentController::class, 'listStudents']);
@@ -139,20 +139,19 @@ Route::group([
     });
 
     Route::group([
-        // 'middleware' => ['permissionValidate:1'],
         'prefix' => 'infoTeacher'
     ], function () {
         Route::get('/', [GiangVienController::class, 'listTeachers']);
         Route::get('/info', [GiangVienController::class, 'infoTeacher']);
-        Route::get('/search', [GiangVienController::class, 'searchTeacher']);
-        Route::post('/add', [GiangVienController::class, 'addTeacher']);
-        Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher']);
-        Route::post('/edit', [GiangVienController::class, 'editTeacher']);
+        Route::get('/search', [GiangVienController::class, 'searchTeacher'])->middleware('permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m');
+        Route::post('/add', [GiangVienController::class, 'addTeacher'])->middleware('permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m');
+        Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher'])->middleware('permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m');
+        Route::post('/edit', [GiangVienController::class, 'editTeacher'])->middleware('permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m');
     });
 
 
     Route::group([
-        // 'middleware' => ['api'],
+        'middleware' => ['permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m'],
         'prefix' => 'permissionadmin'
     ], function () {
         Route::get('/', [PermissionAdminController::class, 'permission']);

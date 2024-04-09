@@ -97,14 +97,14 @@ export const postAddListTeacher = async(data, tokenBearer )=>{
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
-export const getPermissionAdmin = async()=>{
+export const getPermissionAdmin = async(tokenBearer)=>{
     try{
         const header = {
 
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                    //'Authorization': `Bearer ${tokenBearer}`
+                    'Authorization': `Bearer ${tokenBearer}`
             },
 
         }
@@ -116,14 +116,14 @@ export const getPermissionAdmin = async()=>{
     }
 }
 
-export const getListPermissionAdmin = async()=>{
+export const getListPermissionAdmin = async(tokenBearer)=>{
     try{
         const header = {
 
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                    //'Authorization': `Bearer ${tokenBearer}`
+                'Authorization': `Bearer ${tokenBearer}`
             },
 
         }
@@ -135,7 +135,7 @@ export const getListPermissionAdmin = async()=>{
     }
 }
 
-export const getDetailPermissionAdmin = async(id)=>{
+export const getDetailPermissionAdmin = async(id, tokenBearer)=>{
     try{
 
         const header = {
@@ -143,7 +143,7 @@ export const getDetailPermissionAdmin = async(id)=>{
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                    //'Authorization': `Bearer ${tokenBearer}`
+                    'Authorization': `Bearer ${tokenBearer}`
             },
             params:{
                 id:id,
