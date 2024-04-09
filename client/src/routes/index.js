@@ -39,7 +39,6 @@ import studentManagement from '~/pages/sidebarPages/studentManagement/studentMan
 import teacherManagement from '~/pages/sidebarPages/teacherManagement/teacherManagement';
 import detailStudent from '~/pages/sidebarPages/detailStudent/detailStudent';
 import detailTeacher from '~/pages/sidebarPages/detailTeacher/detailTeacher';
-
 const publicRoutes = [
 	{ path: config.routes.home, component: Home, auth: RequireAuth },
 	{ path: config.routes.notification, component: Notification, auth: RequireAuth },
