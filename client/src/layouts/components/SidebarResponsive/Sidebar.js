@@ -158,25 +158,32 @@ function Sidebar() {
 							<MenuItem text={'Quản lý phân quyền'} to={config.routes.addStudent} />
 						</div>
 					</ParentMenuItem>
-					<ParentMenuItem icon={faBox} text="Quản lý chung">
-						<div className={cx('menu-frame')}>
-							<MenuItem text={'Thêm hướng nghiên cứu'} to={config.routes.addResearch} />
-							<MenuItem text={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
-						</div>
-					</ParentMenuItem>
-					<ParentMenuItem icon={faMortarBoard} text="Quản lý hội đồng">
-						<div className={cx('menu-frame')}>
-							{/*<MenuItem text={'Phân công giảng viên'} to={config.routes.appointmentOfTeacher}/>*/}
-							<MenuItem text={'Thêm hội đồng'} to={config.routes.addCouncil} />
-						</div>
-					</ParentMenuItem>
-					<ParentMenuItem icon={faMortarBoard} text="Quản lý giải">
-						<div className={cx('menu-frame')}>
-							<MenuItem text={'Xét giải'} to={config.routes.awardReview} />
-						</div>
-					</ParentMenuItem>
+					
 							</>
 						)
+					}
+					{
+						permission === 'quanly' && (
+						<>
+							<ParentMenuItem icon={faBox} text="Quản lý chung">
+							<div className={cx('menu-frame')}>
+								<MenuItem text={'Thêm hướng nghiên cứu'} to={config.routes.addResearch} />
+								<MenuItem text={'Xét duyệt đề tài'} to={config.routes.reviewTopic} />
+							</div>
+						</ParentMenuItem>
+						<ParentMenuItem icon={faMortarBoard} text="Quản lý hội đồng">
+							<div className={cx('menu-frame')}>
+								{/*<MenuItem text={'Phân công giảng viên'} to={config.routes.appointmentOfTeacher}/>*/}
+								<MenuItem text={'Thêm hội đồng'} to={config.routes.addCouncil} />
+							</div>
+						</ParentMenuItem>
+						<ParentMenuItem icon={faMortarBoard} text="Quản lý giải">
+							<div className={cx('menu-frame')}>
+								<MenuItem text={'Xét giải'} to={config.routes.awardReview} />
+							</div>
+						</ParentMenuItem>
+						</>
+					)
 					}
 				</Menu>
 			</div>
