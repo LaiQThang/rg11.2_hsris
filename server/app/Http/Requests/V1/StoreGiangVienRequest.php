@@ -46,7 +46,7 @@ class StoreGiangVienRequest extends FormRequest
             'gioiTinh' => $this->sex,
             'diaChi' => $this->address,
         ]);
-        if(isset($this->passWord))
+        if(!empty($this->passWord))
         {
             $this->merge([
                 'matKhau' => Hash::make($this->passWord)
