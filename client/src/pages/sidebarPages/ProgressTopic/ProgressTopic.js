@@ -287,7 +287,7 @@ function ProgressTopic() {
 					</div>
 				{
 					showReportForm && (
-						<div className={cx('modal')} row ={selectedRow}>
+						<div className={cx('modal')}>
                             <div className={cx('overlay')}></div>
                             <div className ={cx('modal-pw')}>
 								<FontAwesomeIcon className={cx('icon-close')} icon={faClose} onClick = {()=>setShowReportForm(false)}/>
