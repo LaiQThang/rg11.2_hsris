@@ -70,6 +70,7 @@
                 margin-bottom: 20px;
                 .research-name{
                     display:flex;
+                    flex-direction: column;
                     min-width: 60%;
                     margin-bottom: 20px;
                     .content{

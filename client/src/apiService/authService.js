@@ -36,25 +36,6 @@ export const profileStudent = async (username,tokenBearer) => {
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
     }
 };
-export const updateProfileStudent = async (username,tokenBearer) => {
-    try {
-        const user = {
-            email: username,
-        };
-        const header = {
-
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${tokenBearer}`
-            }
-        }
-        const res = await request.post('/auth/update-profile', user, header,);
-        return res.data;
-    } catch (error) {
-        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
-    }
-};
 export const detailTopic = async (tokenBearer,id) => {
     try {
         const config= {
@@ -686,7 +667,6 @@ export const getHistoryRegisterTopic = async(year,tokenBearer)=>{
 
         }
         const res = await request.get('/v1/ct-detai',header)
-        console.log(res);
         return res.data
     }
     catch(e){
@@ -735,7 +715,38 @@ export const postAddCouoncil = async(tenHD, ngayCham,diaDiem, ghiChu,topicArr, t
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
     }
 }
+export const updateProfileStudent = async (data) => {
+    try {
+        const header = {
 
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'Authorization': `Bearer ${tokenBearer}`
+            }
+        }
+        const res = await request.post('/infoStudents/edit', data, header,);
+        return res.data;
+    } catch (error) {
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
+    }
+};
+export const updateProfileTeacher = async (data) => {
+    try {
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'Authorization': `Bearer ${tokenBearer}`
+            }
+        }
+        const res = await request.post('/infoTeacher/edit', data, header,);
+        return res.data;
+    } catch (error) {
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
+    }
+};
 export const checkReport = async(idBC, tokenBearer)=>{
     try{
         const header = {
@@ -769,6 +780,164 @@ export const getValiResearch= async(tokenBearer)=>{
 
         }
         const res = await request.get('/v1/valit/research',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const getAllStudent= async(tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const res = await request.get('/infoStudents',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const getDetailStudent= async(id)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'Authorization': `Bearer ${tokenBearer}`
+            },
+            params : {
+                id:id
+            }
+
+        }
+        const res = await request.get('/infoStudents/info',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const getDetailTeacher= async(id)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'Authorization': `Bearer ${tokenBearer}`
+            },
+            params : {
+                id:id
+            }
+
+        }
+        const res = await request.get('/infoTeacher/info',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const getAllTeacherManagement= async(tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const res = await request.get('/infoTeacher',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const getAllPermissionadmin= async(tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const res = await request.get('/permissionadmin',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const getDetailAward= async(tokenBearer)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const res = await request.get('/v1/giai-thuong-sv',header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const searchTeacher= async(name)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const res = await request.get('/infoTeacher/search',{
+            params: {
+                'name[lk]': name,
+            },
+        },header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const searchStudent= async(name)=>{
+    try{
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // 'Authorization': `Bearer ${tokenBearer}`
+            },
+
+        }
+        const res = await request.get('/infoStudents/search',{
+            params: {
+                'name[lk]': name,
+            },
+        },header)
         return res.data
     }
     catch(e){

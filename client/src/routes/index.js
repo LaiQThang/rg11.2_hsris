@@ -35,6 +35,10 @@ import RequireAuth from '~/Components/Auth/RequiedAuth';
 import addResearch from '~/pages/sidebarPages/addResearch/addResearch';
 import detailReviewTopic from '~/pages/sidebarPages/detailReviewTopic/detailReviewTopic';
 import awardReview from '~/pages/sidebarPages/awardReview/awardReview';
+import studentManagement from '~/pages/sidebarPages/studentManagement/studentManagement';
+import teacherManagement from '~/pages/sidebarPages/teacherManagement/teacherManagement';
+import detailStudent from '~/pages/sidebarPages/detailStudent/detailStudent';
+import detailTeacher from '~/pages/sidebarPages/detailTeacher/detailTeacher';
 const publicRoutes = [
 	{ path: config.routes.home, component: Home, auth: RequireAuth },
 	{ path: config.routes.notification, component: Notification, auth: RequireAuth },
@@ -71,6 +75,10 @@ const publicRoutes = [
 	{ path: config.routes.addCouncil, component: AddCouncil, auth: RequireAuth },
 	{ path: config.routes.detailReviewTopic, component: detailReviewTopic, auth: RequireAuth },
 	{ path: config.routes.awardReview, component: awardReview, auth: RequireAuth },
+	{ path: config.routes.studentManagement, component: studentManagement, auth: RequireAuth },
+	{ path: config.routes.teacherManagement, component: teacherManagement, auth: RequireAuth },
+	{ path: config.routes.detailStudent, component: detailStudent, auth: RequireAuth },
+	{ path: config.routes.detailTeacher, component: detailTeacher, auth: RequireAuth },
 ];
 const privateRoutes = [];
 
