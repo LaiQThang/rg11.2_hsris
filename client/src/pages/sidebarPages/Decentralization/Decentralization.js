@@ -57,7 +57,7 @@ function Decentralization() {
 	}
     const permissionDetail = dataPermission.map(value => value.permissionDetail)
     const handleUpdatePermission = ()=>{
-        let result = Result.postUpdatePermission(id,"admin",listPermission,tokenBearer.access_token)
+        let result = Result.postUpdatePermission(id,listPermission,tokenBearer.access_token)
         if(result){
             callApi()
             .then(function(res){

@@ -47,6 +47,8 @@ const routes = {
 	addTeacherFile: '/addTeacherFile',
 	permissionType: '/permissionType',
 	decentralization: '/decentralization/:id',
+	// all
+	showDetailTeacher:'/showDetailTeacher/:id'
 };
 
 export default routes;
