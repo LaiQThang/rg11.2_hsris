@@ -149,7 +149,8 @@ function Sidebar() {
 							<>
 							<ParentMenuItem icon={faBox} text="Quản lý tài khoản">
 						<div className={cx('menu-frame')}>
-							<MenuItem text={'Quản lý phân quyền'} to={config.routes.addStudent} />
+							<MenuItem text={'Quản lý sinh viên'} to={config.routes.studentManagement} />
+							<MenuItem text={'Quản lý giảng viên'} to={config.routes.teacherManagement} />
 						</div>
 					</ParentMenuItem>
 					<ParentMenuItem icon={faBox} text="Quản lý chung">
