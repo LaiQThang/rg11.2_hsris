@@ -38,7 +38,7 @@ class CTHuongNghienCuuModel extends ApiModel
             if($id != null)
             {
                 // dd(123);
-                $inputArray = GiangVien::find($idGV)->giangVien_CTHNC()
+                $inputArray = giangvien::find($idGV)->giangVien_CTHNC()
                                                     ->where('ct_hnc.idHNC', '=', $id)
                                                     ->whereYear('ngayTao', '=', $year)
                                                     ->with(['hNCSinhVien' => function ($query) use ($idGV) {
@@ -48,7 +48,7 @@ class CTHuongNghienCuuModel extends ApiModel
             }
             else
             {
-                $inputArray = GiangVien::find($idGV)->giangVien_CTHNC()
+                $inputArray = giangvien::find($idGV)->giangVien_CTHNC()
                                                     ->whereYear('ngayTao', '=', $year)
                                                     ->with(['hNCSinhVien' => function ($query) use ($idGV) {
                                                 $query->wherePivot('idGV', '=', $idGV)

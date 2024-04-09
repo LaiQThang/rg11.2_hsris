@@ -30,7 +30,14 @@ class ApiFilter {
             
             foreach($operators as $operator){
                 if(isset($query[$operator])){
-                    $eloQuery[] = [$column, $this->operatorMap[$operator], $query[$operator]];
+                    if($operator == 'lk')
+                    {
+                        $eloQuery[] = [$column, $this->operatorMap[$operator], '%' .$query[$operator] .'%'];
+                    }
+                    else
+                    {
+                        $eloQuery[] = [$column, $this->operatorMap[$operator], $query[$operator]];
+                    }
                 }
             }
             
