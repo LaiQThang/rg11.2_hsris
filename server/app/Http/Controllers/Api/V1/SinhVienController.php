@@ -96,4 +96,5 @@ class SinhVienController extends Controller
     {
         //
     }
+
 }

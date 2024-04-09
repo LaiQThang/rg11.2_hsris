@@ -16,10 +16,13 @@ use App\Http\Controllers\Api\V1\HNCSinhVienController;
 use App\Http\Controllers\Api\V1\HoiDongController;
 use App\Http\Controllers\Api\V1\HuongNghienCuuController;
 use App\Http\Controllers\Api\V1\NhanXetDeTaiController;
+use App\Http\Controllers\Api\V1\PermissionAdminController;
 use App\Http\Controllers\Api\V1\permissionController;
+use App\Http\Controllers\Api\V1\StudentController;
 use App\Http\Controllers\Api\V1\XetDuyetAdminController;
 use App\Http\Controllers\Api\V1\ValidateViewController;
 use App\Http\Controllers\Authentication\V1\AuthController;
+use App\Models\Auth\GiangVien;
 use App\Models\permission;
 use App\Models\permission_detail;
 use App\Models\permission_list;
@@ -121,5 +124,38 @@ Route::group([
         Route::get('/researchTeacher', [ValidateViewController::class, 'Research']);
         Route::get('/report', [ValidateViewController::class, 'checkReport']);
     });
+
 });
 
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'infoStudents'
+], function() {
+    Route::get('/', [StudentController::class, 'listStudents']);
+    Route::get('/search', [StudentController::class, 'searchStudents']);
+    Route::get('/info', [StudentController::class, 'infoStudents']);
+    Route::post('/edit', [StudentController::class, 'editStudents']);
+});
+
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'infoTeacher'
+], function() {
+    Route::get('/', [GiangVienController::class, 'listTeachers']);
+    Route::get('/info', [GiangVienController::class, 'infoTeacher']);
+    Route::get('/search', [GiangVienController::class, 'searchTeacher']);
+    Route::post('/add', [GiangVienController::class, 'addTeacher']);
+    Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher']);
+    Route::post('/edit', [GiangVienController::class, 'editTeacher']);
+});
+
+
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'permissionadmin'
+], function() {
+    Route::get('/', [PermissionAdminController::class, 'permission']);
+    Route::get('/list', [PermissionAdminController::class, 'permissionList']);
+    Route::get('/detail', [PermissionAdminController::class, 'permissionDetail']);
+    Route::post('/edit', [PermissionAdminController::class, 'editPermission']);
+});

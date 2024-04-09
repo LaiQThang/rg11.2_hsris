@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests\V1;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSinhVienRequest extends FormRequest
+class StoreGiangVienRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +26,10 @@ class StoreSinhVienRequest extends FormRequest
             'code' => ['required'],
             'name' => ['required'],
             'avatar' => ['nullable'],
-            'className' => ['required'],
-            'status' => ['required', Rule::in(['0', '1', '2', '3'])],
-            'favorite' => ['nullable'],
             'birthday' => ['nullable', 'date_format:Y-m-d'],
-            'idCard' => ['nullable'],
             'phone' => ['nullable'],
             'email' => ['nullable'],
-            'sex' => ['nullable'],
+            'sex' => ['required'],
             'address' => ['nullable'],
             'passWord' => ['nullable'],
             'permissionId' => ['nullable'],
@@ -43,20 +38,15 @@ class StoreSinhVienRequest extends FormRequest
     
     protected function prepareForValidation() {
         $this->merge([
-            'maSV' => $this->code,
-            'tenSV' => $this->name,
+            'maGV' => $this->code,
+            'tenGV' => $this->name,
             'anhDD' => $this->avatar,
-            'lopHC' => $this->className,
-            'tinhTrang' => $this->status,
-            'soThich' => $this->favorite,
             'ngaySinh' => $this->birthday,
-            'soCCCD' => $this->idCard,
             'soDT' => $this->phone,
             'gioiTinh' => $this->sex,
             'diaChi' => $this->address,
-            'matKhau' => Hash::make($this->passWord),
         ]);
-        if($this->passWord)
+        if(isset($this->passWord))
         {
             $this->merge([
                 'matKhau' => Hash::make($this->passWord)
@@ -64,4 +54,3 @@ class StoreSinhVienRequest extends FormRequest
         }
     }
 }
-

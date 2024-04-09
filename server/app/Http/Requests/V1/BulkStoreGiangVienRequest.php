@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BulkStoreSinhVienRequest extends FormRequest
+class BulkStoreGiangVienRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,11 +29,7 @@ class BulkStoreSinhVienRequest extends FormRequest
             '*.code' => ['required'],
             '*.name' => ['required'],
             '*.avatar' => ['nullable'],
-            '*.class' => ['required'],
-            '*.status' => ['required', Rule::in(['0', '1', '2', '3'])],
-            '*.favorite' => ['nullable'],
             '*.birthday' => ['nullable', 'date_format:Y-m-d'],
-            '*.idCard' => ['nullable'],
             '*.phone' => ['nullable'],
             '*.email' => ['nullable'],
             '*.sex' => ['required'],
@@ -48,15 +44,11 @@ class BulkStoreSinhVienRequest extends FormRequest
         // dd($this->toArray());
 
         foreach($this->toArray() as $obj){
-            $obj['idSV'] = \Ramsey\Uuid\Uuid::uuid4()->toString();
-            $obj['maSV'] = $obj['code'] ?? null;
-            $obj['tenSV'] = $obj['name'] ?? null;
+            $obj['idGV'] = \Ramsey\Uuid\Uuid::uuid4()->toString();
+            $obj['maGV'] = $obj['code'] ?? null;
+            $obj['tenGV'] = $obj['name'] ?? null;
             $obj['anhDD'] = $obj['avatar'] ?? null;
-            $obj['lopHC'] = $obj['class'] ?? null;
-            $obj['tinhTrang'] = $obj['status'] ?? null;
-            $obj['soThich'] = $obj['favorite'] ?? null;
             $obj['ngaySinh'] = $obj['birthday'] ?? null;
-            $obj['soCCCD'] = $obj['idCard'] ?? null;
             $obj['soDT'] = $obj['phone'] ?? null;
             $obj['gioiTinh'] = $obj['sex'] ?? null;
             $obj['diaChi'] = $obj['address'] ?? null;
