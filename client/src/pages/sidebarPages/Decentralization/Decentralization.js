@@ -23,7 +23,7 @@ function Decentralization() {
     console.log(dataPermission);
     const fetchApi = async ()=>{
 		let result
-		result = await Result.getListPermissionAdmin()
+		result = await Result.getListPermissionAdmin(tokenBearer.access_token)
 		return result
 	}
     useEffect(()=>{
@@ -52,7 +52,7 @@ function Decentralization() {
 
     const fetchApiPermission = async ()=>{
 		let result
-		result = await Result.getDetailPermissionAdmin(id)
+		result = await Result.getDetailPermissionAdmin(id, tokenBearer.access_token)
 		return result
 	}
     const permissionDetail = dataPermission.map(value => value.permissionDetail)
