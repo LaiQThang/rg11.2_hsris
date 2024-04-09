@@ -17,73 +17,69 @@ function AddTeacherFile() {
     const [jsonData, setJsonData] = useState(null);
 
     const handleFileUpload = event => {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-  
-      reader.onload = event => {
-        const binaryData = event.target.result;
-        const workbook = XLSX.read(binaryData, { type: 'binary' });
-  
-        const sheetName = workbook.SheetNames[0];
-        const sheet = workbook.Sheets[sheetName];
-  
-        const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-        const headers = data[0];
-        const jsonData = [];
-  
-        for (let i = 1; i < data.length; i++) {
-          const row = {};
-          for (let j = 0; j < headers.length; j++) {
-            // Kiểm tra nếu trường không có dữ liệu, chuyển thành null
-            const cellValue = data[i][j] !== undefined ? data[i][j] : null;
-            row[headers[j]] = cellValue;
-          }
-          jsonData.push(row);
+        // Kiểm tra xem người dùng đã chọn file hay chưa
+        if (event.target.files && event.target.files.length > 0) {
+          const file = event.target.files[0];
+          const reader = new FileReader();
+          
+          reader.onload = event => {
+            const binaryData = event.target.result;
+            const workbook = XLSX.read(binaryData, { type: 'binary' });
+      
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+      
+            const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const headers = data[0];
+            const jsonData = [];
+      
+            for (let i = 1; i < data.length; i++) {
+              const row = {};
+              for (let j = 0; j < headers.length; j++) {
+                // Kiểm tra nếu trường không có dữ liệu, chuyển thành null
+                const cellValue = data[i][j] !== undefined ? data[i][j] : null;
+                row[headers[j]] = cellValue;
+              }
+              jsonData.push(row);
+            }
+      
+            setJsonData(jsonData);
+          };
+      
+          reader.readAsBinaryString(file);
+        } else {
+          // Xử lý trường hợp người dùng hủy chọn file ở đây
+          console.log('Người dùng đã hủy chọn file.');
         }
-  
-        setJsonData(jsonData);
       };
-  
-      reader.readAsBinaryString(file);
-    };
     const handleAddListTeacher = () => {
         const show = window.confirm("Bạn có chắc chắn với lựa chọn này?");
+        
         if (show) {
-            let successCount = 0; // Số lượng yêu cầu thành công
-            let errorCount = 0; // Số lượng yêu cầu thất bại
-    
-            // Lặp qua mỗi đối tượng trong danh sách và gửi yêu cầu
-            jsonData.forEach(jsonValue => {
-                posthApiLIST(jsonValue.code, jsonValue.name, jsonValue.birthday, jsonValue.phone, jsonValue.email, jsonValue.sex, jsonValue.address, jsonValue.passWord)
-                    .then((res) => {
-                        if (res) {
-                            successCount++; // Tăng số lượng yêu cầu thành công
-                        } else {
-                            errorCount++; // Tăng số lượng yêu cầu thất bại
-                        }
-    
-                        // Kiểm tra nếu đã hoàn thành tất cả yêu cầu
-                        if (successCount + errorCount === jsonData.length) {
-                            // Hiển thị toast sau khi tất cả yêu cầu đã hoàn thành
-                            if (successCount === jsonData.length) {
-                                showToast('success', 'Tất cả giảng viên đã được thêm thành công!');
-                            } else {
-                                showToast('error', 'Có lỗi xảy ra khi thêm giảng viên!');
-                            }
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Lỗi khi xử lý yêu cầu:', error);
-                        showToast('error', 'Đã xảy ra lỗi khi gửi yêu cầu!');
-                    });
-            });
+            posthApiLIST()
+				.then((res) => {
+					if (res) {
+						showToast('success', 'Thêm danh sách giảng viên thành công!');
+					} else {
+						showToast('error', 'Thêm danh sách giảng viên thất bại!');
+					}
+				})
+				.catch((error) => {
+					console.error('Lỗi khi xử lý yêu cầu:', error);
+					showToast('error', 'Đã xảy ra lỗi khi gửi yêu cầu!');
+				});
         }
     };
     
     //POST LIST API
-	const posthApiLIST = async (a,b,c,d,e,f,g,h) => {
+	const posthApiLIST = async () => {
 		try {
-			const result = await Result.postAddTeacher(a,b,c,d,e,f,g,h, tokenBearer.access_token);
+            let dataValue
+            if(jsonData){
+                dataValue = JSON.stringify(jsonData, null, 2)
+            }
+            console.log(dataValue);
+			const result = await Result.postAddListTeacher(dataValue, tokenBearer.access_token);
 			return result;
 		} catch (error) {
 			console.error('Đã xảy ra lỗi khi gửi dữ liệu:', error);
@@ -126,11 +122,6 @@ function AddTeacherFile() {
                     </div>
 
 
-                <div>
-                    {jsonData && (
-                    <pre>{JSON.stringify(jsonData, null, 2)}</pre>
-                    )}
-                </div>
             </div>
         </div>
     </div>

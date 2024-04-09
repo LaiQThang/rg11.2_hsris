@@ -32,6 +32,25 @@ export const postAddStudent = async(code, name,className, status,birthday, phone
     }
 }
 
+export const postAddListStudent = async(data, tokenBearer )=>{
+    try{
+
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                 'Authorization':` Bearer ${tokenBearer}`
+            },
+        }
+        const res = await request.post('/v1/students/bulk', data,header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+
 export const postAddTeacher = async(code, name,birthday, phone, email, sex, address, password, tokenBearer )=>{
     try{
         const array = {
@@ -53,7 +72,25 @@ export const postAddTeacher = async(code, name,birthday, phone, email, sex, addr
                  'Authorization':` Bearer ${tokenBearer}`
             },
         }
-        const res = await request.post('/infoTeacher/add', array,header)
+        const res = await request.post('/v1/infoTeacher/add', array,header)
+        return res.data
+    }
+    catch(e){
+        console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản', e)
+    }
+}
+export const postAddListTeacher = async(data, tokenBearer )=>{
+    try{
+        
+        const header = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                 'Authorization':` Bearer ${tokenBearer}`
+            },
+        }
+        const res = await request.post('/v1/infoTeacher/addbulk', data,header)
         return res.data
     }
     catch(e){
@@ -71,7 +108,7 @@ export const getPermissionAdmin = async()=>{
             },
 
         }
-        const res = await request.get('/permissionadmin',header)
+        const res = await request.get('/v1/permissionadmin',header)
         return res.data
     }
     catch(e){
@@ -90,7 +127,7 @@ export const getListPermissionAdmin = async()=>{
             },
 
         }
-        const res = await request.get('/permissionadmin/list',header)
+        const res = await request.get('/v1/permissionadmin/list',header)
         return res.data
     }
     catch(e){
@@ -113,7 +150,7 @@ export const getDetailPermissionAdmin = async(id)=>{
             }
 
         }
-        const res = await request.get('/permissionadmin/detail',header)
+        const res = await request.get('/v1/permissionadmin/detail',header)
         return res.data
     }
     catch(e){
