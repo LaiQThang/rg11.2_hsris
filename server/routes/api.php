@@ -143,7 +143,7 @@ Route::group([
     ], function () {
         Route::get('/', [GiangVienController::class, 'listTeachers']);
         Route::get('/info', [GiangVienController::class, 'infoTeacher']);
-        Route::get('/search', [GiangVienController::class, 'searchTeacher'])->middleware('permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m');
+        Route::get('/search', [GiangVienController::class, 'searchTeacher']);
         Route::post('/add', [GiangVienController::class, 'addTeacher'])->middleware('permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m');
         Route::post('/addbulk', [GiangVienController::class, 'addBulkTeacher'])->middleware('permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m');
         Route::post('/edit', [GiangVienController::class, 'editTeacher'])->middleware('permissionValidate:$2y$10$xuam0FmtkUoyZqmnqA1FEeNfhFXXfh9UJSNRzEDWZVuA9uNyWL44m');
