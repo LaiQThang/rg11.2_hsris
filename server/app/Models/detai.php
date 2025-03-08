@@ -83,4 +83,9 @@ class detai extends Model
     {
         return $this->belongsTo(bienbanphancong::class, 'idBB', 'idBB' );
     }
+
+    public function sinhvien() : BelongsToMany
+    {
+        return $this->belongsToMany(sinhvien::class, 'ct_detai', 'idDT', 'idSV');
+    }
 }

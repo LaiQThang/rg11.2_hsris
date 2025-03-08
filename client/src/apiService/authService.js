@@ -317,7 +317,7 @@ export const updateScore = async (data,tokenBearer) => {
             'Authorization': `Bearer ${tokenBearer}`
         },
     }
-    const res = await request.post('v1/giaithuong/capnhatdiem',data,config);
+    const res = await request.post('/v1/giaithuong/capnhatdiem',data,config);
     return res.data;
     }
     catch (error)
@@ -334,7 +334,7 @@ export const updateAward = async (data,tokenBearer) => {
             'Authorization': `Bearer ${tokenBearer}`
         },
     }
-    const res = await request.post('v1/giaithuong',data,config);
+    const res = await request.post('/v1/giaithuong',data,config);
     return res.data;
     }
     catch (error)
@@ -725,7 +725,7 @@ export const updateProfileStudent = async (data) => {
                 // 'Authorization': `Bearer ${tokenBearer}`
             }
         }
-        const res = await request.post('/infoStudents/edit', data, header,);
+        const res = await request.post('/v1/infoStudents/edit', data, header,);
         return res.data;
     } catch (error) {
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
@@ -741,7 +741,7 @@ export const updateProfileTeacher = async (data) => {
                 // 'Authorization': `Bearer ${tokenBearer}`
             }
         }
-        const res = await request.post('/infoTeacher/edit', data, header,);
+        const res = await request.post('/v1/infoTeacher/edit', data, header,);
         return res.data;
     } catch (error) {
         console.error('Đã xảy ra lỗi khi lấy dữ liệu tài khoản:', error);
@@ -797,7 +797,7 @@ export const getAllStudent= async(tokenBearer)=>{
             },
 
         }
-        const res = await request.get('/infoStudents',header)
+        const res = await request.get('/v1/infoStudents',header)
         return res.data
     }
     catch(e){
@@ -818,7 +818,7 @@ export const getDetailStudent= async(id)=>{
             }
 
         }
-        const res = await request.get('/infoStudents/info',header)
+        const res = await request.get('/v1/infoStudents/info',header)
         return res.data
     }
     catch(e){
@@ -839,7 +839,7 @@ export const getDetailTeacher= async(id)=>{
             }
 
         }
-        const res = await request.get('/infoTeacher/info',header)
+        const res = await request.get('/v1/infoTeacher/info',header)
         return res.data
     }
     catch(e){
@@ -857,7 +857,7 @@ export const getAllTeacherManagement= async(tokenBearer)=>{
             },
 
         }
-        const res = await request.get('/infoTeacher',header)
+        const res = await request.get('/v1/infoTeacher',header)
         return res.data
     }
     catch(e){
@@ -875,7 +875,7 @@ export const getAllPermissionadmin= async(tokenBearer)=>{
             },
 
         }
-        const res = await request.get('/permissionadmin',header)
+        const res = await request.get('/v1/permissionadmin',header)
         return res.data
     }
     catch(e){
@@ -911,7 +911,7 @@ export const searchTeacher= async(name)=>{
             },
 
         }
-        const res = await request.get('/infoTeacher/search',{
+        const res = await request.get('/v1/infoTeacher/search',{
             params: {
                 'name[lk]': name,
             },
@@ -933,7 +933,7 @@ export const searchStudent= async(name)=>{
             },
 
         }
-        const res = await request.get('/infoStudents/search',{
+        const res = await request.get('/v1/infoStudents/search',{
             params: {
                 'name[lk]': name,
             },

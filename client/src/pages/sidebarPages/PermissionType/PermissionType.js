@@ -14,18 +14,34 @@ import config from '~/config';
 const cx = classNames.bind(styles);
 
 function PermissionType() {
+    const auth = useAuth()
+	const tokenBearer = auth.getTokens()
     const [data, setData] = useState([]);
     const [idPermission, setIDPermission] = useState('');
     const fetchApi = async ()=>{
 		let result
-		result = await Result.getPermissionAdmin()
-		return result
+        try{
+            result = await Result.getPermissionAdmin(tokenBearer.access_token)
+            return result
+        }catch(error){
+        }
 	}
 
     useEffect(()=> {
-        fetchApi().then((data)=>{
-			setData(data.data)
+        fetchApi()
+        .then((data)=>{
+            if(data === undefined)
+            {
+                showToast('error', 'Không có quyền thay đổi dữ liệu!');
+            }
+            if(data)
+            {
+                setData(data.data)
+            }
 		})
+        .catch(error => {
+            throw new Error('Fetch error: ' + error.message);
+          });
     },[])
     useEffect(()=> {
         console.log(idPermission);

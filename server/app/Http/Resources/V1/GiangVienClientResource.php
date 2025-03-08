@@ -15,16 +15,18 @@ class GiangVienClientResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id_GV' => $this->idGV,
             'name' => $this->tenGV,
             'avatar' => $this->anhDD,
             'code' => $this->maGV,
             'dateOfBirth' => $this->ngaySinh,
             'email' => $this->email,
             'phone' => $this->soDT,
-            'addres' => $this->diaChi,
+            'address' => $this->diaChi,
             'sex' => $this->gioiTinh,
             'level' => $this->trinhDo,
             'special' => $this->chuyenNganh,
+            'password' => $this->matKhau,
             'permissionId' => $this->permissionId,
         ];
     }
